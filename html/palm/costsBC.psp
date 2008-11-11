@@ -1,0 +1,757 @@
+﻿<%
+import mod_python
+sess = mod_python.Session.Session(req);
+if sess.is_new(): psp.redirect("index.psp");
+userId = form.getfirst("id");
+sess.load();
+%>
+
+
+<html>
+<head>
+<title>Questionário Custos - Partes B e C</title>
+
+<style type="text/css">
+
+body
+{
+	font-family: Verdana, Arial;
+	font-size: 8pt;
+	background-color: #CDCDCD;
+}
+
+radio_label
+{
+  width: 10em;
+}
+
+text_label
+{
+  text-align: right;
+  padding:0.125em;
+  margin-left:1.5em;
+}
+
+input[type="radio"]
+{
+	font-family: Verdana, Arial;
+	font-size: 1em;
+	vertical-align:middle;
+	padding:0.125em;
+	margin-left:1.25em;
+}
+
+input[type="radio"]
+{
+	font-family: Verdana, Arial;
+	font-size: 1em;
+}
+
+input[type="submit"]
+{
+  margin-left:1.5em;
+}
+
+input[type="reset"]
+{
+  margin-right:1.5em;
+}
+
+label
+{
+  width: 6em;
+  float: left;
+  text-align: left;
+  margin-right: 0.5em;
+  display: block
+  vertical-align:middle;
+}
+
+</style>
+
+
+<script>
+  function inicializaOcultos()
+  {
+    document.getElementById("custo_transporte").style.display = "none";//custo do transporte(parte B)
+    document.getElementById("qual_programa").style.display = "none";//Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?(parte C)
+  }
+
+  function exibeLinhaOculta(id)
+  {
+	  document.getElementById(id).style.display = "";
+  }
+
+  function ocultaLinha(id)
+  {
+	  document.getElementById(id).style.display = "none";
+  }
+
+  function isNumberString(InString)
+  {
+	  if(InString.length==0)
+		  return (true);
+	  var RefString="1234567890";
+	  for (Count=0; Count < InString.length; Count++)
+	  {
+		  TempChar= InString.substring (Count, Count+1);
+		  if (RefString.indexOf (TempChar, 0)==-1)
+			  return (false);
+	  }
+	  return (true);
+  }
+
+  function validarCampoNumerico(campo)
+  {
+	  if (!isNumberString(campo.value))
+	  {
+		  alert("Valor inválido, digite somente números.");
+		  campo.value = '';
+		  campo.focus();
+	  }
+  }
+
+  function validarHora(campo)
+  {
+	  if (campo.value > 23)
+	  {
+		  alert("Digite um valor entre 0 e 23.");
+		  campo.focus();
+		  campo.select();
+		  return false;
+	  }
+	  return true;
+  }
+
+  function validarMinuto(campo)
+  {
+	  if (campo.value > 59)
+	  {
+		  alert("Digite um valor entre 0 e 59.");
+		  campo.focus();
+		  campo.select();
+		  return false;
+	  }
+	  return true;
+}
+
+  function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,tempoTotalHora,tempoTotalMin)
+  /**
+	  A - Que horas vocÍ saiu de casa?
+	  B - Que horas vocÍ chegou no posto?
+	  C - Que horas vocÍ viu o mÈdico?
+  **/
+  {
+	  var tempoA,tempoB,tempoC;
+	  tempoA = tempoB = tempoC = 0;
+	
+	  tempoA = (Number(horaA.value)*60) + Number(minA.value);
+	  tempoB = (Number(horaB.value)*60) + Number(minB.value);
+	  tempoC = (Number(horaC.value)*60) + Number(minC.value);
+
+	  if((horaA.value != '') && (minA.value != '') && (horaB.value != '') && (minB.value != ''))
+	  {
+		  if(tempoB < tempoA)
+		  {
+			  alert("A hora que você chegou no posto de saúde não pode ser anterior a hora que você saiu de casa!");
+			  horaB.value = '';
+			  minB.value = '';
+			  horaB.focus();
+			  return false;
+		  }
+		
+		  if((tempoB < tempoA) && (tempoC < tempoB))
+		  {
+			  alert("A hora que você chegou no posto de saúde e a hora em que você viu o médico não podem ser anteriores a hora que você saiu de casa!");
+			  horaB.value = '';
+			  minB.value = '';
+			  horaC.value = '';
+			  minC.value = '';
+			  horaB.focus();
+			  return false;
+		  }
+		
+		  if((horaC.value != '') && (minC.value != ''))
+		  {	
+			  if(tempoC < tempoB)
+			  {
+				  alert("A hora em que você viu o médico não pode ser anterior a hora que você saiu de casa!");
+				  horaC.value = '';
+				  minC.value = '';
+				  horaC.focus();
+				  return false
+			  }
+	
+			  /** CALCULO DO TEMPO QUE LEVOU PARA SAIR DE CASA ATEH SER ATENDIDO PELO MEDICO **/
+			
+			  tempoTotalHora.value = horaC.value - horaA.value;
+			
+			  tempoTotalMin.value = (tempoC - tempoA) % 60;	
+		  }
+	
+	  }
+	
+	  return true;
+  }
+
+  function validarDia(campoDia)
+  {
+	  if(campoDia.value != '')
+	  {
+		  if(campoDia.value.length != 2)
+		  {
+			  alert("O campo dia deve conter dois dígitos.");
+			  campoDia.value = '';
+			  campoDia.focus();
+			  return false;
+		  }
+		  if(!isNumberString(campoDia.value))
+		  {
+			  alert("Valor inválido para dia, digite somente números.");
+			  campoDia.value = '';
+			  campoDia.focus();
+			  return false;
+		  }
+		  if(campoDia.value < 1 || campoDia.value > 31)
+		  {
+			  alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+			  campoDia.value = '';
+			  campoDia.focus();
+			  return false;
+		  }
+	  }
+	  return true;
+  }
+
+  function validarMes(campoMes)
+  {
+	  if(campoMes.value != '')
+	  {
+		  if(campoMes.value.length != 2)
+		  {
+			  alert("O campo mês deve conter dois dígitos.");
+			  campoMes.value = '';
+			  campoMes.focus();
+			  return false;
+		  }
+		  if (!isNumberString(campoMes.value))
+		  {
+			  alert("Valor inválido para mês, digite somente números.");
+			  campoMes.value = '';
+			  campoMes.focus();
+			  return false;
+		  }
+		  if (campoMes.value < 1 || campoMes.value > 12)
+		  {
+			  alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
+			  campoMes.value = '';
+			  campoMes.focus();
+			  return false;
+		  }
+	  }
+	  return true;
+  }
+
+  function validarAno(campoAno)
+  {
+	  if(campoAno.value != '')
+	  {
+		  if(campoAno.value.length != 4)
+		  {
+			  alert("O campo ano deve conter quatro dígitos.");
+			  campoAno.value = '';
+			  campoAno.focus();
+			  return false;
+		  }
+		  if(!isNumberString(campoAno.value))
+		  {
+			  alert("Valor inválido para ano, digite somente números.");
+			  campoAno.value = '';
+			  campoAno.focus();
+			  return false;
+		  }
+	  }
+	  return true;
+  }
+
+function validarQualquerData(campoDia,campoMes,campoAno)
+{
+	today = new Date();
+	dia = Number(campoDia.value);
+	mes = Number(campoMes.value);
+	ano = Number(campoAno.value);
+	dia_atual = today.getDate();
+	mes_atual = today.getMonth() + 1;
+	ano_atual = today.getFullYear();
+
+	if((dia == 0) && (mes == 0) && (ano == 0))
+		return true;
+	
+	switch(mes)
+	{
+		case 01://janeiro
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido!" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 02://fevereiro
+			if((retcode=(ano-1900)%4 )== 0) // Se o ano e bissexto
+			{
+				if(dia<1 || dia>29)
+				{
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mês de Fevereiro");
+					campoDia.value = '';
+					campoDia.focus();
+					return false;
+				}
+			}
+			else 
+				if(dia<1 || dia>28)//O ano nao e bissexto
+				{
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mês de Fevereiro");
+					campoDia.value = '';
+					campoDia.focus();
+					return false;
+				}
+		break;
+		case 03://marco
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 04://abril
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = '';
+					campoDia.focus();
+				return false;
+			}
+		break;
+		case 05://maio
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 06://junho
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = '';
+					campoDia.focus();
+				return false;
+			}
+		break;
+		case 07://julho
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 08://agosto
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 09://setembro
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 10://outubro
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 11://novembro
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		case 12://dezembro
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = '';
+				campoDia.focus();
+				return false;
+			}
+		break;
+		default://mes invalido
+		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
+		campoMes.value = '';
+		campoMes.focus();
+		return false;
+	}
+	/*if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
+	{
+		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
+		campoAno.focus();
+		campoAno.select();
+		return false;
+	}
+	BirthDay = new Date(ano, mes-1 ,dia);
+	if(BirthDay.getTime()>today.getTime())
+	{
+		alert("A data de nascimento não pode ser posterior a data de hoje");
+		campoAno.focus();
+		campoAno.select();
+		return false;
+	} */
+	
+	if(((dia > dia_atual) && (mes == mes_atual) && (ano == ano_atual)) || ((mes > mes_atual) && (ano == ano_atual)) || (ano > ano_atual))
+	{ 	
+			alert("A data preenchida não pode ser posterior a data de hoje!");
+			campoDia.value = '';
+			campoMes.value = '';
+			campoAno.value = '';
+			campoDia.focus();
+			return false;
+	}
+	
+	return true;
+}
+
+function validar_custos_b_e_c (form)
+{
+	var estado = true;
+	
+	for(indice = 0; indice < 61 ; indice ++)
+	{
+		/****************************************************************************************************************************/
+		if(indice == 8)
+		{
+			if(form.elements[indice].checked == true)
+				indice += 4;
+			else
+			{
+				if((form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false))
+					estado = false;
+					
+				indice += 3;
+			}
+		}
+		/****************************************************************************************************************************/
+		if(indice == 48)
+		{
+			if(form.elements[indice].checked == true)
+				indice += 2;
+			else
+			{
+				if(form.elements[indice+1].checked == false)
+					estado = false;
+					
+				indice += 7;
+			}
+		}
+		/****************************************************************************************************************************/
+		if(form.elements[indice].type == "text")
+		{
+			if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+				estado = false;
+		}
+		else
+		{
+			if(form.elements[indice].type == "radio")
+			{
+				for(contador = 0, radioIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+				{
+					if(form.elements[indice].checked == true)
+						radioIndice ++;
+				}
+				
+				if(form.elements[indice].checked == true)
+						radioIndice ++;
+				
+				if((contador > 0) && (radioIndice != 1)  && (form.elements[indice].disabled == false)) 
+					estado = false;
+			}
+			else
+			{
+				if(form.elements[indice].type == "checkbox")
+				{
+					if((form.elements[indice].name == form.elements[indice + 1].name) && (form.elements[indice].name == form.elements[indice + 2].name) && (form.elements[indice].name == form.elements[indice + 3].name) && (form.elements[indice].name == form.elements[indice + 4].name) && (form.elements[indice].name == form.elements[indice + 5].name) && (form.elements[indice].name == form.elements[indice + 6].name) && (form.elements[indice].name == form.elements[indice + 7].name) && (form.elements[indice].name == form.elements[indice + 8].name) && (form.elements[indice].name == form.elements[indice + 9].name) && (form.elements[indice].name == form.elements[indice + 10].name) && (form.elements[indice].name == form.elements[indice + 11].name))
+					{
+						if((form.elements[indice].checked == false) && (form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false) && (form.elements[indice+3].checked == false) && (form.elements[indice+4].checked == false) && (form.elements[indice+5].checked == false) && (form.elements[indice+6].checked == false) && (form.elements[indice+7].checked == false) && (form.elements[indice+8].checked == false) && (form.elements[indice+9].checked == false) && (form.elements[indice+10].checked == false) && (form.elements[indice+11].checked == false))
+							estado = false;
+						indice += 2;
+					}
+				}
+				else
+				{
+					if(form.elements[indice].type == "select-one")
+					{
+						if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+							estado = false;
+					}
+					else
+					{
+					}
+				}
+				
+			}
+		}
+	}
+	
+	if(estado == false)
+	{
+		alert("Preencha todos os campos do formulário, obrigado.");
+		return false;
+	}
+	
+	if(confirm("Deseja enviar os dados?"))
+		return true;
+	else
+		return false;
+}
+
+
+</script>
+</head>
+
+<body onLoad="inicializaOcultos();">
+
+<div align="center">
+
+  <h3>Projeto - Novos Métodos Diagnósicos em TB pulmonar - Policlinica Augusto Amaral Peixoto-SMS-RJ</br></h3>
+  <h4>Questionário Custos</h4>
+  <i>(aplicar em 1 a cada 4 pacientes incluídos)</i>
+
+  <br /><br />
+
+  <form name="check" method="post" action="storeCostsBC.py" onSubmit="return validar_custos_b_e_c (this)">
+  <input type="hidden" name="form" value="custosBeC" />
+    
+    <b>Parte B</b>
+    <br /><br />
+</div>
+
+<div align="left">
+  
+  <!-- Numero Geral -->    
+  <b>N&uacute;mero Geral : </b><input name="pid" type="text" value=<%= userId %> size="6" readOnly="true" />
+  <br /><br />
+    
+  <fieldset>  
+    <!-- RESULTADO DOS EXAMES -->  
+    <p>
+      01 - Você tem o resultado dos exames?<br />
+      <input name="resultadoExames" type="radio" value="sim"><radio_label>Sim</radio_label>
+      <input name="resultadoExames" type="radio" value="nao"><radio_label>Não</radio_label>
+    </p>
+    
+    <!-- QUANTAS VEZES VEIO AO POSTO -->
+    <p>
+      02 - Quantas vezes veio ao posto para pegar os resultados dos exames?<br />
+      <input name="quantasVezesVeioPosto" type="radio" value="uma"><radio_label>1</radio_label>
+      <input name="quantasVezesVeioPosto" type="radio" value="duas"><radio_label>2</radio_label>
+      <input name="quantasVezesVeioPosto" type="radio" value="tres"><radio_label>3</radio_label>
+      <input name="quantasVezesVeioPosto" type="radio" value="quatro_ou_mais"><radio_label>4+</radio_label>
+    </p>
+    
+    <!-- COMO VEIO AO POSTO -->
+    <p>
+      03 - Como você veio ao posto? Em qual transporte?<br />
+      <input name="comoVeioPosto" type="radio" value="pe" onClick="ocultaLinha('custo_transporte')"><radio_label>A pé</radio_label>
+      <input name="comoVeioPosto" type="radio" value="onibus" onClick="exibeLinhaOculta('custo_transporte')"><radio_label>Ônibus</radio_label>
+      <input name="comoVeioPosto" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('custo_transporte')"><radio_label>Táxi/carro</radio_label>
+    </p>
+    
+    <!-- CUSTO DO TRANSPORTE -->
+    <p id="custo_transporte">
+      03.1 - Quanto custou o transporte?<br />
+      <text_label></text_label><input name="custoTransporteB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+    </p>
+    
+    <!-- ACOMPANHADO -->
+    <p>
+      04 - Você está acompanhado?<br />
+      <input name="acompanhadoB" type="radio" value="sim" onClick="numeroAcompanhantesB.value = ''; "><radio_label>Sim</radio_label>
+      <input name="acompanhadoB" type="radio" value="nao" onClick="numeroAcompanhantesB.value='NA'; numeroAcompanhantesB.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesB" type="text" maxlength="2" size="1" onBlur="validarCampoNumerico(this)">
+    </p>
+    
+    <!-- HORARIO SAIU DE CASA -->    
+    <p>
+      05 - Que horas você saiu de casa?<br />
+      <text_label>Hora:</text_label><input name="horaSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoSaidaCasaB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+    </p>
+
+    
+    <!-- HORARIO CHEGOU NO POSTO -->
+    <p>
+      06 - Que horas você chegou no posto?<br />
+      <text_label>Hora:</text_label><input name="horaChegadaPostoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoChegadaPostoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaMedicoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+    </p>
+    
+    <!-- HORARIO MEDICO -->
+    <p>
+      07 - Que horas você viu o médico?<br />
+      <text_label>Hora:</text_label><input name="horaMedicoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoMedicoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoMedicoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+    </p>
+    
+    <!-- TEMPO TOTAL -->
+    <p>
+      08 - Quanto tempo levou desde que você saiu de casa at&eacute; ver o m&eacute;dico?<br />
+      <text_label>Tempo total:</text_label><input name="horaTotalB" type="text" maxlength="2" size="2" readonly="readonly">h e<input name="minutoTotalB" type="text" maxlength="2" size="2" readonly="readonly">min.
+    </p>
+    
+    <!-- SEGUNDA AMOSTRA DE ESCARRO -->
+    <p>
+      09 - Quando você teve que trazer a 2a amostra de escarro há alguns dias, em que horário você escarrou no potinho?<br />
+      <text_label>Hora:</text_label><input name="horaEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
+    </p> 
+    
+    <!-- HORARIO QUE ACORDOU PARA ESCARRAR NO POTINHO -->
+    <p>
+      10 - Que horas você acordou no dia de escarrar pela segunda vez no potinho?<br />
+      <text_label>Hora:</text_label><input name="horaAcordouEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoAcordouEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
+    </p>
+    
+    <!-- ANTIBIOTICO -->
+    <p>
+      11 - Você recebeu uma receita com antibióticos?<br />
+      <input name="receitaAntibioticos" type="radio" value="sim"><radio_label>Sim</radio_label>
+      <input name="receitaAntibioticos" type="radio" value="nao"><radio_label>Não</radio_label>
+    </p>
+    
+    <!-- PEDIDO RAIO-X -->
+    <p>
+      12 - Você pediu para fazer um RX?<br />
+      <input name="pediuRX" type="radio" value="sim"><radio_label>Sim</radio_label>
+      <input name="pediuRX" type="radio" value="nao"><radio_label>Não</radio_label>
+    </p>  
+    
+    <!-- COMEU E/OU BEBEU -->
+    <p>
+      13 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
+      <input name="comeuBebeuB" type="radio" value="sim" onclick="custoComidaBebidaB.readOnly = false;custoComidaBebidaB.value=''"><radio_label>Sim</radio_label>
+      <input name="comeuBebeuB" type="radio" value="nao" onclick="custoComidaBebidaB.value='0'; custoComidaBebidaB.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="custoComidaBebidaB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+    </p>
+    
+    <!-- PAGOU ALGO NO POSTO -->
+    <p>
+      14 - Você teve que pagar algo aqui no posto?<br />
+      <input name="pagarPostoB" type="radio" value="sim" onclick="custoPostoB.readOnly = false;custoPostoB.value=''"><radio_label>Sim</radio_label>
+      <input name="pagarPostoB" type="radio" value="nao" onclick="custoPostoB.value='0'; custoPostoB.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+    </p>
+    
+    <!-- DEIXOU DE GANHAR DINHEIRO -->
+    <p>
+      15 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto deixou de ganhar?<br />
+      <input name="deixouGanharDinheiroB" type="radio" value="sim" onclick="quantoDeixouGanharB.readOnly = false;quantoDeixouGanharB.value=''"><radio_label>Sim</radio_label>
+      <input name="deixouGanharDinheiroB" type="radio" value="nao" onclick="quantoDeixouGanharB.value='0'; quantoDeixouGanharB.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="quantoDeixouGanharB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+    </p>  
+    
+    <!-- RESULTADO DOS EXAMES DE ESCARRO -->
+    <p>
+      16 - Você já sabe o resutado dos exames de escarro?<br />
+      <input name="resultadoExameEscarro" type="radio" value="sim"><radio_label>Sim</radio_label>
+      <input name="resultadoExameEscarro" type="radio" value="nao"><radio_label>Não</radio_label>
+    </p>
+    
+    <!-- REGISTRO PROGRAMA DE TRATAMENTO DE TB -->
+    <p>
+      17 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?<br />
+      <input name="programaTB" type="radio" value="sim"><radio_label>Sim</radio_label>
+      <input name="programaTB" type="radio" value="nao"><radio_label>Não</radio_label>
+    </p>
+  </fieldset>
+</div>
+
+<div align="center">
+    <br /><br />
+    
+    <b>Parte C</b>
+    <br />
+
+    <i>(Em caso de diagnóstico de TB pulmonar)</i>
+</div>
+
+<div align="left">
+  <fieldset>
+    <!-- PAGOU ALGO NO POSTO -->    
+    <p>
+      18 - Você teve que pagar algo aqui no posto?<br />
+      <input name="pagarPostoC" type="radio" value="sim" onclick="custoPostoC.readOnly = false;custoPostoC.value=''"><radio_label>Sim</radio_label>
+      <input name="pagarPostoC" type="radio" value="nao" onclick="custoPostoC.value='0'; custoPostoC.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+    </p>
+    
+    <!-- TEMPO SE SENTINDO DIFERENTE/DOENTE -->
+    <p>
+      19 - Há quanto tempo você estava sentindo-se diferente ou doente,antes de vir ao posto?<br />
+      <text_label>Semanas:</text_label><input name="tempoDoente" type="text" maxlength="2" size="1" onBlur="validarCampoNumerico(this)">
+    </p>
+
+    <!-- OUTRA UNIDADE DE SAUDE -->
+    <p>
+      20 - Antes de você ser diagnosticado no posto, você foi a alguma outra unidade de saúde?<br />
+      <input name="outraUnidadeSaude" type="radio" value="sim" onClick="exibeLinhaOculta('qual_programa');"><radio_label>Sim</radio_label>
+      <input name="outraUnidadeSaude" type="radio" value="nao" onClick="ocultaLinha('qual_programa');"><radio_label>Não</radio_label>
+    </p>
+    
+    <!-- QUAL? -->    
+    <p id="qual_programa">
+      21 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?<br />
+      <input name="naturezaLocal" type="radio" value="publico" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Público</radio_label>
+      <input name="naturezaLocal" type="radio" value="privado" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Privado</radio_label>
+      <input name="naturezaLocal" type="radio" value="rezadeira" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Rezadeira</radio_label><br />
+      <input name="naturezaLocal" type="radio" value="rezadeira" onClick="qual_outro.disabled = false; qual_outro.readOnly = false; qual_outro.value='';qual_outro.focus();"><radio_label>Outro: </radio_label><input name="qual_outro" type="text" maxlength="50" size="5" readOnly="true">
+    </p>
+
+  </fieldset>
+    
+    <!-- Linha separatória -->
+    <p><hr /></p>
+
+    <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
+    <p>
+      <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroBeC" id="avaliado_por" type="text" maxlength="100" size="15"><br />
+      <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= sess["userName"]%> size="15"><br />
+      <label title="label_data" for="data">Data:</label><input name="diaCustoBC" id="data" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarDia(this))mesCustoBC.focus();">/<input type="text" name="mesCustoBC" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarMes(this))anoCustoBC.focus();">/<input type="text" name="anoCustoBC" maxlength="4" size="4" onKeyUp="if(this.value.length == 4)this.blur();" onChange="validarAno(this);" onBlur="validarQualquerData(diaCustoBC,mesCustoBC,anoCustoBC)">
+    </p>
+
+    <!--    ENVIAR / LIMPAR     -->
+    <p align="center">
+      <input value="Limpar Formulário" type="reset">
+      <input type="submit" value="Enviar Formul&aacute;rio">
+    </p>
+  </form>
+</div>
+</body>
+</html>

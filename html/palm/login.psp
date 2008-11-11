@@ -1,0 +1,50 @@
+<%
+import functions;
+import re;
+import mod_python;
+
+userName = form.getfirst("username");
+password = form.getfirst("password");
+userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
+
+if not userExits: psp.redirect("index.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
+
+sess = mod_python.Session.Session(req);
+sess.set_timeout(120);
+sess["userName"] = userName;
+sess["userGroup"] = userGroup;
+sess.save();
+ptMap = functions.getPatientsList();
+%>
+
+<html>
+
+<head>
+  <title>Neural TB - Listagem de Pacientes</title>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>Numero Geral</td><td>Nome</td><td>Custos A</td><td>Custos B</td>
+    </tr>
+<%
+for name in sorted(ptMap.keys()):
+  id = ptMap[name];
+  fmtId = functions.fmt2GetMethod(id);
+  urlFormA = "<a href=costsA.psp?id=%s>Fazer</a>" % fmtId;
+  urlFormB = "<a href=costsBC.psp?id=%s>Fazer</a>" % fmtId;
+%>
+    <tr>
+    <td><%= id %></td>
+    <td><%= name %></td>
+    <td><%= urlFormA %></td>
+    <td><%= urlFormB %></td>
+<%
+#End of table building loop.
+%>
+    </tr>
+ </table>
+</body>
+
+</html>
