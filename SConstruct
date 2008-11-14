@@ -15,14 +15,19 @@ def getSourceFiles(sourcesDir, extList):
 	srcFilter = re.compile('|'.join(['\.%s\Z' % i for i in extList]));
 	return ['%s%s%s' % (sourcesDir, os.path.sep, f) for f in os.listdir(sourcesDir) if srcFilter.search(f) is not None];
 
+#Path de instalacao dos arquivos. Caso a variaveld e ambiente PROJETOTB_INST_DIR esteja definida,
+#o projeto sera instalado no path determinado por ela. Do contrario, o projeto sera instalado
+#no diretorio 'projetotb' no raiz do pacote.
+install_dir = os.environ.get(PROJETOTB_INST_DIR, os.path.abspath('projetotb'));
+
 #Paths para a localizacao de bibliotecas.
-lib_path = ['/usr/lib'];
+lib_path = ['./src/libs', '/usr/lib'];
 
 #Lista de bibliotecas a serem linkadas ao projeto.
-aux_lib = ['xml2'];
+used_libs = ['xml2', 'cgi'];
 
 #Paths para a localizacao de arquivos de include.
-inc_path = ['.', '/usr/include/libxml2'];
+inc_path = ['/usr/include/libxml2'];
 
 ## Lista de flags de compilacao.
 cxx_flags = [];
@@ -33,7 +38,7 @@ env = Environment(CPPPATH = inc_path, ENV = os.environ);
 #Compilando os CGIs.
 cgiList = []
 for prog in getSourceFiles('./src', ['cpp', 'c', 'cxx']):
-  binName = env.Program(target = prog + '.cgi', source = prog, CCFLAGS = cxx_flags, LIBS = aux_lib, 
+  binName = env.Program(target = prog + '.cgi', source = prog, CCFLAGS = cxx_flags, LIBS = used_libs, 
                         LIBPATH = lib_path);
   cgiList.append(binName)
 
@@ -44,16 +49,18 @@ scriptList = getSourceFiles('./script', ['py', 'sh', 'php']);
 jsList = getSourceFiles('./js', ['js']);
 cssList = getSourceFiles('./css', ['css']);
 imgList = getSourceFiles('./images', ['jpg', 'gif', 'png']);
-xmlList = [];
+xmlList = getSourceFiles('./xml', ['xml']);
+xslList = getSourceFiles('./xml/xsl', ['xsl']);
 
 #Definindo onde cada tipo de arquivo sera instalado
-cgiInstDir = './projetotb';
-htmlInstDir = './projetotb';
-scriptInstDir = './projetotb';
-jsInstDir = './projetotb/js';
-cssInstDir = './projetotb/css';
-imgInstDir = './projetotb/images';
-xmlInstDir = './projetotb/xml';
+cgiInstDir = install_dir;
+htmlInstDir = install_dir;
+scriptInstDir = install_dir;
+jsInstDir = install_dir + '/js';
+cssInstDir = install_dir + '/css';
+imgInstDir = install_dir + '/images';
+xmlInstDir = install_dir + '/xml';
+xslInstDir = install_dir + '/xml/xsl';
 
 #Associando os diretorios de instalacao aos arquivos destinados a eles.
 env.Install(cgiInstDir, cgiList);
@@ -63,6 +70,7 @@ env.Install(jsInstDir, jsList);
 env.Install(cssInstDir, cssList);
 env.Install(imgInstDir, imgList);
 env.Install(xmlInstDir, xmlList);
+env.Install(xslInstDir, xslList);
 
 #Criando o alias de instalacao.
-env.Alias('install', [cgiInstDir, htmlInstDir, scriptInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir]);
+env.Alias('install', [cgiInstDir, htmlInstDir, scriptInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir, xslInstDir]);
