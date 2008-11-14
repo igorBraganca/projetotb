@@ -18,7 +18,7 @@ def getSourceFiles(sourcesDir, extList):
 #Path de instalacao dos arquivos. Caso a variaveld e ambiente PROJETOTB_INST_DIR esteja definida,
 #o projeto sera instalado no path determinado por ela. Do contrario, o projeto sera instalado
 #no diretorio 'projetotb' no raiz do pacote.
-install_dir = os.environ.get(PROJETOTB_INST_DIR, os.path.abspath('projetotb'));
+install_dir = os.environ.get('PROJETOTB_INST_DIR', os.path.abspath('projetotb'));
 
 #Paths para a localizacao de bibliotecas.
 lib_path = ['./src/libs', '/usr/lib'];
