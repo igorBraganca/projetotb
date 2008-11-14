@@ -1,0 +1,9 @@
+# Arquivos a serem ignorados pelo git. Caso haja algum arquivo especifico em
+# algum subdiretorio, crie um .gitignore no proprio subdiretorio do arquivo.
+.*
+*.o
+*~
+*.cgi
+projetotb/*
+
+!.gitignore
