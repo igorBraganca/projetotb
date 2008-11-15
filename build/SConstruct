@@ -9,6 +9,8 @@
 import os;
 import re;
 
+import cgilist;
+
 #Esta funcao devolve todos os arquivos do path sourceDir, que tenha uma das extensoes
 #passadas na lista exList.
 def getSourceFiles(sourcesDir, extList):
@@ -37,20 +39,21 @@ env = Environment(CPPPATH = inc_path, ENV = os.environ);
 
 #Compilando os CGIs.
 cgiList = []
-for prog in getSourceFiles('./src', ['cpp', 'c', 'cxx']):
-  binName = env.Program(target = prog + '.cgi', source = prog, CCFLAGS = cxx_flags, LIBS = used_libs, 
-                        LIBPATH = lib_path);
+for cgi, srcs in cgilist.cgiMap.iteritems():
+  srcsList = ['../src/%s' % s for s in srcs];
+  binName = env.Program(target = cgi + '.cgi', source = srcsList, CCFLAGS = cxx_flags, 
+                        LIBS = used_libs, LIBPATH = lib_path);
   cgiList.append(binName)
 
 #Como os outros arquivos nao precisam de compilacao, apenas os adicionamos a lista
 #de instalacao.
-htmlList = getSourceFiles('./html', ['htm', 'html', 'psp']);
-scriptList = getSourceFiles('./script', ['py', 'sh', 'php']);
-jsList = getSourceFiles('./js', ['js']);
-cssList = getSourceFiles('./css', ['css']);
-imgList = getSourceFiles('./images', ['jpg', 'gif', 'png']);
-xmlList = getSourceFiles('./xml', ['xml']);
-xslList = getSourceFiles('./xml/xsl', ['xsl']);
+htmlList = getSourceFiles('../html', ['htm', 'html', 'psp']);
+scriptList = getSourceFiles('../script', ['py', 'sh', 'php']);
+jsList = getSourceFiles('../js', ['js']);
+cssList = getSourceFiles('../css', ['css']);
+imgList = getSourceFiles('../images', ['jpg', 'gif', 'png']);
+xmlList = getSourceFiles('../xml', ['xml']);
+xslList = getSourceFiles('../xml/xsl', ['xsl']);
 
 #Definindo onde cada tipo de arquivo sera instalado
 cgiInstDir = install_dir;

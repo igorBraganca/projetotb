@@ -1,3 +1,4 @@
+cgiMap = {}
 cgiMap['addPatient'] = ['ntbFunctions.c', 'ntbCgiAddPatient.c']
 cgiMap['addPatientInfo'] = ['ntbFunctions.c', 'ntbCgiAddPatientInfo.c']
 cgiMap['backup'] = ['backup.c']
