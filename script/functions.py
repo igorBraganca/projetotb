@@ -2,7 +2,7 @@ import xml.dom.minidom;
 import re;
 import os;
 
-PROJECT_PATH = os.environ['HOME'] + '/public_html/';
+PROJECT_PATH = os.path.dirname(__file__);
 USERS_FILE_NAME = PROJECT_PATH + "xml/users.xml";
 PATIENTS_FILE_NAME = PROJECT_PATH + "xml/pacientesGuadalupe.xml";
 
