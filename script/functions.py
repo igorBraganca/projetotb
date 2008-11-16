@@ -1,7 +1,8 @@
 import xml.dom.minidom;
 import re;
+import os;
 
-PROJECT_PATH = "/home/projetotb/public_html/"
+PROJECT_PATH = os.environ['HOME'] + '/public_html/';
 USERS_FILE_NAME = PROJECT_PATH + "xml/users.xml";
 PATIENTS_FILE_NAME = PROJECT_PATH + "xml/pacientesGuadalupe.xml";
 

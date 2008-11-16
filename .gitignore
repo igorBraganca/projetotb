@@ -5,5 +5,5 @@
 *~
 *.cgi
 projetotb/*
-
+*.pyc 
 !.gitignore
