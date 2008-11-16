@@ -4,6 +4,7 @@
 *.o
 *~
 *.cgi
+*.pyc
+build/*.*
 projetotb/*
-*.pyc 
 !.gitignore
