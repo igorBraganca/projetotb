@@ -1,7 +1,7 @@
 import xml.dom.minidom;
 import re;
 
-PROJECT_PATH = "/home/torres/public_html/palm/"
+PROJECT_PATH = "/home/projetotb/public_html/"
 USERS_FILE_NAME = PROJECT_PATH + "xml/users.xml";
 PATIENTS_FILE_NAME = PROJECT_PATH + "xml/pacientesGuadalupe.xml";
 

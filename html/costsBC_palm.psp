@@ -550,7 +550,7 @@ function validar_custos_b_e_c (form)
 
   <br /><br />
 
-  <form name="check" method="post" action="storeCostsBC.py" onSubmit="return validar_custos_b_e_c (this)">
+  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_b_e_c (this)">
   <input type="hidden" name="form" value="custosBeC" />
     
     <b>Parte B</b>

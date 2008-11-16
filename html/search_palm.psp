@@ -7,7 +7,7 @@ userName = form.getfirst("username");
 password = form.getfirst("password");
 userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
 
-if not userExits: psp.redirect("index.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
+if not userExits: psp.redirect("palm.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
 
 sess = mod_python.Session.Session(req);
 sess.set_timeout(120);
@@ -32,8 +32,8 @@ ptMap = functions.getPatientsList();
 for name in sorted(ptMap.keys()):
   id = ptMap[name];
   fmtId = functions.fmt2GetMethod(id);
-  urlFormA = "<a href=costsA.psp?id=%s>Fazer</a>" % fmtId;
-  urlFormB = "<a href=costsBC.psp?id=%s>Fazer</a>" % fmtId;
+  urlFormA = "<a href=costsA_palm.psp?id=%s>Fazer</a>" % fmtId;
+  urlFormB = "<a href=costsBC_palm.psp?id=%s>Fazer</a>" % fmtId;
 %>
     <tr>
     <td><%= id %></td>

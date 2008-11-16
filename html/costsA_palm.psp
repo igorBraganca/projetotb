@@ -621,7 +621,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 
   <br /><br />
   <b>Parte A</b>
-  <form name="check" method="post" action="storeCostsA_xml.py" onSubmit="return validar_custos_a (this)">
+  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_a (this)">
     <input type="hidden" name="form" value="custosA" />
     <br />
 </div>
