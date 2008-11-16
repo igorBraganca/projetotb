@@ -1,22 +1,18 @@
 Projeto NeuralTB
 
-Para compilar o projeto, do diretorio rai do mesmo, digite:
+Para compilar e instalar o projeto, supondo que o path do pacote seja $PROJETOTB, 
+vá ao diretório $PROJETOTB/build e execute:
 
 scons install
 
-Após o processo de compilação/instalação, haverá um diretório chamado 'projetotb' no
-root do projeto. É neste diretório que o projeto foi instlado para pronto uso.
+Por default, o projeto é instalado em $PROJETOTB/projetotb. Para instalar num diretório
+diferente, crie uma variável de ambiente chamada 'PROJETOTB_INST_DIR' cujo valor
+é o path ABSOLUTO para o local da instalação. O instalador criará automaticamente a cadeia 
+de diretórios, caso não existam.
 
-
-Como instalar  projeto num diretório diferente?
-  Para isso, crie uma variável de ambiente chamada 'PROJETOTB_INST_DIR' cujo valor
-  é o path ABSOLUTO para o local da instalação. O instalador criará a cadeia de diretórios
-  caso não existam.
-  Ex: desejo instalar os arquivos do projeto tb no diretório /home/usuario/public_html. Faça:
+Ex: caso deseje instalar os arquivos do projeto tb no diretório /home/usuario/public_html. Faça:
   
-  export PROJETOTB_INST_DIR=/home/usuario/public_html
-  scons install
+export PROJETOTB_INST_DIR=/home/usuario/public_html
+scons install
   
-  Ao final, os arquivos do projeto estarão alocados no diretório especificado.
-
-
+Ao final, os arquivos do projeto estarão no diretório especificado.
