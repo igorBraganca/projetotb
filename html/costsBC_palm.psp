@@ -1,7 +1,7 @@
 ﻿<%
 import mod_python
 sess = mod_python.Session.Session(req);
-if sess.is_new(): psp.redirect("index.psp");
+if sess.is_new(): psp.redirect("palm.psp");
 userId = form.getfirst("id");
 sess.load();
 %>

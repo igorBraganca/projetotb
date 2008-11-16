@@ -1,0 +1,21 @@
+<%
+import mod_python
+sess = mod_python.Session.Session(req);
+if sess.is_new(): psp.redirect("palm.psp");
+else: sess.invalidate();
+%>
+
+<html>
+
+<head>
+  <title>Neural TB - Sair do Sistema</title>
+</head>
+
+<body>
+
+<div align="left">
+<p>Você se desconectou com sucesso do Neural TB. Clique <a href="palm.psp">aqui</a> para reconectar-se, caso deseje.</p>
+</div>
+</body>
+
+</html>

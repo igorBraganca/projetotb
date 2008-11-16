@@ -10,7 +10,7 @@ userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
 if not userExits: psp.redirect("palm.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
 
 sess = mod_python.Session.Session(req);
-sess.set_timeout(120);
+sess.set_timeout(12000);
 sess["userName"] = userName;
 sess["userGroup"] = userGroup;
 sess.save();
@@ -24,6 +24,11 @@ ptMap = functions.getPatientsList();
 </head>
 
 <body>
+
+<div align="right">
+<p> <a href="logout_palm.psp">Sair do Sistema</a></p>
+</div>
+
   <table>
     <tr>
       <td>Numero Geral</td><td>Nome</td><td>Custos A</td><td>Custos B</td>
