@@ -4,7 +4,11 @@
 *.o
 *~
 *.cgi
+*.so
 *.pyc
-build/*.*
+build/*.cgi
+build/*.pyc
+build/*.a
+build/*.so
 projetotb/*
 !.gitignore
