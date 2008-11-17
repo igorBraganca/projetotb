@@ -45,8 +45,6 @@ def getPatientsList():
     removido = patient.getAttribute("removido");
     idNum = patient.getElementsByTagName("triagem")[0].getElementsByTagName("numeroGeral")[0].childNodes[0].data;
     name = patient.getElementsByTagName("triagem")[0].getElementsByTagName("nomeCompleto")[0].childNodes[0].data;
-    if removido == "nao": ret[name] = idNum;
+    forms = [s.nodeName for s in patient.childNodes if s.nodeName != '#text'];
+    if removido == "nao": ret[name] = {'id' : idNum, 'doneForms' : forms};
   return ret;
-
-def getAddedForms(dom):
-  

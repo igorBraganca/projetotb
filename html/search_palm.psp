@@ -38,10 +38,13 @@ ptMap = functions.getPatientsList();
     </tr>
 <%
 for name in sorted(ptMap.keys()):
-  id = ptMap[name];
+  id = ptMap[name]["id"];
   fmtId = functions.fmt2GetMethod(id);
+  formsDone = ptMap[name]["doneForms"];
   urlFormA = "<a href=costsA_palm.psp?id=%s>Fazer</a>" % fmtId;
   urlFormB = "<a href=costsBC_palm.psp?id=%s>Fazer</a>" % fmtId;
+  if "custosA" in formsDone: urlFormA = "Feito";
+  if "custosBeC" in formsDone: urlFormB = "Feito";
 %>
     <tr>
     <td><%= functions.encode(id) %></td>
