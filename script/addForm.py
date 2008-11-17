@@ -8,6 +8,8 @@ import shutil;
 
 import functions;
 
+xmlEncoding = 'ISO-8859-1';
+
 #Getting the HTML form input data.
 form = cgi.FieldStorage()
 
@@ -17,7 +19,7 @@ data = doc.createElement(form['form'].value);
 for k in form.keys():
   if k in ['form', 'pid']: continue;
   val = doc.createElement(k);
-  val.appendChild(doc.createTextNode(form[k].value));
+  val.appendChild(doc.createTextNode(unicode(form[k].value, xmlEncoding)));
   data.appendChild(val);
 
 #Opening the xml file and locking it to prevent access from other processes.
@@ -42,8 +44,7 @@ patient.appendChild(data);
 
 #Saving the new data to the XML file.
 xmlData.seek(0); #Going to the beginning of the file.
-xmlData.write('<?xml version="1.0" encoding="ISO-8859-1"?>');
-dom.getElementsByTagName("pacientes")[0].writexml(writer = xmlData, indent = "  ", addindent = "  ");
+xmlData.write(dom.toxml(encoding = xmlEncoding));
 xmlData.close(); #Releasing the file (calls also unlock).
 
 print "Content-Type: text/html\n\n"     # HTML is following
