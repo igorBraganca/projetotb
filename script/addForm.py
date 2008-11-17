@@ -1,54 +1,52 @@
 #!/usr/bin/env python
 
-import datetime;
 import cgi;
-import pysqlite2.dbapi2;
-import cgitb; cgitb.enable(); #Reomving after debuging.
+import cgitb; cgitb.enable(); #Remove after debuging.
+import xml.dom.minidom;
+import fcntl;
+import shutil;
+import time;
+
 import functions;
 
+#Getting the HTML form input data.
 form = cgi.FieldStorage()
 
-#Getting the HTML information in an organized way and doing any necessary process.
-storeMap = {}
-storeMap["pid"] = "'%s'" % form["pid"].value;
-storeMap["ondeMora"] = "'%s'" % form["ondeMora"].value;
-storeMap["transporte"] = "'%s'" % form["transporte"].value;
-storeMap["custoTransporteA"] = str(form.getvalue("custoTransporteA", 0));
-company = str(form["numeroAcompanhantesA"].value);
-if company == "NA": company = "0";
-storeMap["numeroAcompanhantesA"] = company;
-storeMap["horaSaidaCasaA"] = "'%s:%s'" % (form["horaSaidaCasaA"].value, form["minutoSaidaCasaA"].value);
-storeMap["horaChegadaPostoA"] = "'%s:%s'" % (form["horaChegadaPostoA"].value, form["minutoChegadaPostoA"].value);
-storeMap["horaMedicoA"] = "'%s:%s'" % (form["horaMedicoA"].value, form["minutoMedicoA"].value);
-storeMap["horaTotalA"] = "'%s:%s'" % (form["horaTotalA"].value, form["minutoTotalA"].value);
-storeMap["pernoite"] = "'%s'" % form.getvalue("pernoite", "NA");
-storeMap["custoPernoite"] = str(form.getvalue("custoPernoite", 0));
-storeMap["custoAmigos"] = str(form.getvalue("custoAmigos", 0));
-#storeMap["comeu_bebeu"] = form.getvalue("comeu_bebeu");
-storeMap["custoComidaBebidaA"] = str(form["custoComidaBebidaA"].value);
-#storeMap["pagar_algo_posto"] = form.getvalue("pagar_algo_posto");
-storeMap["custoPostoA"] = str(form["custoPostoA"].value);
-storeMap["profissao"] = "'%s'" % form["profissao"].value;
-storeMap["estudantePerdeuAula"] = "'%s'" % form.getvalue("estudantePerdeuAula", "NA");
-storeMap["quantoDeixouGanharA"] = str(form["quantoDeixouGanharA"].value);
-storeMap["quemArcouCustos"] = "'%s'" % form.getvalue("quemArcouCustos", "NA");
-storeMap["gastoAcompanhante"] = str(form.getvalue("gastoAcompanhante", 0));
-estudante = 0;
-if form.getvalue("estudante") == "estudante": estudante = 1;
-storeMap["estudante"] = str(estudante);
-storeMap["observacoes"] = "'%s'" % form["observacoes"].value;
-storeMap["avaliadorEnfermeiroA"] = "'%s'" % form["avaliadorEnfermeiroA"].value;
-storeMap["quemCadastrou"] = "'%s'" % form["quemCadastrou"].value;
-#Making sure sqlite will receive the date exactly as yyyy-mm-dd.
-d = datetime.date(int(form["ano_CustoA"].value), int(form["mes_CustoA"].value), int(form["dia_CustoA"].value));
-storeMap["dia_CustoA"] = "'%s'" % d;
+#Creating the XML document that will hold the new data.
+doc = xml.dom.minidom.Document();
+data = doc.createElement(form['form'].value);
+for k in form.keys():
+  if k in ['form', 'pid']: continue;
+  val = doc.createElement(k);
+  val.appendChild(doc.createTextNode(form[k].value));
+  data.appendChild(val);
 
-#Connecting to the database to store the values.
-con = pysqlite2.dbapi2.connect("xml/costs.db");
-cur = con.cursor();
-functions.tableInsert(cur, "custos_a", storeMap);
-con.commit();
+#Opening the xml file and locking it to prevent access from other processes.
+xmlData = open(functions.PATIENTS_FILE_NAME, 'r+');
+fcntl.flock(xmlData, fcntl.LOCK_EX);
+
+#Opening the file used for backup and locking it.
+bckData = open(functions.PATIENTS_FILE_NAME + '~', 'w');
+fcntl.flock(bckData, fcntl.LOCK_EX);
+
+#Generating the backup.
+shutil.copyfileobj(xmlData, bckData);
+bckData.close(); #Realeasing the backup file (unlock).
+
+#Parsing the XML file
+xmlData.seek(0); #Going to the beginning of the file
+dom = xml.dom.minidom.parse(xmlData);
+#Retrieving the correct user.
+patient = functions.getPatientInfo(dom, form['pid'].value);
+#Adding the new info.
+patient.appendChild(data);
+
+#Saving the new data to the XML file.
+xmlData.seek(0); #Going to the beginning of the file.
+xmlData.write('<?xml version="1.0" encoding="ISO-8859-1"?>');
+dom.getElementsByTagName("pacientes")[0].writexml(writer = xmlData, indent = "  ", addindent = "  ", newl = "\n");
+xmlData.close(); #Releasing the file (calls also unlock).
 
 print "Content-Type: text/html"     # HTML is following
 print;
-print "Information added successfully!";
+print "Dados inseridos com sucesso!";
