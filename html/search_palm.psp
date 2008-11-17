@@ -1,4 +1,4 @@
-<%
+﻿<%
 import functions;
 import re;
 import mod_python;
@@ -34,7 +34,7 @@ ptMap = functions.getPatientsList();
 
   <table>
     <tr>
-      <td>Numero Geral</td><td>Nome</td><td>Custos A</td><td>Custos B</td>
+      <td>Número Geral</td><td>Nome</td><td>Custos A</td><td>Custos B e C</td>
     </tr>
 <%
 for name in sorted(ptMap.keys()):
@@ -44,8 +44,8 @@ for name in sorted(ptMap.keys()):
   urlFormB = "<a href=costsBC_palm.psp?id=%s>Fazer</a>" % fmtId;
 %>
     <tr>
-    <td><%= id %></td>
-    <td><%= name %></td>
+    <td><%= functions.encode(id) %></td>
+    <td><%= functions.encode(name) %></td>
     <td><%= urlFormA %></td>
     <td><%= urlFormB %></td>
 <%

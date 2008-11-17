@@ -1,5 +1,6 @@
 ﻿<%
-import mod_python
+import functions;
+import mod_python;
 sess = mod_python.Session.Session(req);
 if sess.is_new(): psp.redirect("palm.psp");
 userId = form.getfirst("id");
@@ -560,7 +561,7 @@ function validar_custos_b_e_c (form)
 <div align="left">
   
   <!-- Numero Geral -->    
-  <b>N&uacute;mero Geral : </b><input name="pid" type="text" value=<%= userId %> size="6" readOnly="true" />
+  <b>N&uacute;mero Geral : </b><input name="pid" type="text" value=<%= functions.encode(userId) %> size="6" readOnly="true" />
   <br /><br />
     
   <fieldset>  
@@ -742,7 +743,7 @@ function validar_custos_b_e_c (form)
     <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
     <p>
       <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroBeC" id="avaliado_por" type="text" maxlength="100" size="15"><br />
-      <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= sess["userName"]%> size="15"><br />
+      <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(sess["userName"]) %> size="15"><br />
       <label title="label_data" for="data">Data:</label><input name="diaCustoBC" id="data" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarDia(this))mesCustoBC.focus();">/<input type="text" name="mesCustoBC" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarMes(this))anoCustoBC.focus();">/<input type="text" name="anoCustoBC" maxlength="4" size="4" onKeyUp="if(this.value.length == 4)this.blur();" onChange="validarAno(this);" onBlur="validarQualquerData(diaCustoBC,mesCustoBC,anoCustoBC)">
     </p>
 

@@ -6,12 +6,15 @@ PROJECT_PATH = os.path.dirname(__file__) + os.path.sep;
 USERS_FILE_NAME = PROJECT_PATH + "xml/users.xml";
 PATIENTS_FILE_NAME = PROJECT_PATH + "xml/pacientesGuadalupe.xml";
 
-
 def fmt2GetMethod(s):
   s = re.sub(' ', '+', s);
   s = re.sub('&', '%26', s);
   s = re.sub(';', '%3B', s);
   return s;
+
+
+def encode(textStr):
+  return textStr.encode("utf-8");
 
 
 def authenticateUser(userName, password):
@@ -28,13 +31,11 @@ def authenticateUser(userName, password):
   return (False, "", "Usu&aacute;rio n&atilde;o encontrado ou senha inv&aacute;lida.");
 
 
-
 def getPatientInfo(dom, pid):
   for patient in dom.getElementsByTagName("paciente"):
     if patient.getAttribute("removido") == "sim": continue;
     if patient.getElementsByTagName("numeroGeral")[0].childNodes[0].data == pid: return patient;
   return None;
-
 
 
 def getPatientsList():
