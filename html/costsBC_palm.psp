@@ -25,6 +25,13 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <script>
 <%= jsText %>
+
+function inicializaOcultos()
+{
+  document.getElementById("custo_transporte").style.display = "none";//custo do transporte(parte B)
+  document.getElementById("qual_programa").style.display = "none";//Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?(parte C)
+}
+
 </script>
 
 </head>

@@ -23,6 +23,18 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <script>
 <%= jsText %>
+
+function inicializaOcultos()
+{
+  document.getElementById("item_custo_transporte").style.display = "none";//custo do transporte
+  document.getElementById("item_onde_pernoitara").style.display = "none";//pernoite
+  document.getElementById("item_custo_pernoite").style.display = "none";//custo do pernoite
+  document.getElementById("item_custo_amigos").style.display = "none";//custo dos amigos
+  document.getElementById("item_perdeu_aula").style.display = "none";//perdeu aula
+  document.getElementById("item_quem_pagou").style.display = "none";//quem arcou com os custos
+  document.getElementById("item_custo_acompanhante").style.display = "none";//gasto com o acompanhante
+}
+
 </script>
 
 </head>
