@@ -1,0 +1,53 @@
+body
+{
+	font-family: Verdana, Arial;
+	font-size: 8pt;
+	background-color: #CDCDCD;
+}
+
+radio_label
+{
+  width: 10em;
+}
+
+text_label
+{
+  text-align: right;
+  padding:0.125em;
+  margin-left:1.5em;
+}
+
+input[type="radio"]
+{
+	font-family: Verdana, Arial;
+	font-size: 1em;
+	vertical-align:middle;
+	padding:0.125em;
+	margin-left:1.25em;
+}
+
+input[type="radio"]
+{
+	font-family: Verdana, Arial;
+	font-size: 1em;
+}
+
+input[type="submit"]
+{
+  margin-left:1.5em;
+}
+
+input[type="reset"]
+{
+  margin-right:1.5em;
+}
+
+label
+{
+  width: 6em;
+  float: left;
+  text-align: left;
+  margin-right: 0.5em;
+  display: block
+  vertical-align:middle;
+}
