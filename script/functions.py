@@ -46,14 +46,3 @@ def getPatientsList():
     name = patient.getElementsByTagName("nomeCompleto")[0].childNodes[0].data;
     if removido == "nao": ret[name] = idNum;
   return ret;
-  
-
-def tableInsert(dbCursor, tbName, storeMap):
-  #Organizing the info to build de insert statement.
-  fields = [];
-  values = [];
-  for k,v in storeMap.iteritems():
-    fields.append(k);
-    values.append(v);
-
-  dbCursor.execute("INSERT INTO %s (%s) VALUES (%s);" % (tbName, ','.join(fields), ','.join(values)));
