@@ -10,12 +10,16 @@ function putDate()
 
 function exibeLinhaOculta(tabela, linha)
 {
-	document.getElementById(tabela).rows[linha].style.display = "";
+  var obj = document.getElementById(tabela);
+  if (obj.tagName == "TABLE") obj.rows[linha].style.display = "";
+  else obj.style.display = "";
 }
 
 function ocultaLinha(tabela, linha)
 {
-	document.getElementById(tabela).rows[linha].style.display = "none";
+  var obj = document.getElementById(tabela);
+  if (obj.tagName == "TABLE") obj.rows[linha].style.display = "none";
+  else obj.style.display = "none";
 }
 
 
