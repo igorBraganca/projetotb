@@ -3,17 +3,20 @@ import functions;
 import re;
 import mod_python;
 
-userName = form.getfirst("username");
-password = form.getfirst("password");
-userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
-
-if not userExits: psp.redirect("palm.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
-
 sess = mod_python.Session.Session(req);
-sess.set_timeout(12000);
-sess["userName"] = userName;
-sess["userGroup"] = userGroup;
-sess.save();
+
+if sess.is_new():
+  userName = form.getfirst("username");
+  password = form.getfirst("password");
+  userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
+
+  if not userExits: psp.redirect("palm.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
+  else:
+    sess.set_timeout(12000);
+    sess["userName"] = userName;
+    sess["userGroup"] = userGroup;
+    sess.save();
+
 ptMap = functions.getPatientsList();
 %>
 

@@ -5,7 +5,6 @@ import cgitb; cgitb.enable(); #Remove after debuging.
 import xml.dom.minidom;
 import fcntl;
 import shutil;
-import time;
 
 import functions;
 
@@ -47,6 +46,18 @@ xmlData.write('<?xml version="1.0" encoding="ISO-8859-1"?>');
 dom.getElementsByTagName("pacientes")[0].writexml(writer = xmlData, indent = "  ", addindent = "  ", newl = "\n");
 xmlData.close(); #Releasing the file (calls also unlock).
 
-print "Content-Type: text/html"     # HTML is following
-print;
-print "Dados inseridos com sucesso!";
+print "Content-Type: text/html\n\n"     # HTML is following
+
+htmlPage = """
+<html>
+<head>
+  <title>Projeto Neural TB</title>
+</head>
+
+<body>
+Formul&aacute;rio salvo com sucesso! Clique <a href="search_palm.psp">aqui</a> para retornar &agrave; p&aacute;gina de busca.
+</body>
+</html>
+""";
+
+print htmlPage;
