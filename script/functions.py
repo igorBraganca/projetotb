@@ -34,7 +34,7 @@ def authenticateUser(userName, password):
 def getPatientInfo(dom, pid):
   for patient in dom.getElementsByTagName("paciente"):
     if patient.getAttribute("removido") == "sim": continue;
-    if patient.getElementsByTagName("numeroGeral")[0].childNodes[0].data == pid: return patient;
+    if patient.getElementsByTagName("triagem")[0].getElementsByTagName("numeroGeral")[0].childNodes[0].data == pid: return patient;
   return None;
 
 
@@ -43,7 +43,10 @@ def getPatientsList():
   ret = {};  
   for patient in dom.getElementsByTagName("paciente"):
     removido = patient.getAttribute("removido");
-    idNum = patient.getElementsByTagName("numeroGeral")[0].childNodes[0].data;
-    name = patient.getElementsByTagName("nomeCompleto")[0].childNodes[0].data;
+    idNum = patient.getElementsByTagName("triagem")[0].getElementsByTagName("numeroGeral")[0].childNodes[0].data;
+    name = patient.getElementsByTagName("triagem")[0].getElementsByTagName("nomeCompleto")[0].childNodes[0].data;
     if removido == "nao": ret[name] = idNum;
   return ret;
+
+def getAddedForms(dom):
+  

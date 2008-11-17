@@ -34,7 +34,7 @@ ptMap = functions.getPatientsList();
 
   <table>
     <tr>
-      <td>Número Geral</td><td>Nome</td><td>Custos A</td><td>Custos B e C</td>
+      <th>Número Geral</th><th>Nome</th><th>Custos A</th><th>Custos B e C</th>
     </tr>
 <%
 for name in sorted(ptMap.keys()):
