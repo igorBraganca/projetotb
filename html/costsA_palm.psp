@@ -8,9 +8,9 @@ sess.load();
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
-cssText = open("/home/torres/public_html/css/palm.css", "r").read();
-jsText = open("/home/torres/public_html/js/funcoes.js", "r").read();
-jsText += open("/home/torres/public_html/js/validar.js", "r").read();
+cssText = open(functions.PROJECT_PATH + "css/palm.css", "r").read();
+jsText = open(functions.PROJECT_PATH + "js/funcoes.js", "r").read();
+jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 %>
 
 <html>
