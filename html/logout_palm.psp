@@ -1,4 +1,4 @@
-<%
+﻿<%
 import mod_python
 sess = mod_python.Session.Session(req);
 if sess.is_new(): psp.redirect("palm.psp");
@@ -14,7 +14,7 @@ else: sess.invalidate();
 <body>
 
 <div align="left">
-<p>Voc� se desconectou com sucesso do Neural TB. Clique <a href="palm.psp">aqui</a> para reconectar-se, caso deseje.</p>
+<p>Você se desconectou com sucesso do Neural TB. Clique <a href="palm.psp">aqui</a> para reconectar-se, caso deseje.</p>
 </div>
 </body>
 
