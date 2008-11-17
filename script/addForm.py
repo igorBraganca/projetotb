@@ -43,7 +43,7 @@ patient.appendChild(data);
 #Saving the new data to the XML file.
 xmlData.seek(0); #Going to the beginning of the file.
 xmlData.write('<?xml version="1.0" encoding="ISO-8859-1"?>');
-dom.getElementsByTagName("pacientes")[0].writexml(writer = xmlData, indent = "  ", addindent = "  ", newl = "\n");
+dom.getElementsByTagName("pacientes")[0].writexml(writer = xmlData, indent = "  ", addindent = "  ");
 xmlData.close(); #Releasing the file (calls also unlock).
 
 print "Content-Type: text/html\n\n"     # HTML is following
