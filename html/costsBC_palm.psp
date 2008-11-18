@@ -51,7 +51,6 @@ function inicializaOcultos()
   <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_b_e_c (this)">
   <input type="hidden" name="form" value="custosBeC" />
   <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
-
     
     <b>Parte B</b>
     <br /><br />
