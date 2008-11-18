@@ -53,6 +53,13 @@ htmlPage = """
 <html>
 <head>
   <title>Projeto Neural TB</title>
+  <style type="text/css">
+"""
+
+htmlPage += open(functions.PROJECT_PATH + "css/main_palm.css", "r").read();
+
+htmlPage += """
+  </style>
 </head>
 
 <body>
