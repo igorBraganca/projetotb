@@ -1,10 +1,14 @@
 ﻿<%
 import functions;
 import mod_python;
+import xml.dom.minidom;
+
 sess = mod_python.Session.Session(req);
 if sess.is_new(): psp.redirect("palm.psp");
 userId = form.getfirst("id");
 sess.load();
+
+patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
@@ -50,13 +54,23 @@ function inicializaOcultos()
   <b>Parte A</b>
   <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_a (this)">
     <input type="hidden" name="form" value="custosA" />
+    <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
     <br />
 </div>
 
 <div align="left">
     
-    <!-- Numero Geral -->
-    <b>Número Geral :</b><input name="pid" type="text" size="6" value=<%= functions.encode(userId) %> readoOly="true" />
+    <!-- Numero Geral e Nome-->
+    <table>
+      <tr>
+        <td><b>Número Geral :</b></td>
+        <td><%= functions.encode(userId) %></td>
+      </tr>
+      <tr>
+        <td><b>Paciente :</b></td>
+        <td><%= functions.encode(patientName) %></td>
+      </tr>
+    </table>
     <br /><br />
 
     <fieldset>

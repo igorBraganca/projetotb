@@ -44,10 +44,15 @@ input[type="reset"]
 
 label
 {
-  width: 6em;
+  width: 6.5em;
   float: left;
   text-align: left;
   margin-right: 0.5em;
   display: block
   vertical-align:middle;
+}
+
+table
+{
+  font-size: 9pt;
 }

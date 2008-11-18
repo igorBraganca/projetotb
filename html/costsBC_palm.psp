@@ -6,6 +6,8 @@ if sess.is_new(): psp.redirect("palm.psp");
 userId = form.getfirst("id");
 sess.load();
 
+patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
+
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
 cssText = open(functions.PROJECT_PATH + "css/palm.css", "r").read();
@@ -48,6 +50,8 @@ function inicializaOcultos()
 
   <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_b_e_c (this)">
   <input type="hidden" name="form" value="custosBeC" />
+  <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
+
     
     <b>Parte B</b>
     <br /><br />
@@ -55,8 +59,17 @@ function inicializaOcultos()
 
 <div align="left">
   
-  <!-- Numero Geral -->    
-  <b>N&uacute;mero Geral : </b><input name="pid" type="text" value=<%= functions.encode(userId) %> size="6" readOnly="true" />
+    <!-- Numero Geral e Nome-->
+    <table>
+      <tr>
+        <td><b>Número Geral :</b></td>
+        <td><%= functions.encode(userId) %></td>
+      </tr>
+      <tr>
+        <td><b>Paciente :</b></td>
+        <td><%= functions.encode(patientName) %></td>
+      </tr>
+    </table>
   <br /><br />
     
   <fieldset>  

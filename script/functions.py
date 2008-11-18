@@ -1,6 +1,7 @@
 import xml.dom.minidom;
 import re;
 import os;
+import fcntl;
 
 PROJECT_PATH = os.path.dirname(__file__) + os.path.sep;
 USERS_FILE_NAME = PROJECT_PATH + "xml/users.xml";
@@ -48,3 +49,19 @@ def getPatientsList():
     forms = [s.nodeName for s in patient.childNodes if s.nodeName != '#text'];
     if removido == "nao": ret[name] = {'id' : idNum, 'doneForms' : forms};
   return ret;
+
+def getSingleInfo(pid, form, field):
+  #Opening the xml file and locking it to prevent access from other processes.
+  xmlData = open(PATIENTS_FILE_NAME, 'r');
+  fcntl.flock(xmlData, fcntl.LOCK_EX);
+
+  #Parsing the XML file
+  dom = xml.dom.minidom.parse(xmlData);
+
+  #Retrieving the correct user.
+  patient = getPatientInfo(dom, pid);
+  value = patient.getElementsByTagName(form)[0].getElementsByTagName(field)[0].childNodes[0].data;
+  xmlData.close();
+
+  return value;
+  

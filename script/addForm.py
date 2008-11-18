@@ -17,7 +17,7 @@ form = cgi.FieldStorage()
 doc = xml.dom.minidom.Document();
 data = doc.createElement(form['form'].value);
 for k in form.keys():
-  if k in ['form', 'pid']: continue;
+  if k in ['form', 'pid', 'patientName']: continue;
   val = doc.createElement(k);
   val.appendChild(doc.createTextNode(unicode(form[k].value, xmlEncoding)));
   data.appendChild(val);
