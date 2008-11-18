@@ -36,10 +36,13 @@ cssText = open(functions.PROJECT_PATH + "css/main_palm.css", "r").read();
 
 <body>
 
-<div align="right">
-<p> <a href="logout_palm.psp">Sair do Sistema</a></p>
-<br />
-</div>
+  <div align="center">
+    <table>
+    <tr>
+      <td align="left"><%= sess["userName"] %> conectado</td>
+      <td align="right"><a href="logout_palm.psp">Sair do Sistema</a></td>
+    <tr>
+  </div>
 
   <table>
     <tr>
