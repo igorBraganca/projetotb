@@ -20,15 +20,20 @@ def encode(textStr):
 
 def authenticateUser(userName, password):
   if (not userName) or (not password) : return (False, "", "Preencha todos os campos.");
-  dom = xml.dom.minidom.parse(USERS_FILE_NAME);
+  xmlData = open(USERS_FILE_NAME, 'r');
+  fcntl.flock(xmlData, fcntl.LOCK_EX);
+  dom = xml.dom.minidom.parse(xmlData);
   
   for usuario in dom.getElementsByTagName("usuario"):
     name = usuario.getElementsByTagName("username")[0].childNodes[0].data;
     passWd = usuario.getElementsByTagName("senha")[0].childNodes[0].data;
     group = usuario.getElementsByTagName("grupo")[0].childNodes[0].data;
-    if (name == userName) and (passWd == password): return (True, group, "");
+    if (name == userName) and (passWd == password):
+      xmlData.close();
+      return (True, group, "");
   
   #No matching user was found if we get here.
+  xmlData.close();
   return (False, "", "Usu&aacute;rio n&atilde;o encontrado ou senha inv&aacute;lida.");
 
 
@@ -40,7 +45,10 @@ def getPatientInfo(dom, pid):
 
 
 def getPatientsList():
-  dom = xml.dom.minidom.parse(PATIENTS_FILE_NAME);
+  xmlData = open(PATIENTS_FILE_NAME, 'r');
+  fcntl.flock(xmlData, fcntl.LOCK_EX);
+  dom = xml.dom.minidom.parse(xmlData);
+
   ret = {};  
   for patient in dom.getElementsByTagName("paciente"):
     removido = patient.getAttribute("removido");
@@ -48,6 +56,8 @@ def getPatientsList():
     name = patient.getElementsByTagName("triagem")[0].getElementsByTagName("nomeCompleto")[0].childNodes[0].data;
     forms = [s.nodeName for s in patient.childNodes if s.nodeName != '#text'];
     if removido == "nao": ret[name] = {'id' : idNum, 'doneForms' : forms};
+  
+  xmlData.close();
   return ret;
 
 def getSingleInfo(pid, form, field):
@@ -64,4 +74,4 @@ def getSingleInfo(pid, form, field):
   xmlData.close();
 
   return value;
-  
+ 
