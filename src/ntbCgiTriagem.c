@@ -52,9 +52,9 @@ printf ("	<title>NeuralTB - Preencha todos os campos do formul&aacute;rio abaixo
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/const_digitador.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/validar_.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/const_digitador.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar_.js\"></script>\n");
 printf ("	<script>\n");
 printf ("	\n");
 printf ("\n");
@@ -744,7 +744,7 @@ printf ("			</tr>\n");
 printf ("\n");
 /*
 printf ("			<tr bgcolor=\"red\" class=\"bold\">\n");
-printf ("				<td colspan=\"5\" style=\"text-align: center; color:white\">ATEN&Ccedil;&Atilde;O!!! AS PERGUNTAS A SEGUIR SÃO DESTINADAS &Agrave; ENTRADA DE FORMUL&Aacute;RIOS ANTIGOS. <BR>PARA NOVOS PACIENTES, DEIXE-AS EM BRANCO.\n");
+printf ("				<td colspan=\"5\" style=\"text-align: center; color:white\">ATEN&Ccedil;&Atilde;O!!! AS PERGUNTAS A SEGUIR S&Atilde;O DESTINADAS &Agrave; ENTRADA DE FORMUL&Aacute;RIOS ANTIGOS. <BR>PARA NOVOS PACIENTES, DEIXE-AS EM BRANCO.\n");
 printf ("				</td>\n");
 printf ("			</tr>\n");
 */
@@ -1095,9 +1095,9 @@ printf ("	<title>NeuralTB - Preencha todos os campos do formul&aacute;rio abaixo
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/const_outros.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/validar.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/const_outros.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar.js\"></script>\n");
 printf ("	<script>\n");
 printf ("\n");
 printf ("	function inicializaOcultos(tabela)\n");

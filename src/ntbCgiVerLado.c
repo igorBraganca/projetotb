@@ -98,7 +98,7 @@ int main (void)
 	fprintf (xsl,"			-->\r\n");
 	fprintf (xsl,"		<xsl:if test=\"consultaMedica\">\r\n");
 	fprintf (xsl,"			<tr>\r\n");
-	fprintf (xsl,"				<td class=\"title3\" colspan=\"2\">Consulta M�dica</td>\r\n");
+	fprintf (xsl,"				<td class=\"title3\" colspan=\"2\">Consulta M&#233;dica</td>\r\n");
 	fprintf (xsl,"			</tr>\r\n");
 	fprintf (xsl,"			<xsl:apply-templates select=\"consultaMedica\" />\r\n");
 	fprintf (xsl,"			<tr>\r\n");
@@ -125,7 +125,7 @@ int main (void)
 	fprintf (xsl,"		</xsl:if>\r\n");
 	fprintf (xsl,"			<!--\r\n");
 	fprintf (xsl,"			<tr>\r\n");
-	fprintf (xsl,"				<td class=\"title1\">Gr�fico de Grupo</td>\r\n");
+	fprintf (xsl,"				<td class=\"title1\">Gr&#225;fico de Grupo</td>\r\n");
 	fprintf (xsl,"				<td><a href=\"{concat(graficoGrupo, triagem/numeroGeral)}\" target=\"_blank\">Visualizar</a></td>\r\n");
 	fprintf (xsl,"			</tr>\r\n");
 	fprintf (xsl,"			-->\r\n");
@@ -151,7 +151,7 @@ int main (void)
 	printf("\t<title>Projeto Neural TB - Dados do paciente</title>\r\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\" />\r\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/dataFormat.css\" />\r\n");
-	printf("\t<script type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
+	printf("\t<script charset=\"ISO-8859-1\" type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
 	printf("\
 	<script>\n\
 		function loadXMLDoc(fname)\n\

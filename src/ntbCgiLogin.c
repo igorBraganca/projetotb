@@ -63,7 +63,7 @@ int main (void)
 		printf ("	<title>Neural TB - Entrar</title>\n");
 		printf ("	<!--<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">-->\n");
 		printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/login.css\">\n");
-		printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
+		printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
 		printf ("</head>\n");
 		printf ("\n");
 		printf ("<body>\n");

@@ -67,11 +67,11 @@ fprintf(xsl2,"\n");
 fprintf(xsl2,"<xsl:template match=\"pacientes\">\n");
 fprintf(xsl2,"	<table>\n");
 fprintf(xsl2,"		<tr>\n");
-fprintf(xsl2,"			<th class=\"title3\">Nº Geral</th>\n");
+fprintf(xsl2,"			<th class=\"title3\">N&#186; Geral</th>\n");
 fprintf(xsl2,"			<th class=\"title3\" width=\"40%%\">Paciente</th>\n");
-fprintf(xsl2,"			<th class=\"title3\" width=\"30%%\">Nome da Mãe</th>\n");
+fprintf(xsl2,"			<th class=\"title3\" width=\"30%%\">Nome da M&#227;e</th>\n");
 fprintf(xsl2,"			<th class=\"title3\">Data de Nascimento</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Incluído em</th>\n");
+fprintf(xsl2,"			<th class=\"title3\">Inclu&#237;do em</th>\n");
 fprintf(xsl2,"			<th class=\"title3\">Visualizar</th>\n");
 fprintf(xsl2,"			<th class=\"title3\">Remover</th>\n");
 fprintf(xsl2,"			<th class=\"title3\">Editar</th>\n");
@@ -148,8 +148,8 @@ fclose(xsl2);
 	printf("<html>\n");
 	printf("<head>\n");
 	printf("\t<title>Busca Conclu&iacute;da</title>\n");
-	printf("	<script src=\"js/jquery.js\"></script>\n");
-	printf("	<script src=\"js/colors.js\"></script>\n");
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/jquery.js\"></script>\n");
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/colors.js\"></script>\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
 	printf("\
 	<script>\n\

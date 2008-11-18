@@ -72,9 +72,9 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 		printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 		printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-		printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
-		printf ("	<script language=javascript src=\"js/const_digitador.js\"></script>\n");
-		printf ("	<script language=javascript src=\"js/validar_.js\"></script>\n");
+		printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
+		printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/const_digitador.js\"></script>\n");
+		printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar_.js\"></script>\n");
 		printf ("	<script>\n");
 		printf ("	\n");
 		printf ("	function inicializaOcultos(tabela)\n");
@@ -1192,9 +1192,9 @@ printf ("	<title>NeuralTB - Preencha todos os campos do formul&aacute;rio abaixo
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/const_outros.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/validar.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/const_outros.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar.js\"></script>\n");
 printf ("	<script>\n");
 printf ("\n");
 printf ("	function inicializaOcultos(tabela)\n");

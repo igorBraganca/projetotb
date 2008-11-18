@@ -80,11 +80,11 @@ int main (void)
 	fprintf(xsl,"	<xsl:sort select=\"descendant::nomeCompleto\" />\r\n");
 	fprintf(xsl,"		<xsl:if test=\"triagem/numeroGeral = '%s'\">\r\n", pid);
 
-	fprintf(xsl,"			<p align=\"right\"><a target=\"blank\" href=\"imprimir.cgi?pid=%s\">Versão para Impressão</a></p>\r\n", pid);
+	fprintf(xsl,"			<p align=\"right\"><a target=\"blank\" href=\"imprimir.cgi?pid=%s\">Vers&#227;o para Impress&#227;o</a></p>\r\n", pid);
 
 	fprintf(xsl,"			<table>\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Critério Inicial de Triagem para TB</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Crit&#233;rio Inicial de Triagem para TB</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"triagem\" />\r\n");
 
@@ -94,7 +94,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Questionário de Custos - Parte A</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Question&#225;rio de Custos - Parte A</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"custosA\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");
@@ -102,7 +102,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Consulta Médica</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Consulta M&#233;dica</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"consultaMedica\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");	
@@ -110,7 +110,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th class=\"title3\" colspan=\"2\">Questionário de Custos - Partes B e C</th>\r\n");
+	fprintf(xsl,"				<th class=\"title3\" colspan=\"2\">Question&#225;rio de Custos - Partes B e C</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"custosBeC\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");
@@ -126,7 +126,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th class=\"title3\">Gráfico de Grupo</th>\r\n");
+	fprintf(xsl,"				<th class=\"title3\">Gr&#225;fico de Grupo</th>\r\n");
 	fprintf(xsl,"				<td><!--<a href=\"{concat(graficoGrupo, triagem/numeroGeral)}\" target=\"_blank\">Visualizar</a>--></td>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 */
@@ -152,8 +152,8 @@ int main (void)
 	//printf("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n");
 	printf("\t<title>Busca Conclu&iacute;da</title>\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
-	printf("	<script src=\"js/jquery.js\"></script>\n");
-	printf("	<script src=\"js/colors.js\"></script>\n");
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/jquery.js\"></script>\n");
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/colors.js\"></script>\n");
 	
 	printf("\
 	<script>\n\

@@ -324,7 +324,7 @@ int main (void)
 	printf("				<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 	printf("				<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 	printf("				<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-	printf("				<script language=javascript src=\"js/funcoes.js\"></script>");
+	printf("				<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>");
 	printf("				<style>\n");
 	printf("					iframe {width: 90%%; height: 360px}\n");
 	printf("				</style>\n");

@@ -4,10 +4,10 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link rel="stylesheet" type="text/css" href="css/form.css">
-	<script language=javascript src="js/funcoes.js"></script>
-	<script language=javascript src="js/const_outros.js"></script>
+	<script charset="ISO-8859-1" language=javascript src="js/funcoes.js"></script>
+	<script charset="ISO-8859-1" language=javascript src="js/const_outros.js"></script>
 
-	<script language=javascript src="js/validar.js"></script>
+	<script charset="ISO-8859-1" language=javascript src="js/validar.js"></script>
 	<script>
 
 	function inicializaOcultos(tabela)
@@ -64,11 +64,11 @@
 
 <body  onLoad="inicializaOcultos('tabelaSintomas');">
 <table border="0" id="menu"><tr>	<td>		<table border="0">		<tr><td class="fl" onmouseover="showmenu('forms')" onmouseout="hidemenu('forms')">
-<a href="#">Formulários</a><br />
+<a href="#">Formul&aacute;rios</a><br />
 <ul class="option" id="forms">
 
 	<li><a href="triagem.cgi?uid=medico" target="_parent">Triagem</a></li>
-	<li><a href="busca.cgi?uid=medico" target="_parent">Outros Formulários</a></li>
+	<li><a href="busca.cgi?uid=medico" target="_parent">Outros Formul&aacute;rios</a></li>
 </ul>
 </td>
 			<td class="fl"><a href="busca.cgi?uid=medico" target="_parent">Buscar/Editar/Remover</a></td>			<td class="fl"><a href="listar.cgi?uid=medico" target="_parent">Listar Pacientes</a></td>			<td class="fl"><a href="backup.cgi">Backup</a></td>			<td class="fl"><a style="cursor:help" href="ajuda.html" target="_blank">Ajuda</a></td>		</tr>		</table>	</td>	<td>		<table border="0">		<tr>			<td class="fr"><i>medico</i> conectado | <a href="logout.cgi">Sair</a></td>		</tr>		</table>	</td></tr></table><table border="0">

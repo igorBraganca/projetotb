@@ -83,7 +83,7 @@ int main (void)
 
 	fprintf(xsl,"			<table>\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Critério Inicial de Triagem para TB</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Crit&#233;rio Inicial de Triagem para TB</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"triagem\" />\r\n");
 
@@ -92,7 +92,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Questionário de Custos - Parte A</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Question&#225;rio de Custos - Parte A</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"custosA\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");
@@ -100,7 +100,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Consulta Médica</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Consulta M&#233;dica</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"consultaMedica\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");	
@@ -108,7 +108,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th class=\"title3\" colspan=\"2\">Questionário de Custos - Partes B e C</th>\r\n");
+	fprintf(xsl,"				<th class=\"title3\" colspan=\"2\">Question&#225;rio de Custos - Partes B e C</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"custosBeC\" />\r\n");
 	fprintf(xsl,"			<tr>\r\n");
@@ -124,7 +124,7 @@ int main (void)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th class=\"title3\">Gráfico de Grupo</th>\r\n");
+	fprintf(xsl,"				<th class=\"title3\">Gr&#225;fico de Grupo</th>\r\n");
 	fprintf(xsl,"				<td><!--<a href=\"{concat(graficoGrupo, triagem/numeroGeral)}\" target=\"_blank\">Visualizar</a>--></td>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 */
@@ -148,7 +148,7 @@ int main (void)
 	printf("<html>\n");
 	printf("<head>\n");
 	//printf("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n");
-	printf("\t<title>Vers�o de Impress�o</title>\n");
+	printf("\t<title>Vers&atilde;o de Impress&atilde;o</title>\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/imprimir.css\" />\n"); 
 	printf("\
 	<script>\n\
@@ -169,7 +169,7 @@ int main (void)
 			}\n\
 			else\n\
 			{\n\
-				alert('O seu navegador n&atilde;o tem suporte a este script');\n\
+				alert('O seu navegador nao tem suporte a este script');\n\
 			}\n\
 			xmlDoc.async = false;\n\
 			xmlDoc.load(fname);\n\

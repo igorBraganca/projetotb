@@ -55,8 +55,8 @@ printf ("	<title>Projeto TB Adapt - Preencha todos os campos do formul&aacute;ri
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
-printf ("	<script language=javascript src=\"js/validar.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar.js\"></script>\n");
 printf ("	<script>/* Funcao que  oculta as linhas do formulario que nao deverao se vistas em seu carregamento inicial */\n");
 printf ("	\n");
 printf ("	\n");
@@ -66,7 +66,7 @@ printf ("	tabFields[1] = [\"especimes_respiratorios\", \"Data da coleta dos DOIS
 printf ("	tabFields[2] = [\"cicatriz_bcg\", \"Cicatriz de BCG presente?(Checar delt&oacute;ide direito):\"];\n");
 printf ("	tabFields[3] = [\"resultado_leitura\", \"Resultado da leitura (mil&iacute;metros de endura&ccedil;&atilde;o):\"];\n");
 printf ("	tabFields[4] = [\"aplicacao_data\", \"Data da aplica&ccedil;&atilde;o da prova tubercul&iacute;nica (dia/m&ecirc;s/ano):\"];\n");
-printf ("	tabFields[5] = [\"leitura_data\", \"Data da leitura (dia/m�s/ano):\"];\n");
+printf ("	tabFields[5] = [\"leitura_data\", \"Data da leitura (dia/m&ecirc;s/ano):\"];\n");
 printf ("	tabFields[6] = [\"pt_1dose\", \"PT 1&170; dose Leitor:\"];\n");
 printf ("	tabFields[7] = [\"tb_anterior\", \"01 - Tratamento de TB anterior:\"];\n");
 printf ("	tabFields[8] = [\"inh\", \"01.1 - NH:\"];\n");
@@ -102,7 +102,7 @@ printf ("	tabFields[37] = [\"fatores_de_risco\", \"20 - Fatores de risco para TB
 printf ("	tabFields[38] = [\"comorbidades\", \"06 - Comorbidades:\"];\n");
 printf ("	\n");
 printf ("	\n");
-printf ("	var tabValores= new Array(\"Masculino\", \"Feminino\", \"Presente\", \"Ausente\", \"Ignorado\",\"Sim\", \"N&etilde;o\", \"Branco\", \"N&etilde;o-branco\", \"Negro\", \"Mulato\", \"Índio\", \"Asiático\", \"Outro\", \"Casado\", \"Solteiro\", \"Separado\", \"Viúvo\", \"Pulmão\", \"Pleura\", \"G&acirc;nglio\");\n");
+printf ("	var tabValores= new Array(\"Masculino\", \"Feminino\", \"Presente\", \"Ausente\", \"Ignorado\",\"Sim\", \"N&atilde;o\", \"Branco\", \"N&atilde;o-branco\", \"Negro\", \"Mulato\", \"&Iacute;ndio\", \"Asi&aacute;tico\", \"Outro\", \"Casado\", \"Solteiro\", \"Separado\", \"Vi&uacute;vo\", \"Pulm&atilde;o\", \"Pleura\", \"G&acirc;nglio\");\n");
 printf ("\n");
 printf ("function inicializaOcultos(tabela)\n");
 printf ("{\n");

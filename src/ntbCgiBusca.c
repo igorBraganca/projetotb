@@ -48,7 +48,7 @@ printf ("	<title>Neural TB - Busca</title>\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\" />\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\" />\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
 printf ("	\n");
 printf ("	<style>\n");
 printf ("		iframe {width: 100%%; min-width: 800px; height:500px}\n");

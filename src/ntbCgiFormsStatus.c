@@ -77,8 +77,8 @@ int main (void)
 	//fprintf(xsl,"	<head>\r\n");
 	//fprintf(xsl,"		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\" />\r\n");
 	//fprintf(xsl,"		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/patientForms.css\" />\r\n");
-	//fprintf(xsl,"		<script type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
-	//fprintf(xsl,"		<title>Projeto Neural TB - Formul&aacute;rios</title>\r\n");
+	//fprintf(xsl,"		<script charset=\"ISO-8859-1\" type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
+	//fprintf(xsl,"		<title>Projeto Neural TB - Formul&#225;rios</title>\r\n");
 	//fprintf(xsl,"	</head>\r\n");
 	//fprintf(xsl,"\r\n");
 	//fprintf(xsl,"	<body>\r\n");
@@ -105,7 +105,7 @@ int main (void)
 	
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\" />\r\n");
 	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/patientForms.css\" />\r\n");
-	printf("\t<script type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
+	printf("\t<script charset=\"ISO-8859-1\" type=\"javascript\" src=\"js/funcoes.js\"></script>\r\n");
 	
 	printf("\
 	<script>\n\

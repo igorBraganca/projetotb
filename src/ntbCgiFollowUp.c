@@ -50,8 +50,8 @@ printf ("	<title>Follow Up 90 dias - Preencha todos os campos do Formul&aacute;r
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\r\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu.css\">\r\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form_2.css\">\r\n");
-printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\r\n");
-printf ("	<script language=javascript src=\"js/validar.js\"></script>\r\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\r\n");
+printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar.js\"></script>\r\n");
 printf ("<script>\r\n");
 printf ("function validarDataDesconhecida(form)\r\n");
 printf ("{\r\n");
