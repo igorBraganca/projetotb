@@ -18,18 +18,27 @@ if sess.is_new():
     sess.save();
 
 ptMap = functions.getPatientsList();
+
+cssText = open(functions.PROJECT_PATH + "css/main_palm.css", "r").read();
 %>
 
 <html>
 
 <head>
-  <title>Neural TB - Listagem de Pacientes</title>
+
+<title>Neural TB - Listagem de Pacientes</title>
+
+<style type="text/css">
+<%= cssText %>
+</style>
+
 </head>
 
 <body>
 
 <div align="right">
 <p> <a href="logout_palm.psp">Sair do Sistema</a></p>
+<br />
 </div>
 
   <table>
