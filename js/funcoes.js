@@ -893,6 +893,14 @@ function validarDataExame(dia,mes,ano)
 		ano.value="";
 		dia.focus();
 	}	
+	else if (parseInt(ano.value) < parseInt(document.check.ano_nascimento.value))
+	{
+		alert("Data invalida. A data não pode ser anterior ao nascimento do paciente.");
+		dia.value="";
+		mes.value="";
+		ano.value="";
+		dia.focus();
+	}
 	else
 	{
 		if (ano.value == Ano)
