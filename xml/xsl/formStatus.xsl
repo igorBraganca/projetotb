@@ -65,7 +65,7 @@
 					<xsl:choose>
 					<xsl:when test="custosA">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" onclick="self.close(); opener.top.location='editFormCustosA.cgi?uid={$uid}&amp;pid={$id}';return false;">
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
