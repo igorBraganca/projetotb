@@ -19,7 +19,7 @@ if sess.is_new():
 
 ptMap = functions.getPatientsList();
 
-cssText = open(functions.PROJECT_PATH + "css/main_palm.css", "r").read();
+cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 %>
 
 <html>

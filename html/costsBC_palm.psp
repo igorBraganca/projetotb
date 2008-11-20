@@ -10,7 +10,7 @@ patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
-cssText = open(functions.PROJECT_PATH + "css/form_palm.css", "r").read();
+cssText = open(functions.PROJECT_PATH + "css/costs_palm.css", "r").read();
 jsText = open(functions.PROJECT_PATH + "js/funcoes.js", "r").read();
 jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 %>
@@ -24,6 +24,8 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 <style type="text/css">
 <%= cssText %>
 </style>
+
+<link rel="stylesheet" type="text/css" href="css/costs_pc.css" media="screen" />
 
 <script>
 <%= jsText %>
