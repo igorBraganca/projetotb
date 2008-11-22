@@ -47,14 +47,7 @@ function setValues()
 <%
 for field, value in costs.iteritems():
 %>
-  obj = document.getElementsByName("<%=field%>")[0];
-  if ( (obj.type == "text") || (obj.tagName == "TEXTAREA") )
-  {
-    state = obj.readOnly;
-    obj.readOnly = false;
-    obj.value = "<%= functions.encode(value) %>";
-    obj.readOnly = state;
-  }
+  setObjValue(document.getElementsByName("<%=field%>"), "<%= functions.encode(value) %>");
 <%
 #end of loop.
 %>
@@ -123,7 +116,7 @@ function inicializa()
       <!-- ACOMPANHADO -->
       <p>
         03 - Você está acompanhado?<br />
-        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.value='';numeroAcompanhantesA.focus();"><radio_label>Sim</radio_label>
+        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.focus();"><radio_label>Sim</radio_label>
         <input name="acompanhadoA" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantesA.value='NA'; numeroAcompanhantesA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesA" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
       </p>
@@ -159,28 +152,28 @@ function inicializa()
     
       <!-- Pagar o pernoite -->
       <p id="item_custo_pernoite">08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar?<br />
-        <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;custoPernoite.value=''"><radio_label>Sim</radio_label>
+        <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;"><radio_label>Sim</radio_label>
         <input name="pagarPernoite" id="nao_paga_pernoite" type="radio" value="nao" onclick="custoPernoite.value='0'; custoPernoite.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input class="preco" name="custoPernoite" id="preco_pernoite" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- Trouxe algo para os amigos -->
       <p id="item_custo_amigos">08.2 - Você trouxe algo para os seus amigos?<br />
-        <input name="trouxeAlgoAmigos" id="trouxe_presente" type="radio" value="sim" onclick="custoAmigos.readOnly = false;custoAmigos.value=''"><radio_label>Sim</radio_label>
+        <input name="trouxeAlgoAmigos" id="trouxe_presente" type="radio" value="sim" onclick="custoAmigos.readOnly = false;"><radio_label>Sim</radio_label>
         <input name="trouxeAlgoAmigos" id="nao_trouse_presente" type="radio" value="nao" onclick="custoAmigos.value='0'; custoAmigos.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoAmigos" id="custo_presente" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- COMEU E/OU BEBEU -->
       <p>09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
-        <input name="comeuBebeuA" id="comeu" type="radio" value="sim" onclick="custoComidaBebidaA.readOnly = false;custoComidaBebidaA.value=''"><radio_label>Sim</radio_label>
+        <input name="comeuBebeuA" id="comeu" type="radio" value="sim" onclick="custoComidaBebidaA.readOnly = false;"><radio_label>Sim</radio_label>
         <input name="comeuBebeuA" id="nao_comeu" type="radio" value="nao" onclick="custoComidaBebidaA.value='0'; custoComidaBebidaA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoComidaBebidaA" id="custo_comida" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- PAGOU ALGO NO POSTO -->
       <p>10 - Você teve que pagar algo aqui no posto? Quanto custou?<br />
-        <input name="pagarPostoA" id="pagou_posto" type="radio" value="sim" onclick="custoPostoA.readOnly = false;custoPostoA.value=''"><radio_label>Sim</radio_label>
+        <input name="pagarPostoA" id="pagou_posto" type="radio" value="sim" onclick="custoPostoA.readOnly = false;"><radio_label>Sim</radio_label>
         <input name="pagarPostoA" id="nao_pagou_posto" type="radio" value="nao" onclick="custoPostoA.value='0'; custoPostoA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoPostoA" id="custo_posto" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
@@ -204,7 +197,7 @@ function inicializa()
     
       <!-- DEIXOU DE GANHAR DINHEIRO -->
       <p>13 - Deixou de ganhar dinheiro hoje para poder vir ao posto?  Quanto?<br />
-        <input name="deixouGanharDinheiroA" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanharA.readOnly = false;quantoDeixouGanharA.value=''"><radio_label>Sim</radio_label>
+        <input name="deixouGanharDinheiroA" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanharA.readOnly = false;"><radio_label>Sim</radio_label>
         <input name="deixouGanharDinheiroA" id="nao_deixou_ganhar_dinheiro" type="radio" value="nao" onclick="quantoDeixouGanharA.value='0'; quantoDeixouGanharA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="quantoDeixouGanharA" id="quanto_nao_ganhou" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this);">,00
       </p>

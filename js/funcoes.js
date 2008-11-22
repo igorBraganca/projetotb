@@ -1,3 +1,25 @@
+function setObjValue(objName, objVal)
+{
+  if ( (objName[0].type == "text") || (objName[0].tagName == "TEXTAREA") )
+  {
+    state = objName[0].readOnly;
+    objName[0].readOnly = false;
+    objName[0].value = objVal;
+    objName[0].readOnly = state;
+  }
+  else if (objName[0].type == "radio")
+  {
+    for (i=0; i< objName.length; i++)
+    {
+      if ( objName[i].value == objVal)
+      {
+        objName[i].click();
+        break;
+      }
+    }
+  }
+}
+
 function putDate()
 {
 	var d = new Date();
