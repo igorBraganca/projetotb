@@ -102,7 +102,7 @@ def getSingleInfo(pid, form, field):
  
 def formAsMap(pid, form):
   """Busca o paciente com numero geral (pid), e converte o formulario (form) desejado
-     em um dicionario onde a chave e o nome doc ampo, e o valor e o conteudo do campo.
+     em um dicionario onde a chave e o nome do campo, e o valor e o conteudo do campo.
      Retorna um dicionario vazio se o formulario desejado nao foi encontrado."""
 
   #Opening the xml file and locking it to prevent access from other processes.
