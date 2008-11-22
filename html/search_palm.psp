@@ -53,10 +53,15 @@ for name in sorted(ptMap.keys()):
   id = ptMap[name]["id"];
   fmtId = functions.fmt2GetMethod(id);
   formsDone = ptMap[name]["doneForms"];
-  urlFormA = "<a href=costsA_palm.psp?id=%s>Fazer</a>" % fmtId;
-  urlFormB = "<a href=costsBC_palm.psp?id=%s>Fazer</a>" % fmtId;
-  if "custosA" in formsDone: urlFormA = "Feito";
-  if "custosBeC" in formsDone: urlFormB = "Feito";
+  
+  statusA = statusB = "";
+  if "custosA" in formsDone: statusA = "Editar";
+  else: statusA = "Fazer";
+  if "custosBeC" in formsDone: statusB = "Editar";
+  else: statusB = "Fazer";
+  
+  urlFormA = "<a href=costsA_palm.psp?id=%s>%s</a>" % (fmtId, statusA);
+  urlFormB = "<a href=costsBC_palm.psp?id=%s>%s</a>" % (fmtId, statusB);
 %>
     <tr>
     <td><%= functions.encode(id) %></td>

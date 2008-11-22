@@ -9,6 +9,7 @@ userId = form.getfirst("id");
 sess.load();
 
 patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
+costs = functions.formAsMap(userId, "custosA");
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
@@ -41,11 +42,36 @@ function inicializaOcultos()
   document.getElementById("item_custo_acompanhante").style.display = "none";//gasto com o acompanhante
 }
 
+function setValues()
+{
+<%
+for field, value in costs.iteritems():
+%>
+  obj = document.getElementsByName("<%=field%>")[0];
+  if ( (obj.type == "text") || (obj.tagName == "TEXTAREA") )
+  {
+    state = obj.readOnly;
+    obj.readOnly = false;
+    obj.value = "<%= functions.encode(value) %>";
+    obj.readOnly = state;
+  }
+<%
+#end of loop.
+%>
+
+}
+
+function inicializa()
+{
+  inicializaOcultos();
+  setValues();
+}
+
 </script>
 
 </head>
 
-<body onLoad="inicializaOcultos()">
+<body onLoad="inicializa()">
 
 <div align="center" >
   <h3>Projeto - Novos Métodos Diagnósicos em TB pulmonar - Policlinica Augusto Amaral Peixoto-SMS-RJ</br></h4>
@@ -104,22 +130,22 @@ function inicializaOcultos()
     
       <!-- HORARIO SAIU DE CASA -->
       <p>04 - Que horas você saiu de casa?<br />
-        <text_label>Hora:</text_label><input name="horaSaidaCasaA" id="hora_saiu" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoSaidaCasaA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoSaidaCasaA" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaSaidaCasaA" id="hora_saiu" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoSaidaCasaA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO CHEGOU NO POSTO -->
      <p>05 - Que horas você chegou no posto?<br />
-        <text_label>Hora:</text_label><input name="horaChegadaPostoA" id="hora_chegou" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoChegadaPostoA" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaMedicoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaChegadaPostoA" id="hora_chegou" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoChegadaPostoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO MEDICO -->
       <p>06 - Que horas você viu o médico?<br />
-        <text_label>Hora:</text_label><input name="horaMedicoA" id="hora_medico" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoMedicoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoMedicoA" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2)this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaMedicoA" id="hora_medico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoMedicoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- TEMPO TOTAL -->
       <p>07 - Quanto tempo levou desde que você saiu de casa at&eacute; ver o m&eacute;dico?<br />
-        <text_label>Tempo total:</text_label><input name="horaTotalA" id="tempo_total" type="text" maxlength="2" size="1" readonly="readonly" >h e<input name="minutoTotalA" type="text" maxlength="2" size="1" readonly="readonly">min.
+        <text_label>Tempo total:</text_label><input name="horaTotalA" id="tempo_total" type="text" maxlength="2" size="2" readonly="readonly" >h e<input name="minutoTotalA" type="text" maxlength="2" size="2" readonly="readonly">min.
       </p>
     
       <!-- SE MORAR FORA DO RIO -->
@@ -205,7 +231,7 @@ function inicializaOcultos()
       <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
       <p>      
         <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroA" id="avaliado_por" type="text" size="15"><br />
-        <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(sess["userName"])%> size="15"><br />
+        <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value="<%= functions.encode(sess["userName"])%>" size="15"><br />
         <label title="label_data" for="data">Data:</label><input name="dia_CustoA" type="text" id="data" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) mes_CustoA.focus();" onBlur="if(validarDia(this))mes_CustoA.focus();">/<input type="text" name="mes_CustoA" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) ano_CustoA.focus()" onBlur="if(validarMes(this))ano_CustoA.focus();">/<input type="text" name="ano_CustoA" maxlength="4" size="4" onKeyUp="if(this.value.length == 4) this.blur();" onBlur="validarAno(this); validarQualquerData(dia_CustoA,mes_CustoA,ano_CustoA);">
       </p>
     
