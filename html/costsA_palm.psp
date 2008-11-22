@@ -51,7 +51,6 @@ for field, value in costs.iteritems():
 <%
 #end of loop.
 %>
-
 }
 
 function inicializa()

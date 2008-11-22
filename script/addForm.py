@@ -37,9 +37,13 @@ bckData.close(); #Realeasing the backup file (unlock).
 #Parsing the XML file
 xmlData.seek(0); #Going to the beginning of the file
 dom = xml.dom.minidom.parse(xmlData);
+
 #Retrieving the correct user.
 patient = functions.getPatientInfo(dom, form['pid'].value);
-#Adding the new info.
+
+#Checking whether the form already exists. If so, we remove it first.
+if len(patient.getElementsByTagName(form['form'].value)) != 0:
+  patient.removeChild(patient.getElementsByTagName(form['form'].value)[0]);
 patient.appendChild(data);
 
 #Saving the new data to the XML file.
