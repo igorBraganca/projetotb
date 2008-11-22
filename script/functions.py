@@ -114,7 +114,7 @@ def formAsMap(pid, form):
 
   #Retrieving the correct user.
   xmlForm = getPatientInfo(dom, pid).getElementsByTagName(form);
-  if len(xmlForm == 0): return {};
+  if len(xmlForm) == 0: return {};
   
   ret = {};
   for field in xmlForm[0].childNodes:
