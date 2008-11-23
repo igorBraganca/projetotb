@@ -7,6 +7,7 @@ userId = form.getfirst("id");
 sess.load();
 
 patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
+costs = functions.formAsMap(userId, "custosBeC");
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
@@ -36,11 +37,28 @@ function inicializaOcultos()
   document.getElementById("qual_programa").style.display = "none";//Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?(parte C)
 }
 
+function setValues()
+{
+<%
+for field, value in costs.iteritems():
+%>
+  setObjValue(getElementsByName("<%=field%>"), "<%= functions.encode(value) %>");
+<%
+#end of loop.
+%>
+}
+
+function inicializa()
+{
+  inicializaOcultos();
+  setValues();
+}
+
 </script>
 
 </head>
 
-<body onLoad="inicializaOcultos();">
+<body onLoad="inicializa();">
 
 <div align="center">
 
@@ -118,7 +136,6 @@ function inicializaOcultos()
       <text_label>Hora:</text_label><input name="horaSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoSaidaCasaB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
     </p>
 
-    
     <!-- HORARIO CHEGOU NO POSTO -->
     <p>
       06 - Que horas você chegou no posto?<br />
