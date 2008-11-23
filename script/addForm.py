@@ -60,7 +60,7 @@ htmlPage = """
   <style type="text/css">
 """
 
-htmlPage += open(functions.PROJECT_PATH + "css/main_palm.css", "r").read();
+htmlPage += open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 
 htmlPage += """
   </style>

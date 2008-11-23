@@ -1,14 +1,22 @@
 ﻿<%
-import mod_python
+import mod_python;
+import functions;
 sess = mod_python.Session.Session(req);
 if sess.is_new(): psp.redirect("palm.psp");
 else: sess.invalidate();
+
+cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
+
 %>
 
 <html>
 
 <head>
   <title>Neural TB - Sair do Sistema</title>
+
+  <style type="text/css">
+    <%= cssText %>
+  </style>
 </head>
 
 <body>
