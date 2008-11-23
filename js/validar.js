@@ -1,12 +1,12 @@
 /*
  *	Autor: Igor Cunha Braganca
  */
- 
+
  function returnNameCampo (name)
  {
 	var newName = "";
 	var estado = false;
-	
+
  	tabela_triagem = new Array();
 	tabela_triagem[0] = ["nomeCompleto", "01 - Nome"];
 	tabela_triagem[1] = ["nomeMae","02 - Nome da Mãe"];
@@ -57,8 +57,8 @@
 	tabela_triagem[46] = ["dorToracica_semanas", "Semanas"];
 	tabela_triagem[47] = ["result", "Resultado"];//Sinais e Sintomas
 	tabela_triagem[48] = ["tratamentoAnteriorTB", "30 - Tratamento de TB anterior"];
-	tabela_triagem[49] = ["mes_diagnostico", "30.1 - Data do diagn&oacute;stico de TB no passado"];
-	tabela_triagem[50] = ["ano_diagnostico", "30.1 - Data do diagn&oacute;stico de TB no passado"];	
+	tabela_triagem[49] = ["mes_diagnostico", "30.1 - Data do diagnóstico de TB no passado"];
+	tabela_triagem[50] = ["ano_diagnostico", "30.1 - Data do diagnóstico de TB no passado"];
 	tabela_triagem[51] = ["TBdesfecho", "30.2 - Desfecho de TB"];
 	tabela_triagem[52] = ["internado", "31 - Internação Hospitalar"];
 	tabela_triagem[53] = ["prisao", "32 - Esteve em prisão"];
@@ -79,40 +79,40 @@
 	tabela_triagem[68] = ["bebidaManha", "36.4 - Costuma beber de manhã para diminuir nervosismo/ressaca"];
 	tabela_triagem[69] = ["culpadoManeiraBeber", "36.5 - Sente culpa pela maneira que bebe"];
 	tabela_triagem[70] = ["cage", "Cage"];
-	tabela_triagem[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxilio para seu problema de sa&uacute;de?"];
+	tabela_triagem[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxilio para seu problema de saúde?"];
 	tabela_triagem[72] = ["lugarDaPrimeiraConsulta", "38 - Onde foi?"];
 	tabela_triagem[73] = ["causaDaPrimeiraConsulta", "39 - Porque procurou? "];
 	tabela_triagem[74] = ["veioAcompanhadoDeFamiliares", "40 - Veio acompanhado de familiares?"];
-	tabela_triagem[75] = ["veioEncaminhadoPorAlgumPostodeSaude", "41 - Foi encaminhado para o Posto pelo P. Sa&uacute;de de Fam&iacute;lia"];
+	tabela_triagem[75] = ["veioEncaminhadoPorAlgumPostodeSaude", "41 - Foi encaminhado para o Posto pelo P. Saúde de Família"];
 	tabela_triagem[76] = ["deQualPostoDeSaudeFoiEncaminhado", "41.1 - Qual?"];
-	tabela_triagem[77] = ["veioEncaminhadoPorUnidadedDeSaudeSUS", "42 - Foi encaminhado por unidade de sa&uacute;de do SUS?"];
+	tabela_triagem[77] = ["veioEncaminhadoPorUnidadedDeSaudeSUS", "42 - Foi encaminhado por unidade de saúde do SUS?"];
 	tabela_triagem[78] = ["deQualPostoDeSaudeDoSUSFoiEncaminhado", "42.1 - Qual?"];
-	tabela_triagem[79] = ["veioEncaminhadoPorUnidadedDeSaudeParticular", "43 - Foi encaminhado por unidade de sa&uacute;de Particular?"];
-	tabela_triagem[80] = ["deQualPostoDeSaudeparticularFoiEncaminhado", "43.1 - Qual?"];	
-	tabela_triagem[81] = ["decidiuSozinhoPorAuxilioMedico", "44 - Decidiu sozinho por aux&iacute;lio m&eacute;dico na Policl&iacute;nica?"];	
-	tabela_triagem[82] = ["porqueDecidiuSozinhoPorAuxilioMedico", "44.1 - Porque?"];	
-	tabela_triagem[83] = ["encaminhadoParaQualSetorDaPoliclinica", "45 - O encaminhamento foi para atendimento em qual setor da Policl&iacute;nica?"];	
-	tabela_triagem[84] = ["algumTratamentoParaTosseRecente", "46 - Fez algum tratamento para tosse, ultimamente?"];	
-	tabela_triagem[85] = ["qualFoiTratamentoRecenteFeito", "46.1 - Qual?"];	
-	tabela_triagem[86] = ["quantoDiasDurouTratamentoRecenteFeito", "46.2 - Durante quantos dias (total)?"];	
-	tabela_triagem[87] = ["trouxeRXdeTorax", "47 - Trouxe RX de t&oacute;rax?"];	
-	tabela_triagem[88] = ["trouxeAlgumResultadoDeRXdeTorax", "48 - Trouxe algum resultado de RX de t&oacute;rax?"];	
-	tabela_triagem[89] = ["trouxeMaterialDeExacarro", "49 - Trouxe material de escarro?"];	
-	tabela_triagem[90] = ["trouxeAlgumResultadoDeMaterialDeExacarro", "50 - Trouxe algum resultado de exame de escarro?"];	
-	tabela_triagem[91] = ["trouxeAlgumResultadoDeBiopasia", "51 - Trouxe algum resultado de bi&oacute;psia?"];	
-	tabela_triagem[92] = ["trouxeAlgumOutroResultado", "52 - Trouxe algum outro resultado?"];	
-	tabela_triagem[93] = ["qualOutroResultado", "52.1 - Qual?"];	
-	tabela_triagem[94] = ["desfechoConsultaInicial", "37 - Desfecho da Consulta Inicial"];	
-	tabela_triagem[95] = ["inclusao", "38 - Inclusão"];	
-	tabela_triagem[96] = ["criteriosInclusao", "38.1 - Critérios de Inclusão"];	
-	tabela_triagem[97] = ["", "38.2 - Data de Coleta dos DOIS Esp&eacute;cimes Respirat&oacute;rios:"];	
-	tabela_triagem[98] = ["coleta_1", "#1"];	
-	tabela_triagem[99] = ["coleta_2", "#2"];	
-	tabela_triagem[100] = ["cicatrizBCG", "38.3 - Cicatriz de BCG"];	
-	tabela_triagem[101] = ["resultadoLeitura", "38.4 - Resultado da leitura"];	
-	tabela_triagem[102] = ["data_aplicacao", "38.5 - Data de aplicação da prova tuberculínica"];	
-	tabela_triagem[103] = ["data_leitura", "38.6 - Data da Leitura"];	
-	tabela_triagem[104] = ["PTprimeiraDose", "38.7 - PT 1ª dose leitor"];	
+	tabela_triagem[79] = ["veioEncaminhadoPorUnidadedDeSaudeParticular", "43 - Foi encaminhado por unidade de saúde Particular?"];
+	tabela_triagem[80] = ["deQualPostoDeSaudeparticularFoiEncaminhado", "43.1 - Qual?"];
+	tabela_triagem[81] = ["decidiuSozinhoPorAuxilioMedico", "44 - Decidiu sozinho por auxílio médico na Policlínica?"];
+	tabela_triagem[82] = ["porqueDecidiuSozinhoPorAuxilioMedico", "44.1 - Porque?"];
+	tabela_triagem[83] = ["encaminhadoParaQualSetorDaPoliclinica", "45 - O encaminhamento foi para atendimento em qual setor da Policlínica?"];
+	tabela_triagem[84] = ["algumTratamentoParaTosseRecente", "46 - Fez algum tratamento para tosse, ultimamente?"];
+	tabela_triagem[85] = ["qualFoiTratamentoRecenteFeito", "46.1 - Qual?"];
+	tabela_triagem[86] = ["quantoDiasDurouTratamentoRecenteFeito", "46.2 - Durante quantos dias (total)?"];
+	tabela_triagem[87] = ["trouxeRXdeTorax", "47 - Trouxe RX de tórax?"];
+	tabela_triagem[88] = ["trouxeAlgumResultadoDeRXdeTorax", "48 - Trouxe algum resultado de RX de tórax?"];
+	tabela_triagem[89] = ["trouxeMaterialDeExacarro", "49 - Trouxe material de escarro?"];
+	tabela_triagem[90] = ["trouxeAlgumResultadoDeMaterialDeExacarro", "50 - Trouxe algum resultado de exame de escarro?"];
+	tabela_triagem[91] = ["trouxeAlgumResultadoDeBiopasia", "51 - Trouxe algum resultado de biópsia?"];
+	tabela_triagem[92] = ["trouxeAlgumOutroResultado", "52 - Trouxe algum outro resultado?"];
+	tabela_triagem[93] = ["qualOutroResultado", "52.1 - Qual?"];
+	tabela_triagem[94] = ["desfechoConsultaInicial", "37 - Desfecho da Consulta Inicial"];
+	tabela_triagem[95] = ["inclusao", "38 - Inclusão"];
+	tabela_triagem[96] = ["criteriosInclusao", "38.1 - Critérios de Inclusão"];
+	tabela_triagem[97] = ["", "38.2 - Data de Coleta dos DOIS Espécimes Respiratórios:"];
+	tabela_triagem[98] = ["coleta_1", "#1"];
+	tabela_triagem[99] = ["coleta_2", "#2"];
+	tabela_triagem[100] = ["cicatrizBCG", "38.3 - Cicatriz de BCG"];
+	tabela_triagem[101] = ["resultadoLeitura", "38.4 - Resultado da leitura"];
+	tabela_triagem[102] = ["data_aplicacao", "38.5 - Data de aplicação da prova tuberculínica"];
+	tabela_triagem[103] = ["data_leitura", "38.6 - Data da Leitura"];
+	tabela_triagem[104] = ["PTprimeiraDose", "38.7 - PT 1ª dose leitor"];
 	tabela_triagem[105] = ["observacoes", "39 - Observações"];
 	tabela_triagem[106] = ["numeroGeral","Nº Geral (TB Adapt)"];
 	tabela_triagem[107] = ["dia_inclusao","Data de inclusão"];
@@ -139,7 +139,7 @@
 	tabela_triagem[128] = ["mes_termoConsentimento","38.1 - Critérios de Inclusão"];
 	tabela_triagem[129] = ["ano_termoConsentimento","38.1 - Critérios de Inclusão"];
 	tabela_triagem[130] = ["pontuacao","Resultado"];
-	
+
 	var indice = 0;
 	while((indice < 131) && (estado != true))
 	{
@@ -155,17 +155,17 @@
 
  function validar_triagem (form)
 {
-	
+
 	var estado = true;
 	var texto="";
 	var tamanho = 0;
 	var novoNome1, novoNome2;
 	novoNome1 = "-";
-	
+
 	tamanho = form.elements.length;
-	
+
 	texto="As seguintes perguntas não foram preenchidas:\n";
-	
+
 	for(indice = 0; indice < tamanho; indice ++)
 	{
 
@@ -184,7 +184,7 @@
 					novoNome1 = novoNome2;
 				}
 				/***********************/
-			}	
+			}
 		}
 		else
 		{
@@ -246,14 +246,14 @@
 						if(form.elements[indice].checked == true)
 							radioIndice ++;
 					}
-					
+
 					if(form.elements[indice].checked == true)
 					{
 						contador ++
 						radioIndice ++;
 					}
-					
-					if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false)) 
+
+					if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
 					{
 						estado = false;
 						/***********************/
@@ -288,7 +288,7 @@
 								novoNome1 = novoNome2;
 							}
 							/***********************/
-						}	
+						}
 						indice += 2;
 					}
 				}
@@ -315,18 +315,18 @@
 					{
 					}
 				}
-				
+
 			}
-		}	
+		}
 	}
-	
+
 	if(estado == false)
 	{
 		alert("Preencha todos os campos do formulario, obrigado.\n\nOBS:Não se esqueça de clicar no botão \"Resultado\" no grupo de perguntas Sinais e Sintomas.");
 		alert(texto);
 		return false;
 	}
-	
+
 	if(confirm("Deseja enviar os dados ?"))
 		return true;
 	else
@@ -337,7 +337,7 @@ function returnNameCampoCustosA (name)
 {
 	var newName = "";
 	var estado = false;
-	
+
 	tabela_custosA= new Array();
 	tabela_custosA[0] = ["ondeMora", "01 - Onde você mora?"];
 	tabela_custosA[1] = ["transporte", "02 - Como você veio ao posto? Em qual transporte?"];
@@ -346,7 +346,7 @@ function returnNameCampoCustosA (name)
 	tabela_custosA[4] = ["horaSaidaCasaA", "04 - Que horas você saiu de casa?"];
 	tabela_custosA[5] = ["horaChegadaPostoA", "05 - Que horas você chegou no posto?"];
 	tabela_custosA[6] = ["horaMedicoA", "06 - Que horas você viu o médico?"];
-	tabela_custosA[7] = ["horaTotalA", "07 - Quanto tempo levou desde que você saiu de casa at&eacute; ver o m&eacute;dico?"];
+	tabela_custosA[7] = ["horaTotalA", "07 - Quanto tempo levou desde que você saiu de casa até ver o médico?"];
 	tabela_custosA[8] = ["pernoite", "08 - Amanhã você terá que voltar para trazer outra amostra de escarro. Onde você vai passar a noite?"];
 	tabela_custosA[9] = ["pagarPernoite", "08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar?"];
 	tabela_custosA[10] = ["trouxeAlgoAmigos", "08.2 - Você trouxe algo para os seus amigos?"];
@@ -361,7 +361,7 @@ function returnNameCampoCustosA (name)
 	tabela_custosA[19] = ["minutoSaidaCasaA", "04 - Que horas você saiu de casa?"];
 	tabela_custosA[20] = ["minutoChegadaPostoA", "05 - Que horas você chegou no posto?"];
 	tabela_custosA[21] = ["minutoMedicoA", "06 - Que horas você viu o médico?"];
-	tabela_custosA[22] = ["minutoTotalA", "07 - Quanto tempo levou desde que você saiu de casa at&eacute; ver o m&eacute;dico?"];
+	tabela_custosA[22] = ["minutoTotalA", "07 - Quanto tempo levou desde que você saiu de casa até ver o médico?"];
 	tabela_custosA[23] = ["numeroAcompanhantesA","03 - Você está acompanhado?"];
 	tabela_custosA[24] = ["custoComidaBebidaA","09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?"];
 	tabela_custosA[25] = ["custoPostoA","10 - Você teve que pagar algo aqui no posto? Quanto custou?"];
@@ -372,7 +372,7 @@ function returnNameCampoCustosA (name)
 	tabela_custosA[30] = ["mes_CustoA","Data"];
 	tabela_custosA[31] = ["ano_CustoA","Data"];
 	tabela_custosA[32] = ["quantoDeixouGanharA","13 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto?"];
-	
+
 	var indice = 0;
 	while((indice < 33) && (estado != true))
 	{
@@ -388,16 +388,16 @@ function returnNameCampoCustosA (name)
 
  function validar_custos_a (form)
 {
-	
+
 	var estado = true;
 	var texto="";
 	var tamanho = 0;
 	var novoNome1, novoNome2;
 	novoNome1 = "-";
-	
-	tamanho = form.elements.length;
+
+	tamanho = form.elements.length;
 	texto="As seguintes perguntas não foram preenchidas:\n";
-	
+
 	for(indice = 0; indice < tamanho; indice ++)
 	{
 
@@ -416,7 +416,7 @@ function returnNameCampoCustosA (name)
 					novoNome1 = novoNome2;
 				}
 				/***********************/
-			}	
+			}
 		}
 		else
 		{
@@ -478,14 +478,14 @@ function returnNameCampoCustosA (name)
 						if(form.elements[indice].checked == true)
 							radioIndice ++;
 					}
-					
+
 					if(form.elements[indice].checked == true)
 					{
 						contador ++
 						radioIndice ++;
 					}
-					
-					if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false)) 
+
+					if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
 					{
 						estado = false;
 						/***********************/
@@ -520,7 +520,7 @@ function returnNameCampoCustosA (name)
 								novoNome1 = novoNome2;
 							}
 							/***********************/
-						}	
+						}
 						indice += 2;
 					}
 				}
@@ -547,18 +547,18 @@ function returnNameCampoCustosA (name)
 					{
 					}
 				}
-				
+
 			}
-		}	
+		}
 	}
-	
+
 	if(estado == false)
 	{
 		alert("Preencha todos os campos do formulario, obrigado.");
 		alert(texto);
 		return false;
 	}
-	
+
 	if(confirm("Deseja enviar os dados ?"))
 		return true;
 	else
