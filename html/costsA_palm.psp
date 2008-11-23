@@ -42,12 +42,27 @@ function inicializaOcultos()
   document.getElementById("item_custo_acompanhante").style.display = "none";//gasto com o acompanhante
 }
 
+function getElementsByName_palm(fieldName)
+{
+  alert(fieldName);
+}
+
+function getElementsByName_pc(fieldName)
+{
+  return document.getElementsByName(fieldName);
+}
+
+
 function setValues()
 {
+  var funcPtr;
+  if (navigator.appName == "Microsoft Pocket Internet Explorer") funcPtr = getElementsByName_palm;
+  else funcPtr = getElementsByName_pc;  
+
 <%
 for field, value in costs.iteritems():
 %>
-  setObjValue(document.getElementsByName("<%=field%>"), "<%= functions.encode(value) %>");
+  setObjValue(funcPtr("<%=field%>"), "<%= functions.encode(value) %>");
 <%
 #end of loop.
 %>
