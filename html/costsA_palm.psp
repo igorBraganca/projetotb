@@ -45,11 +45,13 @@ function inicializaOcultos()
 function getElementsByName(fieldName)
 {
   var retList = new Array();
-  for (i=0; i < document.forms.length; i++) // Running each form.
+  var formList = document.forms;
+  for (i=0; i < formList.length; i++) // Running each form.
   {
-    for (j=0; j < document.forms[i].elements.length; j++) // Running each element within a form.
+    var objList = formList[i].elements;
+    for (j=0; j < objList.length; j++) // Running each element within a form.
     {
-      if (document.forms[i].elements[j].name == fieldName) retList.push(document.forms[i].elements[j]);
+      if (objList[j].name == fieldName) retList.push(objList[j]);
     }
   }
   
