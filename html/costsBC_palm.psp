@@ -258,7 +258,7 @@ function inicializa()
       <input name="naturezaLocal" type="radio" value="publico" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Público</radio_label>
       <input name="naturezaLocal" type="radio" value="privado" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Privado</radio_label>
       <input name="naturezaLocal" type="radio" value="rezadeira" onClick="qual_outro.disabled = true; qual_outro.value='';"><radio_label>Rezadeira</radio_label><br />
-      <input name="naturezaLocal" type="radio" value="rezadeira" onClick="qual_outro.disabled = false; qual_outro.readOnly = false; qual_outro.value='';qual_outro.focus();"><radio_label>Outro: </radio_label><input name="qual_outro" type="text" maxlength="50" size="5" readOnly="true">
+      <input name="naturezaLocal" type="radio" value="outro" onClick="qual_outro.disabled = false; qual_outro.readOnly = false; qual_outro.value='';qual_outro.focus();"><radio_label>Outro: </radio_label><input name="qual_outro" type="text" maxlength="50" size="5" readOnly="true">
     </p>
 
   </fieldset>
