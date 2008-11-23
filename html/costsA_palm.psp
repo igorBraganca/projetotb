@@ -44,7 +44,17 @@ function inicializaOcultos()
 
 function getElementsByName_palm(fieldName)
 {
-  alert(fieldName);
+  var retList = new Array();
+  for (i=0; i < document.forms.length; i++) // Running each form.
+  {
+    for (j=0; j < document.forms[i].elements.length; j++) // Running each element within a form.
+    {
+      var field = document.forms[i].elements[j];
+      if (field.name == fieldName) retList.push(field);
+    }
+  }
+  
+  return retList;
 }
 
 function getElementsByName_pc(fieldName)
@@ -57,7 +67,7 @@ function setValues()
 {
   var funcPtr;
   if (navigator.appName == "Microsoft Pocket Internet Explorer") funcPtr = getElementsByName_palm;
-  else funcPtr = getElementsByName_pc;  
+  else funcPtr = getElementsByName_palm;  
 
 <%
 for field, value in costs.iteritems():
