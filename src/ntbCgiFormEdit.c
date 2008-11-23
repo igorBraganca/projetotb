@@ -1152,12 +1152,10 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("		\n");
 		printf ("			<tr>\n");
 		
-		printf ("<!-- %s -->	\n",username);
 		
 		printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
-		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" value=\"%s\" size=\"25\"></td>\n",username);
+		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" size=\"25\"></td>\n");
 		
-		printf ("<!-- %s -->	\n",username);
 		
 		printf ("			</tr>\n");
 		printf ("			\n");
@@ -1306,8 +1304,7 @@ printf ("	*/\n");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				if(strcmp((char *)cur_node_children->name,"cadastradoPor") != 0);			
-					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
 			}
 			else
 				indice1 --;
@@ -2128,11 +2125,7 @@ printf ("			<tr>\n");
 printf ("\n");
 printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
 
-printf ("<!-- %s -->	\n",username);
-
-printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" value=\"%s\" size=\"25\"></td>\n",username);
-
-printf ("<!-- %s -->	\n",username);
+printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" size=\"25\"></td>\n");
 
 printf ("			</tr>\n");
 printf ("\n");
