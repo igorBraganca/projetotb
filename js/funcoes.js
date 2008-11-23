@@ -1,6 +1,22 @@
+function getElementsByName(fieldName)
+{
+  var retList = new Array();
+  var formList = document.forms;
+  for (i=0; i < formList.length; i++) // Running each form.
+  {
+    var objList = formList[i].elements;
+    for (j=0; j < objList.length; j++) // Running each element within a form.
+    {
+      if (objList[j].name == fieldName) retList.push(objList[j]);
+    }
+  } 
+  return retList;
+}
+
+
 function setObjValue(objName, objVal)
 {
-  if ( (objName[0].type == "text") || (objName[0].tagName == "TEXTAREA") )
+  if ( (objName[0].type == "text") || (objName[0].type == "textarea") )
   {
     state = objName[0].readOnly;
     objName[0].readOnly = false;
