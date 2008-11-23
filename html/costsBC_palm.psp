@@ -119,7 +119,7 @@ function inicializa()
     <!-- CUSTO DO TRANSPORTE -->
     <p id="custo_transporte">
       03.1 - Quanto custou o transporte?<br />
-      <text_label></text_label><input name="custoTransporteB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+      <text_label></text_label><input name="custoTransporteB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- ACOMPANHADO -->
@@ -127,25 +127,25 @@ function inicializa()
       04 - Você está acompanhado?<br />
       <input name="acompanhadoB" type="radio" value="sim" onClick="numeroAcompanhantesB.value = ''; "><radio_label>Sim</radio_label>
       <input name="acompanhadoB" type="radio" value="nao" onClick="numeroAcompanhantesB.value='NA'; numeroAcompanhantesB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesB" type="text" maxlength="2" size="1" onBlur="validarCampoNumerico(this)">
+      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesB" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
     
     <!-- HORARIO SAIU DE CASA -->    
     <p>
       05 - Que horas você saiu de casa?<br />
-      <text_label>Hora:</text_label><input name="horaSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoSaidaCasaB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoSaidaCasaB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <text_label>Hora:</text_label><input name="horaSaidaCasaB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoSaidaCasaB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
     </p>
 
     <!-- HORARIO CHEGOU NO POSTO -->
     <p>
       06 - Que horas você chegou no posto?<br />
-      <text_label>Hora:</text_label><input name="horaChegadaPostoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoChegadaPostoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaMedicoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <text_label>Hora:</text_label><input name="horaChegadaPostoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoChegadaPostoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoB.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
     </p>
     
     <!-- HORARIO MEDICO -->
     <p>
       07 - Que horas você viu o médico?<br />
-      <text_label>Hora:</text_label><input name="horaMedicoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoMedicoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoMedicoB" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <text_label>Hora:</text_label><input name="horaMedicoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoB.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoMedicoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
     </p>
     
     <!-- TEMPO TOTAL -->
@@ -157,13 +157,13 @@ function inicializa()
     <!-- SEGUNDA AMOSTRA DE ESCARRO -->
     <p>
       09 - Quando você teve que trazer a 2a amostra de escarro há alguns dias, em que horário você escarrou no potinho?<br />
-      <text_label>Hora:</text_label><input name="horaEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) horaAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
+      <text_label>Hora:</text_label><input name="horaEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
     </p> 
     
     <!-- HORARIO QUE ACORDOU PARA ESCARRAR NO POTINHO -->
     <p>
       10 - Que horas você acordou no dia de escarrar pela segunda vez no potinho?<br />
-      <text_label>Hora:</text_label><input name="horaAcordouEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) minutoAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoAcordouEscarro" type="text" maxlength="2" size="1" onKeyUp="if(this.value.length == 2) this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
+      <text_label>Hora:</text_label><input name="horaAcordouEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoAcordouEscarro.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoAcordouEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
     </p>
     
     <!-- ANTIBIOTICO -->
@@ -185,7 +185,7 @@ function inicializa()
       13 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
       <input name="comeuBebeuB" type="radio" value="sim" onclick="custoComidaBebidaB.readOnly = false;custoComidaBebidaB.value=''"><radio_label>Sim</radio_label>
       <input name="comeuBebeuB" type="radio" value="nao" onclick="custoComidaBebidaB.value='0'; custoComidaBebidaB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoComidaBebidaB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="custoComidaBebidaB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- PAGOU ALGO NO POSTO -->
@@ -193,7 +193,7 @@ function inicializa()
       14 - Você teve que pagar algo aqui no posto?<br />
       <input name="pagarPostoB" type="radio" value="sim" onclick="custoPostoB.readOnly = false;custoPostoB.value=''"><radio_label>Sim</radio_label>
       <input name="pagarPostoB" type="radio" value="nao" onclick="custoPostoB.value='0'; custoPostoB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- DEIXOU DE GANHAR DINHEIRO -->
@@ -201,7 +201,7 @@ function inicializa()
       15 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto deixou de ganhar?<br />
       <input name="deixouGanharDinheiroB" type="radio" value="sim" onclick="quantoDeixouGanharB.readOnly = false;quantoDeixouGanharB.value=''"><radio_label>Sim</radio_label>
       <input name="deixouGanharDinheiroB" type="radio" value="nao" onclick="quantoDeixouGanharB.value='0'; quantoDeixouGanharB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="quantoDeixouGanharB" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="quantoDeixouGanharB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>  
     
     <!-- RESULTADO DOS EXAMES DE ESCARRO -->
@@ -236,13 +236,13 @@ function inicializa()
       18 - Você teve que pagar algo aqui no posto?<br />
       <input name="pagarPostoC" type="radio" value="sim" onclick="custoPostoC.readOnly = false;custoPostoC.value=''"><radio_label>Sim</radio_label>
       <input name="pagarPostoC" type="radio" value="nao" onclick="custoPostoC.value='0'; custoPostoC.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="1" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- TEMPO SE SENTINDO DIFERENTE/DOENTE -->
     <p>
       19 - Há quanto tempo você estava sentindo-se diferente ou doente,antes de vir ao posto?<br />
-      <text_label>Semanas:</text_label><input name="tempoDoente" type="text" maxlength="2" size="1" onBlur="validarCampoNumerico(this)">
+      <text_label>Semanas:</text_label><input name="tempoDoente" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
 
     <!-- OUTRA UNIDADE DE SAUDE -->
