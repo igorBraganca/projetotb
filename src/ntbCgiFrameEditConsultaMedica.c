@@ -7,6 +7,7 @@
 	Projeto Neural TB
 	
 	Autor: Patrick Svaiter
+	Atualização: Laura Moraes
 */
 
 #include <stdio.h>
@@ -57,8 +58,8 @@ int main (void)
 	printf ("	<head>\n");
 	printf ("		<title>Neural TB - Incluir Formul&aacute;rio</title>\n");
 	printf ("	</head>\n");
-	printf ("	<frameset cols=\"25%%,*\">\n");
-	printf ("		<frame src=\"verLado.cgi?pid=%s\" />\n", pid);
+	printf ("	<frameset cols=\"25%%,*\" id=\"editCM\" onunload=\"alert('The onunload event was triggered')\">\n");
+	printf ("		<frame src=\"verLado.cgi?pid=%s\" name=\"detalhes\"/>\n", pid);
 	printf ("		<frame src=\"editFormConsultaMedica.cgi?uid=%s&amp;pid=%s\" />\n",uid,pid);
 	printf ("	</frameset>\n");
 	printf ("</html>");

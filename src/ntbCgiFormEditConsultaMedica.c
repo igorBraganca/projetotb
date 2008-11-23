@@ -6,6 +6,7 @@
 	Laboratorio de Processamento de Sinais
 	Projeto Neural TB (Guadalupe)
 	Autor: Igor Cunha Braganca
+	Atualização: Laura Moraes
 
 	$Author$
 	$Date$
@@ -224,7 +225,11 @@ printf ("}\n");
 					cur_node = cur_node->next;
 		}
 
-		//if(!cur_node) //MENSAGEM DE ERRO!!!
+		if(!cur_node) //MENSAGEM DE ERRO
+		{
+			printf("</script></head><body>Paciente não encontrado! Por favor, verifique se ele não foi excluído!</body></html>");
+			exit(0);
+		}
 		cur_node_children = cur_node->children;
 
 		for(indice1 = 1; cur_node_children != NULL; cur_node_children = cur_node_children->next, indice1 ++)
@@ -281,7 +286,7 @@ showMenu("consulta",username);
 
 printf ("\n");
 printf ("<div align=\"center\">\n");
-printf ("<form name=\"check\" method=\"post\" action=\"addPatientInfo.cgi\" onSubmit=\"return validar_consulta_medica(this)\">\n");
+printf ("<form name=\"check\" method=\"post\" action=\"editPatientConsultaMedica.cgi\" onSubmit=\"return validar_consulta_medica(this)\">\n");
 printf ("\n");
 printf ("	<span style=\"font-size: 13pt\" class=\"bold\"><br />Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 printf ("	<div align=\"center\">\n");

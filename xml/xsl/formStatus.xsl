@@ -65,7 +65,7 @@
 					<xsl:choose>
 					<xsl:when test="custosA">
 					<td>
-						<a class="full" onclick="self.close(); opener.top.location='editFormCustosA.cgi?uid={$uid}&amp;pid={$id}';return false;">
+						<a class="full" href="javascript:;">
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
@@ -85,7 +85,7 @@
 					<xsl:choose>
 					<xsl:when test="consultaMedica">
 					<td>
-						<a class="full" href="" onclick="self.close(); opener.top.location='frameEditConsultaMedica.cgi?uid={$uid}&amp;pid={$id}'; return false;"><!-- &cage={$cage} ? -->
+						<a class="full" href="" onclick="self.close(); opener.top.location='editFormConsultaMedica.cgi?uid={$uid}&amp;pid={$id}'; return false;"><!-- &cage={$cage} ? -->
 							<img src="images/full.png" width="9" height="9" />
 							Consulta Médica
 						</a>

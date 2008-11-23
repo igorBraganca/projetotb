@@ -6,6 +6,7 @@
 	Laboratorio de Processamento de Sinais
 	Projeto Neural TB (Guadalupe)
 	Autor: Igor Cunha Braganca
+	Atualização: Laura Moraes
 
 	$Author$
 	$Date$
@@ -47,8 +48,11 @@ void printSuccess (char *username)
 	printf ("\t<head>\n");
 	printf ("\t\t<title>Usu&aacute;rio Editado</title>\n");
 	printf ("\t\t<meta http-equiv=\"refresh\" content=\"2; URL=busca.cgi?uid=%s\" />\n",username);
+	//printf ("	<script language=javascript src=\"js/funcoes.js\"></script>\n");
+	//printf ("	<script language=javascript src=\"js/validar.js\"></script>\n");
 	printf ("\t</head>\n");
-	printf ("\t</body>\n");
+	printf ("\t<body>\n");
+	//printf ("\t<body onload=\"window.location.close()\";>\n");
 	printf ("<span style=\"background-color:green; color: white; font-family: Verdana, Arial; font-size:15pt; padding: 5px\">");
 	printf ("Usu&aacute;rio editado com sucesso. Aguarde...</span>");
 	printf ("\t</body>\n");
@@ -140,7 +144,11 @@ int main (void)
 				if (xmlStrEqual(cur_node->children->content, BAD_CAST pid))
 				{
 					found_patient = true;
-					old_patient = cur_node->parent; /*old_paciente recebe o noh <triagem> do paciente que possui o numeroGeral procurado */
+					cur_node = cur_node->parent; /*cur_node recebe o noh <triagem> do paciente que possui o numeroGeral procurado */		
+					
+					while ((!xmlStrEqual(cur_node->name, BAD_CAST "consultaMedica")) && (cur_node))
+						cur_node = cur_node->next;
+					old_patient = cur_node; /*old_paciente recebe o noh <consultaMedica> do paciente que possui o numeroGeral procurado */
 				}
 				else
 				{
@@ -173,7 +181,7 @@ int main (void)
  *            CRIANDO NOVO FORMULARIO DE TRIAGEM                                        *
  ******************************************************************************/
 	
-	edited_patient = xmlNewNode (NULL,BAD_CAST "triagem");
+	edited_patient = xmlNewNode (NULL,BAD_CAST "consultaMedica");
 	
 /******************************************************************************
  *            ADD NEW FORM                                                    *
