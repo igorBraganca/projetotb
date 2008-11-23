@@ -125,7 +125,7 @@ function inicializa()
     <!-- ACOMPANHADO -->
     <p>
       04 - Você está acompanhado?<br />
-      <input name="acompanhadoB" type="radio" value="sim" onClick="numeroAcompanhantesB.value = ''; "><radio_label>Sim</radio_label>
+      <input name="acompanhadoB" type="radio" value="sim" onClick="numeroAcompanhantesB.readOnly = false; numeroAcompanhantesB.select(); "><radio_label>Sim</radio_label>
       <input name="acompanhadoB" type="radio" value="nao" onClick="numeroAcompanhantesB.value='NA'; numeroAcompanhantesB.readOnly = true"><radio_label>Não</radio_label>
       <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesB" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
