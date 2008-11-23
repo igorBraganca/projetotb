@@ -115,24 +115,24 @@ function inicializa()
       <!-- ACOMPANHADO -->
       <p>
         03 - Você está acompanhado?<br />
-        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.focus();"><radio_label>Sim</radio_label>
+        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.select();"><radio_label>Sim</radio_label>
         <input name="acompanhadoA" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantesA.value='NA'; numeroAcompanhantesA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesA" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
       </p>
     
       <!-- HORARIO SAIU DE CASA -->
       <p>04 - Que horas você saiu de casa?<br />
-        <text_label>Hora:</text_label><input name="horaSaidaCasaA" id="hora_saiu" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoSaidaCasaA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaSaidaCasaA" id="hora_saiu" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoSaidaCasaA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoA.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO CHEGOU NO POSTO -->
      <p>05 - Que horas você chegou no posto?<br />
-        <text_label>Hora:</text_label><input name="horaChegadaPostoA" id="hora_chegou" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoChegadaPostoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoA.focus();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaChegadaPostoA" id="hora_chegou" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoChegadaPostoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoA.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO MEDICO -->
       <p>06 - Que horas você viu o médico?<br />
-        <text_label>Hora:</text_label><input name="horaMedicoA" id="hora_medico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoA.focus();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoMedicoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
+        <text_label>Hora:</text_label><input name="horaMedicoA" id="hora_medico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoMedicoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- TEMPO TOTAL -->
@@ -224,7 +224,7 @@ function inicializa()
       <p>      
         <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroA" id="avaliado_por" type="text" size="15"><br />
         <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value="<%= functions.encode(sess["userName"])%>" size="15"><br />
-        <label title="label_data" for="data">Data:</label><input name="dia_CustoA" type="text" id="data" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) mes_CustoA.focus();" onBlur="if(validarDia(this))mes_CustoA.focus();">/<input type="text" name="mes_CustoA" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) ano_CustoA.focus()" onBlur="if(validarMes(this))ano_CustoA.focus();">/<input type="text" name="ano_CustoA" maxlength="4" size="4" onKeyUp="if(this.value.length == 4) this.blur();" onBlur="validarAno(this); validarQualquerData(dia_CustoA,mes_CustoA,ano_CustoA);">
+        <label title="label_data" for="data">Data:</label><input name="dia_CustoA" type="text" id="data" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) mes_CustoA.select();" onBlur="if(validarDia(this))mes_CustoA.select();">/<input type="text" name="mes_CustoA" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) ano_CustoA.select()" onBlur="if(validarMes(this))ano_CustoA.select();">/<input type="text" name="ano_CustoA" maxlength="4" size="4" onKeyUp="if(this.value.length == 4) this.blur();" onBlur="validarAno(this); validarQualquerData(dia_CustoA,mes_CustoA,ano_CustoA);">
       </p>
     
       <!--    ENVIAR / LIMPAR     -->
