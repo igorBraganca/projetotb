@@ -292,6 +292,7 @@ printf ("	<span style=\"font-size: 13pt\" class=\"bold\"><br />Projeto - Novos M
 printf ("	<div align=\"center\">\n");
 printf ("		<br /><br />\n");
 printf ("	<!-- --><input type=\"hidden\" name=\"form\" value=\"consultaMedica\" />\n");
+printf ("		<input type=\"hidden\" name=\"uid\" value=\"%s\" />\n",username);
 printf ("	<!-- --><div class=\"h4\"><b>N&#186; Geral (TB Adapt): <input name=\"numeroGeral\" size=\"6\" type=\"text\" value=\"\" readonly=\"readonly\"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n");
 printf ("		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 printf ("		Data de inclus&atilde;o&nbsp;:&nbsp;<input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_inclusao.focus();\" onChange=\"if(validarDia(this))mes_inclusao.focus();\">&nbsp;/\n");
