@@ -51,6 +51,7 @@ HTML_VERLADO_OBJS = ntbFunctions.o ntbCgiVerLado.o
 HTML_INCLUIRFORM_OBJS = ntbFunctions.o ntbCgiAcrescentarOutrosForms.o
 
 HTML_EDIT_OBJS = functions.o ntbCgiFormEdit.o
+HTML_EDIT_CUSTOSA_OBJS = functions.o ntbCgiFormEditCustosA.o
 HTML_BUSCA_OBJS = functions.o ntbCgiBusca.o
 HTML_LISTAR_OBJS = functions.o ntbCgiListar.o
 HTML_IMPRIMIR_OBJS = ntbFunctions.o ntbCgiImprimir.o
@@ -150,11 +151,15 @@ removePatient.cgi: $(REMOVEPATIENT_OBJS)
 editForm.cgi: $(HTML_EDIT_OBJS)
 	$(LD) $(LFLAGS) $@ $(HTML_EDIT_OBJS) $(XML_LFLAGS) $(LIBCGIFLAGS)
 	mv -f $@ $(CGIDIR)/$@
-	
+
+editFormCustosA.cgi: $(HTML_EDIT_CUSTOSA_OBJS)
+	$(LD) $(LFLAGS) $@ $(HTML_EDIT_CUSTOSA_OBJS) $(XML_LFLAGS) $(LIBCGIFLAGS)
+	mv -f $@ $(CGIDIR)/$@	
+
 editPatient.cgi: $(EDIT_PATIENT_OBJS)
 	$(LD) $(LFLAGS) $@ $(EDIT_PATIENT_OBJS) $(XML_LFLAGS) $(LIBCGIFLAGS)
 	mv -f $@ $(CGIDIR)/$@
-	
+
 verLado.cgi: $(HTML_VERLADO_OBJS)
 	$(LD) $(LFLAGS) $@ $(HTML_VERLADO_OBJS) $(XML_LFLAGS) $(LIBCGIFLAGS)
 	mv -f $@ $(CGIDIR)/$@

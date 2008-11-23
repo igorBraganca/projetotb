@@ -85,7 +85,7 @@
 					<xsl:choose>
 					<xsl:when test="consultaMedica">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="" onclick="self.close(); opener.top.location='editFormConsultaMedica.cgi?uid={$uid}&amp;pid={$id}'; return false;"><!-- &cage={$cage} ? -->
 							<img src="images/full.png" width="9" height="9" />
 							Consulta Médica
 						</a>
