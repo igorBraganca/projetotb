@@ -52,7 +52,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="javascript:;">
+						<a class="empty" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/empty.png" width="9" height="9" />
 							Critério Inicial de Triagem para TB
 						</a>
@@ -65,7 +65,7 @@
 					<xsl:choose>
 					<xsl:when test="custosA">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
@@ -73,7 +73,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='custosA.cgi?uid={$uid}&amp;pid={$id}'; return false;">
+						<a class="empty" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/empty.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
@@ -85,7 +85,7 @@
 					<xsl:choose>
 					<xsl:when test="consultaMedica">
 					<td>
-						<a class="full" href="" onclick="self.close(); opener.top.location='editFormConsultaMedica.cgi?uid={$uid}&amp;pid={$id}'; return false;"><!-- &cage={$cage} ? -->
+						<a class="full" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/full.png" width="9" height="9" />
 							Consulta Médica
 						</a>
@@ -93,7 +93,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='incluirForm.cgi?uid={$uid}&amp;pid={$id}'; return false;"><!-- &cage={$cage} ? -->
+						<a class="empty" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');"><!-- &cage={$cage} ? -->
 							<img src="images/empty.png" width="9" height="9" />
 							Consulta Médica
 						</a>
@@ -105,7 +105,7 @@
 					<xsl:choose>
 					<xsl:when test="custosBeC">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Partes B e C
 						</a>
@@ -113,7 +113,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='custosBeC.cgi?uid={$uid}&amp;pid={$id}'; return false;">
+						<a class="empty" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/empty.png" width="9" height="9" />
 							Questionário de Custos - Partes B e C
 						</a>
@@ -125,7 +125,7 @@
 					<xsl:choose>
 					<xsl:when test="followUp">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/full.png" width="9" height="9" />
 							Follow up
 						</a>
@@ -133,7 +133,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='followUp.cgi?uid={$uid}&amp;pid={$id}'; return false;">
+						<a class="empty" href="javascript:alert('Opcao desabilitada nessa versao do sistema.');">
 							<img src="images/empty.png" width="9" height="9" />
 							Follow up
 						</a>
