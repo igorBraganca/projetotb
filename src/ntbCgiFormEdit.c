@@ -115,6 +115,13 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("		document.getElementById(tabela).rows[96].style.display = \"none\";//Data da leitura\n");
 		printf ("		document.getElementById(tabela).rows[97].style.display = \"none\";//PT 1a dose\n");
 		printf ("	}\n");
+printf ("	function clicaCheckBox(campoReferencia, campoCheckBox)\n");
+printf ("	{\n");
+printf ("		if ((campoReferencia.value == \"\") || (campoReferencia.value == \"NA\")) {\n");
+printf ("			campoCheckBox.checked = true;\n");
+printf ("			campoCheckBox.onclick()\n");
+printf ("		}\n");
+printf ("	}\n");
 		printf ("	\n");
 /*******************************************************************************************************************************************************************************************/
 		/*** funcao em javascipt que atribui valores aos campos do formulario ***/
@@ -213,6 +220,22 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("				}\n");
 		printf ("			}\n");
 		printf ("		}\n");
+		printf ("		form.naturalidadeCidade.onblur();\n");
+		printf ("		clicaCheckBox(form.cep1, document.getElementById('ignorarCep'));\n");
+		printf ("		clicaCheckBox(form.fone, document.getElementById('ignorarFone'));\n");
+		printf ("		clicaCheckBox(form.cel, document.getElementById('ignorarCel'));\n");
+		printf ("		clicaCheckBox(form.foneContato, document.getElementById('ignorarContato'));\n");
+		printf ("		if (form.dia_nascimento.value == 'XX') {\n");
+		printf ("			form.dia_nascimento.readOnly = true;\n");
+		printf ("			form.mes_nascimento.readOnly = true;\n");
+		printf ("			document.getElementById('habilita_idade').checked = true;\n");
+		printf ("			form.idade.readOnly = false;\n");
+		printf ("		}\n");
+		printf ("		clicaCheckBox(form.mes_diagnostico, document.getElementById('ignorarMesDiag'));\n");
+		printf ("		clicaCheckBox(form.ano_diagnostico, document.getElementById('ignorarAnoDiag'));\n");
+		printf ("		clicaCheckBox(form.resultadoLeitura, document.getElementById('ignorarResultadoLeitura'));\n");
+		printf ("		form.pesoAtual.onblur();\n");
+		printf ("		form.numeroGeral.focus();\n");
 		printf ("	}\n");
 		printf ("	\n");
 
@@ -299,7 +322,7 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("				<td><script>document.write(tabFields[4][1]);</script>:</td>\n");
 		printf ("				<td colspan=\"2\" ><input type=\"text\" maxlength=\"30\" size=\"20\" name=\"bairro\"></td>\n");
 		printf ("				<td colspan=\"2\"><script>document.write(tabFields[5][1]);</script>: <input  type=\"text\" maxlength=\"5\" size=\"5\" name=\"cep1\" onKeyUp =\"if(cep1.value.length == 5)cep2.focus(); \" onBlur=\"validarCampoNumerico(this)\"> - <input maxlength=\"3\" size=\"2\" name=\"cep2\" onKeyUp =\"if(cep2.value.length == 3)cidade.focus(); \"  onBlur=\"validarCampoNumerico(this)\">\n");
-		printf ("					<input type=\"checkbox\" onClick=\"if(this.checked){cep1.disabled=true;cep2.disabled=true;} else{cep1.disabled=false;cep2.disabled=false;}\"> <i>O paciente n&atilde;o lembra.</i></td>\n");
+		printf ("					<input id=\"ignorarCep\" type=\"checkbox\" onClick=\"if(this.checked){cep1.disabled=true;cep2.disabled=true;} else{cep1.disabled=false;cep2.disabled=false;}\"> <i>O paciente n&atilde;o lembra.</i></td>\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
 		printf ("			<!--    CIDADE    -->\n");
@@ -313,9 +336,9 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("\n");
 		printf ("				<td><script>document.write(tabFields[7][1]);</script>:</td>\n");
 		printf ("				<td colspan=\"2\" ><input maxlength=\"8\" size=\"8\" name=\"fone\" onBlur=\"validarCampoNumerico(this)\"  onKeyUp=\"if(fone.value.length == 8) cel.focus();\" >\n");
-		printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){fone.disabled=true;} else{fone.disabled=false;}\" ><i> O paciente n&atilde;o possui.</i></td>\n");
+		printf ("				<input id=\"ignorarFone\" type=\"checkbox\" onClick=\"if(this.checked){fone.disabled=true;} else{fone.disabled=false;}\" ><i> O paciente n&atilde;o possui.</i></td>\n");
 		printf ("				<td colspan=\"2\" ><script>document.write(tabFields[8][1]);</script>:<input maxlength=\"8\" size=\"8\" name=\"cel\" onBlur=\"validarCampoNumerico(this)\" onKeyUp=\"if(this.value.length == 8) foneContato.focus();\">\n");
-		printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){cel.disabled=true;} else{cel.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
+		printf ("				<input id=\"ignorarCel\" type=\"checkbox\" onClick=\"if(this.checked){cel.disabled=true;} else{cel.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
 		printf ("\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
@@ -324,7 +347,7 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("				<td><script>document.write(tabFields[9][1]);</script>:</td>\n");
 		printf ("				<td colspan=\"1\" ><input maxlength=\"8\" size=\"8\" name=\"foneContato\" onBlur=\"validarCampoNumerico(this)\" onKeyUp=\"if(this.value.length == 8) nomeContato.focus();\"></td>\n");
 		printf ("				<td colspan=\"3\" ><script>document.write(tabFields[10][1]);</script>: <input maxlength=\"30\" size=\"10\" name=\"nomeContato\">\n");
-		printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){foneContato.disabled=true;nomeContato.disabled=true;} else{foneContato.disabled=false;nomeContato.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
+		printf ("				<input id=\"ignorarContato\" type=\"checkbox\" onClick=\"if(this.checked){foneContato.disabled=true;nomeContato.disabled=true;} else{foneContato.disabled=false;nomeContato.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
 		printf ("\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
@@ -635,7 +658,7 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("\n");
 		printf ("			<tr class=\"impar\">\n");
 		printf ("				<td><script>document.write(tabFields[48][1]);</script>:</td>\n");
-		printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"sim\" onClick=\"exibeLinhaOculta('tabelaSintomas', 38);exibeLinhaOculta('tabelaSintomas', 39);exibeLinhaOculta('tabelaSintomas', 40);mes_diagnostico.focus(); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> Sim</td>\n");
+		printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"sim\" onClick=\"mes_diagnostico.disabled = false;ano_diagnostico.disabled = false;habilitarRadio(TBdesfecho,5);exibeLinhaOculta('tabelaSintomas', 38);exibeLinhaOculta('tabelaSintomas', 39);exibeLinhaOculta('tabelaSintomas', 40);mes_diagnostico.focus(); mes_diagnostico.value = ''; ano_diagnostico.value = '';ignorarAnoDiag.checked=false;ignorarMesDiag.checked=false;\"> Sim</td>\n");
 		printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"nao\" onClick=\"ocultaLinha('tabelaSintomas', 38);ocultaLinha('tabelaSintomas', 39);ocultaLinha('tabelaSintomas', 40); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> N&atilde;o</td>\n");
 		printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"ignorado\" onClick=\"ocultaLinha('tabelaSintomas', 38);ocultaLinha('tabelaSintomas', 39);ocultaLinha('tabelaSintomas', 40); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> Ignorado</td>\n");
 		printf ("				<td></td>\n");
@@ -1080,7 +1103,7 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("			<tr class=\"par\">\n");
 		printf ("				<td><script>document.write(tabFields[96][1]);</script>:</td>\n");
 		printf ("				<td colspan=\"4\"><p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"tosse\"> tosse por mais de duas semanas +</p>\n");
-		printf ("								<p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"Termo de Consentimento assinado em:\" onClick=\"if(this.checked){dia_termoConsentimento.disabled=false;mes_termoConsentimento.disabled=false;ano_termoConsentimento.disabled=false}else{dia_termoConsentimento.disabled=true;mes_termoConsentimento.disabled=true;ano_termoConsentimento.disabled=true;}\"> termo de consentimento assinado em <input name=\"dia_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_termoConsentimento.focus();\" onChange=\"if(validarDia(this))mes_termoConsentimento.focus();\"> / <input name=\"mes_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_termoConsentimento.focus();\" onChange=\"if(validarMes(this))ano_termoConsentimento.focus();\"> / <input name=\"ano_termoConsentimento\" type=\"text\" maxlength=\"4\" size=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento);validarDataExame(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento)\"></p></td>\n");
+		printf ("								<p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"Termo de Consentimento assinado em:\" onClick=\"if(this.checked){dia_termoConsentimento.disabled=false;mes_termoConsentimento.disabled=false;ano_termoConsentimento.disabled=false}else{dia_termoConsentimento.disabled=true;mes_termoConsentimento.disabled=true;ano_termoConsentimento.disabled=true;}\"> termo de consentimento assinado em <input name=\"dia_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_termoConsentimento.focus();\"> / <input name=\"mes_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_termoConsentimento.focus();\"> / <input name=\"ano_termoConsentimento\" type=\"text\" maxlength=\"4\" size=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\"onBlur=\"validarQualquerData(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento);validarDataExame(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento)\"></p></td>\n");
 		printf ("			</tr>\n");
 		printf ("\n");
 		printf ("	\n");
@@ -1089,14 +1112,14 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("				<td colspan=\"5\"><script>document.write(tabFields[97][1]);</script></td>\n");
 		printf ("			</tr>\n");
 		printf ("			<tr class=\"impar\">\n");
-		printf ("				<td><script>document.write(tabFields[98][1]);</script>:&nbsp;<input name=\"dia_coleta1\" type=\"text\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta1.focus();\" onChange=\"if(validarDia(this))mes_coleta1.focus();\">/<input type=\"text\" name=\"mes_coleta1\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta1.focus();\" onChange=\"if(validarMes(this))ano_coleta1.focus();\">/<input type=\"text\" name=\"ano_coleta1\" maxlength=\"4\" size=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta1,mes_coleta1,ano_coleta1);validarDataExame(dia_coleta1,mes_coleta1,ano_coleta1)\"></td>\n");
+		printf ("				<td><script>document.write(tabFields[98][1]);</script>:&nbsp;<input name=\"dia_coleta1\" type=\"text\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta1.focus();\">/<input type=\"text\" name=\"mes_coleta1\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta1.focus();\">/<input type=\"text\" name=\"ano_coleta1\" maxlength=\"4\" size=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta1,mes_coleta1,ano_coleta1);validarDataExame(dia_coleta1,mes_coleta1,ano_coleta1)\"></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"espontaneo\"> Espont&acirc;neo</input></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"induzido\"> Induzido</input></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"lba\"> LBA</input></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"rna\"> RNA</input></td>\n");
 		printf ("			</tr>\n");
 		printf ("			<tr class=\"impar\">\n");
-		printf ("				<td><script>document.write(tabFields[99][1]);</script>:&nbsp;<input name=\"dia_coleta2\" type=\"text\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta2.focus();\" onChange=\"if(validarDia(this))mes_coleta2.focus();\">/<input type=\"text\" name=\"mes_coleta2\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta2.focus();\"onChange=\"if(validarMes(this))ano_coleta2.focus();\">/<input type=\"text\" name=\"ano_coleta2\" maxlength=\"4\" size=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta2,mes_coleta2,ano_coleta2);validarDataExame(dia_coleta2,mes_coleta2,ano_coleta2)\"></td>\n");
+		printf ("				<td><script>document.write(tabFields[99][1]);</script>:&nbsp;<input name=\"dia_coleta2\" type=\"text\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta2.focus();\" >/<input type=\"text\" name=\"mes_coleta2\" maxlength=\"2\" size=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta2.focus();\">/<input type=\"text\" name=\"ano_coleta2\" maxlength=\"4\" size=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta2,mes_coleta2,ano_coleta2);validarDataExame(dia_coleta2,mes_coleta2,ano_coleta2)\"></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"espontaneo\"> Espont&acirc;neo</input></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"induzido\"> Induzido</input></td>\n");
 		printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"lba\"> LBA</input></td>\n");
@@ -1117,20 +1140,20 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("			<tr class=\"impar\">\n");
 		printf ("				<td><script>document.write(tabFields[101][1]);</script>:</td>\n");
 		printf ("				<td colspan=\"2\" style=\"text-align:center\">&nbsp;&nbsp;<input  name=\"resultadoLeitura\" type=\"text\" maxlength=\"10\" size=\"3\" onBlur=\"if(resultadoLeitura.value != 'NA')validarCampoNumerico(this);\"/>&nbsp;mm de endura&ccedil;&atilde;o</td>\n");
-		printf ("				<td colspan=\"2\"><input type=\"checkbox\"  onClick=\"if(this.checked){resultadoLeitura.value = 'NA';dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = true;resultadoLeitura.readOnly = true;ocultaLinha('tabelaSintomas', 95);ocultaLinha('tabelaSintomas', 96);ocultaLinha('tabelaSintomas', 97);} else {document.check.resultadoLeitura.readOnly = false; resultadoLeitura.value = ''; dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = false;resultadoLeitura.focus(); exibeLinhaOculta('tabelaSintomas', 95);exibeLinhaOculta('tabelaSintomas', 96);exibeLinhaOculta('tabelaSintomas', 97);}\">Ignorado</input></td>\n");
+		printf ("				<td colspan=\"2\"><input id=\"ignorarResultadoLeitura\" type=\"checkbox\"  onClick=\"if(this.checked){resultadoLeitura.value = 'NA';dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = true;resultadoLeitura.readOnly = true;ocultaLinha('tabelaSintomas', 95);ocultaLinha('tabelaSintomas', 96);ocultaLinha('tabelaSintomas', 97);} else {document.check.resultadoLeitura.readOnly = false; resultadoLeitura.value = ''; dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = false;resultadoLeitura.focus(); exibeLinhaOculta('tabelaSintomas', 95);exibeLinhaOculta('tabelaSintomas', 96);exibeLinhaOculta('tabelaSintomas', 97);}\">Ignorado</input></td>\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
 		printf ("			<!-- APLICACAO PROVA TUBERCULONICA    -->\n");
 		printf ("\n");
 		printf ("			<tr class=\"impar\">\n");
 		printf ("				<td><script>document.write(tabFields[102][1]);</script>:</td>\n");
-		printf ("				<td colspan=\"4\"><input name=\"dia_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_aplicacao.focus();\" onChange=\"if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"mes_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_aplicacao.focus();\" onChange=\"if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"ano_aplicacao\" type=\"text\" size=\"4\" maxlength=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_aplicacao,mes_aplicacao,ano_aplicacao);validarDataExame(dia_aplicacao,mes_aplicacao,ano_aplicacao)\"> (dd/mm/aaaa)\n");
+		printf ("				<td colspan=\"4\"><input name=\"dia_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"mes_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_aplicacao.focus();\"> / <input name=\"ano_aplicacao\" type=\"text\" size=\"4\" maxlength=\"4\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_aplicacao,mes_aplicacao,ano_aplicacao);validarDataExame(dia_aplicacao,mes_aplicacao,ano_aplicacao)\"> (dd/mm/aaaa)\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
 		printf ("			<!--    DATA DA LEITURA   -->\n");
 		printf ("			<tr class=\"impar\">\n");
 		printf ("				<td><script>document.write(tabFields[103][1]);</script>:</td>\n");
-		printf ("				<td colspan=\"4\"><input name=\"dia_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarDia(this))mes_leitura.focus();\"> / <input name=\"mes_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarMes(this))ano_leitura.focus();\"> / <input name=\"ano_leitura\" type=\"text\" size=\"4\" maxlength=\"4\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_leitura,mes_leitura,ano_leitura);validarDataExame(dia_leitura,mes_leitura,ano_leitura)\"> (dd/mm/aaaa)</td>\n");
+		printf ("				<td colspan=\"4\"><input name=\"dia_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)this.blur();\"> / <input name=\"mes_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" onKeyUp=\"if(this.value.length == 2)this.blur();\"> / <input name=\"ano_leitura\" type=\"text\" size=\"4\" maxlength=\"4\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onBlur=\"validarQualquerData(dia_leitura,mes_leitura,ano_leitura);validarDataExame(dia_leitura,mes_leitura,ano_leitura)\"> (dd/mm/aaaa)</td>\n");
 		printf ("			</tr>\n");
 		printf ("			\n");
 		printf ("			<!--  PT PRIMEIRA DOSE  -->\n");
@@ -1152,12 +1175,10 @@ int main (void)/*(int argc,char**argv)*/
 		printf ("		\n");
 		printf ("			<tr>\n");
 		
-		printf ("<!-- %s -->	\n",username);
 		
 		printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
-		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" value=\"%s\" size=\"25\"></td>\n",username);
+		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" size=\"25\"></td>\n");
 		
-		printf ("<!-- %s -->	\n",username);
 		
 		printf ("			</tr>\n");
 		printf ("			\n");
@@ -1240,6 +1261,13 @@ printf ("	{\n");
 printf ("		for(indice=0; indice< num; indice++)\n");
 printf ("			name[indice].disabled = false;\n");
 printf ("	}\n");
+printf ("	function clicaCheckBox(campoReferencia, campoCheckBox)\n");
+printf ("	{\n");
+printf ("		if ((campoReferencia.value == \"\") || (campoReferencia.value == \"NA\")) {\n");
+printf ("			campoCheckBox.checked = true;\n");
+printf ("			campoCheckBox.onclick()\n");
+printf ("		}\n");
+printf ("	}\n");
 printf ("	/*\n");
 printf ("	**	para as funcoes desabilitarRadio e habilitarRadio\n");
 printf ("	**	name -> nome do campo\n");
@@ -1306,8 +1334,7 @@ printf ("	*/\n");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				if(strcmp((char *)cur_node_children->name,"cadastradoPor") != 0);			
-					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
 			}
 			else
 				indice1 --;
@@ -1340,6 +1367,22 @@ printf ("	*/\n");
 		printf ("				}\n");
 		printf ("			}\n");
 		printf ("		}\n");
+		printf ("		form.naturalidadeCidade.onblur();\n");
+		printf ("		clicaCheckBox(form.cep1, document.getElementById('ignorarCep'));\n");
+		printf ("		clicaCheckBox(form.fone, document.getElementById('ignorarFone'));\n");
+		printf ("		clicaCheckBox(form.cel, document.getElementById('ignorarCel'));\n");
+		printf ("		clicaCheckBox(form.foneContato, document.getElementById('ignorarContato'));\n");
+		printf ("		if (form.dia_nascimento.value == 'XX') {\n");
+		printf ("			form.dia_nascimento.readOnly = true;\n");
+		printf ("			form.mes_nascimento.readOnly = true;\n");
+		printf ("			document.getElementById('habilita_idade').checked = true;\n");
+		printf ("			form.idade.readOnly = false;\n");
+		printf ("		}\n");
+		printf ("		clicaCheckBox(form.mes_diagnostico, document.getElementById('ignorarMesDiag'));\n");
+		printf ("		clicaCheckBox(form.ano_diagnostico, document.getElementById('ignorarAnoDiag'));\n");
+		printf ("		clicaCheckBox(form.resultadoLeitura, document.getElementById('ignorarResultadoLeitura'));\n");
+		printf ("		form.pesoAtual.onblur();\n");
+		printf ("		form.numeroGeral.focus();\n");
 		printf ("	}\n");
 		printf ("	\n");
 
@@ -1430,7 +1473,7 @@ printf ("				<td><script>document.write(tabFields[4][1]);</script>:</td>\n");
 printf ("\n");
 printf ("				<td colspan=\"2\" ><input type=\"text\" maxlength=\"30\" size=\"20\" name=\"bairro\"></td>\n");
 printf ("				<td colspan=\"2\"><script>document.write(tabFields[5][1]);</script>: <input  type=\"text\" maxlength=\"5\" size=\"5\" name=\"cep1\" onKeyUp =\"if(cep1.value.length == 5)cep2.focus(); \" onBlur=\"validarCampoNumerico(this)\"> - <input maxlength=\"3\" size=\"2\" name=\"cep2\" onKeyUp =\"if(cep2.value.length == 3)cidade.focus(); \"  onBlur=\"validarCampoNumerico(this)\">\n");
-printf ("					<input type=\"checkbox\" onClick=\"if(this.checked){cep1.disabled=true;cep2.disabled=true;} else{cep1.disabled=false;cep2.disabled=false;}\"> <i>O paciente n&atilde;o lembra.</i></td>\n");
+printf ("					<input id=\"ignorarCep\" type=\"checkbox\" onClick=\"if(this.checked){cep1.disabled=true;cep2.disabled=true;} else{cep1.disabled=false;cep2.disabled=false;}\"> <i>O paciente n&atilde;o lembra.</i></td>\n");
 printf ("			</tr>\n");
 printf ("\n");
 printf ("			<!--    CIDADE    -->\n");
@@ -1446,9 +1489,9 @@ printf ("\n");
 printf ("				<td><script>document.write(tabFields[7][1]);</script>:</td>\n");
 printf ("\n");
 printf ("				<td colspan=\"2\" ><input maxlength=\"8\" size=\"8\" name=\"fone\" onBlur=\"validarCampoNumerico(this)\"  onKeyUp=\"if(fone.value.length == 8) cel.focus();\" >\n");
-printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){fone.disabled=true;} else{fone.disabled=false;}\" ><i> O paciente n&atilde;o possui.</i></td>\n");
+printf ("				<input id=\"ignorarFone\" type=\"checkbox\" onClick=\"if(this.checked){fone.disabled=true;} else{fone.disabled=false;}\" ><i> O paciente n&atilde;o possui.</i></td>\n");
 printf ("				<td colspan=\"2\" ><script>document.write(tabFields[8][1]);</script>:<input maxlength=\"8\" size=\"8\" name=\"cel\" onBlur=\"validarCampoNumerico(this)\" onKeyUp=\"if(this.value.length == 8) foneContato.focus();\">\n");
-printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){cel.disabled=true;} else{cel.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
+printf ("				<input id=\"ignorarCel\" type=\"checkbox\" onClick=\"if(this.checked){cel.disabled=true;} else{cel.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
 printf ("\n");
 printf ("			</tr>\n");
 printf ("\n");
@@ -1457,7 +1500,7 @@ printf ("			<tr class=\"par\">\n");
 printf ("				<td><script>document.write(tabFields[9][1]);</script>:</td>\n");
 printf ("				<td colspan=\"1\" ><input maxlength=\"8\" size=\"8\" name=\"foneContato\" onBlur=\"validarCampoNumerico(this)\" onKeyUp=\"if(this.value.length == 8) nomeContato.focus();\"></td>\n");
 printf ("				<td colspan=\"3\" ><script>document.write(tabFields[10][1]);</script>: <input maxlength=\"30\" size=\"10\" name=\"nomeContato\">\n");
-printf ("				<input type=\"checkbox\" onClick=\"if(this.checked){foneContato.disabled=true;nomeContato.disabled=true;} else{foneContato.disabled=false;nomeContato.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
+printf ("				<input id=\"ignorarContato\" type=\"checkbox\" onClick=\"if(this.checked){foneContato.disabled=true;nomeContato.disabled=true;} else{foneContato.disabled=false;nomeContato.disabled=false;}\"><i> O paciente n&atilde;o possui.</i></td>\n");
 printf ("\n");
 printf ("			</tr>\n");
 printf ("\n");
@@ -1790,7 +1833,7 @@ printf ("\n");
 printf ("			<tr class=\"impar\">\n");
 printf ("				<td><script>document.write(tabFields[48][1]);</script>:</td>\n");
 printf ("\n");
-printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"sim\" onClick=\"mes_diagnostico.disabled = false;ano_diagnostico.disabled = false;habilitarRadio(TBdesfecho,5);exibeLinhaOculta('tabelaSintomas', 38);exibeLinhaOculta('tabelaSintomas', 39);exibeLinhaOculta('tabelaSintomas', 40);mes_diagnostico.focus(); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> Sim</td>\n");
+printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"sim\" onClick=\"mes_diagnostico.disabled = false;ano_diagnostico.disabled = false;habilitarRadio(TBdesfecho,5);exibeLinhaOculta('tabelaSintomas', 38);exibeLinhaOculta('tabelaSintomas', 39);exibeLinhaOculta('tabelaSintomas', 40);mes_diagnostico.focus(); mes_diagnostico.value = ''; ano_diagnostico.value = '';ignorarAnoDiag.checked=false;ignorarMesDiag.checked=false;\"> Sim</td>\n");
 printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"nao\" onClick=\"mes_diagnostico.disabled = true;ano_diagnostico.disabled = true;desabilitarRadio(TBdesfecho,5);ocultaLinha('tabelaSintomas', 38);ocultaLinha('tabelaSintomas', 39);ocultaLinha('tabelaSintomas', 40); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> N&atilde;o</td>\n");
 printf ("				<td><input name=\"tratamentoAnteriorTB\" type=\"radio\" value=\"ignorado\" onClick=\"mes_diagnostico.disabled = true;ano_diagnostico.disabled = true;desabilitarRadio(TBdesfecho,5);ocultaLinha('tabelaSintomas', 38);ocultaLinha('tabelaSintomas', 39);ocultaLinha('tabelaSintomas', 40); mes_diagnostico.value = ''; ano_diagnostico.value = '';\"> Ignorado</td>\n");
 printf ("				<td></td>\n");
@@ -1800,8 +1843,8 @@ printf ("			<!-- Data do diagnostico de TB no passado -->\n");
 printf ("			<tr class=\"impar\">\n");
 printf ("				<td><script>document.write(tabFields[49][1]);</script>:</td>\n");
 printf ("				<td colspan=\"2\"><input name=\"mes_diagnostico\" type=\"text\" size=\"2\" maxlength=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarMes(this))ano_diagnostico.focus();\"> / <input name=\"ano_diagnostico\" type=\"text\" size=\"4\" maxlength=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onChange=\"validarAno(this);\"  onBlur=\"validarDataExame(0,mes_diagnostico,ano_diagnostico); validarDiagnosticoAnterior(ano_diagnostico, ano_nascimento)\" > (mm/aaaa)</td>\n");
-printf ("				<td><input type=\"checkbox\" onClick=\"if(this.checked){mes_diagnostico.disabled=true; mes_diagnostico.value='';} else{mes_diagnostico.disabled=false; mes_diagnostico.focus(); mes_diagnostico.value='';}\"> Ignorar m&ecirc;s</td>\n");
-printf ("				<td><input type=\"checkbox\" onClick=\"if(this.checked){ano_diagnostico.disabled=true; mes_diagnostico.disabled=true; ano_diagnostico.value = '';} else{ano_diagnostico.disabled=false; ano_diagnostico.focus(); ano_diagnostico.value = '';}\"> Ignorar ano</td>\n");
+printf ("				<td><input id=\"ignorarMesDiag\" type=\"checkbox\" onClick=\"if(this.checked){mes_diagnostico.disabled=true; mes_diagnostico.value='';} else{mes_diagnostico.disabled=false; mes_diagnostico.focus(); mes_diagnostico.value='';}\"> Ignorar m&ecirc;s</td>\n");
+printf ("				<td><input id=\"ignorarAnoDiag\" type=\"checkbox\" onClick=\"if(this.checked){ano_diagnostico.disabled=true; mes_diagnostico.disabled=true; ano_diagnostico.value = ''; mes_diagnostico.value = ''; ignorarMesDiag.checked = true;} else{ano_diagnostico.disabled=false; ano_diagnostico.focus(); ano_diagnostico.value = '';}\"> Ignorar ano</td>\n");
 printf ("			</tr>\n");
 printf ("\n");
 printf ("			<!-- DESFECHO -->\n");
@@ -2050,7 +2093,7 @@ printf ("			<!-- CRITERIOS DE INCLUSAO -->\n");
 printf ("			<tr class=\"par\">\n");
 printf ("				<td><script>document.write(tabFields[96][1]);</script>:</td>\n");
 printf ("				<td colspan=\"4\"><p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"tosse\" disabled=\"true\" > tosse por mais de duas semanas +</p>\n");
-printf ("								<p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"Termo de Consentimento assinado em:\"  disabled=\"true\" onClick=\"if(this.checked){dia_termoConsentimento.disabled=false;mes_termoConsentimento.disabled=false;ano_termoConsentimento.disabled=false}else{dia_termoConsentimento.disabled=true;mes_termoConsentimento.disabled=true;ano_termoConsentimento.disabled=true;}\"> termo de consentimento assinado em <input name=\"dia_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_termoConsentimento.focus();\" onChange=\"if(validarDia(this))mes_termoConsentimento.focus();\"> / <input name=\"mes_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_termoConsentimento.focus();\" onChange=\"if(validarMes(this))ano_termoConsentimento.focus();\"> / <input name=\"ano_termoConsentimento\" type=\"text\" maxlength=\"4\" size=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento);validarDataExame(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento)\"></p></td>\n");
+printf ("								<p><input name=\"criteriosInclusao\" type=\"checkbox\" value=\"Termo de Consentimento assinado em:\"  disabled=\"true\" onClick=\"if(this.checked){dia_termoConsentimento.disabled=false;mes_termoConsentimento.disabled=false;ano_termoConsentimento.disabled=false}else{dia_termoConsentimento.disabled=true;mes_termoConsentimento.disabled=true;ano_termoConsentimento.disabled=true;}\"> termo de consentimento assinado em <input name=\"dia_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_termoConsentimento.focus();\"> / <input name=\"mes_termoConsentimento\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_termoConsentimento.focus();\"> / <input name=\"ano_termoConsentimento\" type=\"text\" maxlength=\"4\" size=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento);validarDataExame(dia_termoConsentimento,mes_termoConsentimento,ano_termoConsentimento)\"></p></td>\n");
 printf ("\n");
 printf ("			</tr>\n");
 printf ("\n");
@@ -2059,14 +2102,14 @@ printf ("			<tr class=\"impar\">\n");
 printf ("				<td colspan=\"5\"><script>document.write(tabFields[97][1]);</script></td>\n");
 printf ("			</tr>\n");
 printf ("			<tr class=\"impar\">\n");
-printf ("				<td><script>document.write(tabFields[98][1]);</script>:&nbsp;<input name=\"dia_coleta1\" type=\"text\" maxlength=\"2\" size=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta1.focus();\" onChange=\"if(validarDia(this))mes_coleta1.focus();\">/<input type=\"text\" name=\"mes_coleta1\" maxlength=\"2\" size=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta1.focus();\" onChange=\"if(validarMes(this))ano_coleta1.focus();\">/<input type=\"text\" name=\"ano_coleta1\" maxlength=\"4\" size=\"4\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta1,mes_coleta1,ano_coleta1);validarDataExame(dia_coleta1,mes_coleta1,ano_coleta1)\"></td>\n");
+printf ("				<td><script>document.write(tabFields[98][1]);</script>:&nbsp;<input name=\"dia_coleta1\" type=\"text\" maxlength=\"2\" size=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta1.focus();\">/<input type=\"text\" name=\"mes_coleta1\" maxlength=\"2\" size=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta1.focus();\">/<input type=\"text\" name=\"ano_coleta1\" maxlength=\"4\" size=\"4\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta1,mes_coleta1,ano_coleta1);validarDataExame(dia_coleta1,mes_coleta1,ano_coleta1)\"></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"espontaneo\" disabled=\"true\" > Espont&acirc;neo</input></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"induzido\" disabled=\"true\" > Induzido</input></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"lba\" disabled=\"true\" > LBA</input></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta1\" value=\"rna\" disabled=\"true\" > RNA</input></td>\n");
 printf ("			</tr>\n");
 printf ("			<tr class=\"impar\">\n");
-printf ("				<td><script>document.write(tabFields[99][1]);</script>:&nbsp;<input name=\"dia_coleta2\" type=\"text\" maxlength=\"2\" size=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta2.focus();\" onChange=\"if(validarDia(this))mes_coleta2.focus();\">/<input type=\"text\" name=\"mes_coleta2\" maxlength=\"2\" size=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta2.focus();\"onChange=\"if(validarMes(this))ano_coleta2.focus();\">/<input type=\"text\" name=\"ano_coleta2\" maxlength=\"4\" size=\"4\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta2,mes_coleta2,ano_coleta2);validarDataExame(dia_coleta2,mes_coleta2,ano_coleta2)\"></td>\n");
+printf ("				<td><script>document.write(tabFields[99][1]);</script>:&nbsp;<input name=\"dia_coleta2\" type=\"text\" maxlength=\"2\" size=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_coleta2.focus();\">/<input type=\"text\" name=\"mes_coleta2\" maxlength=\"2\" size=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_coleta2.focus();\">/<input type=\"text\" name=\"ano_coleta2\" maxlength=\"4\" size=\"4\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_coleta2,mes_coleta2,ano_coleta2);validarDataExame(dia_coleta2,mes_coleta2,ano_coleta2)\"></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"espontaneo\" disabled=\"true\" > Espont&acirc;neo</input></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"induzido\" disabled=\"true\" > Induzido</input></td>\n");
 printf ("				<td><input type=\"radio\" name=\"coleta2\" value=\"lba\" disabled=\"true\" > LBA</input></td>\n");
@@ -2087,7 +2130,7 @@ printf ("			<!--  RESULTADO DA LEITURA  -->\n");
 printf ("			<tr class=\"impar\">\n");
 printf ("				<td><script>document.write(tabFields[101][1]);</script>:</td>\n");
 printf ("				<td colspan=\"2\" style=\"text-align:center\">&nbsp;&nbsp;<input  name=\"resultadoLeitura\" type=\"text\" maxlength=\"10\" size=\"3\"  disabled=\"true\" onBlur=\"if(resultadoLeitura.value != 'NA')validarCampoNumerico(this);\"/>&nbsp;mm de endura&ccedil;&atilde;o</td>\n");
-printf ("				<td colspan=\"2\"><input type=\"checkbox\"  onClick=\"if(this.checked){resultadoLeitura.value = 'NA';dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = true;resultadoLeitura.readOnly = true;ocultaLinha('tabelaSintomas', 71);ocultaLinha('tabelaSintomas', 72);ocultaLinha('tabelaSintomas', 73);} else {document.check.resultadoLeitura.readOnly = false; resultadoLeitura.value = ''; dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = false;resultadoLeitura.focus(); exibeLinhaOculta('tabelaSintomas', 71);exibeLinhaOculta('tabelaSintomas', 72);exibeLinhaOculta('tabelaSintomas', 73);}\">Ignorado</input></td>\n");
+printf ("				<td colspan=\"2\"><input type=\"checkbox\" id=\"ignorarResultadoLeitura\" onClick=\"if(this.checked){resultadoLeitura.value = 'NA';dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = true;resultadoLeitura.readOnly = true;ocultaLinha('tabelaSintomas', 71);ocultaLinha('tabelaSintomas', 72);ocultaLinha('tabelaSintomas', 73);} else {document.check.resultadoLeitura.readOnly = false; resultadoLeitura.value = ''; dia_aplicacao.value = '';mes_aplicacao.value = '';ano_aplicacao.value = '';dia_leitura.value = '';mes_leitura.value = '';ano_leitura.value = '';PTprimeiraDose.value='';dia_aplicacao.disabled = mes_aplicacao.disabled = ano_aplicacao.disabled = dia_leitura.disabled = mes_leitura.disabled = ano_leitura.disabled = PTprimeiraDose.disabled = false;resultadoLeitura.focus(); exibeLinhaOculta('tabelaSintomas', 71);exibeLinhaOculta('tabelaSintomas', 72);exibeLinhaOculta('tabelaSintomas', 73);}\">Ignorado</input></td>\n");
 printf ("			</tr>\n");
 printf ("\n");
 printf ("\n");
@@ -2095,14 +2138,14 @@ printf ("			<!-- APLICACAO PROVA TUBERCULONICA    -->\n");
 printf ("\n");
 printf ("			<tr class=\"impar\">\n");
 printf ("				<td><script>document.write(tabFields[102][1]);</script>:</td>\n");
-printf ("				<td colspan=\"4\"><input name=\"dia_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_aplicacao.focus();\" onChange=\"if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"mes_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_aplicacao.focus();\" onChange=\"if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"ano_aplicacao\" type=\"text\" size=\"4\" maxlength=\"4\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_aplicacao,mes_aplicacao,ano_aplicacao);validarDataExame(dia_aplicacao,mes_aplicacao,ano_aplicacao)\"> (dd/mm/aaaa)\n");
+printf ("				<td colspan=\"4\"><input name=\"dia_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)if(validarDia(this))mes_aplicacao.focus();\"> / <input name=\"mes_aplicacao\" type=\"text\" size=\"2\" maxlength=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)if(validarMes(this))ano_aplicacao.focus();\"> / <input name=\"ano_aplicacao\" type=\"text\" size=\"4\" maxlength=\"4\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 4)validarAno(this);\" onBlur=\"validarQualquerData(dia_aplicacao,mes_aplicacao,ano_aplicacao);validarDataExame(dia_aplicacao,mes_aplicacao,ano_aplicacao)\"> (dd/mm/aaaa)\n");
 printf ("			</tr>\n");
 printf ("\n");
 printf ("\n");
 printf ("			<!--    DATA DA LEITURA   -->\n");
 printf ("			<tr class=\"impar\">\n");
 printf ("				<td><script>document.write(tabFields[103][1]);</script>:</td>\n");
-printf ("				<td colspan=\"4\"><input name=\"dia_leitura\" type=\"text\" size=\"2\" maxlength=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarDia(this))mes_leitura.focus();\"> / <input name=\"mes_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" disabled=\"true\"  onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarMes(this))ano_leitura.focus();\"> / <input name=\"ano_leitura\" type=\"text\" size=\"4\" maxlength=\"4\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(dia_leitura,mes_leitura,ano_leitura);validarDataExame(dia_leitura,mes_leitura,ano_leitura)\"> (dd/mm/aaaa)</td>\n");
+printf ("				<td colspan=\"4\"><input name=\"dia_leitura\" type=\"text\" size=\"2\" maxlength=\"2\"  disabled=\"true\" onKeyUp=\"if(this.value.length == 2)this.blur();\"> / <input name=\"mes_leitura\" type=\"text\" size=\"2\" maxlength=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)this.blur();\"> / <input name=\"ano_leitura\" type=\"text\" size=\"4\" maxlength=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onBlur=\"validarQualquerData(dia_leitura,mes_leitura,ano_leitura);validarDataExame(dia_leitura,mes_leitura,ano_leitura)\"> (dd/mm/aaaa)</td>\n");
 printf ("			</tr>\n");
 printf ("\n");
 printf ("\n");
@@ -2128,11 +2171,7 @@ printf ("			<tr>\n");
 printf ("\n");
 printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
 
-printf ("<!-- %s -->	\n",username);
-
-printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" value=\"%s\" size=\"25\"></td>\n",username);
-
-printf ("<!-- %s -->	\n",username);
+printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" size=\"25\"></td>\n");
 
 printf ("			</tr>\n");
 printf ("\n");
@@ -2157,7 +2196,26 @@ printf ("</tr>\n");
 printf ("</table>\n");
 printf ("\n");
 printf ("</body>\n");
-printf ("</html>");
+
+printf ("<script language=\"JavaScript\">\n");
+printf ("document.form.numeroGeral.readOnly = true;\n");
+printf ("</script>\n");
+
+printf ("<script language=\"JavaScript\">\n");
+printf ("emSubmissao = false; // ao tentar sair da pagina, eh preciso saber se estamos submetendo o formulario ou nao\n");
+printf ("window.onbeforeunload = checkGoToNewPage;\n");
+printf ("function checkGoToNewPage() {\n");
+printf ("       if (!emSubmissao) {\n");
+
+
+
+printf ("               return \"Voce perdera todos os dados nao salvos se sair desta pagina.\";\n");
+printf ("       }\n");
+printf ("       else { emSubmissao=false; }\n");
+printf ("}\n");
+printf ("</script>\n");
+
+printf ("</html>\n");
 	}
 	
 	cgi_end();	
