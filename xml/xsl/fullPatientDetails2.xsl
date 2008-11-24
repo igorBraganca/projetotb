@@ -64,7 +64,7 @@
 				<td class="title1">Naturalidade:</td>
 				<td class="answer1"><xsl:value-of select="concat(naturalidadeCidade,' - ',naturalidadeEstado)" /></td>
 			</tr>
-			<xsl:if test="naturalidadeEestado[(. != 'RJ') and (. != 'Rio de Janeiro')]">
+			<xsl:if test="naturalidadeAnosRio">
 				<tr>
 					<td class="title1">Chegou no Rio há quantos anos?</td>
 					<td class="answer1"><xsl:value-of select="naturalidadeAnosRio" /></td>
@@ -101,9 +101,16 @@
 				<td class="answer1"><xsl:value-of select="concat(pesoAtual,' ',pesoAtual/@unidade)" /></td>
 			</tr>
 			<tr>
-				<td class="title1">Perda de peso (> 10%):</td>
+				<td class="title1">Perda de peso (&gt; 10%):</td>
 				<td class="answer1"><xsl:value-of select="perdaDePeso" /></td>
-			</tr>			<tr>
+			</tr>
+			<xsl:if test="perdaDePeso_semanas">
+				<tr>
+					<td class="title1">Semanas com perda de peso &gt;10%:</td>
+					<td class="answer1"><xsl:value-of select="perdaDePeso_semanas" /></td>
+				</tr>
+			</xsl:if>
+			<tr>
 				<td class="title2">Altura:</td>
 				<td class="answer2"><xsl:value-of select="concat(altura, ' ', altura/@unidade)" /></td>
 			</tr>
