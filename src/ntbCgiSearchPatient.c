@@ -106,7 +106,7 @@ fclose(xsl2);
 	
 	xsl = fopen(PATHFILE, "w");
 	
-	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
 	fprintf(xsl,"<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\n");
 	
 	
