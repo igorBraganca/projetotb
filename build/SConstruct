@@ -52,7 +52,6 @@ for cgi, srcs in cgilist.cgiMap.iteritems():
 #Como os outros arquivos nao precisam de compilacao, apenas os adicionamos a lista
 #de instalacao.
 htmlList = getSourceFiles('../html', ['htm', 'html', 'psp']);
-scriptList = getSourceFiles('../script', ['py', 'sh', 'php']);
 jsList = getSourceFiles('../js', ['js']);
 cssList = getSourceFiles('../css', ['css']);
 imgList = getSourceFiles('../images', ['jpg', 'gif', 'png']);
@@ -73,7 +72,6 @@ backupDir = install_dir + '/backup';
 #Associando os diretorios de instalacao aos arquivos destinados a eles.
 env.Install(cgiInstDir, cgiList);
 env.Install(htmlInstDir, htmlList);
-env.Install(scriptInstDir, scriptList);
 env.Install(jsInstDir, jsList);
 env.Install(cssInstDir, cssList);
 env.Install(imgInstDir, imgList);
@@ -84,4 +82,4 @@ env.Install(xslInstDir, xslList);
 Command(Dir(backupDir), [], Mkdir(backupDir))
 
 #Criando o alias de instalacao.
-env.Alias('install', [cgiInstDir, htmlInstDir, scriptInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir, xslInstDir, backupDir]);
+env.Alias('install', [cgiInstDir, htmlInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir, xslInstDir, backupDir]);
