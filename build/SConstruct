@@ -68,6 +68,7 @@ cssInstDir = install_dir + '/css';
 imgInstDir = install_dir + '/images';
 xmlInstDir = install_dir + '/xml';
 xslInstDir = install_dir + '/xml/xsl';
+backupDir = install_dir + '/backup';
 
 #Associando os diretorios de instalacao aos arquivos destinados a eles.
 env.Install(cgiInstDir, cgiList);
@@ -79,5 +80,8 @@ env.Install(imgInstDir, imgList);
 env.Install(xmlInstDir, xmlList);
 env.Install(xslInstDir, xslList);
 
+# Criando o diretorio de backup
+Command(Dir(backupDir), [], Mkdir(backupDir))
+
 #Criando o alias de instalacao.
-env.Alias('install', [cgiInstDir, htmlInstDir, scriptInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir, xslInstDir]);
+env.Alias('install', [cgiInstDir, htmlInstDir, scriptInstDir, jsInstDir, cssInstDir, imgInstDir, xmlInstDir, xslInstDir, backupDir]);
