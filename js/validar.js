@@ -573,3 +573,22 @@ function returnNameCampoCustosA (name)
 	else
 		return false;
 }
+
+function temAlgumCampoPreenchido(form)
+{
+    for (i = 0; i < form.elements.length; i++) {
+        curr = form.elements[i];
+
+        if ((curr.type == "text") && (curr.value != "")) {
+            if (curr.name != "cadastradoPor") {
+                return true;
+            }
+        } else if ((curr.type == "checkbox") && (curr.checked)) {
+            return true;
+        } else if ((curr.type == "radio") && (curr.checked)) {
+            return true;
+        }
+    }
+    return false;
+}
+
