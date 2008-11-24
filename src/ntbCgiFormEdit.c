@@ -2201,6 +2201,20 @@ printf ("<script language=\"JavaScript\">\n");
 printf ("document.form.numeroGeral.readOnly = true;\n");
 printf ("</script>\n");
 
+printf ("<script language=\"JavaScript\">\n");
+printf ("emSubmissao = false; // ao tentar sair da pagina, eh preciso saber se estamos submetendo o formulario ou nao\n");
+printf ("window.onbeforeunload = checkGoToNewPage;\n");
+printf ("function checkGoToNewPage() {\n");
+printf ("       if (!emSubmissao) {\n");
+
+
+
+printf ("               return \"Voce perdera todos os dados nao salvos se sair desta pagina.\";\n");
+printf ("       }\n");
+printf ("       else { emSubmissao=false; }\n");
+printf ("}\n");
+printf ("</script>\n");
+
 printf ("</html>\n");
 	}
 	

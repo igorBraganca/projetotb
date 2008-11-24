@@ -162,6 +162,8 @@
 	var novoNome1, novoNome2;
 	novoNome1 = "-";
 
+
+
 	tamanho = form.elements.length;
 
 	texto="As seguintes perguntas não foram preenchidas:\n";
@@ -322,15 +324,22 @@
 
 	if(estado == false)
 	{
+
 		alert("Preencha todos os campos do formulario, obrigado.\n\nOBS:Não se esqueça de clicar no botão \"Resultado\" no grupo de perguntas Sinais e Sintomas.");
 		alert(texto);
 		return false;
 	}
 
 	if(confirm("Deseja enviar os dados ?"))
+	{
+		emSubmissao = true;
 		return true;
+	}
 	else
+	{
+
 		return false;
+	}
 }
 
 function returnNameCampoCustosA (name)
