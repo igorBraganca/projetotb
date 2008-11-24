@@ -2,10 +2,10 @@ function getElementsByName(fieldName)
 {
   var retList = new Array();
   var formList = document.forms;
-  for (i=0; i < formList.length; i++) // Running each form.
+  for (var i=0; i < formList.length; i++) // Running each form.
   {
     var objList = formList[i].elements;
-    for (j=0; j < objList.length; j++) // Running each element within a form.
+    for (var j=0; j < objList.length; j++) // Running each element within a form.
     {
       if (objList[j].name == fieldName) retList.push(objList[j]);
     }
@@ -18,14 +18,14 @@ function setObjValue(objName, objVal)
 {
   if ( (objName[0].type == "text") || (objName[0].type == "textarea") )
   {
-    state = objName[0].readOnly;
+    var state = objName[0].readOnly;
     objName[0].readOnly = false;
     objName[0].value = objVal;
     objName[0].readOnly = state;
   }
   else if (objName[0].type == "radio")
   {
-    for (i=0; i< objName.length; i++)
+    for (var i=0; i< objName.length; i++)
     {
       if ( objName[i].value == objVal)
       {
