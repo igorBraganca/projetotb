@@ -2196,7 +2196,12 @@ printf ("</tr>\n");
 printf ("</table>\n");
 printf ("\n");
 printf ("</body>\n");
-printf ("</html>");
+
+printf ("<script language=\"JavaScript\">\n");
+printf ("document.form.numeroGeral.readOnly = true;\n");
+printf ("</script>\n");
+
+printf ("</html>\n");
 	}
 	
 	cgi_end();	
