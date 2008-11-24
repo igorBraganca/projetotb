@@ -72,6 +72,7 @@ printf("<tr>\n");
 		printf("Procure por um paciente e selecione a a&ccedil;&atilde;o desejada\n");
 	printf("</span>-->\n");
 	printf("<form action=\"searchPatient.cgi\" method=\"get\" target=\"resultado\">\n");
+		printf("<input type=\"hidden\" name=\"uid\" value=\"%s\" />\n", username);
 		printf("<div align=\"center\">\n");
 		printf("<table border=\"0\" style=\"width: 100%%\" cellspacing=\"0\" cellpadding=\"0\">\n");
 		printf("<tr>\n");
