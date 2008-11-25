@@ -1,4 +1,4 @@
-ï»¿<%
+<%
 import functions;
 import mod_python;
 import xml.dom.minidom;
@@ -20,9 +20,9 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
 
-<title>QuestionÃ¡rio Custos - Parte A</title>
+<title>Questionário Custos - Parte A</title>
 
 <style type="text/css" media="handheld">
 <%= cssText %>
@@ -85,9 +85,9 @@ function inicializa()
 <body onLoad="inicializa()">
 
 <div align="center" >
-  <h3>Projeto - Novos MÃ©todos DiagnÃ³sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto-SMS-RJ</br></h4>
-  <h4>QuestionÃ¡rio Custos</h3>
-  <i>(aplicar em 1 a cada 4 pacientes incluÃ­dos)</i>
+  <h3>Projeto - Novos Métodos Diagnósticos em TB pulmonar - Policlínica Augusto Amaral Peixoto-SMS-RJ</br></h4>
+  <h4>Questionário Custos</h3>
+  <i>(aplicar em 1 a cada 4 pacientes incluídos)</i>
 
   <br /><br />
   <b>Parte A</b>
@@ -102,7 +102,7 @@ function inicializa()
     <!-- Numero Geral e Nome-->
     <table>
       <tr>
-        <td><b>NÃºmero Geral :</b></td>
+        <td><b>Número Geral :</b></td>
         <td><%= functions.encode(userId) %></td>
       </tr>
       <tr>
@@ -114,125 +114,125 @@ function inicializa()
 
     <fieldset>
       <!-- ONDE MORA -->
-      <p>01 - Onde vocÃª mora?<br />
-        <input name="ondeMora" id="mora_rio" type="radio" value="rio" onClick="ocultaLinha('item_onde_pernoitara');ocultaLinha('item_custo_pernoite');ocultaLinha('item_custo_amigos')"><radio_label>MunicÃ­pio do Rio</radio_label>
+      <p>01 - Onde você mora?<br />
+        <input name="ondeMora" id="mora_rio" type="radio" value="rio" onClick="ocultaLinha('item_onde_pernoitara');ocultaLinha('item_custo_pernoite');ocultaLinha('item_custo_amigos')"><radio_label>Município do Rio</radio_label>
         <input name="ondeMora" id="mora_fora_rio" type="radio" value="fora_rio" onClick="exibeLinhaOculta('item_onde_pernoitara')"><radio_label>Fora do Rio</radio_label>
       </p>
     
       <!-- COMO VEIO AO POSTO -->
-      <p>02 - Como vocÃª veio ao posto? Em qual transporte?<br />
-        <input name="transporte" id="veio_pe" type="radio" value="pe" onClick="ocultaLinha('item_custo_transporte');custoTransporteA.value='';"><radio_label>A pÃ©</radio_label>
-        <input name="transporte" id="veio_onibus" type="radio" value="onibus" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>Ã”nibus</radio_label>
-        <input name="transporte" id="veio_taxi" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>TÃ¡xi/carro</radio_label>
+      <p>02 - Como você veio ao posto? Em qual transporte?<br />
+        <input name="transporte" id="veio_pe" type="radio" value="pe" onClick="ocultaLinha('item_custo_transporte');custoTransporteA.value='';"><radio_label>A pé</radio_label>
+        <input name="transporte" id="veio_onibus" type="radio" value="onibus" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>Ônibus</radio_label>
+        <input name="transporte" id="veio_taxi" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>Táxi/carro</radio_label>
       </p>
     
       <!-- CUSTO DO TRANSPORTE -->
-      <p id="item_custo_transporte">02.1 - Se vocÃª nÃ£o veio a pÃ©, quanto custou o transporte?<br />
+      <p id="item_custo_transporte">02.1 - Se você não veio a pé, quanto custou o transporte?<br />
         <text_label>R$</text_label> <input name="custoTransporteA" id="custo_transporte" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- ACOMPANHADO -->
       <p>
-        03 - VocÃª estÃ¡ acompanhado?<br />
+        03 - Você está acompanhado?<br />
         <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.value='';numeroAcompanhantesA.select();"><radio_label>Sim</radio_label>
-        <input name="acompanhadoA" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantesA.value='NA'; numeroAcompanhantesA.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="acompanhadoA" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantesA.value='NA'; numeroAcompanhantesA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesA" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
       </p>
     
       <!-- HORARIO SAIU DE CASA -->
-      <p>04 - Que horas vocÃª saiu de casa?<br />
+      <p>04 - Que horas você saiu de casa?<br />
         <text_label>Hora:</text_label><input name="horaSaidaCasaA" id="hora_saiu" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoSaidaCasaA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoA.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO CHEGOU NO POSTO -->
-     <p>05 - Que horas vocÃª chegou no posto?<br />
+     <p>05 - Que horas você chegou no posto?<br />
         <text_label>Hora:</text_label><input name="horaChegadaPostoA" id="hora_chegou" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoChegadaPostoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoA.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- HORARIO MEDICO -->
-      <p>06 - Que horas vocÃª viu o mÃ©dico?<br />
+      <p>06 - Que horas você viu o médico?<br />
         <text_label>Hora:</text_label><input name="horaMedicoA" id="hora_medico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoA.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">:<input name="minutoMedicoA" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaA,minutoSaidaCasaA,horaChegadaPostoA,minutoChegadaPostoA,horaMedicoA,minutoMedicoA,horaTotalA,minutoTotalA);">
       </p>
     
       <!-- TEMPO TOTAL -->
-      <p>07 - Quanto tempo levou desde que vocÃª saiu de casa at&eacute; ver o m&eacute;dico?<br />
+      <p>07 - Quanto tempo levou desde que você saiu de casa até ver o médico?<br />
         <text_label>Tempo total:</text_label><input name="horaTotalA" id="tempo_total" type="text" maxlength="2" size="2" readonly="readonly" >h e<input name="minutoTotalA" type="text" maxlength="2" size="2" readonly="readonly">min.
       </p>
     
       <!-- SE MORAR FORA DO RIO -->
     
       <!-- Onde vai passar a noite -->
-      <p id="item_onde_pernoitara">08 - AmanhÃ£ vocÃª terÃ¡ que voltar para trazer outra amostra de escarro. Onde vocÃª vai passar a noite?<br />
+      <p id="item_onde_pernoitara">08 - Amanhã você terá que voltar para trazer outra amostra de escarro. Onde você vai passar a noite?<br />
         <input name="pernoite" id="dorme_casa" type="radio" value="casa" onClick="ocultaLinha('item_custo_pernoite');ocultaLinha('item_custo_amigos');pagarPernoite[0].checked = pagarPernoite[1].checked=false;custoPernoite.value='';trouxeAlgoAmigos[0].checked = trouxeAlgoAmigos[1].checked = false;custoAmigos.value='';"><radio_label>Em casa</radio_label>
         <input name="pernoite" id="dorme_amigos" type="radio" value="amigos" onClick="exibeLinhaOculta('item_custo_pernoite');exibeLinhaOculta('item_custo_amigos')"><radio_label>Com amigos</radio_label>
         <input name="pernoite" id="dorme_hotel" type="radio" value="hotel" onClick="exibeLinhaOculta('item_custo_pernoite');ocultaLinha('item_custo_amigos');trouxeAlgoAmigos[0].checked = trouxeAlgoAmigos[1].checked = false;custoAmigos.value='';"><radio_label>Hotel</radio_label>
       </p>
     
       <!-- Pagar o pernoite -->
-      <p id="item_custo_pernoite">08.1 - VocÃª terÃ¡ que pagar o pernoite? Quanto vocÃª deverÃ¡ gastar?<br />
+      <p id="item_custo_pernoite">08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar?<br />
         <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;custoPernoite.value='';custoPernoite.select();"><radio_label>Sim</radio_label>
-        <input name="pagarPernoite" id="nao_paga_pernoite" type="radio" value="nao" onclick="custoPernoite.value='0'; custoPernoite.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="pagarPernoite" id="nao_paga_pernoite" type="radio" value="nao" onclick="custoPernoite.value='0'; custoPernoite.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input class="preco" name="custoPernoite" id="preco_pernoite" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- Trouxe algo para os amigos -->
-      <p id="item_custo_amigos">08.2 - VocÃª trouxe algo para os seus amigos?<br />
+      <p id="item_custo_amigos">08.2 - Você trouxe algo para os seus amigos?<br />
         <input name="trouxeAlgoAmigos" id="trouxe_presente" type="radio" value="sim" onclick="custoAmigos.readOnly = false;custoAmigos.value='';custoAmigos.select();"><radio_label>Sim</radio_label>
-        <input name="trouxeAlgoAmigos" id="nao_trouse_presente" type="radio" value="nao" onclick="custoAmigos.value='0'; custoAmigos.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="trouxeAlgoAmigos" id="nao_trouse_presente" type="radio" value="nao" onclick="custoAmigos.value='0'; custoAmigos.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoAmigos" id="custo_presente" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- COMEU E/OU BEBEU -->
-      <p>09 - Desde que vocÃª saiu de casa, vocÃª comeu ou bebeu alguma coisa? Quanto custou?<br />
+      <p>09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
         <input name="comeuBebeuA" id="comeu" type="radio" value="sim" onclick="custoComidaBebidaA.readOnly = false;custoComidaBebidaA.value='';custoComidaBebidaA.select();"><radio_label>Sim</radio_label>
-        <input name="comeuBebeuA" id="nao_comeu" type="radio" value="nao" onclick="custoComidaBebidaA.value='0'; custoComidaBebidaA.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="comeuBebeuA" id="nao_comeu" type="radio" value="nao" onclick="custoComidaBebidaA.value='0'; custoComidaBebidaA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoComidaBebidaA" id="custo_comida" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- PAGOU ALGO NO POSTO -->
-      <p>10 - VocÃª teve que pagar algo aqui no posto? Quanto custou?<br />
+      <p>10 - Você teve que pagar algo aqui no posto? Quanto custou?<br />
         <input name="pagarPostoA" id="pagou_posto" type="radio" value="sim" onclick="custoPostoA.readOnly = false;custoPostoA.value='';custoPostoA.select();"><radio_label>Sim</radio_label>
-        <input name="pagarPostoA" id="nao_pagou_posto" type="radio" value="nao" onclick="custoPostoA.value='0'; custoPostoA.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="pagarPostoA" id="nao_pagou_posto" type="radio" value="nao" onclick="custoPostoA.value='0'; custoPostoA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoPostoA" id="custo_posto" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- ESTUDANTE OU NÃƒO-ESTUDANTE -->
-      <p>11 - VocÃª Ã© estudante?<br />
+      <p>11 - Você é estudante?<br />
         <input name="estudante" id="e_estudante" type="radio" value="estudante" onClick="exibeLinhaOculta('item_perdeu_aula')"><radio_label>Sim</radio_label>
-        <input name="estudante" id="nao_e_estudante" type="radio" value="nao_estudante" onClick="ocultaLinha('item_perdeu_aula');estudantePerdeuAula[0].checked = estudantePerdeuAula[1].checked = false;"><radio_label>NÃ£o</radio_label>
+        <input name="estudante" id="nao_e_estudante" type="radio" value="nao_estudante" onClick="ocultaLinha('item_perdeu_aula');estudantePerdeuAula[0].checked = estudantePerdeuAula[1].checked = false;"><radio_label>Não</radio_label>
       </p>
     
       <!-- CASO ESTUDANTE -->
-      <p id="item_perdeu_aula">11.1 - VocÃª perdeu aula hoje?<br />
+      <p id="item_perdeu_aula">11.1 - Você perdeu aula hoje?<br />
         <input name="estudantePerdeuAula" id="perdeu_aula" type="radio" value="sim"><radio_label>Sim</radio_label>
-        <input name="estudantePerdeuAula" id="nao_perdeu_aula" type="radio" value="nao"><radio_label>NÃ£o</radio_label>
+        <input name="estudantePerdeuAula" id="nao_perdeu_aula" type="radio" value="nao"><radio_label>Não</radio_label>
       </p>
     
       <!-- PROFISSAO -->
-      <p>12 - Qual a sua profissÃ£o?<br />
+      <p>12 - Qual a sua profissão?<br />
         <text_label></text_label><input name="profissao" id="profissao" type="text" maxlength="100" size="25">
       </p>
     
       <!-- DEIXOU DE GANHAR DINHEIRO -->
       <p>13 - Deixou de ganhar dinheiro hoje para poder vir ao posto?  Quanto?<br />
         <input name="deixouGanharDinheiroA" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanharA.readOnly = false;quantoDeixouGanharA.value='';quantoDeixouGanharA.select();"><radio_label>Sim</radio_label>
-        <input name="deixouGanharDinheiroA" id="nao_deixou_ganhar_dinheiro" type="radio" value="nao" onclick="quantoDeixouGanharA.value='0'; quantoDeixouGanharA.readOnly = true"><radio_label>NÃ£o</radio_label>
+        <input name="deixouGanharDinheiroA" id="nao_deixou_ganhar_dinheiro" type="radio" value="nao" onclick="quantoDeixouGanharA.value='0'; quantoDeixouGanharA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="quantoDeixouGanharA" id="quanto_nao_ganhou" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this);">,00
       </p>
     
       <!-- QUEM ARCOU COM OS CUSTOS -->
-      <p id="item_quem_pagou">14 - Quem pagou pela bebida, comida, transporte, hotel, etc.? VocÃª ou seus acompanhantes?<br />
-        <input name="quemArcouCustos" id="voce_arcou_custos" type="radio" value="voce" onClick="exibeLinhaOculta('item_custo_acompanhante');gastoAcompanhante.select();"><radio_label>VocÃª</radio_label>
+      <p id="item_quem_pagou">14 - Quem pagou pela bebida, comida, transporte, hotel, etc.? Você ou seu(s) acompanhante(s)?<br />
+        <input name="quemArcouCustos" id="voce_arcou_custos" type="radio" value="voce" onClick="exibeLinhaOculta('item_custo_acompanhante');gastoAcompanhante.select();"><radio_label>Você</radio_label>
         <input name="quemArcouCustos" id="acompanhante_arcou_custos" type="radio" value="acompanhante" onClick="ocultaLinha('item_custo_acompanhante');gastoAcompanhante.value='';"><radio_label>Acompanhante</radio_label>
       </p>    
 
       <!-- GASTO DO ACOMPANHANTE -->
-      <p id="item_custo_acompanhante">15 - Quanto vocÃª gastou com o seu acompanhante?<br />
+      <p id="item_custo_acompanhante">15 - Quanto você gastou com o seu acompanhante?<br />
         <text_label>R$</text_label><input name="gastoAcompanhante" id="gastos_acompanhante" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this);">,00
       </p>
 
       <!-- Observacoes -->
-      <p>16 - ObservaÃ§Ãµes:<br /> 
+      <p>16 - Observações:<br /> 
         <text_label></text_label><textarea name="observacoes" id="observacoes" rows="3" cols="40"></textarea>
       </p>
 
@@ -248,8 +248,8 @@ function inicializa()
     
       <!--    ENVIAR / LIMPAR     -->
       <p align="center">
-        <input type="reset" value="Limpar FormulÃ¡rio">
-        <input type="submit" value="Enviar FormulÃ¡rio">
+        <input type="reset" value="Limpar Formulário">
+        <input type="submit" value="Enviar Formulário">
       </p>
     </fieldset>
   </form>

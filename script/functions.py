@@ -17,7 +17,7 @@ def fmt2GetMethod(s):
 
 def encode(textStr):
   """Retorna a string de entrada (textStr) codificada em UTF-8."""
-  return textStr.encode("utf-8");
+  return textStr.encode("iso-8859-1");
 
 
 def authenticateUser(userName, password):

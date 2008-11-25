@@ -1,4 +1,4 @@
-﻿<%
+<%
 import mod_python;
 import functions;
 sess = mod_python.Session.Session(req);
@@ -12,7 +12,7 @@ cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
   <title>Neural TB - Sair do Sistema</title>
 
   <style type="text/css">
@@ -23,7 +23,7 @@ cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 <body>
 
 <div align="left">
-<p>Você se desconectou com sucesso do Neural TB. Clique <a href="palm.psp">aqui</a> para reconectar-se, caso deseje.</p>
+<p>Voc� se desconectou com sucesso do Neural TB. Clique <a href="palm.psp">aqui</a> para reconectar-se, caso deseje.</p>
 </div>
 </body>
 
