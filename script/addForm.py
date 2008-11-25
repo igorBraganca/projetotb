@@ -56,6 +56,7 @@ print "Content-Type: text/html\n\n"     # HTML is following
 htmlPage = """
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
   <title>Projeto Neural TB</title>
   <style type="text/css">
 """

@@ -25,7 +25,7 @@ cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 <html>
 
 <head>
-
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 <title>Neural TB - Listagem de Pacientes</title>
 
 <style type="text/css">

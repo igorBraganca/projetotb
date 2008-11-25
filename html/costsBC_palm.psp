@@ -19,6 +19,7 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
 
 <title>Questionário Custos - Partes B e C</title>
 
