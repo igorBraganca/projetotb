@@ -11,6 +11,9 @@ sess.load();
 patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
 costs = functions.formAsMap(userId, "custosA");
 
+isNewForm = "true";
+if len(costs) > 0: isNewForm = "false";
+
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
 cssText = open(functions.PROJECT_PATH + "css/costs_palm.css", "r").read();
@@ -32,6 +35,8 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <script>
 <%= jsText %>
+
+var newForm = <%=isNewForm%>;
 
 function inicializaOcultos()
 {
@@ -122,8 +127,8 @@ function inicializa()
       <!-- COMO VEIO AO POSTO -->
       <p>02 - Como você veio ao posto? Em qual transporte?<br />
         <input name="transporte" id="veio_pe" type="radio" value="pe" onClick="ocultaLinha('item_custo_transporte');custoTransporteA.value='';"><radio_label>A pé</radio_label>
-        <input name="transporte" id="veio_onibus" type="radio" value="onibus" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>Ônibus</radio_label>
-        <input name="transporte" id="veio_taxi" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('item_custo_transporte');custoTransporteA.value='';custoTransporteA.select();"><radio_label>Táxi/carro</radio_label>
+        <input name="transporte" id="veio_onibus" type="radio" value="onibus" onClick="exibeLinhaOculta('item_custo_transporte');safeSelect(custoTransporteA, newForm, '');"><radio_label>Ônibus</radio_label>
+        <input name="transporte" id="veio_taxi" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('item_custo_transporte');safeSelect(custoTransporteA, newForm, '')"><radio_label>Táxi/carro</radio_label>
       </p>
     
       <!-- CUSTO DO TRANSPORTE -->
@@ -134,7 +139,7 @@ function inicializa()
       <!-- ACOMPANHADO -->
       <p>
         03 - Você está acompanhado?<br />
-        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;numeroAcompanhantesA.value='';numeroAcompanhantesA.select();"><radio_label>Sim</radio_label>
+        <input name="acompanhadoA" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantesA.readOnly = false;safeSelect(numeroAcompanhantesA, newForm, '')"><radio_label>Sim</radio_label>
         <input name="acompanhadoA" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantesA.value='NA'; numeroAcompanhantesA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesA" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
       </p>
@@ -170,28 +175,28 @@ function inicializa()
     
       <!-- Pagar o pernoite -->
       <p id="item_custo_pernoite">08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar?<br />
-        <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;custoPernoite.value='';custoPernoite.select();"><radio_label>Sim</radio_label>
+        <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;safeSelect(custoPernoite, newForm, '')"><radio_label>Sim</radio_label>
         <input name="pagarPernoite" id="nao_paga_pernoite" type="radio" value="nao" onclick="custoPernoite.value='0'; custoPernoite.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input class="preco" name="custoPernoite" id="preco_pernoite" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- Trouxe algo para os amigos -->
       <p id="item_custo_amigos">08.2 - Você trouxe algo para os seus amigos?<br />
-        <input name="trouxeAlgoAmigos" id="trouxe_presente" type="radio" value="sim" onclick="custoAmigos.readOnly = false;custoAmigos.value='';custoAmigos.select();"><radio_label>Sim</radio_label>
+        <input name="trouxeAlgoAmigos" id="trouxe_presente" type="radio" value="sim" onclick="custoAmigos.readOnly = false;safeSelect(custoAmigos, newForm, '')"><radio_label>Sim</radio_label>
         <input name="trouxeAlgoAmigos" id="nao_trouse_presente" type="radio" value="nao" onclick="custoAmigos.value='0'; custoAmigos.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoAmigos" id="custo_presente" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- COMEU E/OU BEBEU -->
       <p>09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
-        <input name="comeuBebeuA" id="comeu" type="radio" value="sim" onclick="custoComidaBebidaA.readOnly = false;custoComidaBebidaA.value='';custoComidaBebidaA.select();"><radio_label>Sim</radio_label>
+        <input name="comeuBebeuA" id="comeu" type="radio" value="sim" onclick="custoComidaBebidaA.readOnly = false;safeSelect(custoComidaBebidaA, newForm, '')"><radio_label>Sim</radio_label>
         <input name="comeuBebeuA" id="nao_comeu" type="radio" value="nao" onclick="custoComidaBebidaA.value='0'; custoComidaBebidaA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoComidaBebidaA" id="custo_comida" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
     
       <!-- PAGOU ALGO NO POSTO -->
       <p>10 - Você teve que pagar algo aqui no posto? Quanto custou?<br />
-        <input name="pagarPostoA" id="pagou_posto" type="radio" value="sim" onclick="custoPostoA.readOnly = false;custoPostoA.value='';custoPostoA.select();"><radio_label>Sim</radio_label>
+        <input name="pagarPostoA" id="pagou_posto" type="radio" value="sim" onclick="custoPostoA.readOnly = false;safeSelect(custoPostoA, newForm, '')"><radio_label>Sim</radio_label>
         <input name="pagarPostoA" id="nao_pagou_posto" type="radio" value="nao" onclick="custoPostoA.value='0'; custoPostoA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="custoPostoA" id="custo_posto" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
       </p>
@@ -215,14 +220,14 @@ function inicializa()
     
       <!-- DEIXOU DE GANHAR DINHEIRO -->
       <p>13 - Deixou de ganhar dinheiro hoje para poder vir ao posto?  Quanto?<br />
-        <input name="deixouGanharDinheiroA" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanharA.readOnly = false;quantoDeixouGanharA.value='';quantoDeixouGanharA.select();"><radio_label>Sim</radio_label>
+        <input name="deixouGanharDinheiroA" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanharA.readOnly = false;safeSelect(quantoDeixouGanharA, newForm, '')"><radio_label>Sim</radio_label>
         <input name="deixouGanharDinheiroA" id="nao_deixou_ganhar_dinheiro" type="radio" value="nao" onclick="quantoDeixouGanharA.value='0'; quantoDeixouGanharA.readOnly = true"><radio_label>Não</radio_label>
         <text_label>R$</text_label><input name="quantoDeixouGanharA" id="quanto_nao_ganhou" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this);">,00
       </p>
     
       <!-- QUEM ARCOU COM OS CUSTOS -->
       <p id="item_quem_pagou">14 - Quem pagou pela bebida, comida, transporte, hotel, etc.? Você ou seu(s) acompanhante(s)?<br />
-        <input name="quemArcouCustos" id="voce_arcou_custos" type="radio" value="voce" onClick="exibeLinhaOculta('item_custo_acompanhante');gastoAcompanhante.select();"><radio_label>Você</radio_label>
+        <input name="quemArcouCustos" id="voce_arcou_custos" type="radio" value="voce" onClick="exibeLinhaOculta('item_custo_acompanhante');safeSelect(gastoAcompanhante, newForm, '')"><radio_label>Você</radio_label>
         <input name="quemArcouCustos" id="acompanhante_arcou_custos" type="radio" value="acompanhante" onClick="ocultaLinha('item_custo_acompanhante');gastoAcompanhante.value='';"><radio_label>Acompanhante</radio_label>
       </p>    
 

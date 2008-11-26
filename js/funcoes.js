@@ -1,3 +1,16 @@
+function safeSelect(field, setField, value)
+{
+    if (setField)
+    {
+      var state = field.readOnly;
+      field.readOnly = false;
+      field.value = value;
+      field.readOnly = state;
+    }
+    
+    field.select();
+}
+
 function getElementsByName(fieldName)
 {
   var retList = new Array();
