@@ -51,30 +51,13 @@ function inicializaOcultos()
 
 function setValues()
 { 
-  var radioList = new Array();
-  var radioListVal = new Array();
-  var textList = new Array();
-  var textListVal = new Array();
 <%
 for field, value in costs.iteritems():
 %>
-  var objList = getElementsByName("<%=field%>");
-  
-  if (objList[0].type == "radio")
-  {
-    radioList.push(objList);
-    radioListVal.push("<%= functions.encode(value) %>");
-  }
-  else
-  {
-    textList.push(objList);
-    textListVal.push("<%= functions.encode(value) %>");
-  }
+  setObjValue(getElementsByName("<%=field%>"), "<%= functions.encode(value) %>");
 <%
 #end of loop.
 %>
-  for (var i=0; i < radioList.length; i++) setObjValue(radioList[i], radioListVal[i]);
-  for (var i=0; i < textList.length; i++) setObjValue(textList[i], textListVal[i]);
 }
 
 function inicializa()
