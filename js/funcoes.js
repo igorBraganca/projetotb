@@ -1,3 +1,11 @@
+//Classe usada para associar o nome de um input field em HTML a um dado texto de apresentacao.
+function Question(name, text)
+{
+  this.name = name;
+  this.text = text;
+}
+
+
 //Retorna a lista de nos XML filhos para umd eterminado objeto. Esta funcao deve ser usada no
 //ligar de chamar direto o atributo children (ou childNodes), visto que o nome do atributo
 //muda dependendo do Browser. esta funcao esta validada para operacao com o firefox e o

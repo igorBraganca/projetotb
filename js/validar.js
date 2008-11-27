@@ -342,60 +342,8 @@
 	}
 }
 
-function returnNameCampoCustosA (name)
-{
-	var newName = "";
-	var estado = false;
 
-	tabela_custosA= new Array();
-	tabela_custosA[0] = ["ondeMora", "01 - Onde você mora?"];
-	tabela_custosA[1] = ["transporte", "02 - Como você veio ao posto? Em qual transporte?"];
-	tabela_custosA[2] = ["custoTransporteA", "02.1 - Se você não veio a pé, quanto custou o transporte?"];
-	tabela_custosA[3] = ["acompanhadoA", "03 - Você está acompanhado?"];
-	tabela_custosA[4] = ["horaSaidaCasaA", "04 - Que horas você saiu de casa?"];
-	tabela_custosA[5] = ["horaChegadaPostoA", "05 - Que horas você chegou no posto?"];
-	tabela_custosA[6] = ["horaMedicoA", "06 - Que horas você viu o médico?"];
-	tabela_custosA[7] = ["horaTotalA", "07 - Quanto tempo levou desde que você saiu de casa até ver o médico?"];
-	tabela_custosA[8] = ["pernoite", "08 - Amanhã você terá que voltar para trazer outra amostra de escarro. Onde você vai passar a noite?"];
-	tabela_custosA[9] = ["pagarPernoite", "08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar?"];
-	tabela_custosA[10] = ["trouxeAlgoAmigos", "08.2 - Você trouxe algo para os seus amigos?"];
-	tabela_custosA[11] = ["comeuBebeuA", "09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?"];
-	tabela_custosA[12] = ["pagarPostoA", "10 - Você teve que pagar algo aqui no posto? Quanto custou?"];
-	tabela_custosA[13] = ["profissao", "12 - Qual a sua profissão?"];
-	tabela_custosA[14] = ["estudantePerdeuAula", "11.1 - Você perdeu aula hoje?"];
-	tabela_custosA[15] = ["deixouGanharDinheiroA", "13 - Deixou de ganhar dinheiro hoje para poder vir ao posto?  Quanto?"];
-	tabela_custosA[16] = ["quemArcouCustos", "14 - Quem pagou pela bebida, comida, transporte, hotel, etc.? Você ou seus acompanhantes?"];
-	tabela_custosA[17] = ["gastoAcompanhante", "15 - Quanto você gastou com o seu acompanhante?"];
-	tabela_custosA[18] = ["estudante", "11 - Você é estudante?"];
-	tabela_custosA[19] = ["minutoSaidaCasaA", "04 - Que horas você saiu de casa?"];
-	tabela_custosA[20] = ["minutoChegadaPostoA", "05 - Que horas você chegou no posto?"];
-	tabela_custosA[21] = ["minutoMedicoA", "06 - Que horas você viu o médico?"];
-	tabela_custosA[22] = ["minutoTotalA", "07 - Quanto tempo levou desde que você saiu de casa até ver o médico?"];
-	tabela_custosA[23] = ["numeroAcompanhantesA","03 - Você está acompanhado?"];
-	tabela_custosA[24] = ["custoComidaBebidaA","09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?"];
-	tabela_custosA[25] = ["custoPostoA","10 - Você teve que pagar algo aqui no posto? Quanto custou?"];
-	tabela_custosA[26] = ["pid","Número Geral"];
-	tabela_custosA[27] = ["avaliadorEnfermeiroA","Avaliado por"];
-	tabela_custosA[28] = ["quemCadastrou","Cadastrado por"];
-	tabela_custosA[29] = ["dia_CustoA","Data"];
-	tabela_custosA[30] = ["mes_CustoA","Data"];
-	tabela_custosA[31] = ["ano_CustoA","Data"];
-	tabela_custosA[32] = ["quantoDeixouGanharA","13 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto?"];
-
-	var indice = 0;
-	while((indice < 33) && (estado != true))
-	{
-		if(tabela_custosA[indice][0] == name)
-		{
-			estado = true;
-			newName = tabela_custosA[indice][1];
-		}
-		indice ++;
-	}
-	return newName;
-}
-
-function validar_custos_a (form)
+function validar_custos_a(form, data)
 {
   var estado = true;
   var texto="";
@@ -413,7 +361,7 @@ function validar_custos_a (form)
       if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
       {
         estado = false;
-        novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+        novoNome2 = data[form.elements[indice].name].text;
         if(novoNome2 == novoNome1) novoNome1 = novoNome2;
         else
         {
@@ -439,7 +387,7 @@ function validar_custos_a (form)
         if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
         {
           estado = false;
-          novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+          novoNome2 = data[form.elements[indice].name].text;
           if(novoNome2 == novoNome1) novoNome1 = novoNome2;
           else
           {
@@ -457,7 +405,7 @@ function validar_custos_a (form)
             if((form.elements[indice].checked == false) && (form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false) && (form.elements[indice].disabled == false))
             {
               estado = false;
-              novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+              novoNome2 = data[form.elements[indice].name].text;
               if(novoNome2 == novoNome1) novoNome1 = novoNome2;
               else
               {
@@ -475,7 +423,7 @@ function validar_custos_a (form)
             if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
             {
               estado = false;
-              novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+              novoNome2 = data[form.elements[indice].name].text;
               if(novoNome2 == novoNome1) novoNome1 = novoNome2;
               else
               {
@@ -494,7 +442,7 @@ function validar_custos_a (form)
 
   if(estado == false)
   {
-    alert("Preencha todos os campos do formulario, obrigado.");
+    alert("Preencha todos os campos do formulário, obrigado.");
     alert(texto);
     return false;
   }
