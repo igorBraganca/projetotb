@@ -100,8 +100,9 @@ function exibeLinhaOculta(tabela, linha)
   {
     obj.style.display = "";
     //Colocando todos os itens habilitados.
-    var disableList = getElementsByTagName(obj, "input");
-    for (var i=0; i < disableList.length; i++) disableList[i].disabled = false; 
+    var tagList = getElementsByTagName(obj, "input");
+    tagList.concat(getElementsByTagName(obj, "textarea"));
+    for (var i=0; i < tagList.length; i++) tagList[i].disabled = false; 
   }
 
 }
@@ -114,8 +115,9 @@ function ocultaLinha(tabela, linha)
   {
     obj.style.display = "none";
     //Colocando todos os itens desabilitados.
-    var disableList = getElementsByTagName(obj, "input");
-    for (var i=0; i < disableList.length; i++) disableList[i].disabled = true; 
+    var tagList = getElementsByTagName(obj, "input");
+    tagList.concat(getElementsByTagName(obj, "textarea"));
+    for (var i=0; i < tagList.length; i++) tagList[i].disabled = true; 
   }
 }
 
