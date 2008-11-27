@@ -74,7 +74,7 @@ function inicializa()
 
   <br /><br />
 
-  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_b_e_c (this)">
+  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_bc(this)">
   <input type="hidden" name="form" value="custosBeC" />
   <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
     

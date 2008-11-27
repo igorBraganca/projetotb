@@ -395,183 +395,124 @@ function returnNameCampoCustosA (name)
 	return newName;
 }
 
- function validar_custos_a (form)
+function validar_custos_a (form)
 {
+  var estado = true;
+  var texto="";
+  var tamanho = 0;
+  var novoNome1, novoNome2;
+  novoNome1 = "-";
 
-	var estado = true;
-	var texto="";
-	var tamanho = 0;
-	var novoNome1, novoNome2;
-	novoNome1 = "-";
+  tamanho = form.elements.length;
+  texto="As seguintes perguntas não foram preenchidas:\n";
 
-	tamanho = form.elements.length;
-	texto="As seguintes perguntas não foram preenchidas:\n";
+  for(indice = 0; indice < tamanho; indice ++)
+  {
+    if(form.elements[indice].type == "text")
+    {
+      if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+      {
+        estado = false;
+        /***********************/
+        novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+        if(novoNome2 == novoNome1)
+          novoNome1 = novoNome2;
+        else
+        {
+          texto = texto + novoNome2 + "\n";
+          novoNome1 = novoNome2;
+        }
+        /***********************/
+      }
+    }
+    else
+    {
+      if(form.elements[indice].type == "radio")
+      {
+        for(contador = 0, radioIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+        {
+          if(form.elements[indice].checked == true) radioIndice ++;
+        }
+        if(form.elements[indice].checked == true)
+        {
+          contador ++
+          radioIndice ++;
+        }
 
-	for(indice = 0; indice < tamanho; indice ++)
-	{
+        if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
+        {
+          estado = false;
+          novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+          if(novoNome2 == novoNome1) novoNome1 = novoNome2;
+          else
+          {
+            texto = texto + novoNome2 + "\n";
+            novoNome1 = novoNome2;
+          }
+        }
+      }
+      else
+      {
+        if(form.elements[indice].type == "checkbox")
+        {
+          if((form.elements[indice].name == form.elements[indice + 1].name) && (form.elements[indice].name == form.elements[indice + 2].name))
+          {
+            if((form.elements[indice].checked == false) && (form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false) && (form.elements[indice].disabled == false))
+            {
+              estado = false;
+              /***********************/
+              novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+              if(novoNome2 == novoNome1)
+                novoNome1 = novoNome2;
+              else
+              {
+                texto = texto + novoNome2 + "\n";
+                novoNome1 = novoNome2;
+              }
+              /***********************/
+            }
+            indice += 2;
+          }
+        }
+        else
+        {
+          if(form.elements[indice].type == "select-one")
+          {
+            if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+            {
+              estado = false;
+              /***********************/
+              novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
+              if(novoNome2 == novoNome1)
+                novoNome1 = novoNome2;
+              else
+              {
+                texto = texto + novoNome2 + "\n";
+                novoNome1 = novoNome2;
+              }
+              /***********************/
+            }
+          }
+          else
+          {
+          }
+        }
 
-		if(form.elements[indice].type == "text")
-		{
-			if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
-			{
-				estado = false;
-				/***********************/
-				novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-				if(novoNome2 == novoNome1)
-					novoNome1 = novoNome2;
-				else
-				{
-					texto = texto + novoNome2 + "\n";
-					novoNome1 = novoNome2;
-				}
-				/***********************/
-			}
-		}
-		else
-		{
-			if(form.elements[indice].type == "radio")
-			{
-				if(form.elements[indice].name == "desfechoConsultaInicial")
-				{
-					if((form.elements[indice].checked == true) || (form.elements[indice+1].checked == true) || (form.elements[indice+2].checked == true) || (form.elements[indice+4].checked == true) || (form.elements[indice+5].checked == true) || (form.elements[indice+7].checked == true))
-					{
-						if((form.elements[indice+2].checked == true) && (form.elements[indice+3].value == "") && (form.elements[indice+3].disabled == false))
-						{
-							estado = false;
-							/***********************/
-							novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-							if(novoNome2 == novoNome1)
-								novoNome1 = novoNome2;
-							else
-							{
-								texto = texto + novoNome2 + "\n";
-								novoNome1 = novoNome2;
-							}
-							/***********************/
-						}
-						if((form.elements[indice+5].checked == true) && (form.elements[indice+6].value == "") && (form.elements[indice+6].disabled == false))
-						{
-							estado = false;
-							/***********************/
-							novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-							if(novoNome2 == novoNome1)
-								novoNome1 = novoNome2;
-							else
-							{
-								texto = texto + novoNome2 + "\n";
-								novoNome1 = novoNome2;
-							}
-							/***********************/
-						}
-					}
-					else
-					{
-						estado = false;
-						/***********************/
-						novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-						if(novoNome2 == novoNome1)
-							novoNome1 = novoNome2;
-						else
-						{
-							texto = texto + novoNome2 + "\n";
-							novoNome1 = novoNome2;
-						}
-						/***********************/
-					}
-					indice += 7;
-				}
-				else
-				{
-					for(contador = 0, radioIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
-					{
-						if(form.elements[indice].checked == true)
-							radioIndice ++;
-					}
+      }
+    }
+  }
 
-					if(form.elements[indice].checked == true)
-					{
-						contador ++
-						radioIndice ++;
-					}
+  if(estado == false)
+  {
+    alert("Preencha todos os campos do formulario, obrigado.");
+    alert(texto);
+    return false;
+  }
 
-					if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
-					{
-						estado = false;
-						/***********************/
-						novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-						if(novoNome2 == novoNome1)
-							novoNome1 = novoNome2;
-						else
-						{
-							texto = texto + novoNome2 + "\n";
-							novoNome1 = novoNome2;
-						}
-						/***********************/
-					}
-				}
-			}
-			else
-			{
-				if(form.elements[indice].type == "checkbox")
-				{
-					if((form.elements[indice].name == form.elements[indice + 1].name) && (form.elements[indice].name == form.elements[indice + 2].name))
-					{
-						if((form.elements[indice].checked == false) && (form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false) && (form.elements[indice].disabled == false))
-						{
-							estado = false;
-							/***********************/
-							novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-							if(novoNome2 == novoNome1)
-								novoNome1 = novoNome2;
-							else
-							{
-								texto = texto + novoNome2 + "\n";
-								novoNome1 = novoNome2;
-							}
-							/***********************/
-						}
-						indice += 2;
-					}
-				}
-				else
-				{
-					if(form.elements[indice].type == "select-one")
-					{
-						if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
-						{
-							estado = false;
-							/***********************/
-							novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-							if(novoNome2 == novoNome1)
-								novoNome1 = novoNome2;
-							else
-							{
-								texto = texto + novoNome2 + "\n";
-								novoNome1 = novoNome2;
-							}
-							/***********************/
-						}
-					}
-					else
-					{
-					}
-				}
-
-			}
-		}
-	}
-
-	if(estado == false)
-	{
-		alert("Preencha todos os campos do formulario, obrigado.");
-		alert(texto);
-		return false;
-	}
-
-	if(confirm("Deseja enviar os dados ?"))
-		return true;
-	else
-		return false;
+  if(confirm("Deseja enviar os dados ?"))
+    return true;
+  else
+    return false;
 }
 
 function temAlgumCampoPreenchido(form)
