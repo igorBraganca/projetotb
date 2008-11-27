@@ -39,8 +39,8 @@ var newForm = <%=isNewForm%>;
 
 function inicializaOcultos()
 {
-  document.getElementById("custo_transporte").style.display = "none";//custo do transporte(parte B)
-  document.getElementById("qual_programa").style.display = "none";//Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?(parte C)
+  ocultaLinha("custo_transporte"); //custo do transporte (parte B)
+  ocultaLinha("qual_programa"); //Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?(parte C)
 }
 
 function setValues()
