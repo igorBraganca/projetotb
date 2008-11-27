@@ -96,14 +96,27 @@ function exibeLinhaOculta(tabela, linha)
 {
   var obj = document.getElementById(tabela);
   if (obj.tagName == "TABLE") obj.rows[linha].style.display = "";
-  else obj.style.display = "";
+  else
+  {
+    obj.style.display = "";
+    //Colocando todos os itens habilitados.
+    var disableList = getElementsByTagName(obj, "input");
+    for (var i=0; i < disableList.length; i++) disableList[i].disabled = false; 
+  }
+
 }
 
 function ocultaLinha(tabela, linha)
 {
   var obj = document.getElementById(tabela);
   if (obj.tagName == "TABLE") obj.rows[linha].style.display = "none";
-  else obj.style.display = "none";
+  else
+  {
+    obj.style.display = "none";
+    //Colocando todos os itens desabilitados.
+    var disableList = getElementsByTagName(obj, "input");
+    for (var i=0; i < disableList.length; i++) disableList[i].disabled = true; 
+  }
 }
 
 

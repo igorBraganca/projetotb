@@ -40,13 +40,13 @@ var newForm = <%=isNewForm%>;
 
 function inicializaOcultos()
 {
-  document.getElementById("item_custo_transporte").style.display = "none";//custo do transporte
-  document.getElementById("item_onde_pernoitara").style.display = "none";//pernoite
-  document.getElementById("item_custo_pernoite").style.display = "none";//custo do pernoite
-  document.getElementById("item_custo_amigos").style.display = "none";//custo dos amigos
-  document.getElementById("item_perdeu_aula").style.display = "none";//perdeu aula
-  document.getElementById("item_quem_pagou").style.display = "none";//quem arcou com os custos
-  document.getElementById("item_custo_acompanhante").style.display = "none";//gasto com o acompanhante
+  ocultaLinha("item_custo_transporte");//custo do transporte
+  ocultaLinha("item_onde_pernoitara");//pernoite
+  ocultaLinha("item_custo_pernoite");//custo do pernoite
+  ocultaLinha("item_custo_amigos");//custo dos amigos
+  ocultaLinha("item_perdeu_aula");//perdeu aula
+  ocultaLinha("item_quem_pagou");//quem arcou com os custos
+  ocultaLinha("item_custo_acompanhante");//gasto com o acompanhante
 }
 
 function setValues()
@@ -224,10 +224,10 @@ function inicializa()
         <text_label></text_label><textarea name="observacoes" id="observacoes" rows="3" cols="40"></textarea>
       </p>
 
-      <!-- Linha separatória -->
+      <!-- Linha separatoria -->
       <p><hr /></p>
 
-      <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
+      <!-- Informacoes de cadastramento (avaliador cadastrador, e data) -->
       <p>      
         <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroA" id="avaliado_por" type="text" size="15"><br />
         <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value="<%= functions.encode(sess["userName"])%>" size="15"><br />
