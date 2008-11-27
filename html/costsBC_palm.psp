@@ -60,6 +60,51 @@ function inicializa()
   setValues();
 }
 
+function CostsBC()
+{
+  this.resultadoExames = new Question("resultadoExames", "01 - Você tem o resultado dos exames?");
+  this.quantasVezesVeioPosto = new Question("quantasVezesVeioPosto", "02 - Quantas vezes você veio ao posto para pegar os resultados dos exames?");
+  this.comoVeioPosto = new Question("comoVeioPosto", "03 - Como você veio ao posto? Em qual transporte?");
+  this.custoTransporte = new Question("custoTransporte", "03.1 - Quanto custou o transporte?");
+  this.acompanhado = new Question("acompanhado", "04 - Você está acompanhado?");
+  this.numeroAcompanhantes = new Question("numeroAcompanhantes", "04 - Você está acompanhado?");
+  this.horaSaidaCasa = new Question("horaSaidaCasa", "05 - Que horas você saiu de casa?");
+  this.minutoSaidaCasa = new Question("minutoSaidaCasa", "05 - Que horas você saiu de casa?");
+  this.horaChegadaPosto = new Question("horaChegadaPosto", "06 - Que horas você chegou no posto?");
+  this.minutoChegadaPosto = new Question("minutoChegadaPosto", "06 - Que horas você chegou no posto?");
+  this.horaMedico = new Question("horaMedico", "07 - Que horas você viu o médico?");
+  this.minutoMedico = new Question("minutoMedico", "07 - Que horas você viu o médico?");
+  this.horaTotal = new Question("horaTotal", "08 - Quanto tempo levou desde que você saiu de casa até ver o médico?");
+  this.minutoTotal = new Question("minutoTotal", "08 - Quanto tempo levou desde que você saiu de casa até ver o médico?");
+  this.horaEscarro = new Question("horaEscarro", "09 - Quando você teve que trazer a 2a amostra de escarro há alguns dias, em que horário você escarrou no potinho?");
+  this.minutoEscarro = new Question("minutoEscarro", "09 - Quando você teve que trazer a 2a amostra de escarro há alguns dias, em que horário você escarrou no potinho?");
+  this.horaAcordouEscarro = new Question("horaAcordouEscarro", "10 - Que horas você acordou no dia de escarrar pela segunda vez no potinho?");
+  this.minutoAcordouEscarro = new Question("minutoAcordouEscarro", "10 - Que horas você acordou no dia de escarrar pela segunda vez no potinho?");
+  this.receitaAntibioticos = new Question("receitaAntibioticos", "11 - Você recebeu uma receita com antibióticos?");
+  this.pediuRX = new Question("pediuRX", "12 - Você pediu para fazer um RX?");
+  this.comeuBebeu = new Question("comeuBebeu", "13 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?");
+  this.custoComidaBebida = new Question("custoComidaBebida", "13 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?");
+  this.pagarPostoB = new Question("pagarPostoB", "14 - Você teve que pagar algo aqui no posto?");
+  this.custoPostoB = new Question("custoPostoB", "14 - Você teve que pagar algo aqui no posto?");
+  this.deixouGanharDinheiro = new Question("deixouGanharDinheiro", "15 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto deixou de ganhar?");
+  this.quantoDeixouGanhar = new Question("quantoDeixouGanhar", "15 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto deixou de ganhar?");
+  this.resultadoExameEscarro = new Question("resultadoExameEscarro", "16 - Você já sabe o resutado dos exames de escarro?");
+  this.programaTB = new Question("programaTB", "17 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?");
+  this.pagarPostoC = new Question("pagarPostoC", "18 - Você teve que pagar algo aqui no posto?");
+  this.custoPostoC = new Question("custoPostoC", "18 - Você teve que pagar algo aqui no posto?");
+  this.tempoDoente = new Question("tempoDoente", "19 - Há quanto tempo você estava sentindo-se diferente ou doente, antes de vir ao posto?");
+  this.outraUnidadeSaude = new Question("outraUnidadeSaude", "20 - Antes de você ser diagnosticado no posto, você foi a alguma outra unidade de saúde?");
+  this.naturezaLocal = new Question("naturezaLocal", "21 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?");
+  this.qual_outro = new Question("qual_outro", "21 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?");
+  this.avaliador = new Question("avaliador", "Avaliado por:");
+  this.quemCadastrou = new Question("quemCadastrou", "Cadastrado por:");
+  this.diaCadastro = new Question("diaCadastro", "Data:");
+  this.mesCadastro = new Question("mesCadastro", "Data:");
+  this.anoCadastro = new Question("anoCadastro", "Data:");
+}
+
+var fieldsCostBC = new CostsBC();
+
 </script>
 
 </head>
@@ -74,7 +119,7 @@ function inicializa()
 
   <br /><br />
 
-  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_bc(this)">
+  <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostBC)">
   <input type="hidden" name="form" value="custosBeC" />
   <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
     
@@ -100,14 +145,14 @@ function inicializa()
   <fieldset>  
     <!-- RESULTADO DOS EXAMES -->  
     <p>
-      01 - Você tem o resultado dos exames?<br />
+      <script>document.write(fieldsCostBC.resultadoExames.text)</script><br />
       <input name="resultadoExames" type="radio" value="sim"><radio_label>Sim</radio_label>
       <input name="resultadoExames" type="radio" value="nao"><radio_label>Não</radio_label>
     </p>
     
     <!-- QUANTAS VEZES VEIO AO POSTO -->
     <p>
-      02 - Quantas vezes você veio ao posto para pegar os resultados dos exames?<br />
+      <script>document.write(fieldsCostBC.quantasVezesVeioPosto.text)</script><br />
       <input name="quantasVezesVeioPosto" type="radio" value="uma"><radio_label>1</radio_label>
       <input name="quantasVezesVeioPosto" type="radio" value="duas"><radio_label>2</radio_label>
       <input name="quantasVezesVeioPosto" type="radio" value="tres"><radio_label>3</radio_label>
@@ -116,87 +161,87 @@ function inicializa()
     
     <!-- COMO VEIO AO POSTO -->
     <p>
-      03 - Como você veio ao posto? Em qual transporte?<br />
-      <input name="comoVeioPosto" type="radio" value="pe" onClick="ocultaLinha('custo_transporte');custoTransporteB.value='';"><radio_label>A pé</radio_label>
-      <input name="comoVeioPosto" type="radio" value="onibus" onClick="exibeLinhaOculta('custo_transporte');safeSelect(custoTransporteB, newForm, '');"><radio_label>Ônibus</radio_label>
-      <input name="comoVeioPosto" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('custo_transporte');safeSelect(custoTransporteB, newForm, '');"><radio_label>Táxi/carro</radio_label>
+      <script>document.write(fieldsCostBC.comoVeioPosto.text)</script><br />
+      <input name="comoVeioPosto" type="radio" value="pe" onClick="ocultaLinha('custo_transporte');custoTransporte.value='';"><radio_label>A pé</radio_label>
+      <input name="comoVeioPosto" type="radio" value="onibus" onClick="exibeLinhaOculta('custo_transporte');safeSelect(custoTransporte, newForm, '');"><radio_label>Ônibus</radio_label>
+      <input name="comoVeioPosto" type="radio" value="taxi_carro" onClick="exibeLinhaOculta('custo_transporte');safeSelect(custoTransporte, newForm, '');"><radio_label>Táxi/carro</radio_label>
     </p>
     
     <!-- CUSTO DO TRANSPORTE -->
     <p id="custo_transporte">
-      03.1 - Quanto custou o transporte?<br />
-      <text_label></text_label><input name="custoTransporteB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <script>document.write(fieldsCostBC.custoTransporte.text)</script><br />
+      <text_label></text_label><input name="custoTransporte" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- ACOMPANHADO -->
     <p>
-      04 - Você está acompanhado?<br />
-      <input name="acompanhadoB" type="radio" value="sim" onClick="numeroAcompanhantesB.readOnly = false; safeSelect(numeroAcompanhantesB, newForm, '');"><radio_label>Sim</radio_label>
-      <input name="acompanhadoB" type="radio" value="nao" onClick="numeroAcompanhantesB.value='NA'; numeroAcompanhantesB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantesB" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
+      <script>document.write(fieldsCostBC.acompanhado.text)</script><br />
+      <input name="acompanhado" type="radio" value="sim" onClick="numeroAcompanhantes.readOnly = false; safeSelect(numeroAcompanhantes, newForm, '');"><radio_label>Sim</radio_label>
+      <input name="acompanhado" type="radio" value="nao" onClick="numeroAcompanhantes.value='NA'; numeroAcompanhantes.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
     
     <!-- HORARIO SAIU DE CASA -->    
     <p>
-      05 - Que horas você saiu de casa?<br />
-      <text_label>Hora:</text_label><input name="horaSaidaCasaB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasaB.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoSaidaCasaB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPostoB.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <script>document.write(fieldsCostBC.horaSaidaCasa.text)</script><br />
+      <text_label>Hora:</text_label><input name="horaSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasa.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
 
     <!-- HORARIO CHEGOU NO POSTO -->
     <p>
-      06 - Que horas você chegou no posto?<br />
-      <text_label>Hora:</text_label><input name="horaChegadaPostoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPostoB.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoChegadaPostoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedicoB.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <script>document.write(fieldsCostBC.horaChegadaPosto.text)</script><br />
+      <text_label>Hora:</text_label><input name="horaChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedico.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- HORARIO MEDICO -->
     <p>
-      07 - Que horas você viu o médico?<br />
-      <text_label>Hora:</text_label><input name="horaMedicoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedicoB.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">:<input name="minutoMedicoB" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasaB,minutoSaidaCasaB,horaChegadaPostoB,minutoChegadaPostoB,horaMedicoB,minutoMedicoB,horaTotalB,minutoTotalB);">
+      <script>document.write(fieldsCostBC.horaMedico.text)</script><br />
+      <text_label>Hora:</text_label><input name="horaMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedico.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- TEMPO TOTAL -->
     <p>
-      08 - Quanto tempo levou desde que você saiu de casa at&eacute; ver o m&eacute;dico?<br />
-      <text_label>Tempo total:</text_label><input name="horaTotalB" type="text" maxlength="2" size="2" readonly="readonly">h e<input name="minutoTotalB" type="text" maxlength="2" size="2" readonly="readonly">min.
+      <script>document.write(fieldsCostBC.horaTotal.text)</script><br />
+      <text_label>Tempo total:</text_label><input name="horaTotal" type="text" maxlength="2" size="2" readonly="readonly">h e<input name="minutoTotal" type="text" maxlength="2" size="2" readonly="readonly">min.
     </p>
     
     <!-- SEGUNDA AMOSTRA DE ESCARRO -->
     <p>
-      09 - Quando você teve que trazer a 2a amostra de escarro há alguns dias, em que horário você escarrou no potinho?<br />
+      <script>document.write(fieldsCostBC.horaEscarro.text)</script><br />
       <text_label>Hora:</text_label><input name="horaEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoEscarro.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaAcordouEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
     </p> 
     
     <!-- HORARIO QUE ACORDOU PARA ESCARRAR NO POTINHO -->
     <p>
-      10 - Que horas você acordou no dia de escarrar pela segunda vez no potinho?<br />
+      <script>document.write(fieldsCostBC.horaAcordouEscarro.text)</script><br />
       <text_label>Hora:</text_label><input name="horaAcordouEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoAcordouEscarro.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">:<input name="minutoAcordouEscarro" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) this.blur();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_hora_escarro (horaEscarro,minutoEscarro,horaAcordouEscarro,minutoAcordouEscarro);">
     </p>
     
     <!-- ANTIBIOTICO -->
     <p>
-      11 - Você recebeu uma receita com antibióticos?<br />
+      <script>document.write(fieldsCostBC.receitaAntibioticos.text)</script><br />
       <input name="receitaAntibioticos" type="radio" value="sim"><radio_label>Sim</radio_label>
       <input name="receitaAntibioticos" type="radio" value="nao"><radio_label>Não</radio_label>
     </p>
     
     <!-- PEDIDO RAIO-X -->
     <p>
-      12 - Você pediu para fazer um RX?<br />
+      <script>document.write(fieldsCostBC.pediuRX.text)</script><br />
       <input name="pediuRX" type="radio" value="sim"><radio_label>Sim</radio_label>
       <input name="pediuRX" type="radio" value="nao"><radio_label>Não</radio_label>
     </p>  
     
     <!-- COMEU E/OU BEBEU -->
     <p>
-      13 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou?<br />
-      <input name="comeuBebeuB" type="radio" value="sim" onclick="custoComidaBebidaB.readOnly = false;safeSelect(custoComidaBebidaB, newForm, '');"><radio_label>Sim</radio_label>
-      <input name="comeuBebeuB" type="radio" value="nao" onclick="custoComidaBebidaB.value='0'; custoComidaBebidaB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoComidaBebidaB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <script>document.write(fieldsCostBC.comeuBebeu.text)</script><br />
+      <input name="comeuBebeu" type="radio" value="sim" onclick="custoComidaBebida.readOnly = false;safeSelect(custoComidaBebida, newForm, '');"><radio_label>Sim</radio_label>
+      <input name="comeuBebeu" type="radio" value="nao" onclick="custoComidaBebida.value='0'; custoComidaBebida.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="custoComidaBebida" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>
     
     <!-- PAGOU ALGO NO POSTO -->
     <p>
-      14 - Você teve que pagar algo aqui no posto?<br />
+      <script>document.write(fieldsCostBC.pagarPostoB.text)</script><br />
       <input name="pagarPostoB" type="radio" value="sim" onclick="custoPostoB.readOnly = false;safeSelect(custoPostoB, newForm, '');"><radio_label>Sim</radio_label>
       <input name="pagarPostoB" type="radio" value="nao" onclick="custoPostoB.value='0'; custoPostoB.readOnly = true"><radio_label>Não</radio_label>
       <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
@@ -204,22 +249,22 @@ function inicializa()
     
     <!-- DEIXOU DE GANHAR DINHEIRO -->
     <p>
-      15 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto deixou de ganhar?<br />
-      <input name="deixouGanharDinheiroB" type="radio" value="sim" onclick="quantoDeixouGanharB.readOnly = false;safeSelect(quantoDeixouGanharB, newForm, '');"><radio_label>Sim</radio_label>
-      <input name="deixouGanharDinheiroB" type="radio" value="nao" onclick="quantoDeixouGanharB.value='0'; quantoDeixouGanharB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="quantoDeixouGanharB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <script>document.write(fieldsCostBC.deixouGanharDinheiro.text)</script><br />
+      <input name="deixouGanharDinheiro" type="radio" value="sim" onclick="quantoDeixouGanhar.readOnly = false;safeSelect(quantoDeixouGanhar, newForm, '');"><radio_label>Sim</radio_label>
+      <input name="deixouGanharDinheiro" type="radio" value="nao" onclick="quantoDeixouGanhar.value='0'; quantoDeixouGanhar.readOnly = true"><radio_label>Não</radio_label>
+      <text_label>R$</text_label><input name="quantoDeixouGanhar" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
     </p>  
     
     <!-- RESULTADO DOS EXAMES DE ESCARRO -->
     <p>
-      16 - Você já sabe o resutado dos exames de escarro?<br />
+      <script>document.write(fieldsCostBC.resultadoExameEscarro.text)</script><br />
       <input name="resultadoExameEscarro" type="radio" value="sim"><radio_label>Sim</radio_label>
       <input name="resultadoExameEscarro" type="radio" value="nao"><radio_label>Não</radio_label>
     </p>
     
     <!-- REGISTRO PROGRAMA DE TRATAMENTO DE TB -->
     <p>
-      17 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?<br />
+      <script>document.write(fieldsCostBC.programaTB.text)</script><br />
       <input name="programaTB" type="radio" value="sim"><radio_label>Sim</radio_label>
       <input name="programaTB" type="radio" value="nao"><radio_label>Não</radio_label>
     </p>
@@ -239,7 +284,7 @@ function inicializa()
   <fieldset>
     <!-- PAGOU ALGO NO POSTO -->    
     <p>
-      18 - Você teve que pagar algo aqui no posto?<br />
+      <script>document.write(fieldsCostBC.pagarPostoC.text)</script><br />
       <input name="pagarPostoC" type="radio" value="sim" onclick="custoPostoC.readOnly = false;safeSelect(custoPostoC, newForm, '');"><radio_label>Sim</radio_label>
       <input name="pagarPostoC" type="radio" value="nao" onclick="custoPostoC.value='0'; custoPostoC.readOnly = true"><radio_label>Não</radio_label>
       <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
@@ -247,20 +292,20 @@ function inicializa()
     
     <!-- TEMPO SE SENTINDO DIFERENTE/DOENTE -->
     <p>
-      19 - Há quanto tempo você estava sentindo-se diferente ou doente, antes de vir ao posto?<br />
+      <script>document.write(fieldsCostBC.tempoDoente.text)</script><br />
       <text_label>Semanas:</text_label><input name="tempoDoente" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
 
     <!-- OUTRA UNIDADE DE SAUDE -->
     <p>
-      20 - Antes de você ser diagnosticado no posto, você foi a alguma outra unidade de saúde?<br />
+      <script>document.write(fieldsCostBC.outraUnidadeSaude.text)</script><br />
       <input name="outraUnidadeSaude" type="radio" value="sim" onClick="exibeLinhaOculta('qual_programa');"><radio_label>Sim</radio_label>
       <input name="outraUnidadeSaude" type="radio" value="nao" onClick="ocultaLinha('qual_programa');naturezaLocal[0].checked=naturezaLocal[1].checked=naturezaLocal[2].checked=naturezaLocal[3].checked=false;qual_outro.value='';"><radio_label>Não</radio_label>
     </p>
     
     <!-- QUAL? -->    
     <p id="qual_programa">
-      21 - Se o paciente tiver TB: Você foi registrado no programa de tratamento de TB?<br />
+      <script>document.write(fieldsCostBC.naturezaLocal.text)</script><br />
       <input name="naturezaLocal" type="radio" value="publico" onClick="qual_outro.disabled = true;qual_outro.value='';"><radio_label>Público</radio_label>
       <input name="naturezaLocal" type="radio" value="privado" onClick="qual_outro.disabled = true;qual_outro.value='';"><radio_label>Privado</radio_label>
       <input name="naturezaLocal" type="radio" value="rezadeira" onClick="qual_outro.disabled = true;qual_outro.value='';"><radio_label>Rezadeira</radio_label><br />
@@ -274,9 +319,9 @@ function inicializa()
 
     <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
     <p>
-      <label title="label_avaliado_por" for="avaliado_por">Avaliado por:</label><input name="avaliadorEnfermeiroBeC" id="avaliado_por" type="text" maxlength="100" size="15"><br />
-      <label title="label_cadastrado_por" for="cadastrado_por">Cadastrado por:</label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(sess["userName"]) %> size="15"><br />
-      <label title="label_data" for="data">Data:</label><input name="diaCustoBC" id="data" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarDia(this))mesCustoBC.select();">/<input type="text" name="mesCustoBC" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarMes(this))anoCustoBC.select();">/<input type="text" name="anoCustoBC" maxlength="4" size="4" onKeyUp="if(this.value.length == 4)this.blur();" onChange="validarAno(this);" onBlur="validarQualquerData(diaCustoBC,mesCustoBC,anoCustoBC)">
+      <label title="label_avaliado_por" for="avaliado_por"><script>document.write(fieldsCostBC.avaliador.text)</script></label><input name="avaliador" id="avaliado_por" type="text" maxlength="100" size="15"><br />
+      <label title="label_cadastrado_por" for="cadastrado_por"><script>document.write(fieldsCostBC.quemCadastrou.text)</script></label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(sess["userName"]) %> size="15"><br />
+      <label title="label_data" for="data"><script>document.write(fieldsCostBC.diaCadastro.text)</script></label><input name="diaCadastro" id="data" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarDia(this))mesCadastro.select();">/<input type="text" name="mesCadastro" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if (validarMes(this)) anoCadastro.select();">/<input type="text" name="anoCadastro" maxlength="4" size="4" onKeyUp="if(this.value.length == 4)this.blur();" onChange="validarAno(this);" onBlur="validarQualquerData(diaCadastro,mesCadastro,anoCadastro)">
     </p>
 
     <!--    ENVIAR / LIMPAR     -->

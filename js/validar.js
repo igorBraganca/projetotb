@@ -343,7 +343,7 @@
 }
 
 
-function validar_custos_a(form, data)
+function validarCustos(form, data)
 {
   var estado = true;
   var texto="";

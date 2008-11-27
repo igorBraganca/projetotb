@@ -120,7 +120,7 @@ var fieldsCostA = new CostsA();
 
   <br /><br />
   <b>Parte A</b>
-  <form name="check" method="post" action="addForm.py" onSubmit="return validar_custos_a(this, fieldsCostA)">
+  <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostA)">
     <input type="hidden" name="form" value="custosA" />
     <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
     <br />
