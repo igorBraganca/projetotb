@@ -1,3 +1,30 @@
+//Retorna a lista de nos XML filhos para umd eterminado objeto. Esta funcao deve ser usada no
+//ligar de chamar direto o atributo children (ou childNodes), visto que o nome do atributo
+//muda dependendo do Browser. esta funcao esta validada para operacao com o firefox e o
+//Internet Explorer Mobile.
+function getChildren(obj)
+{
+  var chlildrenName = "childNodes";
+  if (navigator.appName.match("Internet Explorer") != null) chlildrenName = "children";
+  return obj[chlildrenName];
+}
+
+//Esta funcao substitui o uso da funcao default obj.getElementsByTagName, visto que a mesma
+//nao existe no Mobile IE.
+function getElementsByTagName(obj, tagName)
+{
+  var childList = getChildren(obj);
+  var ret = new Array();  
+  for (var i=0; i < childList.length; i++)
+  {
+    var childTagName = new String(childList[i].tagName);
+    if (childTagName.toLowerCase() == tagName) ret.push(childList[i]);
+  }
+  return ret;
+}
+
+//Esta funcao permite selectionar um objeto (field), e setar o seu valor para "value",
+//somente se "setField" for true. Do contrario, so seleciona o obj, sem setar sem valor.
 function safeSelect(field, setField, value)
 {
     if (setField)
@@ -11,6 +38,8 @@ function safeSelect(field, setField, value)
     field.select();
 }
 
+//Esta funcao substitui o uso da funcao default obj.getElementsByName, visto que a mesma
+//nao existe no Mobile IE.
 function getElementsByName(fieldName)
 {
   var retList = new Array();
@@ -26,7 +55,10 @@ function getElementsByName(fieldName)
   return retList;
 }
 
-
+//Seta o valor do objeto "obj" com o valor "objVal". Se "obj" for uma textbox, ou textarea,
+//entao o conteudo do texto especificado por objVal sera usado. Se "obj" for um botao de radio
+//Entao a funcao procurara aquele botao de radio que contem o valor igual a "objVal", e chamara
+//o metodo "click" do mesmo.
 function setObjValue(objName, objVal)
 {
   if ( (objName[0].type == "text") || (objName[0].type == "textarea") )
