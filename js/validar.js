@@ -413,16 +413,13 @@ function validar_custos_a (form)
       if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
       {
         estado = false;
-        /***********************/
         novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-        if(novoNome2 == novoNome1)
-          novoNome1 = novoNome2;
+        if(novoNome2 == novoNome1) novoNome1 = novoNome2;
         else
         {
           texto = texto + novoNome2 + "\n";
           novoNome1 = novoNome2;
         }
-        /***********************/
       }
     }
     else
@@ -460,16 +457,13 @@ function validar_custos_a (form)
             if((form.elements[indice].checked == false) && (form.elements[indice+1].checked == false) && (form.elements[indice+2].checked == false) && (form.elements[indice].disabled == false))
             {
               estado = false;
-              /***********************/
               novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-              if(novoNome2 == novoNome1)
-                novoNome1 = novoNome2;
+              if(novoNome2 == novoNome1) novoNome1 = novoNome2;
               else
               {
                 texto = texto + novoNome2 + "\n";
                 novoNome1 = novoNome2;
               }
-              /***********************/
             }
             indice += 2;
           }
@@ -481,23 +475,19 @@ function validar_custos_a (form)
             if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
             {
               estado = false;
-              /***********************/
               novoNome2 = returnNameCampoCustosA(form.elements[indice].name);
-              if(novoNome2 == novoNome1)
-                novoNome1 = novoNome2;
+              if(novoNome2 == novoNome1) novoNome1 = novoNome2;
               else
               {
                 texto = texto + novoNome2 + "\n";
                 novoNome1 = novoNome2;
               }
-              /***********************/
             }
           }
           else
           {
           }
         }
-
       }
     }
   }
@@ -509,10 +499,8 @@ function validar_custos_a (form)
     return false;
   }
 
-  if(confirm("Deseja enviar os dados ?"))
-    return true;
-  else
-    return false;
+  if(confirm("Deseja enviar os dados ?")) return true;
+  else return false;
 }
 
 function temAlgumCampoPreenchido(form)
