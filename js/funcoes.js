@@ -51,9 +51,10 @@ function getElementsByName(fieldName)
     {
       if (objList[j].name == fieldName) retList.push(objList[j]);
     }
-  } 
+  }
   return retList;
 }
+
 
 //Seta o valor do objeto "obj" com o valor "objVal". Se "obj" for uma textbox, ou textarea,
 //entao o conteudo do texto especificado por objVal sera usado. Se "obj" for um botao de radio
