@@ -146,9 +146,9 @@ int main (void)
 					found_patient = true;
 					cur_node = cur_node->parent; /*cur_node recebe o noh <triagem> do paciente que possui o numeroGeral procurado */		
 					
-					while ((!xmlStrEqual(cur_node->name, BAD_CAST "consultaMedica")) && (cur_node))
+					while ((!xmlStrEqual(cur_node->name, BAD_CAST formName)) && (cur_node))
 						cur_node = cur_node->next;
-					old_patient = cur_node; /*old_paciente recebe o noh <consultaMedica> do paciente que possui o numeroGeral procurado */
+					old_patient = cur_node; /*old_paciente recebe o noh <formName> do paciente que possui o numeroGeral procurado */
 				}
 				else
 				{
@@ -181,7 +181,7 @@ int main (void)
  *            CRIANDO NOVO FORMULARIO DE TRIAGEM                                        *
  ******************************************************************************/
 	
-	edited_patient = xmlNewNode (NULL,BAD_CAST "consultaMedica");
+	edited_patient = xmlNewNode (NULL,BAD_CAST formName);
 	
 /******************************************************************************
  *            ADD NEW FORM                                                    *
