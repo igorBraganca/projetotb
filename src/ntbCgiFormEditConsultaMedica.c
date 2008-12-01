@@ -286,7 +286,7 @@ showMenu("consulta",username);
 
 printf ("\n");
 printf ("<div align=\"center\">\n");
-printf ("<form name=\"check\" method=\"post\" action=\"editPatientConsultaMedica.cgi\" onSubmit=\"return validar_consulta_medica(this)\">\n");
+printf ("<form name=\"check\" method=\"post\" action=\"editPatientOutrosForms.cgi\" onSubmit=\"return validar_consulta_medica(this)\">\n");
 printf ("\n");
 printf ("	<span style=\"font-size: 13pt\" class=\"bold\"><br />Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 printf ("	<div align=\"center\">\n");
