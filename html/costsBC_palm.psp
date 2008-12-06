@@ -122,6 +122,7 @@ var fieldsCostBC = new CostsBC();
   <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostBC)">
   <input type="hidden" name="form" value="custosBeC" />
   <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
+  <input type="hidden" name="device" value="<%= functions.encode(sess.get('device', 'screen'))%>" />
     
     <b>Parte B</b>
     <br /><br />

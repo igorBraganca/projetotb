@@ -15,6 +15,7 @@ if sess.is_new():
     sess.set_timeout(12000);
     sess["userName"] = userName;
     sess["userGroup"] = userGroup;
+    sess["device"] = "handheld";
     sess.save();
 
 ptMap = functions.getPatientsList();

@@ -17,7 +17,7 @@ form = cgi.FieldStorage()
 doc = xml.dom.minidom.Document();
 data = doc.createElement(form['form'].value);
 for k in form.keys():
-  if k in ['form', 'pid']: continue;
+  if k in ['form', 'pid', 'device']: continue;
   val = doc.createElement(k);
   val.appendChild(doc.createTextNode(unicode(form[k].value, xmlEncoding)));
   data.appendChild(val);
@@ -51,6 +51,9 @@ xmlData.seek(0); #Going to the beginning of the file.
 xmlData.write(dom.toxml(encoding = xmlEncoding));
 xmlData.close(); #Releasing the file (calls also unlock).
 
+returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(form["quemCadastrou"].value);
+if form.getfirst("device", "screen") == "handheld": returnPage = "search_palm.psp";
+
 print "Content-Type: text/html\n\n"     # HTML is following
 
 htmlPage = """
@@ -68,7 +71,11 @@ htmlPage += """
 </head>
 
 <body>
-Formul&aacute;rio salvo com sucesso! Clique <a href="search_palm.psp">aqui</a> para retornar &agrave; p&aacute;gina de busca.
+"""
+
+htmlPage += 'Formul&aacute;rio salvo com sucesso! Clique <a href="%s">aqui</a> para retornar &agrave; p&aacute;gina de busca.' % returnPage;
+
+htmlPage += """
 </body>
 </html>
 """;
