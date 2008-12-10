@@ -56,8 +56,8 @@ for name in sorted(ptMap.keys()):
   if "custosBeC" in formsDone: statusB = "Editar";
   else: statusB = "Fazer";
   
-  urlFormA = "<a href=costsA.psp?uid=%s>%s</a>" % (fmtId, statusA);
-  urlFormB = "<a href=costsBC.psp?uid=%s>%s</a>" % (fmtId, statusB);
+  urlFormA = "<a href=costsA.psp?pid=%s>%s</a>" % (fmtId, statusA);
+  urlFormB = "<a href=costsBC.psp?pid=%s>%s</a>" % (fmtId, statusB);
 %>
     <tr>
     <td><%= functions.encode(id) %></td>
