@@ -3,20 +3,15 @@ import functions;
 import re;
 import mod_python;
 
+#Getting apache environment variables.
+req.add_common_vars();
+envVars = req.subprocess_env.copy();
+userName = envVars["REMOTE_USER"];
+
 sess = mod_python.Session.Session(req);
-
-if sess.is_new():
-  userName = form.getfirst("username");
-  password = form.getfirst("password");
-  userExits, userGroup, errorMsg = functions.authenticateUser(userName, password);
-
-  if not userExits: psp.redirect("palm.psp?errorMsg=%s" % functions.fmt2GetMethod(errorMsg));
-  else:
-    sess.set_timeout(12000);
-    sess["userName"] = userName;
-    sess["userGroup"] = userGroup;
-    sess["device"] = "handheld";
-    sess.save();
+sess.set_timeout(36000);
+sess["device"] = "handheld";
+sess.save();
 
 ptMap = functions.getPatientsList();
 
@@ -40,7 +35,7 @@ cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
   <div align="center">
     <table>
     <tr>
-      <td align="left"><%= sess["userName"] %> conectado</td>
+      <td align="left"><%= userName %> conectado</td>
       <td align="right"><a href="logout_palm.psp">Sair do Sistema</a></td>
     <tr>
   </div>

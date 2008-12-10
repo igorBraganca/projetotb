@@ -1,13 +1,21 @@
 <%
 import functions;
 import mod_python;
+
+#Getting apache environment variables.
+req.add_common_vars();
+envVars = req.subprocess_env.copy();
+userName = envVars["REMOTE_USER"];
+
 sess = mod_python.Session.Session(req);
-if sess.is_new(): psp.redirect("palm.psp");
-userId = form.getfirst("id");
+patientId = form.getfirst("id", None);
+
+if (sess.is_new()) or (patientId is None): psp.redirect("search_palm.psp");
+
 sess.load();
 
-patientName = functions.getSingleInfo(userId, "triagem", "nomeCompleto");
-costs = functions.formAsMap(userId, "custosBeC");
+patientName = functions.getSingleInfo(patientId, "triagem", "nomeCompleto");
+costs = functions.formAsMap(patientId, "custosBeC");
 
 isNewForm = "true";
 if len(costs) > 0: isNewForm = "false";
@@ -121,7 +129,7 @@ var fieldsCostBC = new CostsBC();
 
   <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostBC)">
   <input type="hidden" name="form" value="custosBeC" />
-  <input type="hidden" name="pid" value=<%= functions.encode(userId) %> />
+  <input type="hidden" name="pid" value=<%= functions.encode(patientId) %> />
   <input type="hidden" name="device" value="<%= functions.encode(sess.get('device', 'screen'))%>" />
     
     <b>Parte B</b>
@@ -134,7 +142,7 @@ var fieldsCostBC = new CostsBC();
     <table>
       <tr>
         <td><b>Número Geral :</b></td>
-        <td><%= functions.encode(userId) %></td>
+        <td><%= functions.encode(patientId) %></td>
       </tr>
       <tr>
         <td><b>Paciente :</b></td>
@@ -321,7 +329,7 @@ var fieldsCostBC = new CostsBC();
     <!-- Informações de cadastramento (avaliador cadastrador, e data) -->
     <p>
       <label title="label_avaliado_por" for="avaliado_por"><script>document.write(fieldsCostBC.avaliador.text)</script></label><input name="avaliador" id="avaliado_por" type="text" maxlength="100" size="15"><br />
-      <label title="label_cadastrado_por" for="cadastrado_por"><script>document.write(fieldsCostBC.quemCadastrou.text)</script></label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(sess["userName"]) %> size="15"><br />
+      <label title="label_cadastrado_por" for="cadastrado_por"><script>document.write(fieldsCostBC.quemCadastrou.text)</script></label><input name="quemCadastrou" id="cadastrado_por" type="text" readonly="readonly" value=<%= functions.encode(userName) %> size="15"><br />
       <label title="label_data" for="data"><script>document.write(fieldsCostBC.diaCadastro.text)</script></label><input name="diaCadastro" id="data" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if(validarDia(this))mesCadastro.select();">/<input type="text" name="mesCadastro" maxlength="2" size="2" onKeyUp="if(this.value.length == 2)this.blur();" onChange="if (validarMes(this)) anoCadastro.select();">/<input type="text" name="anoCadastro" maxlength="4" size="4" onKeyUp="if(this.value.length == 4)this.blur();" onChange="validarAno(this);" onBlur="validarQualquerData(diaCadastro,mesCadastro,anoCadastro)">
     </p>
 
