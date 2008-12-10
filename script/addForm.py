@@ -53,7 +53,7 @@ xmlData.write(dom.toxml(encoding = xmlEncoding));
 xmlData.close(); #Releasing the file (calls also unlock).
 
 returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(os.environ["REMOTE_USER"]);
-if form.getfirst("device", "screen") == "handheld": returnPage = "search_palm.psp";
+if form.getfirst("device", "screen") == "handheld": returnPage = "palm.psp";
 
 print "Content-Type: text/html\n\n"     # HTML is following
 

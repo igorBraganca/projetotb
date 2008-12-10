@@ -11,7 +11,7 @@ userName = envVars["REMOTE_USER"];
 sess = mod_python.Session.Session(req);
 patientId = form.getfirst("id", None);
 
-if (sess.is_new()) or (patientId is None): psp.redirect("search_palm.psp");
+if (sess.is_new()) or (patientId is None): psp.redirect("palm.psp");
 
 sess.load();
 

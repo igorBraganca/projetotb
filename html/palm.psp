@@ -1,50 +1,74 @@
 <%
-errorMsg = form.getfirst("errorMsg");
-msg = '';
-if errorMsg is not None: msg = "<tr><td colspan='2' style='color:red'>%s</td></tr>" % errorMsg;
+import functions;
+import re;
+import mod_python;
+
+#Getting apache environment variables.
+req.add_common_vars();
+envVars = req.subprocess_env.copy();
+userName = envVars["REMOTE_USER"];
+
+sess = mod_python.Session.Session(req);
+sess.set_timeout(36000);
+sess["device"] = "handheld";
+sess.save();
+
+ptMap = functions.getPatientsList();
+
+cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 %>
 
 <html>
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
-	<title>Neural TB - Entrar</title>
+<meta http-equiv="Content-Type" content="text/html" charset="ISO-8859-1" />
+<title>Neural TB - Listagem de Pacientes</title>
+
+<style type="text/css">
+<%= cssText %>
+</style>
+
 </head>
 
 <body>
-<div align="center">
 
-<img src="images/NeuralTB3.jpg">
-<br /><br />
-<div class="">
-<table>
-	<tr>
-		<td style="vertical-align:top; padding-top:8px">
-			<form name="login" action="search_palm.psp" method="post">
-			<table border="0">
-				<tr>
-					<td style="text-align:right">Usu&aacute;rio:</td>
-					<td><input name="username" type="text"></td>
-				</tr>
-				<tr>
-					<td style="text-align:right">Senha:</td>
-					<td><input name="password" type="password"></td>
-				</tr>
-				<tr>
-					<td colspan="2" height="15"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td style="text-align:right"><input type="submit" value="Entrar"></td>
-				</tr>
-				<%= msg %>
-			</table>
-			</form>
-		</td>
-		<td style="padding-left:20px"><img src="images/humanSmallest.jpg" style="z-index:-1"></td>
-	</tr>
-</table>
-</div>
+  <div align="center">
+    <table>
+    <tr>
+      <td align="left"><%= userName %> conectado</td>
+      <td align="right"><a href="logout_palm.psp">Sair do Sistema</a></td>
+    <tr>
+  </div>
 
-</div>
+  <table>
+    <tr>
+      <th>Número Geral</th><th>Nome</th><th>Custos A</th><th>Custos B e C</th>
+    </tr>
+<%
+for name in sorted(ptMap.keys()):
+  id = ptMap[name]["id"];
+  fmtId = functions.fmt2GetMethod(id);
+  formsDone = ptMap[name]["doneForms"];
+  
+  statusA = statusB = "";
+  if "custosA" in formsDone: statusA = "Editar";
+  else: statusA = "Fazer";
+  if "custosBeC" in formsDone: statusB = "Editar";
+  else: statusB = "Fazer";
+  
+  urlFormA = "<a href=costsA_palm.psp?id=%s>%s</a>" % (fmtId, statusA);
+  urlFormB = "<a href=costsBC_palm.psp?id=%s>%s</a>" % (fmtId, statusB);
+%>
+    <tr>
+    <td><%= functions.encode(id) %></td>
+    <td><%= functions.encode(name) %></td>
+    <td><%= urlFormA %></td>
+    <td><%= urlFormB %></td>
+<%
+#End of table building loop.
+%>
+    </tr>
+ </table>
 </body>
+
 </html>
