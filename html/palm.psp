@@ -32,13 +32,7 @@ cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();
 
 <body>
 
-  <div align="center">
-    <table>
-    <tr>
-      <td align="left"><%= userName %> conectado</td>
-      <td align="right"><a href="logout_palm.psp">Sair do Sistema</a></td>
-    <tr>
-  </div>
+  <p><%= userName %> conectado</td></p>
 
   <table>
     <tr>
