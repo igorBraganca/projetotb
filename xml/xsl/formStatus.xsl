@@ -73,7 +73,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='custosA.cgi?uid={$uid}&amp;pid={$id}'; return false;">
+						<a class="empty" href="" onclick="self.close(); opener.top.location='costsA.psp?pid={$id}'; return false;">
 							<img src="images/empty.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
@@ -113,7 +113,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 					<td>
-						<a class="empty" href="" onclick="self.close(); opener.top.location='custosBeC.cgi?uid={$uid}&amp;pid={$id}'; return false;">
+						<a class="empty" href="" onclick="self.close(); opener.top.location='costsBC.psp?pid={$id}'; return false;">
 							<img src="images/empty.png" width="9" height="9" />
 							Questionário de Custos - Partes B e C
 						</a>

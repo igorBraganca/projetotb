@@ -5,6 +5,7 @@ import cgitb; cgitb.enable(); #Remove after debuging.
 import xml.dom.minidom;
 import fcntl;
 import shutil;
+import os;
 
 import functions;
 
@@ -51,8 +52,8 @@ xmlData.seek(0); #Going to the beginning of the file.
 xmlData.write(dom.toxml(encoding = xmlEncoding));
 xmlData.close(); #Releasing the file (calls also unlock).
 
-returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(form["quemCadastrou"].value);
-if form.getfirst("device", "screen") == "handheld": returnPage = "search_palm.psp";
+returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(os.environ["REMOTE_USER"]);
+if form.getfirst("device", "screen") == "handheld": returnPage = "palm.psp";
 
 print "Content-Type: text/html\n\n"     # HTML is following
 

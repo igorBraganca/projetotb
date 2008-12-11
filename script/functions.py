@@ -20,34 +20,6 @@ def encode(textStr):
   return textStr.encode("iso-8859-1");
 
 
-def authenticateUser(userName, password):
-  """Recebe 2 strings. O nome do usuario e a sua senha. Com isso, comecta-se a base
-     dados de usuarios do sistema, e verifica se o login existe e a senha confere.
-     A funcao retorna uma tuple com os seguintes valores:
-      - ok:    booleano, com valor True se o usuario foi autenticado corretamente.
-      - group: o grupo ao qual o usuario pertence. Este campo e uma string vazia se 
-               o usuario nao existe.
-      - msg:   A mensagem de erro justificando a falha na autenticacao do usuario. 
-               E uma string vazia em caso de sucesso"""
-
-  if (not userName) or (not password) : return (False, "", "Preencha todos os campos.");
-  xmlData = open(USERS_FILE_NAME, 'r');
-  fcntl.flock(xmlData, fcntl.LOCK_EX);
-  dom = xml.dom.minidom.parse(xmlData);
-  
-  for usuario in dom.getElementsByTagName("usuario"):
-    name = usuario.getElementsByTagName("username")[0].childNodes[0].data;
-    passWd = usuario.getElementsByTagName("senha")[0].childNodes[0].data;
-    group = usuario.getElementsByTagName("grupo")[0].childNodes[0].data;
-    if (name == userName) and (passWd == password):
-      xmlData.close();
-      return (True, group, "");
-  
-  #No matching user was found if we get here.
-  xmlData.close();
-  return (False, "", "Usu&aacute;rio n&atilde;o encontrado ou senha inv&aacute;lida.");
-
-
 def getPatientInfo(dom, pid):
   """Recebe um node xml (xml.dom.minidom.Document) e o numero geral do paciente (pid).
      Retorna um objeto xml.minidom.node contendo as informacoes encontradas do paciente
