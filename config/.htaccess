@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "Sistema de Guadalupe - Projeto TB"
+AuthBasicProvider file
+AuthUserFile /etc/apache2/passwd/passwords
+Require valid-user
+
