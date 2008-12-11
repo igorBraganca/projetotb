@@ -114,7 +114,20 @@ int main (void)
 	first_input = cgi_process_form();
 	pid = cgi_param("numeroGeral");
 	formName = cgi_param("form");
-	username = cgi_param("cadastradoPor");
+	//username = cgi_param("cadastradoPor");
+		if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
+	  {
+		printf("Content-type: text/html\n\n");
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n");
+    printf("Erro ao verificar o usuário.");
+		printf("</body>\n");
+		printf("</html>\n");
+		exit(0);
+		}
 	
 	if ((!pid) || (!formName))
 	{

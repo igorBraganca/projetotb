@@ -16,6 +16,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
@@ -28,7 +31,7 @@
 #include "ntbFunctions.h"
 
 #define XML_FILE_PATH "./xml/pacientesGuadalupe.xml"
-#define XML_TEMP_FILE "./xml/TempPacientesGuadalupe.xml"
+//#define XML_TEMP_FILE "./xml/TempPacientesGuadalupe.xml"
 
 void usualFreeMemory (xmlDocPtr doc)
 {
@@ -66,6 +69,7 @@ int main (void)
 {
 	char *formName, *pid, *username;
 	boolean found_patient;
+	FILE *document;
 	
 	/* libcgi declarations */
 	formvars *first_input, *input;
@@ -92,7 +96,21 @@ int main (void)
 	first_input = cgi_process_form();
 	pid = cgi_param("numeroGeral");
 	formName = cgi_param("form");
-	username = cgi_param("uid");
+	//username = cgi_param("uid");
+	
+		if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
+	  {
+		printf("Content-type: text/html\n\n");
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n");
+    printf("Erro ao verificar o usuário.");
+		printf("</body>\n");
+		printf("</html>\n");
+		exit(0);
+		}
 	
 	if ((!pid) || (!formName))
 	{
@@ -105,7 +123,23 @@ int main (void)
  *            OPENING AND PARSING AN XML FILE TO A TREE                       *
  ******************************************************************************/	
  
-	doc = xmlReadFile(XML_FILE_PATH, NULL, XML_PARSE_NOBLANKS);
+	document = fopen(XML_FILE_PATH, "r+");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), XML_FILE_PATH, NULL, XML_PARSE_NOBLANKS);
 	if (doc == NULL)
 	{
 		printError("Failed to parse doc");
@@ -237,32 +271,34 @@ int main (void)
  *            DUMPING DOCUMENT TO FILE		*
  ******************************************************************************/
 	
-	if ((xmlSaveFormatFileEnc(XML_TEMP_FILE, doc, "ISO-8859-1", 1)) < 0)
+	if ((xmlSaveFormatFileEnc(XML_FILE_PATH, doc, "ISO-8859-1", 1)) < 0)
 	{
-		remove(XML_TEMP_FILE);
 		printError("Erro ao salvar arquivo");
 		usualFreeMemory(doc);
+		xmlFreeNode(edited_patient);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	
-	remove(XML_FILE_PATH);
+	/*remove(XML_FILE_PATH);
     
     if (rename(XML_TEMP_FILE, XML_FILE_PATH))
     {
         printError("Erro ao renomear o arquivo atualizado");
         usualFreeMemory(doc);
         exit(0);
-    }
+    }*/
 
 /******************************************************************************
  *            FREE MEMORY AND EXIT			*
  ******************************************************************************/
 
 	printSuccess(username);
-	
 	usualFreeMemory(doc);
-	
 	xmlFreeNode(edited_patient);
+	flock(fileno(document), LOCK_EX);
+	fclose(document);
 	
 	return 0;
 }

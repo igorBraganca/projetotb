@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
@@ -23,6 +26,8 @@
 #include "ntbConsts.h"
 #include "ntbTypes.h"
 #include "ntbFunctions.h"
+
+#define XML_FILE_PATH "./xml/pacientesGuadalupe.xml"
 
 void usualFreeMemory (xmlDocPtr doc)
 {
@@ -63,6 +68,7 @@ int main (void)
 	char tempFile[] = "xml/pacientesTemp.xml";
 	char *pid;
 	boolean found_patient;
+	FILE *document;
 	
 	//char username[65];
 	
@@ -132,7 +138,23 @@ int main (void)
 	else
 	{ */
 
-		doc = xmlReadFile(xmlFilePath, NULL, XML_PARSE_NOBLANKS);
+		document = fopen(XML_FILE_PATH, "r+");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), XML_FILE_PATH, NULL, XML_PARSE_NOBLANKS);
 		if (doc == NULL)
 		{
 			printError("Failed to parse doc");
@@ -192,7 +214,7 @@ int main (void)
 
 	if (!found_patient)
 	{
-		printError("Esse n&uacute;mero geral n&atilde;o foi encontrado");
+		printError("Esse n&uacute;mero geral n&atilde;o foi encontrado. Verifique se o paciente não foi removido.");
 		usualFreeMemory(doc);
 		exit(0);
 	}
@@ -215,33 +237,32 @@ int main (void)
  *            DUMPING DOCUMENT TO FILE                                        *
  ******************************************************************************/
 	
-	if ((xmlSaveFormatFileEnc(tempFile, doc, "ISO-8859-1", 1)) < 0)
+if ((xmlSaveFormatFileEnc(XML_FILE_PATH, doc, "ISO-8859-1", 1)) < 0)
 	{
-		remove(tempFile);
 		printError("Erro ao salvar arquivo");
 		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	
-	if (rename(tempFile, xmlFilePath))
-	{
-		printError("Erro ao renomear o arquivo atualizado");
-		usualFreeMemory(doc);
-		exit(0);
-	}
-	
-	remove(tempFile);
-	
+	/*remove(XML_FILE_PATH);
+    
+    if (rename(XML_TEMP_FILE, XML_FILE_PATH))
+    {
+        printError("Erro ao renomear o arquivo atualizado");
+        usualFreeMemory(doc);
+        exit(0);
+    }*/
 
-	
 /******************************************************************************
- *            FREE MEMORY AND EXIT                                            *
+ *            FREE MEMORY AND EXIT			*
  ******************************************************************************/
 
 	printSuccess();
-	//printf("Content-type: application/javascript\r\n\r\n");
-	//printf("alert(\"Formul&aacute;rio\")");
 	usualFreeMemory(doc);
+	flock(fileno(document), LOCK_EX);
+	fclose(document);
 	
 	return 0;
 }

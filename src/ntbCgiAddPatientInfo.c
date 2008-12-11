@@ -18,6 +18,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
@@ -50,6 +53,7 @@ int main (void)
 	char tempFile[] = "xml/pacientesTemp.xml";
 	int rc, utf8;
 	boolean found_patient, found_form;
+	FILE *document;
 	
 	/* date and time declarations */
 	/*time_t rawtime;
@@ -116,7 +120,23 @@ int main (void)
 	//snprintf (xmlFilePath, FILE_NAME_MAX, "xml/pacientes%s.xml", healthCenter);
 	strcpy (xmlFilePath, "xml/pacientesGuadalupe.xml");
 	
-	doc = xmlReadFile(xmlFilePath, NULL, 256);	/* 256 = remove blank nodes */
+	document = fopen(xmlFilePath, "r+");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), xmlFilePath, NULL, 256);	/* 256 = remove blank nodes */
 	if (doc == NULL)
 	{
 		printError("Failed to parse doc");
@@ -287,21 +307,13 @@ int main (void)
  *            DUMPING DOCUMENT TO FILE                                        *
  ******************************************************************************/
 		
-		if ((xmlSaveFormatFileEnc(tempFile, doc, "ISO-8859-1", 1)) < 0)
+		if ((xmlSaveFormatFileEnc(xmlFilePath, doc, "ISO-8859-1", 1)) < 0)
 		{
-			remove(tempFile);
-			printError("Erro ao salvar arquivo");
-			usualFreeMemory(doc);
-			exit(0);
-		}
-		
-		remove(xmlFilePath);
-		    
-		if (rename(tempFile, xmlFilePath))
-		{
-			printError("Erro ao renomear o arquivo atualizado");
-			usualFreeMemory(doc);
-			exit(0);
+		printError("Erro ao salvar arquivo");
+		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
+		exit(0);
 		}
 	}
 	
@@ -319,6 +331,8 @@ int main (void)
  ******************************************************************************/
 	
 	usualFreeMemory(doc);
+	flock(fileno(document), LOCK_EX);
+	fclose(document);
 	printError("Fomul&aacute;rio adicionado com sucesso");
 	
 	return (0);

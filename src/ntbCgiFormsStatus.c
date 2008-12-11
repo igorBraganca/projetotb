@@ -50,7 +50,22 @@ int main (void)
  *            ACQUIRE VALUES CHOSEN BY USER                                   *
  ******************************************************************************/
 	
-	uid = cgi_param("uid");
+	//uid = cgi_param("uid");
+	
+		if(!(uid= getenv("REMOTE_USER"))) //verifica se string lida é null
+	  {
+		printf("Content-type: text/html\n\n");
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n");
+    printf("Erro ao verificar o usuário.");
+		printf("</body>\n");
+		printf("</html>\n");
+		exit(0);
+		}
+		
 	pid = cgi_param("pid");
 	
 /******************************************************************************

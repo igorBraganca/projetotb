@@ -39,8 +39,22 @@ int main (int argc, char **argv)
 	cgi_init();
 	cgi_process_form();
 
-	if((username = cgi_param("uid")) == NULL)
-		username = USUARIO_ANONIMO;
+	/*if((username = cgi_param("uid")) == NULL)
+		username = USUARIO_ANONIMO;*/
+		
+	if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
+	  {
+		printf("Content-type: text/html\n\n");
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n");
+    printf("Erro ao verificar o usuário.");
+		printf("</body>\n");
+		printf("</html>\n");
+		exit(0);
+		}
 		
 	cgi_init_headers();
 

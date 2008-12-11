@@ -17,6 +17,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
@@ -52,7 +55,7 @@ void printSuccess (char *username)
 	//printf ("	<script language=javascript src=\"js/validar.js\"></script>\n");
 	printf ("\t</head>\n");
 	printf ("\t<body>\n");
-	//printf ("\t<body onload=\"window.location.close()\";>\n");
+	//printf ("\t<body onload=\"window.location.close()\";>\n");*/
 	printf ("<span style=\"background-color:green; color: white; font-family: Verdana, Arial; font-size:15pt; padding: 5px\">");
 	printf ("Usu&aacute;rio editado com sucesso. Aguarde...</span>");
 	printf ("\t</body>\n");
@@ -66,15 +69,18 @@ void printError (char *msg)
 	printf ("<html><head><title>Erro</title></head><body><h2>%s</h2></body></html>", msg);
 }
 
+
 int main (void)
 {
 	char *formName, *pid, *username;
 	boolean found_patient;
+	FILE *document;
 	
 	/* libcgi declarations */
 	formvars *first_input, *input;
 	
 	/* libxml2 declarations */
+	xmlOutputBufferPtr buffer;
 	xmlChar *strUTF = NULL;
 	xmlDocPtr doc;
 	xmlNodePtr root_element, cur_node, new_form, new_node, edited_patient, old_patient;
@@ -96,8 +102,23 @@ int main (void)
 	first_input = cgi_process_form();
 	pid = cgi_param("numeroGeral");
 	formName = cgi_param("form");
-	username = cgi_param("uid");
+	//username = cgi_param("uid");
 	
+		if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
+	  {
+		printf("Content-type: text/html\n\n");
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n");
+    printf("Erro ao verificar o usuário.");
+		printf("</body>\n");
+		printf("</html>\n");
+		exit(0);
+		}
+	
+
 	if ((!pid) || (!formName))
 	{
 		printError("ID do paciente e nome do formul&aacute;rio n&atilde;o foram enviados");
@@ -108,15 +129,32 @@ int main (void)
 /******************************************************************************
  *            OPENING AND PARSING AN XML FILE TO A TREE                       *
  ******************************************************************************/	
- 
-	doc = xmlReadFile(XML_FILE_PATH, NULL, XML_PARSE_NOBLANKS);
+ 	document = fopen(XML_FILE_PATH, "r+");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), XML_FILE_PATH, NULL, XML_PARSE_NOBLANKS);
 	if (doc == NULL)
 	{
 		printError("Failed to parse doc");
 		usualFreeMemory(NULL);
+		flock(fileno(document), LOCK_EX);
+  	fclose(document);
 		exit(0);
 	}
-	
+
 	root_element = xmlDocGetRootElement(doc);
 	
 /******************************************************************************
@@ -244,33 +282,42 @@ int main (void)
 /******************************************************************************
  *            DUMPING DOCUMENT TO FILE		*
  ******************************************************************************/
-	
-	if ((xmlSaveFormatFileEnc(XML_TEMP_FILE, doc, "ISO-8859-1", 1)) < 0)
+ 
+	if ((xmlSaveFormatFileEnc(XML_FILE_PATH, doc, "ISO-8859-1", 1)) < 0)
 	{
-		remove(XML_TEMP_FILE);
 		printError("Erro ao salvar arquivo");
 		usualFreeMemory(doc);
+		xmlFreeNode(edited_patient);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	
-	remove(XML_FILE_PATH);
+	/*remove(XML_FILE_PATH);
     
     if (rename(XML_TEMP_FILE, XML_FILE_PATH))
     {
         printError("Erro ao renomear o arquivo atualizado");
         usualFreeMemory(doc);
         exit(0);
-    }
+    }*/
 
 /******************************************************************************
  *            FREE MEMORY AND EXIT			*
  ******************************************************************************/
 
 	printSuccess(username);
+	usualFreeMemory(doc);
+	xmlFreeNode(edited_patient);
+	flock(fileno(document), LOCK_EX);
+	fclose(document);
+	/*exit(0);
+
+	
 	
 	usualFreeMemory(doc);
 	
-	xmlFreeNode(edited_patient);
+	xmlFreeNode(edited_patient);*/
 	
 	return 0;
 }
