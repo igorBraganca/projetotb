@@ -186,7 +186,7 @@ var fieldsCostBC = new CostsBC();
     <p>
       <script>document.write(fieldsCostBC.acompanhado.text)</script><br />
       <input name="acompanhado" type="radio" value="sim" onClick="numeroAcompanhantes.readOnly = false; safeSelect(numeroAcompanhantes, newForm, '');"><radio_label>Sim</radio_label>
-      <input name="acompanhado" type="radio" value="nao" onClick="numeroAcompanhantes.value='NA'; numeroAcompanhantes.readOnly = true"><radio_label>Não</radio_label>
+      <input name="acompanhado" type="radio" value="nao" onClick="numeroAcompanhantes.value='0'; numeroAcompanhantes.readOnly = true"><radio_label>Não</radio_label>
       <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
     </p>
     
