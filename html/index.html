@@ -1,14 +1,17 @@
 <html>
+
 <head>
-	<title>Neural TB - Entrar</title>
-	<!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
-	<meta http-equiv="refresh" content="1;URL=triagem.cgi" />
-	<!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
-	<!--<script charset="ISO-8859-1" language=javascript src="js/funcoes.js"></script>-->
+
+<script>
+function redirect()
+{
+  if (navigator.appName.toLowerCase().search("pocket") == -1) window.location = "triagem.cgi";
+  else  window.location = "palm.psp";
+}
+</script>
+
 </head>
 
-<body>
-	<span style="background-color:green; color: white; font-family: Verdana, Arial; font-size:15pt; padding: 5px">
-	Verificando usu&aacute;rio. Aguarde...</span>
+<body onLoad="redirect()">
 </body>
 </html>
