@@ -8,11 +8,6 @@ req.add_common_vars();
 envVars = req.subprocess_env.copy();
 userName = envVars["REMOTE_USER"];
 
-sess = mod_python.Session.Session(req);
-sess.set_timeout(36000);
-sess["device"] = "handheld";
-sess.save();
-
 ptMap = functions.getPatientsList();
 
 cssText = open(functions.PROJECT_PATH + "css/search_palm.css", "r").read();

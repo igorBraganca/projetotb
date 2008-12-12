@@ -7,12 +7,8 @@ req.add_common_vars();
 envVars = req.subprocess_env.copy();
 userName = envVars["REMOTE_USER"];
 
-sess = mod_python.Session.Session(req);
 patientId = form.getfirst("pid", None);
-
 if (patientId is None): psp.redirect("palm.psp");
-
-sess.load();
 
 patientName = functions.getSingleInfo(patientId, "triagem", "nomeCompleto");
 costs = functions.formAsMap(patientId, "custosBeC");
@@ -130,7 +126,6 @@ var fieldsCostBC = new CostsBC();
   <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostBC)">
   <input type="hidden" name="form" value="custosBeC" />
   <input type="hidden" name="pid" value=<%= functions.encode(patientId) %> />
-  <input type="hidden" name="device" value="<%= functions.encode(sess.get('device', 'screen'))%>" />
     
     <b>Parte B</b>
     <br /><br />

@@ -18,7 +18,7 @@ form = cgi.FieldStorage()
 doc = xml.dom.minidom.Document();
 data = doc.createElement(form['form'].value);
 for k in form.keys():
-  if k in ['form', 'pid', 'device']: continue;
+  if k in ['form', 'pid']: continue;
   val = doc.createElement(k);
   val.appendChild(doc.createTextNode(unicode(form[k].value, xmlEncoding)));
   data.appendChild(val);
@@ -53,7 +53,7 @@ xmlData.write(dom.toxml(encoding = xmlEncoding));
 xmlData.close(); #Releasing the file (calls also unlock).
 
 returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(os.environ["REMOTE_USER"]);
-if form.getfirst("device", "screen") == "handheld": returnPage = "palm.psp";
+if functions.isMobile(os.environ): returnPage = "palm.psp";
 
 print "Content-Type: text/html\n\n"     # HTML is following
 
