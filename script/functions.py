@@ -95,3 +95,12 @@ def formAsMap(pid, form):
   xmlData.close();
 
   return ret;
+
+
+def isMobile(envVars):
+  """Retorna True se o cliente for um dispositivo movel (PDA, celular, etc), e False
+  caso seja um desktop. envVars e um mapa contendo todas as variaveis de ambiente
+  fornecidas pelo Apache. Cuidado que os.environ so funciona se a funcao nao for chamada
+  pelo mod_python. Do contrario, temos que usar a variavel req."""
+  if "PPC" in envVars["HTTP_USER_AGENT"]: return True;
+  else: return False;
