@@ -38,7 +38,7 @@ void usualFreeMemory (xmlDocPtr doc)
 int main (void)/*(int argc,char**argv)*/
 {
 	int indice1;
-	char *username, *pid;
+	char *username, *pid, fraseFinal[200],fraseFinal2[200];
 	int estado;
 	/** 
 	*	se estado = 0 (verdadeiro)
@@ -242,8 +242,10 @@ printf ("\r\n");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				if(strcmp((char *)cur_node_children->name,"ano_FollowUp") != 0);			
-					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				if(strcmp((char *)cur_node_children->name,"ano_FollowUp") != 0);
+					trocaAspas(cur_node_children->children->content, fraseFinal);
+					trocaEnter(fraseFinal, fraseFinal2);
+					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, fraseFinal2);		
 			}
 			else
 				indice1 --;

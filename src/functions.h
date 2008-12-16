@@ -12,4 +12,6 @@ unsigned checkCookie(char *, char *, char*);
 unsigned authenticateUser(char *, char *, unsigned *);
 unsigned searchUser(char *, char *, unsigned *);
 void showMenu (char *, char *);
+void trocaAspas(char*, char*);
+void trocaEnter(char*, char*);
 #endif

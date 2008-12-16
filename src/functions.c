@@ -326,4 +326,69 @@ unsigned authenticateUser (char *username, char *password, unsigned *group)
 	return(WRONG_PASSWORD);
 }
 /*-----------------------------------------------------------------*/
+void trocaAspas(char* strInicio, char* strFinal)
+{
+int i, j;
+
+	j=0;
+	for (i=0; i<strlen(strInicio); i++)
+	{
+		if (strInicio[i] == '"')
+		{
+			strFinal[j] = '\\';
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+			strFinal[j]=strInicio[i];
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+		}
+		else
+		{
+			strFinal[j] = strInicio[i];
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+		}
+		
+		
+	}
+
+	strFinal[j]='\0';
+
+}
+/*-----------------------------------------------------------------*/
+void trocaEnter(char* strInicio, char* strFinal)
+{
+int i, j;
+
+	i=j=0;
+	while(i<strlen(strInicio))
+	{
+		if 	(strInicio[i] == 13)
+		{
+			strFinal[j] = '\\';
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+			strFinal[j] = 'n';
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+			i++;
+		}
+		else if (strInicio[i] == '\n')
+			i++;
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+		else
+		{
+			strFinal[j] = strInicio[i];
+			//printf("//%i: %c //%i:%c\n",i,strInicio[i],j,strFinal[j]);
+			j++;
+			i++;
+		}
+		
+		
+	}
+
+	strFinal[j]='\0';
+
+}
+/*-----------------------------------------------------------------*/
 
