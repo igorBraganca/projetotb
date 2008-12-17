@@ -1,0 +1,78 @@
+\subsection{Formulário de Custos A}
+\label{sec:alvos_custos_a}
+
+\begin{itemize}
+
+\item Versão para PC
+
+\item Versão para PDA
+
+\end{itemize}
+
+
+\subsection{Validação do Formulário de Custos A}
+\label{sec:validacao_custos_a}
+
+\begin{longtable}{p{0.4\textwidth}|p{0.5\textwidth}}
+
+Campo & Validações \\ \hline
+
+01 - Onde você mora? & ``Município do Rio'' desabilita questão 8  \\ \cline{2-2}  & ``Fora do Rio'' habilita questão 8 \\ \hline
+
+02 - Como você veio ao posto? Em qual transporte?  & ``A pé'' desabilita questão 2.1, do contrário, questão 2.1 é habilitada \\ \hline
+
+02.1 - Se você não veio a pé, quanto custou o transporte? & Somente números \\ \cline{2-2} & no máximo 3 dígitos \\ \hline
+
+03 - Você está acompanhado? & Somente ``Sim'' deve habilitar a questão 14 \\ \hline
+Número de pessoas: & Somente números \\ \cline{2-2} & Igual a zero e read-only se a questão 3 é ``Não'' \\ \cline{2-2} & maior que zero se a questão 3 é ``Sim'' \\ \hline
+
+04 - Que horas você saiu de casa? (Hora) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 23 \\ \cline{2-2} & Foco muda automaticamente para minutos após preenchimento.  \\ \hline
+04 - Que horas você saiu de casa? (Minuto) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 59 \\ \hline
+
+05 - Que horas você chegou no posto? (Hora) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 23 \\ \cline{2-2} & Foco muda automaticamente para minutos após preenchimento.  \\ \hline
+05 - Que horas você chegou no posto? (Minuto) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 59 \\ \hline
+05 - Que horas você chegou no posto? (Global) & Horário tem que ser posterior ao horário de saída de casa \\ \hline 
+
+06 - Que horas você viu o médico? (Hora) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 23 \\ \cline{2-2} & Foco muda automaticamente para minutos após preenchimento.  \\ \hline
+06 - Que horas você viu o médico? (Minuto) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 59 \\ \hline
+06 - Que horas você viu o médico? (Global) & Horário tem que ser posterior ao horário de chegada ao posto \\ \hline
+
+07 - Quanto tempo levou desde que você saiu de casa até ver o médico? (Hora) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 23 \\ \cline{2-2} & Preenchido automaticamente  \\ \cline{2-2} & Read-only\\ \hline
+07 - Quanto tempo levou desde que você saiu de casa até ver o médico? (Minuto) & Somente números \\ \cline{2-2}  & Tem que conter 2 dígitos \\ \cline{2-2} & Não pode ser maior que 59 \\ \cline{2-2} & Preenchido automaticamente  \\ \cline{2-2} & Read-only \\ \hline 
+
+08 - Amanhã você terá que voltar para trazer outra amostra de escarro. Onde você vai passar a noite? & ``Em Casa'' desabilita questões 8.1 e 8.2 \\ \cline{2-2} & ``Com Amigos'' habilita questões 8.1 e 8.2 \\ \cline{2-2} & ``Hotel'' habilita 8.1 e desabilita 8.2 \\ \hline
+
+08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+08.1 - Você terá que pagar o pernoite? Quanto você deverá gastar? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+08.2 - Você trouxe algo para os seus amigos? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+09 - Desde que você saiu de casa, você comeu ou bebeu alguma coisa? Quanto custou? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+10 - Você teve que pagar algo aqui no posto? Quanto custou? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+11 - Você é estudante? & ``Sim'' habilita questão 11.1 \\ \cline{2-2} &  ``Não'' desabilita questão 11.1  \\ \hline
+
+11.1 - Você perdeu aula hoje? & Resposta booleana \\ \hline
+
+12 - Qual a sua profissão? & Texto normal \\ \hline
+
+13 - Deixou de ganhar dinheiro hoje para poder vir ao posto? Quanto? & Somente números \\ \cline{2-2} & Igual a zero e read-only se opção é ``Não'' \\ \cline{2-2} & Maior que zero se opção é ``Sim'' \\ \hline
+
+14 - Quem pagou pela bebida, comida, transporte, hotel, etc.? Você ou seu(s) acompanhante(s)? & ``Você'' habilita questão 15  \\ \cline{2-2} & ``Não'' desabilita questão 15 \\ \hline
+
+15 - Quanto você gastou com o seu acompanhante? & Somente números \\ \cline{2-2} & Valor não negativo \\ \hline
+
+16 - Observações: & Texto normal \\ \cline{2-2} & Pode ser omitido \\ \hline
+
+Avaliado por: & Texto normal \\ \hline
+
+Cadastrado por: & Texto normal \\ \cline{2-2} & Read only \\ \cline{2-2} & Tem que conter o nome do usuário logado \\ \hline
+
+Data: (Dia) & Somente números \\ \cline{2-2} & Valor entre 01 e 31 \\ \cline{2-2} & Tem que conter 2 dígitos \\ \cline{2-2} & Foco muda automaticamente para Mês \\ \hline
+Data: (Mês) & Somente números \\ \cline{2-2} & valor entre 01 e 12 \\ \cline{2-2} & Tem que conter 2 dígitos \\ \cline{2-2} & Foco muda automaticamente para Ano \\ \hline
+Data: (Ano) & Somente números \\ \cline{2-2} & valor entre 1800 e o ano corrente \\ \cline{2-2} & Tem que conter 4 dígitos \\ \hline
+Data: (Global) & Não pode ser depois da data atual \\ \hline
+
+\end{longtable}

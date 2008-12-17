@@ -1,0 +1,44 @@
+\documentclass[pdftex,11pt,a4paper]{article}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage[pdftex]{graphicx}
+\usepackage[unicode]{hyperref}
+\usepackage{longtable}
+\usepackage{ctable}
+\hypersetup{
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftitle={Plano de testes para sistema web de Guadalupe},    % title
+    pdfauthor={Felipe Fink Grael},     % author
+    pdfsubject={Subject},   % subject of the document
+    colorlinks=true,       % false: boxed links; true: colored links
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black%
+}
+
+\title{Plano de testes para sistema web de Guadalupe}
+\author{Felipe Grael, Kaio Karam, Rodrigo Torres}
+
+\begin{document}
+\maketitle
+%\tableofcontents
+%\newpage
+
+
+\section{Alvos de Teste}
+\label{sec:alvos}
+
+\include{alvos_custos_a}
+\include{alvos_custos_bc}
+\include{alvos_servidor}
+
+\section{Método de Teste}
+\label{sec:metodo}
+
+\include{metodo_custos_a}
+\include{metodo_custos_bc}
+\include{metodo_servidor}
+
+\end{document}
