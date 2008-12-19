@@ -24,29 +24,18 @@
 //#include "ntbSearchPatient.h"
 
 
-//#define PATHFILE "xml/xsl/resultado.xsl"
-
-void printError (char *msg)
-{
-	cgi_init_headers();
-	
-	printf ("<html><head><title>Erro</title></head><body><h2>%s</h2></body></html>", msg);
-}
+#define PATHFILE "xml/xsl/resultado.xsl"
 
 int main (void)
 {
-	char tempname [L_tmpnam];
-	char comando[100];
-	char comando2[100];
-	char comando3[100];
-	FILE *xsl, *pipe;
+	FILE *xsl;
 	//size_t len;
 	//char xmlSearchResultFilePath[FILE_NAME_MAX];
 	//char healthCenter[HEALTH_CENTER_NAME_MAX];
 	formvars *first;
 	char *pid;
 	
-
+	
 	cgi_init();
 	
 /******************************************************************************
@@ -66,14 +55,8 @@ int main (void)
 /******************************************************************************
  *            CREATE XSL SEARCH FILE                                          *
  ******************************************************************************/
- 
-if (tmpnam(tempname) != NULL)
-{
-
-/*	sprintf(comando,"arquivo: %s", tempname);
-	printError(comando);
-*/	
-	xsl = fopen(tempname, "w");
+	
+	xsl = fopen(PATHFILE, "w");
 	
 	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
 	fprintf(xsl,"\r\n");
@@ -81,7 +64,7 @@ if (tmpnam(tempname) != NULL)
 	fprintf(xsl,"				xmlns:fo=\"http://www.w3.org/1999/XSL/Format\"\r\n");
 	fprintf(xsl,"				xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	fprintf(xsl,"\r\n");
-	fprintf(xsl,"<xsl:include href=\"xml/xsl/fullPatientDetails2.xsl\" />\r\n");
+	fprintf(xsl,"<xsl:include href=\"fullPatientDetails2.xsl\" />\r\n");
 	fprintf(xsl,"\r\n");
 	fprintf(xsl,"<xsl:template match=\"/\">\r\n");
 	fprintf(xsl,"\r\n");
@@ -156,64 +139,130 @@ if (tmpnam(tempname) != NULL)
 	fprintf(xsl,"\r\n");
 	fprintf(xsl,"</xsl:stylesheet>\r\n");
 	fclose(xsl);
-
-}
-else
-	printError("Erro ao criar arquivo temporário!\n");
-	
-	
 	
 /******************************************************************************
- *            XSL TRANSFORM                                                *
+ *            PRINTING RESULT                                                 *
  ******************************************************************************/
- 
-//NAAAAAAAAO FUNCIONA
-	//sprintf(comando,"xsltproc %s xml/pacientesGuadalupe.xml",tempname);
-//	system(comando);	 
+	
+	cgi_init_headers();
+	//printf("Content-type: text/html; charset=iso-8859-1\r\n\r\n");
+	
+	printf("<html>\n");
+	printf("<head>\n");
+	//printf("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n");
+	printf("\t<title>Busca Conclu&iacute;da</title>\n");
+	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/jquery.js\"></script>\n");
+	printf("	<script charset=\"ISO-8859-1\" src=\"js/colors.js\"></script>\n");
+	
+	printf("\
+	<script>\n\
+		function loadXMLDoc(fname)\n\
+		{\n\
+			var xmlDoc;\n\
+			\n\
+			// code for IE\n\
+			if (window.ActiveXObject)\n\
+			{\n\
+				xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
+			}\n\
+			\n\
+			// code for Mozilla, Firefox, Opera, etc.\n\
+			else if (document.implementation && document.implementation.createDocument)\n\
+			{\n\
+				xmlDoc = document.implementation.createDocument(\"\",\"\",null);\n\
+			}\n\
+			else\n\
+			{\n\
+				alert('O seu navegador n&atilde;o tem suporte a este script');\n\
+			}\n\
+			xmlDoc.async = false;\n\
+			xmlDoc.load(fname);\n\
+			return(xmlDoc);\n\
+		}\n\
+		\n\
+		function displayResult()\n\
+		{\n\
+			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml\");\n\
+			xsl = loadXMLDoc(\"xml/xsl/resultado.xsl\");\n\
+			\n\
+			// code for IE\n\
+			if (window.ActiveXObject)\n\
+			{\n\
+				x = xml.transformNode(xsl);\n\
+				document.getElementById(\"result\").innerHTML = x;\n\
+			}\n\
+			\n\
+			// code for Mozilla, Firefox, Opera, etc.\n\
+			else if (document.implementation && document.implementation.createDocument)\n\
+			{\n\
+				xsltProcessor = new XSLTProcessor();\n\
+				xsltProcessor.importStylesheet(xsl);\n\
+				resultDocument = xsltProcessor.transformToFragment(xml,document);\n\
+				document.getElementById(\"result\").appendChild(resultDocument);\n\
+			}\n\
+		}\n\
+	</script>\n");
+	printf("</head>\n");
+	printf("<body id=\"result\" onLoad=\"displayResult()\">\n");
+	
+	
+/*
+	printf("\t<script type=\"text/javascript\">\n");
 
-	//sprintf(comando,"echo xsltproc %s xml/pacientesGuadalupe.xml",tempname);
-//	system(comando);	 
+// load xml --------------------------------------------------------------------
+	
+	printf("\
+		try //Internet Explorer\n\
+		{\n\
+			xml = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
+		}\n\
+		catch(e)\n\
+		{\n\
+			try //Firefox, Mozilla, Opera, etc.\n\
+			{\n\
+				xml = document.implementation.createDocument(\"\",\"\",null);\n\
+			}\n\
+			catch(e) {alert(e.message)}\n\
+		}\n\
+		try\n\
+		{\n\
+			xml.async = false;\n\
+			xml.load(\"/~psvaiter/neuralTB/pacientesGuadalupe2.xml\");\n\
+		}\n\
+		catch(e) {alert(e.message)}\n");
 
-cgi_init_headers();
+// load xsl --------------------------------------------------------------------
 
-//NAOOOOO FUNCIONA
-		printf("<html>\n");
-		printf("<head>\n");
-		printf("<title>Resultado</title>\n");
-		printf("</head>\n");
-		printf("<body>\n"); 
-		printf("teste\n");
-		system("cp xml/xsl/listar.xsl xml/");
-		printf("</body>\n");
-		printf("</html>\n");
+	printf("\
+		try //Internet Explorer\n\
+		{\n\
+			xsl = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
+		}\n\
+		catch(e)\n\
+		{\n\
+			try //Firefox, Mozilla, Opera, etc.\n\
+			{\n\
+				xsl = document.implementation.createDocument(\"\",\"\",null);\n\
+			}\n\
+			catch(e) {alert(e.message)}\n\
+		}\n\
+		try\n\
+		{\n\
+			xsl.async = false;\n\
+			xsl.load(\"/~psvaiter/neuralTB/xsl/resultado.xsl\");\n\
+		}\n\
+		catch(e) {alert(e.message)}\n");
 
+// transform XML to XHTML ------------------------------------------------------ adaptar a transformacao tb para FF, e ai fica ok
 
-//FUNCIOOONA SEM CSS
-//printf("<?xml version=\"1.0\"?>\n");
-//printf("<h1>Lista de Pacientes:</h1><table><tr><th>Nomes:</th></tr><tr><td><a href=\"viewPatient.cgi?pid=11\">Dhiana</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=111111\">Dhiana Deva</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=553521\">Dhiana tesete RIO</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=812698\">Teste Casa Trabalho Social</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=0001\">Teste Desfecho</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=23432\">Teste Desfecho 2</a></td></tr><tr><td><a href=\"viewPatient.cgi?pid=234\">df</a></td></tr></table>\n");
-
-//NAOOO FUNCIIONA
-//printf("%i",system("pwd &"));
-
-//NAOO FUNCIONA
-/*   
-  pipe = popen(comando, "r" );
-  if (pipe == NULL ) 
-  {        
-	  printf("invoking %s failed:\n", comando);        
-	  return 1;    
-  }    
-  while(!feof(pipe) ) 
-  {        
-	  if( fgets( comando, 128, pipe ) != NULL ) 
-		  {            
-		  printf("%s\n", comando );        
-		  }    
-  }       
-  pclose(pipe);
+	printf("\t\tdocument.write(xml.transformNode(xsl));\n");
+	printf("\t</script>\n");
 */
-
-
+	
+	printf("</body>\n");
+	printf("</html>");
+	
 /******************************************************************************
  *            FREE MEMORY AND EXIT                                            *
  ******************************************************************************/
