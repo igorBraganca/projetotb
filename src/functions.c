@@ -331,6 +331,11 @@ void trocaAspas(char* strInicio, char* strFinal)
 int i, j;
 
 	j=0;
+	/*if (strlen(strInicio)>=FIELD_MAX)
+		max = FIELD_MAX-1;
+	else
+		max = strlen(strInicio);*/
+	
 	for (i=0; i<strlen(strInicio); i++)
 	{
 		if (strInicio[i] == '"')

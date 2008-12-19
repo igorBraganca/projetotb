@@ -6,6 +6,7 @@
 #define MAXLEN 64
 #define EXTRA 9
 #define MAXINPUT MAXLEN+2*EXTRA+1
+#define FIELD_MAX 250
 
 
 

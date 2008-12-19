@@ -16,12 +16,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
 
 #include "cgi.h"
 #include "functions.h"
+#include "const.h"
 
 #define XML_FILE_PATH "./xml/pacientesGuadalupe.xml"
 #define USUARIO_ANONIMO "anonimo"
@@ -34,10 +38,19 @@ void usualFreeMemory (xmlDocPtr doc)
 	xmlMemoryDump();
 }
 
+void printError (char *msg)
+{
+	/*cgi_init_headers();
+	
+	printf ("<html><head><title>Erro</title></head><body><h2>%s</h2></body></html>", msg);*/
+	printf ("</script></head><body><h2>%s</h2></body></html>", msg);
+}
+
 int main (void)/*(int argc,char**argv)*/
 {
 	int indice1;
-	char *username, *pid, fraseFinal[200], fraseFinal2[200];
+	char *username, *pid, fraseFinal[FIELD_MAX], fraseFinal2[FIELD_MAX];
+	FILE* document;
 	int estado;
 	/** 
 	*	se estado = 0 (verdadeiro)
@@ -151,10 +164,28 @@ printf ("	}\n");
 			*            OPENING AND PARSING AN XML FILE TO A TREE                       *
 		 ******************************************************************************/
 
-		doc = xmlReadFile(XML_FILE_PATH, NULL, 256);
+	document = fopen(XML_FILE_PATH, "r");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), XML_FILE_PATH, NULL, 256);
 		if (doc == NULL)
 		{
 			usualFreeMemory(NULL);
+			flock(fileno(document), LOCK_EX);
+			fclose(document);
 			exit(0);
 		}
 
@@ -211,6 +242,8 @@ printf ("	}\n");
 		}
 		
 		usualFreeMemory(NULL);	
+		flock(fileno(document), LOCK_EX);
+			fclose(document);
 							/*
 							tabela[0] = [\"campo1\",\"casa\"];\n\
 							tabela[1] = [\"campo2\",\"cachorro\"];\n\
@@ -1221,6 +1254,8 @@ printf ("	}\n");
 		printf ("\n");
 		printf ("</body>\n");
 		printf ("</html>");
+		
+		
 	}
 	else
 	{
@@ -1304,11 +1339,28 @@ printf ("	*/\n");
 		/******************************************************************************
 			*            OPENING AND PARSING AN XML FILE TO A TREE                       *
 		 ******************************************************************************/
-
-		doc = xmlReadFile(XML_FILE_PATH, NULL, 256);
+	document = fopen(XML_FILE_PATH, "r");
+ 	
+ 	if (document == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(document), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(document);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+	doc = xmlReadFd(fileno(document), XML_FILE_PATH, NULL, 256);
 		if (doc == NULL)
 		{
 			usualFreeMemory(NULL);
+			flock(fileno(document), LOCK_EX);
+			fclose(document);
 			exit(0);
 		}
 
@@ -1360,6 +1412,8 @@ printf ("	*/\n");
 		}
 		
 		usualFreeMemory(NULL);	
+		flock(fileno(document), LOCK_EX);
+			fclose(document);
 							/*
 							tabela[0] = [\"campo1\",\"casa\"];\n\
 							tabela[1] = [\"campo2\",\"cachorro\"];\n\

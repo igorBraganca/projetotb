@@ -159,6 +159,8 @@ int main (void)
 		{
 			printError("Failed to parse doc");
 			usualFreeMemory(NULL);
+			flock(fileno(document), LOCK_EX);
+			fclose(document);
 			exit(0);
 		}
 		
@@ -200,6 +202,8 @@ int main (void)
 				{
 					printError("Erro de forma&ccedil;&atilde;o do XML. Tem paciente sem n&uacute;mero geral.");
 					usualFreeMemory(doc);
+					flock(fileno(document), LOCK_EX);
+					fclose(document);
 					exit(0);
 				}
 			}
@@ -216,6 +220,8 @@ int main (void)
 	{
 		printError("Esse n&uacute;mero geral n&atilde;o foi encontrado. Verifique se o paciente não foi removido.");
 		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	

@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/file.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
@@ -42,7 +45,7 @@ void printSuccess (char *username)
 	printf ("\t\t<title>Fomul&aacute;rio adicionado</title>\n");
 	printf ("\t\t<meta http-equiv=\"refresh\" content=\"2; URL=triagem.cgi?uid=%s\" />\n",username);
 	printf ("\t</head>\n");
-	printf ("\t</body>\n");
+	printf ("\t<body>\n");
 	printf ("<span style=\"background-color:green; color: white; font-family: Verdana, Arial; font-size:15pt; padding: 5px\">");
 	printf ("Fomul&aacute;rio adicionado com sucesso. Aguarde...</span>");
 	printf ("\t</body>\n");
@@ -164,11 +167,30 @@ int main (void)
 	{
 		fclose(fp);
 		
-		doc = xmlReadFile(xmlFilePath, NULL, XML_PARSE_NOBLANKS);
+		
+		fp = fopen(xmlFilePath, "r+");
+ 	
+ 	if (fp == NULL) {
+        printError("O arquivo de pacientes não pode ser aberto");
+        exit(0);
+    }
+    
+	if(flock(fileno(fp), LOCK_EX)) {
+        printError("Erro ao trancar o arquivo");
+       	fclose(fp);
+        exit(0);
+    }
+    
+   //printWait("Trancado!");
+   //sleep(20);
+    
+		doc = xmlReadFd(fileno(fp), xmlFilePath, NULL, XML_PARSE_NOBLANKS);
 		if (doc == NULL)
 		{
 			printError("Failed to parse doc");
 			usualFreeMemory(NULL);
+			flock(fileno(fp), LOCK_EX);
+			fclose(fp);
 			exit(0);
 		}
 		
@@ -213,6 +235,8 @@ int main (void)
 				{
 					printError("Erro de forma&ccedil;&atilde;o do XML. Tem paciente sem n&uacute;mero geral.");
 					usualFreeMemory(doc);
+					flock(fileno(fp), LOCK_EX);
+					fclose(fp);
 					exit(0);
 				}
 			}
@@ -228,6 +252,8 @@ int main (void)
 	{
 		printError("Esse n&uacute;mero geral j&aacute; foi registrado");
 		usualFreeMemory(doc);
+		flock(fileno(fp), LOCK_EX);
+		fclose(fp);
 		exit(0);
 	}
 	
@@ -250,6 +276,8 @@ int main (void)
 		cgi_init_headers();
 		printError("Erro na convers&atilde;o de formName para UTF-8");
 		usualFreeMemory(doc);
+		flock(fileno(fp), LOCK_EX);
+		fclose(fp);
 		exit(0);
 	}
 	
@@ -268,6 +296,8 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->name para UTF-8");
 			usualFreeMemory(doc);
+			flock(fileno(fp), LOCK_EX);
+			fclose(fp);
 			exit(0);
 		}
 		
@@ -281,6 +311,8 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->value para UTF-8");
 			usualFreeMemory(doc);
+			flock(fileno(fp), LOCK_EX);
+			fclose(fp);
 			exit(0);
 		}
 		
@@ -295,22 +327,26 @@ int main (void)
  *            DUMPING DOCUMENT TO FILE                                        *
  ******************************************************************************/
 	
-	if ((xmlSaveFormatFileEnc(tempFile, doc, "ISO-8859-1", 1)) < 0)
+	if ((xmlSaveFormatFileEnc(xmlFilePath, doc, "ISO-8859-1", 1)) < 0)
 	{
-		remove(tempFile);
+		//remove(tempFile);
 		printError("Erro ao salvar arquivo");
 		usualFreeMemory(doc);
+		flock(fileno(fp), LOCK_EX);
+		fclose(fp);
 		exit(0);
 	}
 	
-	remove(xmlFilePath);
+	/*remove(xmlFilePath);
     
     if (rename(tempFile, xmlFilePath))
     {
         printError("Erro ao renomear o arquivo atualizado");
         usualFreeMemory(doc);
+        flock(fileno(fp), LOCK_EX);
+				fclose(fp);
         exit(0);
-    }
+    }*/
 
 	
 	/**
@@ -405,6 +441,8 @@ int main (void)
 	//printf("Content-type: application/javascript\r\n\r\n");
 	//printf("alert(\"Formul&aacute;rio\")");
 	usualFreeMemory(doc);
+	flock(fileno(fp), LOCK_EX);
+	fclose(fp);
 	
 	return 0;
 }

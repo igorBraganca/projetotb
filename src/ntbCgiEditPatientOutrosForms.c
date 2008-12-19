@@ -198,6 +198,8 @@ int main (void)
 			{
 				printError("Erro de forma&ccedil;&atilde;o do XML. Tem paciente sem n&uacute;mero geral.");
 				usualFreeMemory(doc);
+				flock(fileno(document), LOCK_EX);
+				fclose(document);
 				exit(0);
 			}
 		}
@@ -212,6 +214,8 @@ int main (void)
 	{
 		printError("Este paciente n&atilde;o existe.");
 		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	
@@ -231,6 +235,8 @@ int main (void)
 		cgi_init_headers();
 		printError("Erro na convers&atilde;o de formName para UTF-8");
 		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
 		exit(0);
 	}
 	
@@ -249,6 +255,8 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->name para UTF-8");
 			usualFreeMemory(doc);
+			flock(fileno(document), LOCK_EX);
+			fclose(document);
 			exit(0);
 		}
 		
@@ -262,6 +270,8 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->value para UTF-8");
 			usualFreeMemory(doc);
+			flock(fileno(document), LOCK_EX);
+			fclose(document);
 			exit(0);
 		}
 		
