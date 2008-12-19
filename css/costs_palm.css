@@ -44,15 +44,15 @@ input[type="reset"]
 
 label
 {
-  width: 6.5em;
+  width: 6em;
   float: left;
   text-align: left;
-  margin-right: 0.5em;
+  margin-right: 0.25em;
   display: block
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
-table
+input[id="id_patientName"]
 {
-  font-size: 9pt;
+	width: 14em;
 }

@@ -18,7 +18,6 @@ if len(costs) > 0: isNewForm = "false";
 
 #Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
-cssText = open(functions.PROJECT_PATH + "css/costs_palm.css", "r").read();
 jsText = open(functions.PROJECT_PATH + "js/funcoes.js", "r").read();
 jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 %>
@@ -29,11 +28,8 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 
 <title>Questionário Custos - Parte A</title>
 
-<style type="text/css" media="handheld">
-<%= cssText %>
-</style>
-
 <link rel="stylesheet" type="text/css" href="css/costs_pc.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/costs_palm.css" media="handheld" />
 
 <script>
 <%= jsText %>
@@ -124,24 +120,17 @@ var fieldsCostA = new CostsA();
   <b>Parte A</b>
   <form name="check" method="post" action="addForm.py" onSubmit="return validarCustos(this, fieldsCostA)">
     <input type="hidden" name="form" value="custosA" />
-    <input type="hidden" name="pid" value="<%= functions.encode(patientId) %>" />
     <br />
 </div>
 
 <div align="left">
     
     <!-- Numero Geral e Nome-->
-    <table>
-      <tr>
-        <td><b>Número Geral :</b></td>
-        <td><%= functions.encode(patientId) %></td>
-      </tr>
-      <tr>
-        <td><b>Paciente :</b></td>
-        <td><%= functions.encode(patientName) %></td>
-      </tr>
-    </table>
-    <br /><br />
+    <p>      
+      <label title="label_pid" for="id_pid"><b>Número Geral:</b></label><input type="text" name="pid" id="id_pid" size="6" maxlength="100" readonly="true" value="<%= functions.encode(patientId) %>" /><br />
+      <label title="label_patientName" for="id_patientName"><b>Paciente:</b></label><input type="text" name="patientName" id="id_patientName" maxlength="100" readonly="true" disabled="true" value="<%= functions.encode(patientName) %>" />
+    </p>
+    <br />
 
     <fieldset>
       <!-- ONDE MORA -->

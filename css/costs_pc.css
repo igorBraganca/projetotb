@@ -49,10 +49,10 @@ label
   text-align: left;
   margin-right: 0.5em;
   display: block
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
-table
+input[id="id_patientName"]
 {
-  font-size: 9pt;
+	width: 30em;
 }

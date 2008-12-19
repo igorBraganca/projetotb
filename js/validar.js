@@ -2,7 +2,9 @@
  *	Autor: Igor Cunha Braganca
  */
 
- function returnNameCampo (name)
+  /***************** VALIDACAO DO FORMULARIO TRIAGEM *****************/
+ 
+ function returnNameCampoTriagem (name)
  {
 	var newName = "";
 	var estado = false;
@@ -166,7 +168,7 @@
 
 	tamanho = form.elements.length;
 
-	texto="As seguintes perguntas não foram preenchidas:\n";
+	texto="As seguintes perguntas não foram preenchidas:\n\n-------------------------------------------------------------\n";
 
 	for(indice = 0; indice < tamanho; indice ++)
 	{
@@ -177,7 +179,7 @@
 			{
 				estado = false;
 				/***********************/
-				novoNome2 = returnNameCampo(form.elements[indice].name);
+				novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 				if(novoNome2 == novoNome1)
 					novoNome1 = novoNome2;
 				else
@@ -200,7 +202,7 @@
 						{
 							estado = false;
 							/***********************/
-							novoNome2 = returnNameCampo(form.elements[indice].name);
+							novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 							if(novoNome2 == novoNome1)
 								novoNome1 = novoNome2;
 							else
@@ -214,7 +216,7 @@
 						{
 							estado = false;
 							/***********************/
-							novoNome2 = returnNameCampo(form.elements[indice].name);
+							novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 							if(novoNome2 == novoNome1)
 								novoNome1 = novoNome2;
 							else
@@ -229,7 +231,7 @@
 					{
 						estado = false;
 						/***********************/
-						novoNome2 = returnNameCampo(form.elements[indice].name);
+						novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 						if(novoNome2 == novoNome1)
 							novoNome1 = novoNome2;
 						else
@@ -259,7 +261,7 @@
 					{
 						estado = false;
 						/***********************/
-						novoNome2 = returnNameCampo(form.elements[indice].name);
+						novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 						if(novoNome2 == novoNome1)
 							novoNome1 = novoNome2;
 						else
@@ -281,7 +283,7 @@
 						{
 							estado = false;
 							/***********************/
-							novoNome2 = returnNameCampo(form.elements[indice].name);
+							novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 							if(novoNome2 == novoNome1)
 								novoNome1 = novoNome2;
 							else
@@ -302,7 +304,7 @@
 						{
 							estado = false;
 							/***********************/
-							novoNome2 = returnNameCampo(form.elements[indice].name);
+							novoNome2 = returnNameCampoTriagem(form.elements[indice].name);
 							if(novoNome2 == novoNome1)
 								novoNome1 = novoNome2;
 							else
@@ -326,7 +328,7 @@
 	{
 
 		alert("Preencha todos os campos do formulario, obrigado.\n\nOBS:Não se esqueça de clicar no botão \"Resultado\" no grupo de perguntas Sinais e Sintomas.");
-		alert(texto);
+		alert(texto+"-------------------------------------------------------------\n");
 		return false;
 	}
 
@@ -341,7 +343,9 @@
 		return false;
 	}
 }
+ /***************************************************************************/
 
+ /***************** VALIDACAO DO FORMULARIO CUSTOS *****************/
 
 function validarCustos(form, data)
 {
@@ -450,6 +454,439 @@ function validarCustos(form, data)
   if(confirm("Deseja enviar os dados ?")) return true;
   else return false;
 }
+ /***************************************************************************/
+ 
+ /***************** VALIDACAO DO FORMULARIO CONSULTA MEDICA *****************/
+
+ function returnNameCampoConsultaMedica (name)
+ {
+	var newName = "";
+	var estado = false;
+
+	tabela_consulta_medica= new Array(26);
+	tabela_consulta_medica[0] = ["inclusao", "Critérios de inclusão:"];
+	tabela_consulta_medica[1] = ["especimes_respiratorios", "Data da coleta dos DOIS espécimes respiratórios:"];
+	tabela_consulta_medica[2] = ["cicatriz_bcg", "Cicatriz de BCG presente?(Checar deltóide direito):"];
+	tabela_consulta_medica[3] = ["resultado_leitura", "Resultado da leitura (milímetros de enduração):"];
+	tabela_consulta_medica[4] = ["aplicacao_data", "Data da aplicação da prova tuberculínica (dia/mês/ano):"];
+	tabela_consulta_medica[5] = ["leitura_data", "Data da leitura (dia/mês/ano):"];
+	tabela_consulta_medica[6] = ["pt_1dose", "PT 1&170; dose Leitor:"];
+	tabela_consulta_medica[7] = ["tratamentoAnteriorTB", "01 - Tratamento de TB anterior:"];
+	tabela_consulta_medica[8] = ["inh", "01.1 - NH:"];
+	tabela_consulta_medica[9] = ["rif", "01.2 - RIF:"];
+	tabela_consulta_medica[10] = ["qualEsquema", "01.3 - Qual esquema?"];
+	tabela_consulta_medica[11] = ["quimioprofilaxia", "02 - Quimioprofilaxia:"];
+	tabela_consulta_medica[12] = ["cagePositivo","03 - Cage positivo: (Verificar no questionario Triagem)"];
+	tabela_consulta_medica[13] = ["inhCagePositivo", "03.1 - INH:"];
+	tabela_consulta_medica[14] = ["rifCagePositivo", "03.2 - RIF:"];
+	tabela_consulta_medica[15] = ["mes_quimio", "03.4 - Data da Quimioprofilaxia:"];
+	tabela_consulta_medica[16] = ["desfechoQuimio", "03.5 - Desfecho:"];
+	tabela_consulta_medica[17] = ["testeHIV", "04 - HIV teste:"];
+	tabela_consulta_medica[18] = ["dia_antihiv", "05 - Data do anti-HIV:"];
+	tabela_consulta_medica[19] = ["exameFisico", "07 - Exame físico normal:"];
+	tabela_consulta_medica[20] = ["alteracoesNoExameFisico", "07.1 - Descreva as alterações:"];
+	tabela_consulta_medica[21] = ["probTBativa", "08 - Probabilidade de TB ativa:"];
+	tabela_consulta_medica[22] = ["porcentagemProbTBsemRXsemBAAR", "09 - Qual a probabilidade do diagnóstico de TB pulmonar ativa sem avaliar RX de tórax ou BAAR?"];
+	tabela_consulta_medica[23] = ["probTBativaComRX", "10 - Probabilidade de TB ativa ao avaliar o RXT:"];
+	tabela_consulta_medica[24] = ["cavitacao", "10.1 - Cavitação:"];
+	tabela_consulta_medica[25] = ["padraoTipico", "10.2 - Padrão tópico (infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior):"];
+	tabela_consulta_medica[26] = ["compativel", "10.3 - Compatível (alargamento mediastinal ou linf.  hilar , padrão miliar,ou derrame pleural):"];
+	tabela_consulta_medica[27] = ["atipico", "10.4 - Atípico (qualquer outro padrão):"];
+	tabela_consulta_medica[28] = ["nsa", "10.4 - Atípico (qualquer outro padrão):"];
+	tabela_consulta_medica[29] = ["casoBaixaProbabilidade", "10.1 - Em caso de baixa probabilidade de TB ativa responda:"];
+	tabela_consulta_medica[30] = ["dia_rx", "11 - Data do RX:"];
+	tabela_consulta_medica[31] = ["diagnosticoProbabilidadeRX", "12 - Diagnóstico de probabilidade tendo informação sobre o RX de tórax mas sem conhecimento dos resultados bacteriológicos:"];
+	tabela_consulta_medica[32] = ["probabilidadeTBcomRXsemBAAR", "13 - Qual a probabilidade do diagnóstico de TB pulmonar ativa com a avaliação do RX de tórax e sem o BAAR?"];
+	tabela_consulta_medica[33] = ["diagnosticoProbabilidadeCasoDuasNegativas", "16 - Caso as duas baciloscopias iniciais sejam negativas, qual seria o diagnóstico de probabilidade de TB?"];
+	tabela_consulta_medica[34] = ["probabilidadeTBcomRXcomBAAR", "17 - Qual a probabilidade do diagnóstico de TB pulmonar ativa com a avaliação do RX de tórax e do BAAR?"];
+	tabela_consulta_medica[35] = ["desfechoConsultaInicial", "18 - Desfecho da consulta inicial:"];
+	tabela_consulta_medica[36] = ["casoTratamentoTB", "19 - Em caso de tratamento para TB(marque qual):"];
+	tabela_consulta_medica[37] = ["fatoresRisco", "20 - Fatores de risco para TBP MDR:"];
+	tabela_consulta_medica[38] = ["comorbidades", "06 - Comorbidades:"];
+	tabela_consulta_medica[39] = ["numeroGeral","Nº Geral (TB Adapt): "];
+	tabela_consulta_medica[40] = ["dia_inclusao","Data de inclusão :"];
+	tabela_consulta_medica[41] = ["mes_inclusao","Data de inclusão :"];
+	tabela_consulta_medica[42] = ["ano_inclusao","Data de inclusão :"];
+	tabela_consulta_medica[43] = ["resultadoBaciloscopia1","14 - #1:"];
+	tabela_consulta_medica[44] = ["casoPositivo1","14.1 - Se positivo (1):"];
+	tabela_consulta_medica[45] = ["resultadoBaciloscopia2","15 - #2:"];
+	tabela_consulta_medica[46] = ["casoPositivo2","15.1 - Se positivo (2):"];
+	tabela_consulta_medica[47] = ["observacoes"," 21 - Observações: "];
+	tabela_consulta_medica[48] = ["avaliador","Avaliado por: "];
+	tabela_consulta_medica[49] = ["quemCadastrou","Cadastrado por: "];
+	tabela_consulta_medica[50] = ["ano_quimio", "03.4 - Data da Quimioprofilaxia:"];
+	tabela_consulta_medica[51] = ["mes_antihiv", "05 - Data do anti-HIV:"];
+	tabela_consulta_medica[52] = ["ano_antihiv", "05 - Data do anti-HIV:"];
+	tabela_consulta_medica[53] = ["comorbidade", "06 - Comorbidades:"];
+	tabela_consulta_medica[54] = ["mes_rx", "11 - Data do RX:"];
+	tabela_consulta_medica[55] = ["ano_rx", "11 - Data do RX:"];
+	tabela_consulta_medica[56] = ["outrascomorbidades", "06 - Comorbidades: (campo Outras)"];
+
+	var indice = 0;
+	while((indice < 57) && (estado != true))
+	{
+		if(tabela_consulta_medica[indice][0] == name)
+		{
+			estado = true;
+			newName = tabela_consulta_medica[indice][1];
+		}
+		indice ++;
+	}
+	return newName;
+}
+
+function validar_consulta_medica (form)
+{
+
+	var estado = true;
+	var texto="";
+	var tamanho = 0;
+	var novoNome1, novoNome2;
+	novoNome1 = "-";
+
+
+	tamanho = form.elements.length;
+
+	texto="As seguintes perguntas não foram preenchidas:\n\n-------------------------------------------------------------\n";
+
+	for(indice = 0; indice < tamanho; indice ++)
+	{
+
+		if(form.elements[indice].type == "text")
+		{
+			if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+			{
+				estado = false;
+				/***********************/
+				novoNome2 = returnNameCampoConsultaMedica(form.elements[indice].name);
+				if(novoNome2 == novoNome1)
+					novoNome1 = novoNome2;
+				else
+				{
+					texto = texto + novoNome2 + "\n";
+					novoNome1 = novoNome2;
+				}
+				/***********************/
+			}
+		}
+		else
+		{
+			if(form.elements[indice].type == "radio")
+			{
+				for(contador = 0, radioIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+				{
+					if(form.elements[indice].checked == true)
+						radioIndice ++;
+				}
+
+				if(form.elements[indice].checked == true)
+				{
+					contador ++
+					radioIndice ++;
+				}
+
+				if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
+				{
+					estado = false;
+					/***********************/
+					novoNome2 = returnNameCampoConsultaMedica(form.elements[indice].name);
+					if(novoNome2 == novoNome1)
+						novoNome1 = novoNome2;
+					else
+					{
+						texto = texto + novoNome2 + "\n";
+						novoNome1 = novoNome2;
+					}
+					/***********************/
+				}
+			}
+			else
+			{
+				if(form.elements[indice].type == "checkbox")
+				{
+					for(contador = 0, checkboxIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+					{
+						if(form.elements[indice].checked == true)
+							checkboxIndice ++;
+					}
+
+					if(form.elements[indice].checked == true)
+					{
+						contador ++
+						checkboxIndice ++;
+					}
+
+					if((contador > 1) && (checkboxIndice < 1) && (form.elements[indice].disabled == false))
+					{
+						estado = false;
+						/***********************/
+
+						novoNome2 = returnNameCampoConsultaMedica(form.elements[indice].name);
+						if(novoNome2 == novoNome1)
+							novoNome1 = novoNome2;
+						else
+						{
+							texto = texto + novoNome2 + "\n";
+							novoNome1 = novoNome2;
+						}
+						/***********************/
+					}
+				}
+				else
+				{
+					if(form.elements[indice].type == "select-one")
+					{
+						if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+						{
+							estado = false;
+							/***********************/
+							novoNome2 = returnNameCampoConsultaMedica(form.elements[indice].name);
+							if(novoNome2 == novoNome1)
+								novoNome1 = novoNome2;
+							else
+							{
+								texto = texto + novoNome2 + "\n";
+								novoNome1 = novoNome2;
+							}
+							/***********************/
+						}
+					}
+					else
+					{
+					}
+				}
+
+			}
+		}
+	}
+
+	if(estado == false)
+	{
+		alert(texto+"-------------------------------------------------------------\n");
+		return false;
+	}
+
+	if(confirm("Deseja enviar os dados ?"))
+	{
+		emSubmissao = true;
+		return true;
+	}
+	else
+	{
+
+		return false;
+	}
+}
+/*****************************************************************/
+
+/***************** VALIDACAO DO FORMULARIO FOLLOW UP *****************/
+function returnNameCampoFollowUP (name)
+ {
+	var newName = "";
+	var estado = false;
+
+	tabela_follow_UP= new Array();
+	tabela_follow_UP[0] = ["criterioEntrada", "01 - Critério de entrada:"];
+	tabela_follow_UP[1] = ["tratamentoPrescritoTB", "02 - Tratamento prescrito para TB:"];
+	tabela_follow_UP[2] = ["inicio_dia", "02.1 -  Data do início (dia/mês/ano):"];
+	tabela_follow_UP[3] = ["tratamentoPrescritoTBFarmacos", "02.2 - Farmacos utilizados:"];
+	tabela_follow_UP[4] = ["obito", "04 - Houve óbito?"];
+	tabela_follow_UP[5] = ["casoObito", "04.1 - Qual a causa?"];
+	tabela_follow_UP[6] = ["mudancaEsquemaTratamentoTB", "05 - Mudança de esquema de tratamento para TB?"];
+	tabela_follow_UP[7] = ["mudanca_mes", "05.1 - Data do início (mês/ano):"];
+	tabela_follow_UP[8] = ["mudancaMotivo", "05.3 - Motivo:"];
+	tabela_follow_UP[9] = ["tosseDiminuida", "06 - Tosse diminuída:"];
+	tabela_follow_UP[10] = ["pesoAtual90dias", "07 - Peso atual(kg):"];
+	tabela_follow_UP[11] = ["probabilidadeTBAtivaAposEstudoRX", "09 - Probabilidade de TB ativa ao avaliar o RXT:"];
+	tabela_follow_UP[12] = ["cavitacao90dias", "09.1 - Cavitação"];
+	tabela_follow_UP[13] = ["padraoTipico90dias", "09.2 - Padrão tópico (infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior):"];
+	tabela_follow_UP[14] = ["compativel90dias", "09.3 - Compatível (alargamento mediastinal ou linf.  hilar , padrão miliar,ou derrame pleural):"];
+	tabela_follow_UP[15] = ["atipico90dias", "09.4 - Atípico (qualquer outro padrão):"];
+	tabela_follow_UP[16] = ["NSA90dias", "09.4 - Atípico (qualquer outro padrão):"];
+	tabela_follow_UP[17] = ["casoBaixaProbabilidade90dias", "09.1 - Em caso de baixa probabilidade de TB ativa responda:"];
+	tabela_follow_UP[18] = ["rx_dia", "10 - Data do RX:"];
+	tabela_follow_UP[19] = ["followUpRXTorax", "11 - Follow up do RX de Tórax (compare com o RXT inicial como o atual):"];
+	tabela_follow_UP[20] = ["testeHIV90dias", "12 - HIV teste:"];
+	tabela_follow_UP[21] = ["antihiv_dia", "13 - Data do Anti-HIV(dia/mês/ano):"];
+	tabela_follow_UP[22] = ["diagnostico90dias", "14 - Diagnóstico 90 dias:"];
+	tabela_follow_UP[23] = ["diagnosticoDiferenteTB", "14.1 - Em caso de outro Diagnóstico diferente de TB:"];
+	tabela_follow_UP[24] = ["diagnosticoFinal", "15 - Realizado por dois investigadores após revisão dos dados eresultados de exames (análise deve ser realizada as cegas):"];
+	tabela_follow_UP[25] = ["reacoesAdversasTuberculostaticos", "03 - Reação adversa dos tuberculostáticos?"];
+	tabela_follow_UP[26] = ["reacoesAdversasTuberculostaticosMaiores", "03.1 - Maiores:"];
+	tabela_follow_UP[27] = ["reacoesAdversasTuberculostaticosMenores", "03.2 - Menores:"];
+	tabela_follow_UP[28] = ["mudancaFarmacos", "05.2 - Fármacos utilizados:"];
+	tabela_follow_UP[29] = ["alteracoesEvolutivasNoExameFisico", "08 - Alterações evolutivas no exame físico:"];
+	tabela_follow_UP[30] = ["inicio_mes","02.1 -  Data do início (dia/mês/ano):"];
+	tabela_follow_UP[31] = ["inicio_ano","02.1 -  Data do início (dia/mês/ano):"];
+	tabela_follow_UP[32] = ["mudanca_ano","05.1 - Data do início (mês/ano):"];
+	tabela_follow_UP[33] = ["rx_mes","10 - Data do RX:"];
+	tabela_follow_UP[34] = ["rx_ano","10 - Data do RX:"];
+	tabela_follow_UP[35] = ["antihiv_mes","13 - Data do Anti-HIV(dia/mês/ano):"];
+	tabela_follow_UP[36] = ["antihiv_ano","13 - Data do Anti-HIV(dia/mês/ano):"];
+	tabela_follow_UP[37] = ["observacoes"," 16 - Observações: "];
+	tabela_follow_UP[38] = ["avaliadorMedicoFollowUp","Avaliado por:"];
+	tabela_follow_UP[39] = ["quemCadastrou","Cadastrado por:"];
+	tabela_follow_UP[40] = ["dia_FollowUp","Data:"];
+	tabela_follow_UP[41] = ["mes_FollowUp","Data:"];
+	tabela_follow_UP[42] = ["ano_FollowUp","Data:"];
+	tabela_follow_UP[43] = ["farmacos14","05.2 - Fármacos utilizados: (campo Outros)"];
+	tabela_follow_UP[44] = ["farmacos7","02.2 - Farmacos utilizados: (campo Outros)"];
+
+	var indice = 0;
+	while((indice < 45) && (estado != true))
+	{
+		if(tabela_follow_UP[indice][0] == name)
+		{
+			estado = true;
+			newName = tabela_follow_UP[indice][1];
+		}
+		indice ++;
+	}
+	return newName;
+}
+
+function validar_follow_up (form)
+{
+
+	var estado = true;
+	var texto="";
+	var tamanho = 0;
+	var novoNome1, novoNome2;
+	novoNome1 = "-";
+
+
+	tamanho = form.elements.length;
+
+	texto="As seguintes perguntas não foram preenchidas:\n\n-------------------------------------------------------------\n";
+
+	for(indice = 0; indice < tamanho; indice ++)
+	{
+
+		if(form.elements[indice].type == "text")
+		{
+			if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+			{
+				estado = false;
+				/***********************/
+				novoNome2 = returnNameCampoFollowUP(form.elements[indice].name);
+				if(novoNome2 == novoNome1)
+					novoNome1 = novoNome2;
+				else
+				{
+					texto = texto + novoNome2 + "\n";
+					novoNome1 = novoNome2;
+				}
+				/***********************/
+			}
+		}
+		else
+		{
+			if(form.elements[indice].type == "radio")
+			{
+				for(contador = 0, radioIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+				{
+					if(form.elements[indice].checked == true)
+						radioIndice ++;
+				}
+
+				if(form.elements[indice].checked == true)
+				{
+					contador ++
+					radioIndice ++;
+				}
+
+				if(((contador > 1)||(contador == 1)) && (radioIndice != 1)  && (form.elements[indice].disabled == false))
+				{
+					estado = false;
+					/***********************/
+					novoNome2 = returnNameCampoFollowUP(form.elements[indice].name);
+					if(novoNome2 == novoNome1)
+						novoNome1 = novoNome2;
+					else
+					{
+						texto = texto + novoNome2 + "\n";
+						novoNome1 = novoNome2;
+					}
+					/***********************/
+				}
+			}
+			else
+			{
+				if(form.elements[indice].type == "checkbox")
+				{
+					for(contador = 0, checkboxIndice = 0; form.elements[indice].name == form.elements[indice + 1].name; indice ++, contador ++)
+					{
+						if(form.elements[indice].checked == true)
+							checkboxIndice ++;
+					}
+
+					if(form.elements[indice].checked == true)
+					{
+						contador ++
+						checkboxIndice ++;
+					}
+
+					if((contador > 1) && (checkboxIndice < 1) && (form.elements[indice].disabled == false))
+					{
+						estado = false;
+						/***********************/
+						novoNome2 = returnNameCampoFollowUP(form.elements[indice].name);
+						if(novoNome2 == novoNome1)
+							novoNome1 = novoNome2;
+						else
+						{
+							texto = texto + novoNome2 + "\n";
+							novoNome1 = novoNome2;
+						}
+						/***********************/
+					}
+				}
+				else
+				{
+					if(form.elements[indice].type == "select-one")
+					{
+						if((form.elements[indice].value == "") && (form.elements[indice].disabled == false))
+						{
+							estado = false;
+							/***********************/
+							novoNome2 = returnNameCampoFollowUP(form.elements[indice].name);
+							if(novoNome2 == novoNome1)
+								novoNome1 = novoNome2;
+							else
+							{
+								texto = texto + novoNome2 + "\n";
+								novoNome1 = novoNome2;
+							}
+							/***********************/
+						}
+					}
+					else
+					{
+					}
+				}
+
+			}
+		}
+	}
+
+	if(estado == false)
+	{
+		alert(texto+"-------------------------------------------------------------\n");
+		return false;
+	}
+
+	if(confirm("Deseja enviar os dados ?"))
+	{
+		emSubmissao = true;
+		return true;
+	}
+	else
+	{
+
+		return false;
+	}
+}
+/*****************************************************************/
 
 function temAlgumCampoPreenchido(form)
 {

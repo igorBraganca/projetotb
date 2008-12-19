@@ -976,7 +976,7 @@ function perdaPeso(habitual,atual)
 	{
 		document.check.perdaDePeso.value = "SIM";
 		document.check.perdaDePeso_semanas.disabled = false;
-		document.check.perdaDePeso_semanas.value = '';
+		document.check.perdaDePeso_semanas.select();
 	}
 	else
 	{
