@@ -135,7 +135,7 @@ int main (void)
 		\n\
 		function displayResult()\n\
 		{\n\
-			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml\");\n\
+			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml?t=\" + new Date().getTime());\n\
 			xsl = loadXMLDoc(\"xml/xsl/resultado.xsl\");\n\
 			\n\
 			// code for IE\n\
