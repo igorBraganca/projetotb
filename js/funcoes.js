@@ -1123,7 +1123,7 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 		{	
 			if(tempoC < tempoB)
 			{
-				alert("A hora em que você viu o médico não pode ser anterior a hora que você saiu de casa.");
+				alert("A hora em que você viu o médico não pode ser anterior a hora que você chegou no posto.");
 				horaC.value = '';
 				minC.value = '';
 				horaC.focus();
