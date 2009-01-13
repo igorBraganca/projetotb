@@ -214,7 +214,7 @@ function enviar()
 	var i,j,len;
 	var str = "Linhas escondidas: ";
 	var nroLinhas = document.getElementById('tabelaSintomas').rows.length - 8;
-	if (confirm('Tem certeza que quer enviar este formulario?'))
+	if (confirm('Tem certeza que deseja enviar este formulário?'))
 	{
 		for (i = 0; i < nroLinhas; i++)
 			if (document.getElementById('tabelaSintomas').rows[i].style.display != "none")
@@ -264,7 +264,7 @@ function enviar()
 	var nLinhas = document.getElementById('tabelaSintomas').rows.length;
 	c1 = c2 = 0;
 	
-	if (confirm('Tem certeza que quer enviar este formulario?'))
+	if (confirm('Tem certeza que deseja enviar este formulário?'))
 	{
 		for (i = 0; i < nLinhas; i++)
 			if (document.getElementById('tabelaSintomas').rows[i].style.display != "none")
@@ -316,7 +316,7 @@ function validarCampoNumerico(campo)
 {
 	if (!isNumberString(campo.value))
 	{
-		alert("Valor invalido, digite somente numeros.");
+		alert("Valor inválido, digite somente números.");
 		campo.value = '';
 		campo.focus();
 	}
@@ -340,7 +340,7 @@ function validarCampoPeso (campo)
 {	
 	if(validarNumEPonto(campo.value) == false)
 	{
-		alert("Valor invalido, digite somente numeros \".\"");
+		alert("Valor inválido, digite somente números \".\"");
 		campo.focus();
 		campo.select();
 	}
@@ -363,21 +363,21 @@ function validarDia(campoDia)
 	{
 		if(campoDia.value.length != 2)
 		{
-			alert("O campo dia deve conter dois digitos.");
+			alert("O campo dia deve conter dois dígitos.");
 			campoDia.value = '';
 			campoDia.focus();
 			return false;
 		}
 		if(!isNumberString(campoDia.value))
 		{
-			alert("Valor invalido para dia, digite somente numeros.");
+			alert("Valor inválido para dia, digite somente números.");
 			campoDia.value = '';
 			campoDia.focus();
 			return false;
 		}
 		if(campoDia.value < 1 || campoDia.value > 31)
 		{
-			alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 			campoDia.value = '';
 			campoDia.focus();
 			return false;
@@ -392,21 +392,21 @@ function validarMes(campoMes)
 	{
 		if(campoMes.value.length != 2)
 		{
-			alert("O campo mês deve conter dois digitos.");
+			alert("O campo mês deve conter dois dígitos.");
 			campoMes.value = '';
 			campoMes.focus();
 			return false;
 		}
 		if (!isNumberString(campoMes.value))
 		{
-			alert("Valor invalido para mês, digite somente numeros.");
+			alert("Valor inválido para mês, digite somente números.");
 			campoMes.value = '';
 			campoMes.focus();
 			return false;
 		}
 		if (campoMes.value < 1 || campoMes.value > 12)
 		{
-			alert("Mês invalido:" +"\n" +"Use valores entre 01 e 12");
+			alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
 			campoMes.value = '';
 			campoMes.focus();
 			return false;
@@ -421,14 +421,14 @@ function validarAno(campoAno)
 	{
 		if(campoAno.value.length != 4)
 		{
-			alert("O campo ano deve conter quatro digitos!!!.");
+			alert("O campo ano deve conter quatro dígitos.");
 			campoAno.value = '';
 			campoAno.focus();
 			return false;
 		}
 		if(!isNumberString(campoAno.value))
 		{
-			alert("Valor invalido para ano, digite somente numeros.");
+			alert("Valor inválido para ano, digite somente números.");
 			campoAno.value = '';
 			campoAno.focus();
 			return false;
@@ -441,14 +441,14 @@ function validarIdade(campoIdade)
 {
 	if(!isNumberString(campoIdade.value))
 	{
-		alert("Valor invalido para idade, digite somente numeros.");
+		alert("Valor inválido para idade, digite somente números.");
 		campoIdade.focus();
 		campoIdade.select();
 		return false;
 	}			
 	if ((campoIdade.value < 1 || campoIdade.value > 120) && campoIdade.value != "")
 	{
-		alert("Ano invalido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
+		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
 		campoIdade.focus();
 		campoIdade.select();
 		return false;
@@ -471,7 +471,7 @@ function validarData(form)
 		case '01'://janeiro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -482,7 +482,7 @@ function validarData(form)
 		{
 			if(dia<1 || dia>29)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 29, pois este e o mes de Fevereiro");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este e o mes de Fevereiro");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -491,7 +491,7 @@ function validarData(form)
 		else 
 			if(dia<1 || dia>28)//O ano nao e bissexto
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 28, pois este e o mes de Fevereiro");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este e o mes de Fevereiro");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -500,7 +500,7 @@ function validarData(form)
 		case '03'://marco
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -509,7 +509,7 @@ function validarData(form)
 		case '04'://abril
 		if(dia<1 || dia>30)
 		{
-			alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 			form.dia_nascimento.focus();
 			form.dia_nascimento.select();
 			return false;
@@ -518,7 +518,7 @@ function validarData(form)
 		case '05'://maio
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -527,7 +527,7 @@ function validarData(form)
 		case '06'://junho
 		if(dia<1 || dia>30)
 		{
-			alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 			form.dia_nascimento.focus();
 			form.dia_nascimento.select();
 			return false;
@@ -536,7 +536,7 @@ function validarData(form)
 		case '07'://julho
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -545,7 +545,7 @@ function validarData(form)
 		case '08'://agosto
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -554,7 +554,7 @@ function validarData(form)
 		case '09'://setembro
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -563,7 +563,7 @@ function validarData(form)
 		case '10'://outubro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -572,7 +572,7 @@ function validarData(form)
 		case '11'://novembro
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -581,21 +581,21 @@ function validarData(form)
 		case '12'://dezembro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
 			}
 		break;
-		default://mes invalido
-		alert("Mes invalido:" +"\n" +"Use valores entre 01 e 12");
+		default://mes inválido
+		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
 		form.mes_nascimento.focus();
 		form.mes_nascimento.select();
 		return false;
 	}
 	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
 	{
-		alert("Ano invalido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
+		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
 		form.ano_nascimento.focus();
 		form.ano_nascimento.select();
 		return false;
@@ -719,7 +719,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 1://janeiro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalidoChange:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -730,7 +730,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 			{
 				if(dia<1 || dia>29)
 				{
-					alert("Dia invalido:" +"\n" +"Use valores entre 01 e 29, pois este e o mes de Fevereiro");
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mês de Fevereiro");
 					campoDia.value = '';
 					campoDia.focus();
 					return false;
@@ -739,7 +739,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 			else 
 				if(dia<1 || dia>28)//O ano nao e bissexto
 				{
-					alert("Dia invalido:" +"\n" +"Use valores entre 01 e 28, pois este e o mes de Fevereiro");
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mês de Fevereiro");
 					campoDia.value = '';
 					campoDia.focus();
 					return false;
@@ -748,7 +748,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 3://marco
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -757,7 +757,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 4://abril
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				campoDia.value = '';
 					campoDia.focus();
 				return false;
@@ -766,7 +766,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 5://maio
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -775,7 +775,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 6://junho
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				campoDia.value = '';
 					campoDia.focus();
 				return false;
@@ -784,7 +784,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 7://julho
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -793,7 +793,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 8://agosto
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -802,7 +802,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 9://setembro
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -811,7 +811,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 10://outubro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -820,7 +820,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 11://novembro
 			if(dia<1 || dia>30)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 30");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
@@ -829,21 +829,21 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		case 12://dezembro
 			if(dia<1 || dia>31)
 			{
-				alert("Dia invalido:" +"\n" +"Use valores entre 01 e 31");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 				campoDia.value = '';
 				campoDia.focus();
 				return false;
 			}
 		break;
-		default://mes invalido
-		alert("Mes invalido:" +"\n" +"Use valores entre 01 e 12");
+		default://mes inválido
+		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
 		campoMes.value = '';
 		campoMes.focus();
 		return false;
 	}
 	/*if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
 	{
-		alert("Ano invalido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
+		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
 		campoAno.focus();
 		campoAno.select();
 		return false;
@@ -859,7 +859,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 	
 	if(((dia > dia_atual) && (mes == mes_atual) && (ano == ano_atual)) || ((mes > mes_atual) && (ano == ano_atual)) || (ano > ano_atual))
 	{ 	
-			alert("A data preenchida não pode ser posterior a data de hoje!");
+			alert("A data preenchida não pode ser posterior a data de hoje.");
 			campoDia.value = '';
 			campoMes.value = '';
 			campoAno.value = '';
@@ -950,7 +950,7 @@ function definirCage()
 
 function confirmar(form)
 { 
-    if (confirm('Tem certeza que quer enviar este formulario?'))
+    if (confirm('Tem certeza que deseja enviar este formulário?'))
 	{ 
        document.form.submit() 
     } 
@@ -994,7 +994,7 @@ function validarDataExame(dia,mes,ano)
 		
 	if (ano.value > Ano)
 	{
-		alert("Data invalida. Por favor, digite uma data anterior a data de hoje.");
+		alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
 		dia.value="";
 		mes.value="";
 		ano.value="";
@@ -1002,7 +1002,7 @@ function validarDataExame(dia,mes,ano)
 	}	
 	else if (parseInt(ano.value) < parseInt(document.check.ano_nascimento.value))
 	{
-		alert("Data invalida. A data não pode ser anterior ao nascimento do paciente.");
+		alert("Data inválida. A data não pode ser anterior ao nascimento do paciente.");
 		dia.value="";
 		mes.value="";
 		ano.value="";
@@ -1014,7 +1014,7 @@ function validarDataExame(dia,mes,ano)
 		{
 			if (mes.value > Mes)
 			{
-				alert("Data invalida. Por favor, digite uma data anterior a data de hoje.");
+				alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
 				dia.value="";
 				mes.value="";
 				ano.value="";
@@ -1026,7 +1026,7 @@ function validarDataExame(dia,mes,ano)
 				{
 					if (dia.value > Dia)
 					{
-						alert("Data invalida. Por favor, digite uma data anterior a data de hoje.");
+						alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
 						dia.value="";
 						mes.value="";
 						ano.value="";
@@ -1069,7 +1069,7 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 	{
 		if(tempoB < tempoA)
 		{
-			alert("A hora que você chegou no posto de saúde não pode ser anterior a hora que você saiu de casa!");
+			alert("A hora que você chegou no posto de saúde não pode ser anterior a hora que você saiu de casa.");
 			horaB.value = '';
 			minB.value = '';
 			horaB.focus();
@@ -1078,7 +1078,7 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 		
 		if((tempoB < tempoA) && (tempoC < tempoB))
 		{
-			alert("A hora que você chegou no posto de saúde e a hora em que você viu o médico não podem ser anteriores a hora que você saiu de casa!");
+			alert("A hora que você chegou no posto de saúde e a hora em que você viu o médico não podem ser anteriores a hora que você saiu de casa.");
 			horaB.value = '';
 			minB.value = '';
 			horaC.value = '';
@@ -1091,7 +1091,7 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 		{	
 			if(tempoC < tempoB)
 			{
-				alert("A hora em que você viu o médico não pode ser anterior a hora que você saiu de casa!");
+				alert("A hora em que você viu o médico não pode ser anterior a hora que você saiu de casa.");
 				horaC.value = '';
 				minC.value = '';
 				horaC.focus();
@@ -1124,7 +1124,7 @@ function validar_hora_escarro (horaA,minA,horaB,minB)
 	if((horaA.value != '') && (minA.value != '') && (horaB.value != '') && (minB.value != ''))
 		if(tempoA < tempoB)
 		{
-			alert("A hora em que você coletou o escarro no potinho não pode ser anterior a hora em que você acordou para coletar o escarro!");
+			alert("A hora em que você coletou o escarro no potinho não pode ser anterior a hora em que você acordou para coletar o escarro.");
 			horaB.value = '';
 			minB.value = '';
 			horaA.value = '';
