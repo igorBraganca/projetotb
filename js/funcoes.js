@@ -681,11 +681,21 @@ function getElement(aID){
 
 function validarHora(campo)
 {
+  if (campo.value.length == 1)
+  {
+		alert("A hora precisa ter exatamente 2 dígitos.");
+		campo.focus();
+		campo.select();
+		campo.value = ''; 
+		return false;    
+  }
+  
 	if (campo.value > 23)
 	{
 		alert("Digite um valor entre 0 e 23.");
 		campo.focus();
 		campo.select();
+		campo.value = '';
 		return false;
 	}
 	return true;
@@ -693,11 +703,21 @@ function validarHora(campo)
 
 function validarMinuto(campo)
 {
+  if (campo.value.length == 1)
+  {
+		alert("Os minutos precisam ter exatamente 2 dígitos.");
+		campo.focus();
+		campo.select();
+		campo.value = ''; 
+		return false;    
+  }
+
 	if (campo.value > 59)
 	{
 		alert("Digite um valor entre 0 e 59.");
 		campo.focus();
 		campo.select();
+		campo.value = ''; 
 		return false;
 	}
 	return true;
