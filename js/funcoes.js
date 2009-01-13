@@ -5,7 +5,6 @@ function Question(name, text)
   this.text = text;
 }
 
-
 //Retorna a lista de nos XML filhos para umd eterminado objeto. Esta funcao deve ser usada no
 //ligar de chamar direto o atributo children (ou childNodes), visto que o nome do atributo
 //muda dependendo do Browser. esta funcao esta validada para operacao com o firefox e o
@@ -312,6 +311,7 @@ function isNumberString(InString)
 	return (true);
 }
 
+//Valida se o campo e um numero nao-negativo valido.
 function validarCampoNumerico(campo)
 {
 	if (!isNumberString(campo.value))
@@ -321,6 +321,18 @@ function validarCampoNumerico(campo)
 		campo.focus();
 	}
 }
+
+//Valida se o campo e um numero positivo valido.
+function validarCampoNumericoPositivo(campo)
+{
+	if ( (!isNumberString(campo.value)) || (campo.value <= 0) )
+	{
+		alert("Valor inválido, digite somente números maiores que zero.");
+		campo.value = '';
+		campo.focus();
+	}
+}
+
 
 function validarNumEPonto (campo)
 {

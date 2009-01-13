@@ -156,7 +156,7 @@ var fieldsCostA = new CostsA();
         <script>document.write(fieldsCostA.acompanhado.text)</script><br />
         <input name="acompanhado" id="esta_acompanhado" type="radio" value="sim" onClick="exibeLinhaOculta('item_quem_pagou'); numeroAcompanhantes.readOnly = false;safeSelect(numeroAcompanhantes, newForm, '')"><radio_label>Sim</radio_label>
         <input name="acompanhado" id="nao_esta_acompanhado" type="radio" value="nao" onClick="ocultaLinha('item_quem_pagou');numeroAcompanhantes.value='0'; numeroAcompanhantes.readOnly = true"><radio_label>Não</radio_label>
-        <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
+        <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumericoPositivo(this)">
       </p>
     
       <!-- HORARIO SAIU DE CASA -->
@@ -192,7 +192,7 @@ var fieldsCostA = new CostsA();
       <p id="item_custo_pernoite"><script>document.write(fieldsCostA.pagarPernoite.text)</script><br />
         <input name="pagarPernoite" id="paga_pernoite" type="radio" value="sim" onclick="custoPernoite.readOnly = false;safeSelect(custoPernoite, newForm, '')"><radio_label>Sim</radio_label>
         <input name="pagarPernoite" id="nao_paga_pernoite" type="radio" value="nao" onclick="custoPernoite.value='0'; custoPernoite.readOnly = true"><radio_label>Não</radio_label>
-        <text_label>R$</text_label><input class="preco" name="custoPernoite" id="preco_pernoite" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+        <text_label>R$</text_label><input class="preco" name="custoPernoite" id="preco_pernoite" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this)">,00
       </p>
     
       <!-- Trouxe algo para os amigos -->
@@ -213,10 +213,10 @@ var fieldsCostA = new CostsA();
       <p><script>document.write(fieldsCostA.pagarPosto.text)</script><br />
         <input name="pagarPosto" id="pagou_posto" type="radio" value="sim" onclick="custoPosto.readOnly = false;safeSelect(custoPosto, newForm, '')"><radio_label>Sim</radio_label>
         <input name="pagarPosto" id="nao_pagou_posto" type="radio" value="nao" onclick="custoPosto.value='0'; custoPosto.readOnly = true"><radio_label>Não</radio_label>
-        <text_label>R$</text_label><input name="custoPosto" id="custo_posto" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+        <text_label>R$</text_label><input name="custoPosto" id="custo_posto" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this)">,00
       </p>
     
-      <!-- ESTUDANTE OU NÃƒO-ESTUDANTE -->
+      <!-- ESTUDANTE OU NÃO-ESTUDANTE -->
       <p><script>document.write(fieldsCostA.estudante.text)</script><br />
         <input name="estudante" id="e_estudante" type="radio" value="estudante" onClick="exibeLinhaOculta('item_perdeu_aula')"><radio_label>Sim</radio_label>
         <input name="estudante" id="nao_e_estudante" type="radio" value="nao_estudante" onClick="ocultaLinha('item_perdeu_aula');estudantePerdeuAula[0].checked = estudantePerdeuAula[1].checked = false;"><radio_label>Não</radio_label>
@@ -237,7 +237,7 @@ var fieldsCostA = new CostsA();
       <p><script>document.write(fieldsCostA.deixouGanharDinheiro.text)</script><br />
         <input name="deixouGanharDinheiro" id="deixou_ganhar_dinheiro" type="radio" value="sim" onclick="quantoDeixouGanhar.readOnly = false;safeSelect(quantoDeixouGanhar, newForm, '')"><radio_label>Sim</radio_label>
         <input name="deixouGanharDinheiro" id="nao_deixou_ganhar_dinheiro" type="radio" value="nao" onclick="quantoDeixouGanhar.value='0'; quantoDeixouGanhar.readOnly = true"><radio_label>Não</radio_label>
-        <text_label>R$</text_label><input name="quantoDeixouGanhar" id="quanto_nao_ganhou" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this);">,00
+        <text_label>R$</text_label><input name="quantoDeixouGanhar" id="quanto_nao_ganhou" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this);">,00
       </p>
     
       <!-- QUEM ARCOU COM OS CUSTOS -->

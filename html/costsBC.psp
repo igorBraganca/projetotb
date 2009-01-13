@@ -170,7 +170,7 @@ var fieldsCostBC = new CostsBC();
       <script>document.write(fieldsCostBC.acompanhado.text)</script><br />
       <input name="acompanhado" type="radio" value="sim" onClick="numeroAcompanhantes.readOnly = false; safeSelect(numeroAcompanhantes, newForm, '');"><radio_label>Sim</radio_label>
       <input name="acompanhado" type="radio" value="nao" onClick="numeroAcompanhantes.value='0'; numeroAcompanhantes.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumerico(this)">
+      <text_label>No de pessoas:</text_label><input name="numeroAcompanhantes" type="text" maxlength="2" size="2" onBlur="validarCampoNumericoPositivo(this)">
     </p>
     
     <!-- HORARIO SAIU DE CASA -->    
@@ -236,7 +236,7 @@ var fieldsCostBC = new CostsBC();
       <script>document.write(fieldsCostBC.pagarPostoB.text)</script><br />
       <input name="pagarPostoB" type="radio" value="sim" onclick="custoPostoB.readOnly = false;safeSelect(custoPostoB, newForm, '');"><radio_label>Sim</radio_label>
       <input name="pagarPostoB" type="radio" value="nao" onclick="custoPostoB.value='0'; custoPostoB.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="custoPostoB" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this)">,00
     </p>
     
     <!-- DEIXOU DE GANHAR DINHEIRO -->
@@ -244,7 +244,7 @@ var fieldsCostBC = new CostsBC();
       <script>document.write(fieldsCostBC.deixouGanharDinheiro.text)</script><br />
       <input name="deixouGanharDinheiro" type="radio" value="sim" onclick="quantoDeixouGanhar.readOnly = false;safeSelect(quantoDeixouGanhar, newForm, '');"><radio_label>Sim</radio_label>
       <input name="deixouGanharDinheiro" type="radio" value="nao" onclick="quantoDeixouGanhar.value='0'; quantoDeixouGanhar.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="quantoDeixouGanhar" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="quantoDeixouGanhar" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this)">,00
     </p>  
     
     <!-- RESULTADO DOS EXAMES DE ESCARRO -->
@@ -279,7 +279,7 @@ var fieldsCostBC = new CostsBC();
       <script>document.write(fieldsCostBC.pagarPostoC.text)</script><br />
       <input name="pagarPostoC" type="radio" value="sim" onclick="custoPostoC.readOnly = false;safeSelect(custoPostoC, newForm, '');"><radio_label>Sim</radio_label>
       <input name="pagarPostoC" type="radio" value="nao" onclick="custoPostoC.value='0'; custoPostoC.readOnly = true"><radio_label>Não</radio_label>
-      <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="3" onBlur="validarCampoNumerico(this)">,00
+      <text_label>R$</text_label><input name="custoPostoC" type="text" maxlength="3" size="3" onBlur="validarCampoNumericoPositivo(this)">,00
     </p>
     
     <!-- TEMPO SE SENTINDO DIFERENTE/DOENTE -->
