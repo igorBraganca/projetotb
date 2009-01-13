@@ -56,3 +56,9 @@ input[id="id_patientName"]
 {
 	width: 30em;
 }
+
+fieldset
+{
+  border-style: groove;
+  border-color: #C0C0C0;
+}
