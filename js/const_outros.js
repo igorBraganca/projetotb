@@ -70,7 +70,7 @@
 	tabFields[68] = ["bebidaManha", "36.4 - Costuma beber de manh&atilde; para diminuir nervosismo/ressaca"];
 	tabFields[69] = ["culpadoManeiraBeber", "36.5 - Sente culpa pela maneira que bebe"];
 	tabFields[70] = ["cage", "Cage"];
-	tabFields[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxilio para seu problema de sa&uacute;de?"];
+	tabFields[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxílio para seu problema de sa&uacute;de?"];
 	tabFields[72] = ["lugarDaPrimeiraConsulta", "38 - Onde foi?"];
 	tabFields[73] = ["causaDaPrimeiraConsulta", "39 - Porque procurou? "];
 	tabFields[74] = ["veioAcompanhadoDeFamiliares", "40 - Veio acompanhado de familiares?"];

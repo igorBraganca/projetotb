@@ -67,7 +67,7 @@ void printError (char *msg)
 
 int main (void)
 {
-	char *formName, *pid, *username;
+	char *formName, *pid, *username, *newPid;
 	boolean found_patient;
 	FILE *document;
 	
@@ -94,23 +94,24 @@ int main (void)
 	
 	cgi_init();
 	first_input = cgi_process_form();
-	pid = cgi_param("numeroGeral");
+	newPid = cgi_param("numeroGeral");
+	pid = cgi_param("antigoNumeroGeral");
 	formName = cgi_param("form");
 	//username = cgi_param("uid");
 	
-		if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
-	  {
+	if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
+	{
 		printf("Content-type: text/html\n\n");
 		printf("<html>\n");
 		printf("<head>\n");
 		printf("<title>Resultado</title>\n");
 		printf("</head>\n");
 		printf("<body>\n");
-    printf("Erro ao verificar o usuário.");
+		printf("Erro ao verificar o usuário.");
 		printf("</body>\n");
 		printf("</html>\n");
 		exit(0);
-		}
+	}
 	
 	if ((!pid) || (!formName))
 	{
@@ -194,7 +195,7 @@ int main (void)
 			}
 		}
 	}
-	
+
 /******************************************************************************
  *            CHECK IF PATIENT WAS FOUND		*
  *            IF TRUE, EXIT 					*
@@ -208,7 +209,64 @@ int main (void)
 		fclose(document);
 		exit(0);
 	}
+
+/******************************************************************************
+			* Verificando se o novo numero geral jah existe *
+*******************************************************************************/
+		
+	cur_node = root_element->children;	/* Get the node <paciente> if file isn't empty */
+	if (!cur_node) //test!!!! printf!! pode-se tb na remocao exigir a remocao do arquivo se o paciente excluido for o unico do arquivo
+		found_patient = false;
 	
+	else
+	{
+		/* looping through patients looking for the right patient */
+		
+		for (found_patient = false; ((!found_patient) && (cur_node)); cur_node = cur_node->next)
+		{
+			cur_node = cur_node->children; /* <triagem> */
+			cur_node = cur_node->children; /* <numeroGeral> ? */
+			
+			while ((!xmlStrEqual(cur_node->name, BAD_CAST "numeroGeral")) && (cur_node))
+				cur_node = cur_node->next;
+			
+			if (xmlStrEqual(cur_node->name, BAD_CAST "numeroGeral"))
+			{
+				if (xmlStrEqual(cur_node->children->content, BAD_CAST newPid))
+				{
+					found_patient = true;
+					old_patient = cur_node->parent; /*old_paciente recebe o noh <triagem> do paciente que possui o numeroGeral procurado */
+				}
+				else
+				{
+					cur_node = cur_node->parent; /* <triagem> */
+					cur_node = cur_node->parent; /* <paciente> */
+				}
+			}
+			else
+			{
+				printError("Erro de forma&ccedil;&atilde;o do XML. Tem paciente sem n&uacute;mero geral.");
+				usualFreeMemory(doc);
+				flock(fileno(document), LOCK_EX);
+				fclose(document);
+				exit(0);
+			}
+		}
+	}
+	
+/******************************************************************************
+			* Comfirmando se novo numero geral jah existe *
+*******************************************************************************/
+
+	if (found_patient)
+	{
+		printError("O novo n&uacute;mero geral escolhido j&aacute; existe.");
+		usualFreeMemory(doc);
+		flock(fileno(document), LOCK_EX);
+		fclose(document);
+		exit(0);
+	}
+
 /******************************************************************************
  *            CRIANDO NOVO FORMULARIO DE TRIAGEM                                        *
  ******************************************************************************/
@@ -238,6 +296,11 @@ int main (void)
 		if (!strcmp(input->name,"form"))
 			input = input->next;
 		
+		if (!strcmp(input->name,"uid"))
+			input = input->next;
+		
+		if (!strcmp(input->name,"antigoNumeroGeral"))
+			input = input->next;
 		
 		/* Validate tag name input against UTF-8 */
 		strUTF = fixCgiStr((unsigned char *)input->name);

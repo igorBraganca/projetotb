@@ -81,7 +81,7 @@
 	tabela_triagem[68] = ["bebidaManha", "36.4 - Costuma beber de manhã para diminuir nervosismo/ressaca"];
 	tabela_triagem[69] = ["culpadoManeiraBeber", "36.5 - Sente culpa pela maneira que bebe"];
 	tabela_triagem[70] = ["cage", "Cage"];
-	tabela_triagem[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxilio para seu problema de saúde?"];
+	tabela_triagem[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxílio para seu problema de saúde?"];
 	tabela_triagem[72] = ["lugarDaPrimeiraConsulta", "38 - Onde foi?"];
 	tabela_triagem[73] = ["causaDaPrimeiraConsulta", "39 - Porque procurou? "];
 	tabela_triagem[74] = ["veioAcompanhadoDeFamiliares", "40 - Veio acompanhado de familiares?"];
@@ -327,7 +327,7 @@
 	if(estado == false)
 	{
 
-		alert("Preencha todos os campos do formulario, obrigado.\n\nOBS:Não se esqueça de clicar no botão \"Resultado\" no grupo de perguntas Sinais e Sintomas.");
+		alert("Preencha todos os campos do formulário, obrigado.\n\nOBS:Não se esqueça de clicar no botão \"Resultado\" no grupo de perguntas Sinais e Sintomas.");
 		alert(texto+"-------------------------------------------------------------\n");
 		return false;
 	}
@@ -470,7 +470,7 @@ function validarCustos(form, data)
 	tabela_consulta_medica[3] = ["resultado_leitura", "Resultado da leitura (milímetros de enduração):"];
 	tabela_consulta_medica[4] = ["aplicacao_data", "Data da aplicação da prova tuberculínica (dia/mês/ano):"];
 	tabela_consulta_medica[5] = ["leitura_data", "Data da leitura (dia/mês/ano):"];
-	tabela_consulta_medica[6] = ["pt_1dose", "PT 1&170; dose Leitor:"];
+	tabela_consulta_medica[6] = ["pt_1dose", "PT 1ª dose Leitor:"];
 	tabela_consulta_medica[7] = ["tratamentoAnteriorTB", "01 - Tratamento de TB anterior:"];
 	tabela_consulta_medica[8] = ["inh", "01.1 - NH:"];
 	tabela_consulta_medica[9] = ["rif", "01.2 - RIF:"];
@@ -689,7 +689,7 @@ function returnNameCampoFollowUP (name)
 	tabela_follow_UP[0] = ["criterioEntrada", "01 - Critério de entrada:"];
 	tabela_follow_UP[1] = ["tratamentoPrescritoTB", "02 - Tratamento prescrito para TB:"];
 	tabela_follow_UP[2] = ["inicio_dia", "02.1 -  Data do início (dia/mês/ano):"];
-	tabela_follow_UP[3] = ["tratamentoPrescritoTBFarmacos", "02.2 - Farmacos utilizados:"];
+	tabela_follow_UP[3] = ["tratamentoPrescritoTBFarmacos", "02.2 - Fármacos utilizados:"];
 	tabela_follow_UP[4] = ["obito", "04 - Houve óbito?"];
 	tabela_follow_UP[5] = ["casoObito", "04.1 - Qual a causa?"];
 	tabela_follow_UP[6] = ["mudancaEsquemaTratamentoTB", "05 - Mudança de esquema de tratamento para TB?"];
@@ -730,7 +730,7 @@ function returnNameCampoFollowUP (name)
 	tabela_follow_UP[41] = ["mes_FollowUp","Data:"];
 	tabela_follow_UP[42] = ["ano_FollowUp","Data:"];
 	tabela_follow_UP[43] = ["farmacos14","05.2 - Fármacos utilizados: (campo Outros)"];
-	tabela_follow_UP[44] = ["farmacos7","02.2 - Farmacos utilizados: (campo Outros)"];
+	tabela_follow_UP[44] = ["farmacos7","02.2 - Fármacos utilizados: (campo Outros)"];
 
 	var indice = 0;
 	while((indice < 45) && (estado != true))
