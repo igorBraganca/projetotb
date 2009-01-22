@@ -65,7 +65,7 @@
 					<xsl:choose>
 					<xsl:when test="custosA">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="" onclick="self.close(); opener.top.location='costsA.psp?pid={$id}'; return false;">
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Parte A
 						</a>
@@ -105,7 +105,7 @@
 					<xsl:choose>
 					<xsl:when test="custosBeC">
 					<td>
-						<a class="full" href="javascript:;">
+						<a class="full" href="" onclick="self.close(); opener.top.location='costsBC.psp?pid={$id}'; return false;"> 
 							<img src="images/full.png" width="9" height="9" />
 							Questionário de Custos - Partes B e C
 						</a>

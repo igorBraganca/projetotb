@@ -172,7 +172,7 @@ int main (int argc, char **argv)
 	printf ("<span style=\"font-size: 13pt\" class=\"bold\">Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 	printf ("<h4>(<i>Follow up</i> 90 dias)</h4>\n");
 	printf ("\n");
-	printf ("	<form name=\"check\" method=\"post\" action=\"addPatientInfo.py\" onSubmit=\"return validar_follow_up (this)\">\n");
+	printf ("	<form name=\"check\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_follow_up (this)\">\n");
 	printf ("	<!-- action=\"addPatientInfo.cgi\" -->\n");
 	printf ("	<!-- --><input type=\"hidden\" name=\"form\" value=\"followUp\" />\n");
 	printf ("		<br>\n");
