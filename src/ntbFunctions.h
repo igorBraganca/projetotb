@@ -19,6 +19,10 @@
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
+/* path */
+
+void getUserPublicPath (char *address);
+
 /* char * */
 
 char *to_uppercase (char *);

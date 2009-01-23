@@ -22,19 +22,28 @@
 #include "Const.h"
 #include "Types.h"
 #include "Error.h"
-#include "Functions.h"
 */
+#include "ntbFunctions.h"
+
+
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 int main (int argc, char **argv)
 {
 	char *username;
-	//CGI process
 	
+	//CGI process
 	cgi_init();
 	cgi_process_form();
 	//username = cgi_param("uid");
+
+	
+//modificações xsltproc
+	cgi_init_headers();
+	fflush(stdout);
+//3de 6
+
 	
 		if(!(username= getenv("REMOTE_USER"))) //verifica se string lida é null
 	  {
@@ -49,74 +58,28 @@ int main (int argc, char **argv)
 		printf("</html>\n");
 		exit(0);
 		}
-
-	cgi_init_headers();
+		
+//Modificações xsltproc
 	
-/************** pagina html busca ********************/
+	printf("<html>\n");
+	printf("<head>\n");
+	printf("\t<title>Todos os Usu&aacute;rios</title>\n");
+	printf("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n");
+	printf("	<script src=\"js/jquery.js\"></script>\n");
+	printf("	<script src=\"js/colors.js\"></script>\n");		
+	printf("</head>\n");
+	printf("<body>\n");
 
-printf ("<html>\n");
-printf ("<head>\n");
-printf ("	<title>Lista de Pacientes</title>\n");
-printf ("\n");
-	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
-	printf("	<script charset=\"ISO-8859-1\" type=\"text/javascript\" src=\"js/jquery.js\"></script>\n");
-	printf("	<script charset=\"ISO-8859-1\" type=\"text/javascript\" src=\"js/colors.js\"></script>\n");
-printf ("\n");
-printf ("	<script>\n");
-printf ("		function loadXMLDoc(fname)\n");
-printf ("		{\n");
-printf ("			var xmlDoc;\n");
-printf ("			\n");
-printf ("			// code for IE\n");
-printf ("			if (window.ActiveXObject)\n");
-printf ("			{\n");
-printf ("				xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n");
-printf ("			}\n");
-printf ("			\n");
-printf ("			// code for Mozilla, Firefox, Opera, etc.\n");
-printf ("			else if (document.implementation && document.implementation.createDocument)\n");
-printf ("			{\n");
-printf ("				xmlDoc = document.implementation.createDocument(\"\",\"\",null);\n");
-printf ("			}\n");
-printf ("			else\n");
-printf ("			{\n");
-printf ("				alert('O seu navegador n&atilde;o tem suporte a este script');\n");
-printf ("			}\n");
-printf ("			xmlDoc.async = false;\n");
-printf ("			xmlDoc.load(fname);\n");
-printf ("			return(xmlDoc);\n");
-printf ("		}\n");
-printf ("		\n");
-printf ("		function displayResult()\n");
-printf ("		{\n");
-printf ("			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml?t=\" + new Date().getTime());\n");
-printf ("			xsl = loadXMLDoc(\"xml/xsl/listar.xsl\");\n");
-printf ("			\n");
-printf ("			// code for IE\n");
-printf ("			if (window.ActiveXObject)\n");
-printf ("			{\n");
-printf ("				x = xml.transformNode(xsl);\n");
-printf ("				document.getElementById(\"result\").innerHTML = x;\n");
-printf ("			}\n");
-printf ("			\n");
-printf ("			// code for Mozilla, Firefox, Opera, etc.\n");
-printf ("			else if (document.implementation && document.implementation.createDocument)\n");
-printf ("			{\n");
-printf ("				xsltProcessor = new XSLTProcessor();\n");
-printf ("				xsltProcessor.importStylesheet(xsl);\n");
-printf ("				resultDocument = xsltProcessor.transformToFragment(xml,document);\n");
-printf ("				document.getElementById(\"result\").appendChild(resultDocument);\n");
-printf ("			}\n");
-printf ("		}\n");
-printf ("	</script>	\n");
-printf ("	</head>\n");
-printf ("\n");
-printf ("<body id=\"result\" onLoad=\"displayResult()\">\n");
-printf ("</body>\n");
-printf ("</html>\n");
+//debugin
+	fflush(stdout);		
 
-/*****************************************************/
-
+	system("xsltproc xml/xsl/listar.xsl xml/pacientesGuadalupe.xml 2>&1");
+	
+	printf("</body>\n");
+	printf("</html>");
+// 6 de 6
+	
+	
 	cgi_end();
 	
 	return 0;

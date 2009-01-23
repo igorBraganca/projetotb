@@ -24,10 +24,21 @@
 //#include "ntbSearchPatient.h"
 
 
-#define PATHFILE "xml/xsl/resultado.xsl"
+//#define PATHFILE "xml/xsl/resultado.xsl"
+
+void printError (char *msg)
+{
+	cgi_init_headers();
+	
+	printf ("<html><head><title>Erro</title></head><body><h2>%s</h2></body></html>", msg);
+}
 
 int main (void)
 {
+	char tempname [L_tmpnam];
+	char comando[100];
+	char address[100];
+
 	FILE *xsl;
 	//size_t len;
 	//char xmlSearchResultFilePath[FILE_NAME_MAX];
@@ -35,8 +46,10 @@ int main (void)
 	formvars *first;
 	char *pid;
 	
-	
+
 	cgi_init();
+	cgi_init_headers();
+	fflush(stdout);
 	
 /******************************************************************************
  *            READ CONTENT STRING FROM SERVER.                                *
@@ -55,16 +68,28 @@ int main (void)
 /******************************************************************************
  *            CREATE XSL SEARCH FILE                                          *
  ******************************************************************************/
+ 
+if (tmpnam(tempname) != NULL)
+{
+
+//	sprintf(comando,"arquivo: %s", tempname);
+//	printError(comando);
+
+	xsl = fopen(tempname, "w");
 	
-	xsl = fopen(PATHFILE, "w");
+	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n");
+	fprintf(xsl,"\r\n");
+	fprintf(xsl,"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\r\n");
+//	fprintf(xsl,"				xmlns:fo=\"http://www.w3.org/1999/XSL/Format\"\r\n");
+//	fprintf(xsl,"				xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
+	fprintf(xsl,"<xsl:output omit-xml-declaration=\"yes\" encoding=\"ISO-8859-1\" method=\"xml\"/>\r\n"); 
+	fprintf(xsl,"\r\n");
 	
-	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-	fprintf(xsl,"\r\n");
-	fprintf(xsl,"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\"\r\n");
-	fprintf(xsl,"				xmlns:fo=\"http://www.w3.org/1999/XSL/Format\"\r\n");
-	fprintf(xsl,"				xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
-	fprintf(xsl,"\r\n");
-	fprintf(xsl,"<xsl:include href=\"fullPatientDetails2.xsl\" />\r\n");
+	getUserPublicPath(address);
+	
+	fprintf(xsl,"<xsl:include href=\"%s/xml/xsl/fullPatientDetails2.xsl\" />\r\n",address);
+//	printf("%s",address);
+	
 	fprintf(xsl,"\r\n");
 	fprintf(xsl,"<xsl:template match=\"/\">\r\n");
 	fprintf(xsl,"\r\n");
@@ -80,11 +105,11 @@ int main (void)
 	fprintf(xsl,"	<xsl:sort select=\"descendant::nomeCompleto\" />\r\n");
 	fprintf(xsl,"		<xsl:if test=\"triagem/numeroGeral = '%s'\">\r\n", pid);
 
-	fprintf(xsl,"			<p align=\"right\"><a target=\"blank\" href=\"imprimir.cgi?pid=%s\">Vers&#227;o para Impress&#227;o</a></p>\r\n", pid);
+	fprintf(xsl,"			<p align=\"right\"><a target=\"blank\" href=\"imprimir.cgi?pid=%s\">Versão para Impressão</a></p>\r\n", pid);
 
 	fprintf(xsl,"			<table>\r\n");
 	fprintf(xsl,"			<tr>\r\n");
-	fprintf(xsl,"				<th colspan=\"2\">Crit&#233;rio Inicial de Triagem para TB</th>\r\n");
+	fprintf(xsl,"				<th colspan=\"2\">Critério Inicial de Triagem para TB</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"triagem\" />\r\n");
 
@@ -139,130 +164,42 @@ int main (void)
 	fprintf(xsl,"\r\n");
 	fprintf(xsl,"</xsl:stylesheet>\r\n");
 	fclose(xsl);
+
+}
+else
+	printError("Erro ao criar arquivo temporário!\n");
+	
+	
 	
 /******************************************************************************
- *            PRINTING RESULT                                                 *
+ *            XSL TRANSFORM                                                *
  ******************************************************************************/
-	
-	cgi_init_headers();
-	//printf("Content-type: text/html; charset=iso-8859-1\r\n\r\n");
-	
-	printf("<html>\n");
-	printf("<head>\n");
-	//printf("\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n");
-	printf("\t<title>Busca Conclu&iacute;da</title>\n");
-	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
-	printf("	<script charset=\"ISO-8859-1\" src=\"js/jquery.js\"></script>\n");
-	printf("	<script charset=\"ISO-8859-1\" src=\"js/colors.js\"></script>\n");
-	
-	printf("\
-	<script>\n\
-		function loadXMLDoc(fname)\n\
-		{\n\
-			var xmlDoc;\n\
-			\n\
-			// code for IE\n\
-			if (window.ActiveXObject)\n\
-			{\n\
-				xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
-			}\n\
-			\n\
-			// code for Mozilla, Firefox, Opera, etc.\n\
-			else if (document.implementation && document.implementation.createDocument)\n\
-			{\n\
-				xmlDoc = document.implementation.createDocument(\"\",\"\",null);\n\
-			}\n\
-			else\n\
-			{\n\
-				alert('O seu navegador n&atilde;o tem suporte a este script');\n\
-			}\n\
-			xmlDoc.async = false;\n\
-			xmlDoc.load(fname);\n\
-			return(xmlDoc);\n\
-		}\n\
-		\n\
-		function displayResult()\n\
-		{\n\
-			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml\");\n\
-			xsl = loadXMLDoc(\"xml/xsl/resultado.xsl\");\n\
-			\n\
-			// code for IE\n\
-			if (window.ActiveXObject)\n\
-			{\n\
-				x = xml.transformNode(xsl);\n\
-				document.getElementById(\"result\").innerHTML = x;\n\
-			}\n\
-			\n\
-			// code for Mozilla, Firefox, Opera, etc.\n\
-			else if (document.implementation && document.implementation.createDocument)\n\
-			{\n\
-				xsltProcessor = new XSLTProcessor();\n\
-				xsltProcessor.importStylesheet(xsl);\n\
-				resultDocument = xsltProcessor.transformToFragment(xml,document);\n\
-				document.getElementById(\"result\").appendChild(resultDocument);\n\
-			}\n\
-		}\n\
-	</script>\n");
-	printf("</head>\n");
-	printf("<body id=\"result\" onLoad=\"displayResult()\">\n");
-	
-	
-/*
-	printf("\t<script type=\"text/javascript\">\n");
 
-// load xml --------------------------------------------------------------------
-	
-	printf("\
-		try //Internet Explorer\n\
-		{\n\
-			xml = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
-		}\n\
-		catch(e)\n\
-		{\n\
-			try //Firefox, Mozilla, Opera, etc.\n\
-			{\n\
-				xml = document.implementation.createDocument(\"\",\"\",null);\n\
-			}\n\
-			catch(e) {alert(e.message)}\n\
-		}\n\
-		try\n\
-		{\n\
-			xml.async = false;\n\
-			xml.load(\"/~psvaiter/neuralTB/pacientesGuadalupe2.xml\");\n\
-		}\n\
-		catch(e) {alert(e.message)}\n");
+//		sprintf(comando,"xsltproc %s xml/pacientesGuadalupe.xml 2>&1 --encoding ISO-8859-1",tempname);
+		sprintf(comando,"xsltproc %s xml/pacientesGuadalupe.xml 2>&1",tempname);
 
-// load xsl --------------------------------------------------------------------
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n");
+		printf("	<script src=\"js/jquery.js\"></script>\n");
+		printf("	<script src=\"js/colors.js\"></script>\n");		
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n"); 
 
-	printf("\
-		try //Internet Explorer\n\
-		{\n\
-			xsl = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
-		}\n\
-		catch(e)\n\
-		{\n\
-			try //Firefox, Mozilla, Opera, etc.\n\
-			{\n\
-				xsl = document.implementation.createDocument(\"\",\"\",null);\n\
-			}\n\
-			catch(e) {alert(e.message)}\n\
-		}\n\
-		try\n\
-		{\n\
-			xsl.async = false;\n\
-			xsl.load(\"/~psvaiter/neuralTB/xsl/resultado.xsl\");\n\
-		}\n\
-		catch(e) {alert(e.message)}\n");
+//debugin ... YEP
+		fflush(stdout);		
+		
+//		system("xsltproc xml/xsl/listar.xsl xml/pacientesGuadalupe.xml 2>&1");
+		system(comando);
+		sprintf(comando,"rm %s 2>&1",tempname);
+		system(comando);
+			
+		printf("</body>\n");
+		printf("</html>\n");
 
-// transform XML to XHTML ------------------------------------------------------ adaptar a transformacao tb para FF, e ai fica ok
 
-	printf("\t\tdocument.write(xml.transformNode(xsl));\n");
-	printf("\t</script>\n");
-*/
-	
-	printf("</body>\n");
-	printf("</html>");
-	
+
 /******************************************************************************
  *            FREE MEMORY AND EXIT                                            *
  ******************************************************************************/

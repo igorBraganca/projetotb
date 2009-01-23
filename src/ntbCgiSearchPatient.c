@@ -16,17 +16,28 @@
 #include "cgi.h"
 #include "ntbFunctions.h"
 
-#define PATHFILE "xml/xsl/filtro.xsl"
-#define PATHFILE2 "xml/xsl/resultado.xsl"
+//#define PATHFILE "xml/xsl/filtro.xsl"
+//#define PATHFILE2 "xml/xsl/resultado.xsl"
+
+void printError (char *msg)
+{
+	cgi_init_headers();
+	
+	printf ("<html><head><title>Erro</title></head><body><h2>%s</h2></body></html>", msg);
+}
 
 int main (void)
 {
 	FILE *xsl, *xsl2;
 	formvars *first;
 	char *criterio, *filtro, *modo, *valor, *VALOR, *username;
-	
+	char filter [L_tmpnam];
+	char resultado [L_tmpnam];
+	char comando[100];
 	
 	cgi_init();
+	cgi_init_headers();
+	fflush(stdout);	
 	
 /******************************************************************************
  *            READ CONTENT STRING FROM SERVER.                                *
@@ -62,69 +73,19 @@ int main (void)
 		filtro = cgi_param("filtro");
 		valor = cgi_param("valor");
 	}
-	
-/******************************************************************************
- *            CREATE DISPLAY XSL FILE                                          *
- ******************************************************************************/	
-xsl2 = fopen(PATHFILE2, "w");
-fprintf(xsl2,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-fprintf(xsl2,"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\"\n");
-fprintf(xsl2,"				xmlns=\"http://www.w3.org/1999/xhtml\">\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"<xsl:include href=\"filtro.xsl\" />\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"<xsl:template match=\"/\">\n");
-fprintf(xsl2,"		<xsl:apply-templates select=\"pacientes\" />\n");
-fprintf(xsl2,"</xsl:template>\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"<xsl:template match=\"pacientes\">\n");
-fprintf(xsl2,"	<table>\n");
-fprintf(xsl2,"		<tr>\n");
-fprintf(xsl2,"			<th class=\"title3\">N&#186; Geral</th>\n");
-fprintf(xsl2,"			<th class=\"title3\" width=\"40%%\">Paciente</th>\n");
-fprintf(xsl2,"			<th class=\"title3\" width=\"30%%\">Nome da M&#227;e</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Data de Nascimento</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Inclu&#237;do em</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Visualizar</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Remover</th>\n");
-fprintf(xsl2,"			<th class=\"title3\">Editar</th>\n");
-fprintf(xsl2,"		</tr>\n");
-fprintf(xsl2,"		<xsl:for-each select=\"paciente[@removido = 'nao']\">\n");
-fprintf(xsl2,"		<xsl:sort select=\"descendant::nomeCompleto\" />\n");
-fprintf(xsl2,"			<xsl:apply-templates select=\"triagem\" />\n");
-fprintf(xsl2,"		</xsl:for-each>\n");
-fprintf(xsl2,"	</table>\n");
-fprintf(xsl2,"</xsl:template>\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"<!-- Criterio inicial de triagem para TB pulmonar -->\n");
-fprintf(xsl2,"<xsl:template name=\"filtro\">\n");
-fprintf(xsl2,"		<tr>\n");
-fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"numeroGeral\" /></td>\n");
-fprintf(xsl2,"			<td class=\"answer\"><xsl:value-of select=\"nomeCompleto\" /></td>\n");
-fprintf(xsl2,"			<td class=\"answer\"><xsl:value-of select=\"nomeMae\" /></td>\n");
-fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"concat(dia_nascimento,'/', mes_nascimento,'/', ano_nascimento)\" /></td>\n");
-fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"concat(dia_inclusao,'/', mes_inclusao,'/', ano_inclusao)\" /></td>\n");
-fprintf(xsl2,"			<td class=\"answer center\"><a href=\"viewPatient.cgi?pid={numeroGeral}\"><img alt=\"Ver\" src=\"images/ver.gif\" style=\"border: 0px\" /></a></td>\n");
-fprintf(xsl2,"<td class=\"answer center\"><a href=\"removePatient.cgi?numeroGeral={numeroGeral}\" onclick=\"return confirm('Deseja remover o paciente?');\"><img alt=\"Remover\" src=\"images/remove.gif\" style=\"border: 0px\" /></a></td>\n");
-fprintf(xsl2,"			<td class=\"answer center\"><a href=\"\" onclick=\"window.open ('formsStatus.cgi?uid=%s&amp;pid={numeroGeral}','formularios','toolbar=no, width=300, height=280,resizable=yes'); return false;\"><img src=\"images/forms.gif\" style=\"border: 0px\" /></a></td>\n",username);
-fprintf(xsl2,"</tr></xsl:template>\n");
-fprintf(xsl2,"\n");
-fprintf(xsl2,"</xsl:stylesheet>\n");
-fclose(xsl2);
-	
+
+
 /******************************************************************************
  *            CREATE XSL SEARCH FILE                                          *
  ******************************************************************************/
-	
-	xsl = fopen(PATHFILE, "w");
-	
+
+if (tmpnam(filter) != NULL)
+{ 
+	xsl = fopen(filter, "w");
 	fprintf(xsl,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n");
 	fprintf(xsl,"<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\n");
-	
-	
 	fprintf(xsl,"<!-- Criterio inicial de triagem para TB pulmonar -->\n");
+	fprintf(xsl,"<xsl:output omit-xml-declaration=\"yes\" encoding=\"ISO-8859-1\" method=\"xml\"/>\r\n");
 	fprintf(xsl,"<xsl:template match=\"triagem\">\n");
 	
 	if ((modo) || (!valor)){
@@ -152,71 +113,102 @@ fclose(xsl2);
 	
 	fprintf(xsl,"</xsl:stylesheet>\n");
 	fclose(xsl);
+}
+else
+	printError("Erro ao criar arquivo temporário!\n");
+
+
 	
 /******************************************************************************
- *            PRINTING RESULT                                                 *
+ *            CREATE DISPLAY XSL FILE                                          *
+ ******************************************************************************/	
+if (tmpnam(resultado) != NULL)
+{
+	xsl2 = fopen(resultado, "w");
+	fprintf(xsl2,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+	fprintf(xsl2,"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n");
+//	fprintf(xsl2,"				xmlns=\"http://www.w3.org/1999/xhtml\">\n");
+	fprintf(xsl,"<xsl:output omit-xml-declaration=\"yes\" encoding=\"ISO-8859-1\" method=\"xml\"/>\r\n"); 
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"<xsl:include href=\"%s\" />\n",filter);
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"<xsl:template match=\"/\">\n");
+	fprintf(xsl2,"		<xsl:apply-templates select=\"pacientes\" />\n");
+	fprintf(xsl2,"</xsl:template>\n");
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"<xsl:template match=\"pacientes\">\n");
+	fprintf(xsl2,"	<table>\n");
+	fprintf(xsl2,"		<tr>\n");
+	fprintf(xsl2,"			<th class=\"title3\">N&#186; Geral</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\" width=\"40%%\">Paciente</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\" width=\"30%%\">Nome da M&#227;e</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\">Data de Nascimento</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\">Inclu&#237;do em</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\">Visualizar</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\">Remover</th>\n");
+	fprintf(xsl2,"			<th class=\"title3\">Editar</th>\n");
+	fprintf(xsl2,"		</tr>\n");
+	fprintf(xsl2,"		<xsl:for-each select=\"paciente[@removido = 'nao']\">\n");
+	fprintf(xsl2,"		<xsl:sort select=\"descendant::nomeCompleto\" />\n");
+	fprintf(xsl2,"			<xsl:apply-templates select=\"triagem\" />\n");
+	fprintf(xsl2,"		</xsl:for-each>\n");
+	fprintf(xsl2,"	</table>\n");
+	fprintf(xsl2,"</xsl:template>\n");
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"<!-- Criterio inicial de triagem para TB pulmonar -->\n");
+	fprintf(xsl2,"<xsl:template name=\"filtro\">\n");
+	fprintf(xsl2,"		<tr>\n");
+	fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"numeroGeral\" /></td>\n");
+	fprintf(xsl2,"			<td class=\"answer\"><xsl:value-of select=\"nomeCompleto\" /></td>\n");
+	fprintf(xsl2,"			<td class=\"answer\"><xsl:value-of select=\"nomeMae\" /></td>\n");
+	fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"concat(dia_nascimento,'/', mes_nascimento,'/', ano_nascimento)\" /></td>\n");
+	fprintf(xsl2,"			<td class=\"answer center\"><xsl:value-of select=\"concat(dia_inclusao,'/', mes_inclusao,'/', ano_inclusao)\" /></td>\n");
+	fprintf(xsl2,"			<td class=\"answer center\"><a href=\"viewPatient.cgi?pid={numeroGeral}\"><img alt=\"Ver\" src=\"images/ver.gif\" style=\"border: 0px\" /></a></td>\n");
+	fprintf(xsl2,"<td class=\"answer center\"><a href=\"removePatient.cgi?numeroGeral={numeroGeral}\" onclick=\"return confirm('Deseja remover o paciente?');\"><img alt=\"Remover\" src=\"images/remove.gif\" style=\"border: 0px\" /></a></td>\n");
+	fprintf(xsl2,"			<td class=\"answer center\"><a href=\"\" onclick=\"window.open ('formsStatus.cgi?uid=%s&amp;pid={numeroGeral}','formularios','toolbar=no, width=300, height=280,resizable=yes'); return false;\"><img src=\"images/forms.gif\" style=\"border: 0px\" /></a></td>\n",username);
+	fprintf(xsl2,"</tr></xsl:template>\n");
+	fprintf(xsl2,"\n");
+	fprintf(xsl2,"</xsl:stylesheet>\n");
+	fclose(xsl2);
+}
+else
+	printError("Erro ao criar arquivo temporário!\n");
+
+	
+	
+/******************************************************************************
+ *            XSL TRANSFORM                                                *
  ******************************************************************************/
+
+//		sprintf(comando,"xsltproc %s xml/pacientesGuadalupe.xml 2>&1 --encoding ISO-8859-1",tempname);
+		sprintf(comando,"xsltproc %s xml/pacientesGuadalupe.xml 2>&1",resultado);
+
+		printf("<html>\n");
+		printf("<head>\n");
+		printf("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n");
+		printf("	<script src=\"js/jquery.js\"></script>\n");
+		printf("	<script src=\"js/colors.js\"></script>\n");		
+		printf("<title>Resultado</title>\n");
+		printf("</head>\n");
+		printf("<body>\n"); 
+
+//debugin ... YEP
+	fflush(stdout);		
+
+//		system("xsltproc xml/xsl/listar.xsl xml/pacientesGuadalupe.xml 2>&1");
+	system(comando);
 	
-	cgi_init_headers(); //printf("Content-type: text/html\r\n\r\n");
 	
-	printf("<html>\n");
-	printf("<head>\n");
-	printf("\t<title>Busca Conclu&iacute;da</title>\n");
-	printf("	<script charset=\"ISO-8859-1\" src=\"js/jquery.js\"></script>\n");
-	printf("	<script charset=\"ISO-8859-1\" src=\"js/colors.js\"></script>\n");
-	printf("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\" />\n"); 
-	printf("\
-	<script>\n\
-		function loadXMLDoc(fname)\n\
-		{\n\
-			var xmlDoc;\n\
-			\n\
-			// code for IE\n\
-			if (window.ActiveXObject)\n\
-			{\n\
-				xmlDoc = new ActiveXObject(\"Microsoft.XMLDOM\");\n\
-			}\n\
-			\n\
-			// code for Mozilla, Firefox, Opera, etc.\n\
-			else if (document.implementation && document.implementation.createDocument)\n\
-			{\n\
-				xmlDoc = document.implementation.createDocument(\"\",\"\",null);\n\
-			}\n\
-			else\n\
-			{\n\
-				alert('O seu navegador n&atilde;o tem suporte a este script');\n\
-			}\n\
-			xmlDoc.async = false;\n\
-			xmlDoc.load(fname);\n\
-			return(xmlDoc);\n\
-		}\n\
-		\n\
-		function displayResult()\n\
-		{\n\
-			xml = loadXMLDoc(\"xml/pacientesGuadalupe.xml?t=\" + new Date().getTime());\n\
-			xsl = loadXMLDoc(\"xml/xsl/resultado.xsl\");\n\
-			\n\
-			// code for IE\n\
-			if (window.ActiveXObject)\n\
-			{\n\
-				x = xml.transformNode(xsl);\n\
-				document.getElementById(\"result\").innerHTML = x;\n\
-			}\n\
-			\n\
-			// code for Mozilla, Firefox, Opera, etc.\n\
-			else if (document.implementation && document.implementation.createDocument)\n\
-			{\n\
-				xsltProcessor = new XSLTProcessor();\n\
-				xsltProcessor.importStylesheet(xsl);\n\
-				resultDocument = xsltProcessor.transformToFragment(xml,document);\n\
-				document.getElementById(\"result\").appendChild(resultDocument);\n\
-			}\n\
-		}\n\
-	</script>\n");
-	printf("</head>\n");
-	printf("<body id=\"result\" onLoad=\"displayResult()\">\n");
-	printf("</body>\n");
-	printf("</html>");
+	sprintf(comando,"rm %s 2>&1",resultado);
+	system(comando);
+	sprintf(comando,"rm %s 2>&1",filter);
+	system(comando);
+	
+	
+		printf("</body>\n");
+		printf("</html>\n");
 	
 /******************************************************************************
  *            FREE MEMORY AND EXIT                                            *
