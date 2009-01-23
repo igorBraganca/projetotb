@@ -258,7 +258,7 @@ int main (void)
 			* Comfirmando se novo numero geral jah existe *
 *******************************************************************************/
 
-	if (found_patient)
+	if((found_patient) && (strcmp(newPid,pid) != 0))
 	{
 		printError("O novo n&uacute;mero geral escolhido j&aacute; existe.");
 		usualFreeMemory(doc);
