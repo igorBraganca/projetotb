@@ -20,6 +20,21 @@
 #include "ntbFunctions.h"
 
 /*
+Gets current-user's public html path
+*/
+
+void getUserPublicPath (char *address)
+{
+	const char* path = getenv("SCRIPT_FILENAME");
+	char* pos = strrchr(path, '/');
+	
+	strncpy(address,path,(size_t)(pos - path));
+	address[(size_t)(pos - path)]=0;
+	
+//	return;
+}
+
+/*
 	Convert lowercase letters to uppercase in a string
 	Returns the new string keeping the original one intact
 	
