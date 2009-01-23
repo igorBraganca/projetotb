@@ -188,10 +188,13 @@ else
 		printf("<body>\n"); 
 
 //debugin ... YEP
-	fflush(stdout);		
-
+		fflush(stdout);		
+		
 //		system("xsltproc xml/xsl/listar.xsl xml/pacientesGuadalupe.xml 2>&1");
-	system(comando);
+		system(comando);
+		sprintf(comando,"rm %s 2>&1",tempname);
+		system(comando);
+			
 		printf("</body>\n");
 		printf("</html>\n");
 
