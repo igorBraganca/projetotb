@@ -320,8 +320,8 @@ printf ("	}\n");
 		printf ("		<br /> -->\n");
 		printf ("		\n");
 		printf ("		<!-- ******************************************* -->\n");
-		printf ("\n");
-
+		
+/*****
 		printf ("\n");
 		printf ("		<div style=\"font-size:10pt;\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\">\n");
 		printf ("\n");
@@ -333,19 +333,23 @@ printf ("	}\n");
 		printf ("\n");
 		printf ("		<!-- ******************************************* -->\n");
 		printf ("\n");
+******/
 
-
-		/***** CODIGO EM HTML E JAVASCRIPT QUE PERMITIRA ALETRAR O NUMERO GERAL
-		printf ("			<input type=\"hidden\" name=\"antigoNumeroGeral\" value=\"%s\">\n",pid);
+		/***** CODIGO EM HTML E JAVASCRIPT QUE PERMITE ALETRAR O NUMERO GERAL *******/
+		printf ("			<!--- Numero geral --->\n");
+		printf ("				<input type=\"hidden\" name=\"antigoNumeroGeral\" value=\"%s\" >\n",pid);
 		printf ("				<span style=\"font-size: 10pt\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\"></b></span>\n");
 		printf ("				<input type=\"checkbox\" onClick=\"if(this.checked == true){numeroGeral.readOnly = false; numeroGeral.select();}else{numeroGeral.value = antigoNumeroGeral.value; numeroGeral.readOnly = true; numeroGeral.blur();}\">\n");
 		printf ("				<b><span style=\"font-size: 7pt\">(Clique para editar o N&#186; Geral)</b></span>\n");
+		printf ("			<!--- --->\n");
 		printf ("\n");
-		printf ("			<span style=\"font-size: 10pt\"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data de inclus&atilde;o:&nbsp;</b></span><input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
-		printf ("			<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
-		printf ("			<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp;<span style=\"font-size: 7pt\"><b>(dd/mm/aaaa)</b></span><br><br>\n");
-		printf ("			</b>");
-		*******/
+		printf ("			<!--- Data de inclusao --->\n");
+		printf ("			<span style=\"font-size: 10pt\"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data de inclus&atilde;o:&nbsp;</b></span>\n");
+		printf ("				<input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
+		printf ("				<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
+		printf ("				<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp;\n");
+		printf ("			<span style=\"font-size: 7pt\"><b>(dd/mm/aaaa)</b></span><br><br></b>\n");
+		printf ("			<!--- --->\n");
 
 		printf ("		<!-- ******************************************* -->\n");
 		printf ("\n");
@@ -1507,34 +1511,37 @@ printf ("		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb
 printf ("		<br /> -->\n");
 printf ("\n");
 printf ("		<!-- ******************************************* -->\n");
-printf ("\n");
-printf ("\n");
 
-printf ("\n");
-printf ("		<div style=\"font-size:10pt;\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\">\n");
-printf ("\n");
-printf ("		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n");
-printf ("\n");
-printf ("		Data de inclus&atilde;o:<input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
-printf ("								<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
-printf ("								<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp; dd/mm/aaaa<br><br>\n");
-printf ("\n");
-printf ("		<!-- ******************************************* -->\n");
-printf ("\n");
+/*****
+		printf ("\n");
+		printf ("		<div style=\"font-size:10pt;\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\">\n");
+		printf ("\n");
+		printf ("		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n");
+		printf ("\n");
+		printf ("		Data de inclus&atilde;o:<input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
+		printf ("								<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
+		printf ("								<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp; dd/mm/aaaa<br><br>\n");
+		printf ("\n");
+		printf ("		<!-- ******************************************* -->\n");
+		printf ("\n");
+******/
 
-
-/***** CODIGO EM HTML E JAVASCRIPT QUE PERMITIRA ALETRAR O NUMERO GERAL
-printf ("			<input type=\"hidden\" name=\"antigoNumeroGeral\" value=\"%s\">\n",pid);
-printf ("				<span style=\"font-size: 10pt\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\"></b></span>\n");
-printf ("				<input type=\"checkbox\" onClick=\"if(this.checked == true){numeroGeral.readOnly = false; numeroGeral.select();}else{numeroGeral.value = antigoNumeroGeral.value; numeroGeral.readOnly = true; numeroGeral.blur();}\">\n");
-printf ("				<b><span style=\"font-size: 7pt\">(Clique para editar o N&#186; Geral)</b></span>\n");
-printf ("\n");
-printf ("			<span style=\"font-size: 10pt\"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data de inclus&atilde;o:&nbsp;</b></span><input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
-printf ("			<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
-printf ("			<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp;<span style=\"font-size: 7pt\"><b>(dd/mm/aaaa)</b></span><br><br>\n");
-printf ("			</b>");
-*******/
-
+		/***** CODIGO EM HTML E JAVASCRIPT QUE PERMITE ALETRAR O NUMERO GERAL *******/
+		printf ("			<!--- Numero geral --->\n");
+		printf ("				<input type=\"hidden\" name=\"antigoNumeroGeral\" value=\"%s\" >\n",pid);
+		printf ("				<span style=\"font-size: 10pt\"><b>N&#186; Geral (TB Adapt): <input maxlength=\"6\" size=\"6\" name=\"numeroGeral\" readonly=\"true\"></b></span>\n");
+		printf ("				<input type=\"checkbox\" onClick=\"if(this.checked == true){numeroGeral.readOnly = false; numeroGeral.select();}else{numeroGeral.value = antigoNumeroGeral.value; numeroGeral.readOnly = true; numeroGeral.blur();}\">\n");
+		printf ("				<b><span style=\"font-size: 7pt\">(Clique para editar o N&#186; Geral)</b></span>\n");
+		printf ("			<!--- --->\n");
+		printf ("\n");
+		printf ("			<!--- Data de inclusao --->\n");
+		printf ("			<span style=\"font-size: 10pt\"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data de inclus&atilde;o:&nbsp;</b></span>\n");
+		printf ("				<input maxlength=\"2\" size=\"2\" name=\"dia_inclusao\" onKeyUp=\"if(this.value.length == 2)mes_inclusao.focus();\" onBlur=\"validarDia(this)\">&nbsp;/\n");
+		printf ("				<input maxlength=\"2\" size=\"2\" name=\"mes_inclusao\" onKeyUp=\"if(this.value.length == 2)ano_inclusao.focus();\" onBlur=\"validarMes(this)\">&nbsp;/\n");
+		printf ("				<input maxlength=\"4\" size=\"4\" name=\"ano_inclusao\" onKeyUp=\"if(this.value.length == 4)nomeCompleto.focus();\" onBlur=\"validarAno(this); validarQualquerData(dia_inclusao,mes_inclusao,ano_inclusao);\">&nbsp;\n");
+		printf ("			<span style=\"font-size: 7pt\"><b>(dd/mm/aaaa)</b></span><br><br></b>\n");
+		printf ("			<!--- --->\n");
+		
 printf ("		<!-- ******************************************* -->\n");
 printf ("\n");
 printf ("\n");

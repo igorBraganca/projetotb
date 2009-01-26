@@ -50,6 +50,7 @@ patient.appendChild(data);
 #Saving the new data to the XML file.
 xmlData.seek(0); #Going to the beginning of the file.
 xmlData.write(dom.toxml(encoding = xmlEncoding));
+xmlData.truncate();
 xmlData.close(); #Releasing the file (calls also unlock).
 
 returnPage = "busca.cgi?uid=%s" % functions.fmt2GetMethod(os.environ["REMOTE_USER"]);

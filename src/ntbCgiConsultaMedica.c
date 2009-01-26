@@ -183,7 +183,7 @@ int main (int argc, char **argv)
 	showMenu("consulta",username);
 
 	printf ("<div align=\"center\">\n");
-	printf ("<form name=\"check\" method=\"post\" action=\"addPatientInfo.py\" onSubmit=\"return validar_consulta_medica(this)\">\n");
+	printf ("<form name=\"check\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_consulta_medica(this)\">\n");
 	printf ("<!-- action=\"addPatientInfo.cgi\" -->\n");
 	printf ("	<span style=\"font-size: 13pt\" class=\"bold\"><br />Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 	printf ("	<div align=\"center\">\n");

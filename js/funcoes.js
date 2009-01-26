@@ -278,7 +278,7 @@ function enviar()
 					if (((tipo == "text") || (tipo == "password")) && (valor == ""))
 					{
 						//document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[j].style.border = medium solid red;
-						alert ("Falha no envio: ha campos nao preenchidos.");
+						alert ("Falha no envio: há campos não preenchidos.");
 						
 						return false;
 					}
@@ -317,6 +317,7 @@ function validarCampoNumerico(campo)
 	if (!isNumberString(campo.value))
 	{
 		alert("Valor inválido, digite somente números.");
+		
 		campo.value = '';
 		campo.focus();
 	}
@@ -328,6 +329,7 @@ function validarCampoNumericoPositivo(campo)
 	if ( (!isNumberString(campo.value)) || (campo.value <= 0) )
 	{
 		alert("Valor inválido, digite somente números maiores que zero.");
+		
 		campo.value = '';
 		campo.focus();
 	}
@@ -434,6 +436,7 @@ function validarAno(campoAno)
 		if(campoAno.value.length != 4)
 		{
 			alert("O campo ano deve conter quatro dígitos.");
+
 			campoAno.value = '';
 			campoAno.focus();
 			return false;
@@ -494,7 +497,8 @@ function validarData(form)
 		{
 			if(dia<1 || dia>29)
 			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este e o mes de Fevereiro");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mes de Fevereiro");
+				
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -503,7 +507,8 @@ function validarData(form)
 		else 
 			if(dia<1 || dia>28)//O ano nao e bissexto
 			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este e o mes de Fevereiro");
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mes de Fevereiro");
+				
 				form.dia_nascimento.focus();
 				form.dia_nascimento.select();
 				return false;
@@ -607,7 +612,8 @@ function validarData(form)
 	}
 	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
 	{
-		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
+		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
+
 		form.ano_nascimento.focus();
 		form.ano_nascimento.select();
 		return false;
@@ -615,7 +621,7 @@ function validarData(form)
 	BirthDay = new Date(ano, mes-1 ,dia);
 	if(BirthDay.getTime()>today.getTime())
 	{
-		alert("A data de nascimento nao pode ser posterior a data de hoje");
+		alert("A data de nascimento não pode ser posterior a data de hoje");
 		form.ano_nascimento.focus();
 		form.ano_nascimento.select();
 		return false;
@@ -763,6 +769,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 				if(dia<1 || dia>29)
 				{
 					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mês de Fevereiro");
+
 					campoDia.value = '';
 					campoDia.focus();
 					return false;
@@ -772,6 +779,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 				if(dia<1 || dia>28)//O ano nao e bissexto
 				{
 					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mês de Fevereiro");
+					
 					campoDia.value = '';
 					campoDia.focus();
 					return false;
@@ -868,7 +876,9 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 			}
 		break;
 		default://mes inválido
+		
 		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
+
 		campoMes.value = '';
 		campoMes.focus();
 		return false;
@@ -983,6 +993,7 @@ function definirCage()
 function confirmar(form)
 { 
     if (confirm('Tem certeza que deseja enviar este formulário?'))
+
 	{ 
        document.form.submit() 
     } 
@@ -1027,6 +1038,7 @@ function validarDataExame(dia,mes,ano)
 	if (ano.value > Ano)
 	{
 		alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
+
 		dia.value="";
 		mes.value="";
 		ano.value="";
@@ -1047,6 +1059,7 @@ function validarDataExame(dia,mes,ano)
 			if (mes.value > Mes)
 			{
 				alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
+
 				dia.value="";
 				mes.value="";
 				ano.value="";
@@ -1059,6 +1072,7 @@ function validarDataExame(dia,mes,ano)
 					if (dia.value > Dia)
 					{
 						alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
+
 						dia.value="";
 						mes.value="";
 						ano.value="";
@@ -1132,9 +1146,9 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 	
 			/** CALCULO DO TEMPO QUE LEVOU PARA SAIR DE CASA ATEH SER ATENDIDO PELO MEDICO **/
 			
-			tempoTotalHora.value = horaC.value - horaA.value;
+			tempoTotalMin.value = (tempoC - tempoA) % 60;
 			
-			tempoTotalMin.value = (tempoC - tempoA) % 60;	
+			tempoTotalHora.value = ((tempoC - tempoA) - tempoTotalMin.value) / 60;
 		}
 	
 	}

@@ -29,7 +29,7 @@
 	tabFields[27] = ["imc", "20 - IMC"];
 	tabFields[28] = ["tosse", "21 - Tosse"];
 	tabFields[29] = ["tosse_semanas", "Semanas"];
-	tabFields[30] = ["expectoracao", "22 - Expectoração"];
+	tabFields[30] = ["expectoracao", "22 - Expectora&ccedil;&atilde;o"];
 	tabFields[31] = ["expectoracao_semanas", "Semanas"];
 	tabFields[32] = ["hemoptoico", "23 - Hemoptóico"];
 	tabFields[33] = ["hemoptoico_semanas", "Semanas"];
@@ -70,7 +70,7 @@
 	tabFields[68] = ["bebidaManha", "36.4 - Costuma beber de manhã para diminuir nervosismo/ressaca"];
 	tabFields[69] = ["culpadoManeiraBeber", "36.5 - Sente culpa pela maneira que bebe"];
 	tabFields[70] = ["cage", "Cage"];
-	tabFields[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez auxilio para seu problema de sa&uacute;de?"];
+	tabFields[71] = ["primeiraProcuraParaAuxiliodeSaude", "37 - Quando procurou pela primeira vez aux&iacute;lio para seu problema de sa&uacute;de?"];
 	tabFields[72] = ["lugarDaPrimeiraConsulta", "38 - Onde foi?"];
 	tabFields[73] = ["causaDaPrimeiraConsulta", "39 - Porque procurou? "];
 	tabFields[74] = ["veioAcompanhadoDeFamiliares", "40 - Veio acompanhado de familiares?"];
@@ -95,7 +95,7 @@
 	tabFields[93] = ["qualOutroResultado", "52.1 - Qual?"];	
 	tabFields[94] = ["desfechoConsultaInicial", "53 - Desfecho da Consulta Inicial"];	
 	tabFields[95] = ["inclusao", "54 - Inclusão"];	
-	tabFields[96] = ["criteriosInclusao", "54.1 - Critérios de Inclusão"];	
+	tabFields[96] = ["criteriosInclusao", "54.1 - Crit&eacute;rios de Inclus&atilde;o"];	
 	tabFields[97] = ["", "54.2 - Data de Coleta dos DOIS Esp&eacute;cimes Respirat&oacute;rios:"];	
 	tabFields[98] = ["coleta1", "#1"];	
 	tabFields[99] = ["coleta2", "#2"];	
