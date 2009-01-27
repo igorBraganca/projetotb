@@ -75,7 +75,7 @@ htmlPage += """
 <body>
 """
 
-htmlPage += 'Formul&aacute;rio salvo com sucesso! Clique <a href="%s">aqui</a> para retornar &agrave; p&aacute;gina de busca.' % returnPage;
+htmlPage += 'Formul&aacute;rio salvo com sucesso! Clique <a href="%s" target=\"_parent\">aqui</a> para retornar &agrave; p&aacute;gina de busca.' % returnPage;
 
 htmlPage += """
 </body>
