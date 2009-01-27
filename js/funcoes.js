@@ -350,11 +350,28 @@ function validarNumEPonto (campo)
 	return (true);
 }
 
+function mudarVirgulaParaPonto (campo)
+{
+	var temp = "";
+	
+	for(indice = 0; indice < campo.length; indice++)
+	{
+		if(campo[indice] == ",")
+			temp = temp + ".";
+		else
+			temp = temp + campo[indice];
+	}
+	
+	return temp;
+}
+
 function validarCampoPeso (campo)
 {	
+	campo.value = mudarVirgulaParaPonto(campo.value);
+	
 	if(validarNumEPonto(campo.value) == false)
 	{
-		alert("Valor inválido, digite somente números \".\"");
+		alert("Valor inválido, digite somente números, \".\" e \",\".");
 		campo.focus();
 		campo.select();
 	}
