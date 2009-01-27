@@ -15,9 +15,18 @@ def fmt2GetMethod(s):
   return s;
 
 
+escape_table = {"\n" : "\\n", '"' : '\\"', "\r" : "\\r", "'" : "\'"}
+ 
+def escapeJavaScript(original):
+    result = ""
+    for c in original:
+        result += escape_table.get(c, c)
+    return result
+	
+
 def encode(textStr):
   """Retorna a string de entrada (textStr) codificada em UTF-8."""
-  return textStr.encode("iso-8859-1");
+  return escapeJavaScript(textStr.encode("iso-8859-1"));
 
 
 def getPatientInfo(dom, pid):
@@ -104,3 +113,4 @@ def isMobile(envVars):
   pelo mod_python. Do contrario, temos que usar a variavel req."""
   if "PPC" in envVars["HTTP_USER_AGENT"]: return True;
   else: return False;
+  

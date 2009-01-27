@@ -49,7 +49,7 @@ void printError (char *msg)
 int main (void)/*(int argc,char**argv)*/
 {
 	int indice1;
-	char *username, *pid, fraseFinal[FIELD_MAX],fraseFinal2[FIELD_MAX];
+	char *username, *pid, fraseFinal[FIELD_MAX],fraseFinal2[FIELD_MAX], *temp;
 	FILE* document;
 	int estado;
 	/** 
@@ -287,8 +287,12 @@ document = fopen(XML_FILE_PATH, "r");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				if(strcmp((char *)cur_node_children->name,"ano_FollowUp") != 0);			
-					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				if(strcmp((char *)cur_node_children->name,"quemCadastrou") != 0)
+				{
+				temp = translate_escape_character(cur_node_children->children->content);
+				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, temp);
+				free(temp);
+				}
 			}
 			else
 				indice1 --;

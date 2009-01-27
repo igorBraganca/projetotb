@@ -49,7 +49,7 @@ void printError (char *msg)
 int main (void)/*(int argc,char**argv)*/
 {
 	int indice1;
-	char *username, *pid, fraseFinal[FIELD_MAX], fraseFinal2[FIELD_MAX];
+	char *username, *pid, fraseFinal[FIELD_MAX], fraseFinal2[FIELD_MAX], *temp;
 	FILE* document;
 	int estado;
 	/** 
@@ -231,8 +231,12 @@ printf ("	}\n");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				if(strcmp((char *)cur_node_children->name,"cadastradoPor") != 0);			
-					printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				if(strcmp((char *)cur_node_children->name,"cadastradoPor") != 0)
+				{
+				temp = translate_escape_character(cur_node_children->children->content);
+				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, temp);
+				free(temp);
+				}
 			}
 			else
 				indice1 --;
@@ -1247,7 +1251,7 @@ printf ("	}\n");
 		
 		
 		printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
-		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" size=\"25\"></td>\n");
+		printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" size=\"25\" value=\"%s\"></td>\n",username);
 		
 		
 		printf ("			</tr>\n");
@@ -1279,7 +1283,7 @@ printf ("	}\n");
 	}
 	else
 	{
-	printf ("<html>\n");
+printf ("<html>\n");
 printf ("<head>\n");
 printf ("	<title>NeuralTB - Preencha todos os campos do formul&aacute;rio abaixo</title>\n");
 printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/main.css\">\n");
@@ -1423,7 +1427,12 @@ printf ("	*/\n");
 		{	
 			if((cur_node_children->children != NULL) && (cur_node_children->name != NULL))
 			{
-				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, cur_node_children->children->content);
+				if(strcmp((char *)cur_node_children->name,"cadastradoPor") != 0)
+				{
+				temp = translate_escape_character(cur_node_children->children->content);
+				printf ("\t\ttabela[%i] = [\"%s\",\"%s\"];\n", indice1, cur_node_children->name, temp);
+				free(temp);
+				}
 			}
 			else
 				indice1 --;
@@ -2271,7 +2280,7 @@ printf ("			<tr>\n");
 printf ("\n");
 printf ("				<td colspan=\"2\" style=\"text-align:center\">Avaliado por: <input name=\"avaliador\" type=\"text\" size=\"25\"></td>\n");
 
-printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" size=\"25\"></td>\n");
+printf ("				<td colspan=\"3\" style=\"text-align:center\">Cadastrado por: <input name=\"cadastradoPor\" type=\"text\" readonly=\"readonly\" size=\"25\" value=\"%s\"></td>\n",username);
 
 printf ("			</tr>\n");
 printf ("\n");

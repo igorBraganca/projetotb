@@ -166,20 +166,20 @@ int main (void)
 	else
 	{
 		fclose(fp);
-		
-		
+
+
 		fp = fopen(xmlFilePath, "r+");
- 	
- 	if (fp == NULL) {
-        printError("O arquivo de pacientes não pode ser aberto");
-        exit(0);
-    }
-    
-	if(flock(fileno(fp), LOCK_EX)) {
-        printError("Erro ao trancar o arquivo");
-       	fclose(fp);
-        exit(0);
-    }
+
+		if (fp == NULL) {
+			printError("O arquivo de pacientes não pode ser aberto");
+			exit(0);
+		}
+
+		if(flock(fileno(fp), LOCK_EX)) {
+			printError("Erro ao trancar o arquivo");
+			fclose(fp);
+			exit(0);
+		}
     
    //printWait("Trancado!");
    //sleep(20);
@@ -189,8 +189,11 @@ int main (void)
 		{
 			printError("Failed to parse doc");
 			usualFreeMemory(NULL);
-			flock(fileno(fp), LOCK_EX);
-			fclose(fp);
+			if(fp)
+			{
+				flock(fileno(fp), LOCK_UN);
+				fclose(fp);
+			}
 			exit(0);
 		}
 		
@@ -235,8 +238,11 @@ int main (void)
 				{
 					printError("Erro de forma&ccedil;&atilde;o do XML. Tem paciente sem n&uacute;mero geral.");
 					usualFreeMemory(doc);
-					flock(fileno(fp), LOCK_EX);
-					fclose(fp);
+					if(fp)
+					{
+						flock(fileno(fp), LOCK_UN);
+						fclose(fp);
+					}
 					exit(0);
 				}
 			}
@@ -252,8 +258,11 @@ int main (void)
 	{
 		printError("Esse n&uacute;mero geral j&aacute; foi registrado");
 		usualFreeMemory(doc);
-		flock(fileno(fp), LOCK_EX);
-		fclose(fp);
+			if(fp)
+			{
+				flock(fileno(fp), LOCK_UN);
+				fclose(fp);
+			}
 		exit(0);
 	}
 	
@@ -276,8 +285,11 @@ int main (void)
 		cgi_init_headers();
 		printError("Erro na convers&atilde;o de formName para UTF-8");
 		usualFreeMemory(doc);
-		flock(fileno(fp), LOCK_EX);
-		fclose(fp);
+			if(fp)
+			{
+				flock(fileno(fp), LOCK_UN);
+				fclose(fp);
+			}
 		exit(0);
 	}
 	
@@ -296,8 +308,11 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->name para UTF-8");
 			usualFreeMemory(doc);
-			flock(fileno(fp), LOCK_EX);
-			fclose(fp);
+			if(fp)
+			{
+				flock(fileno(fp), LOCK_UN);
+				fclose(fp);
+			}
 			exit(0);
 		}
 		
@@ -311,8 +326,11 @@ int main (void)
 		{
 			printError("Erro na convers&atilde;o de input->value para UTF-8");
 			usualFreeMemory(doc);
-			flock(fileno(fp), LOCK_EX);
-			fclose(fp);
+			if(fp)
+			{
+				flock(fileno(fp), LOCK_UN);
+				fclose(fp);
+			}
 			exit(0);
 		}
 		
@@ -332,8 +350,11 @@ int main (void)
 		//remove(tempFile);
 		printError("Erro ao salvar arquivo");
 		usualFreeMemory(doc);
-		flock(fileno(fp), LOCK_EX);
-		fclose(fp);
+		if(fp)
+		{
+			flock(fileno(fp), LOCK_UN);
+			fclose(fp);
+		}
 		exit(0);
 	}
 	
@@ -343,9 +364,12 @@ int main (void)
     {
         printError("Erro ao renomear o arquivo atualizado");
         usualFreeMemory(doc);
-        flock(fileno(fp), LOCK_EX);
-				fclose(fp);
-        exit(0);
+        if(fp)
+	{
+		flock(fileno(fp), LOCK_UN);
+		fclose(fp);
+	}
+	exit(0);
     }*/
 
 	
@@ -441,8 +465,11 @@ int main (void)
 	//printf("Content-type: application/javascript\r\n\r\n");
 	//printf("alert(\"Formul&aacute;rio\")");
 	usualFreeMemory(doc);
-	flock(fileno(fp), LOCK_EX);
-	fclose(fp);
+	if(fp)
+	{
+		flock(fileno(fp), LOCK_UN);
+		fclose(fp);
+	}
 	
 	return 0;
 }

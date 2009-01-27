@@ -176,3 +176,57 @@ void getTagNameAndTextContent (char *str, parsedvars *parsed)
 	
 	return;
 }
+
+char* translate_escape_character (char*);
+
+char* translate_escape_character (char* palavra)
+{
+	char* temp;
+	int indice1, indice2;
+
+	if(!(temp = malloc(2*strlen(palavra))))
+		exit(1); // erro na alocação de memoria
+	
+	for(indice1 = indice2 = 0; palavra[indice1] != '\0'; indice1 ++, indice2 ++)
+	{
+		if(palavra[indice1] == '\r')
+		{
+			temp[indice2] = '\\';
+			temp[indice2 + 1] = 'r';
+			indice2 ++;
+		}
+		else
+		{
+			if(palavra[indice1] == '\n')
+			{
+				temp[indice2] = '\\';
+				temp[indice2 + 1] = 'n';
+				indice2 ++;
+			}
+			else
+			{
+				if(palavra[indice1] == '\'')
+				{
+					temp[indice2] = '\\';
+					temp[indice2 + 1] = '\'';
+					indice2 ++;
+				}
+				else
+				{
+					if(palavra[indice1] == '\"')
+					{
+						temp[indice2] = '\\';
+						temp[indice2 + 1] = '\"';
+						indice2 ++;
+					}
+					else
+						temp[indice2] = palavra[indice1];
+				}
+			}
+		}	
+	}
+	
+	temp[indice2] = '\0';
+	
+	return temp;
+}

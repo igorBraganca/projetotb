@@ -32,7 +32,7 @@ used_libs = ['xml2', 'cgi'];
 inc_path = ['/usr/include/libxml2'];
 
 ## Lista de flags de compilacao.
-cxx_flags = [];
+cxx_flags = ['-ggdb', '-O0'];
 
 #Criando o nosso ambiente de compilacao.
 env = Environment(CPPPATH = inc_path, ENV = os.environ);

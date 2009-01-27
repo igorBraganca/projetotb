@@ -36,6 +36,7 @@ unsigned char *fixCgiStr (unsigned char *);
 
 void getTagNameAndTextContent (char *, parsedvars *);
 
+char* translate_escape_character (char*);
 
 #endif
 
