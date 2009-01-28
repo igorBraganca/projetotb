@@ -318,7 +318,7 @@ int main (int argc, char **argv)
 	printf ("	<tr class=\"par\">\n");
 	printf ("	<td ><script>document.write(tabFields[7][1]);</script></td> \n");
 	printf ("	<td ><input name=\"mudanca_mes\" type=\"text\" maxlength=\"2\" size=\"2\" disabled=\"true\" onKeyUp=\"if(this.value.length == 2)this.blur();\" onChange=\"if(validarMes(this))mudanca_ano.focus();\"> / <input name=\"mudanca_ano\" type=\"text\" maxlength=\"4\" size=\"4\" disabled=\"true\" onKeyUp=\"if(this.value.length == 4)this.blur();\" onChange=\"validarAno(this);\" onBlur=\"validarQualquerData(01,mudanca_mes,mudanca_ano)\"></td>\n");
-	printf ("	<td colspan=\"3\"><input name=\"mudanca\" id=\"mudanca\" type=\"checkbox\" value=\"ignorada\" disabled=\"true\" onClick=\"validarDataDesconhecida(document.check)\">Ignorada</td>\n");
+	printf ("	<td colspan=\"3\"><input name=\"mudanca\" id=\"mudanca\" type=\"checkbox\" value=\"ignorada\" disabled=\"true\" onClick=\"if(this.checked == true){mudanca_mes.disabled = true;mudanca_ano.disabled = true;}else{mudanca_mes.disabled = false; mudanca_ano.disabled = false;}\">Ignorada</td>\n");
 	printf ("	</tr>\n");
 	printf ("	\n");
 	printf ("	<!-- FARMACOS UTILIZADOS 2 -->\n");
