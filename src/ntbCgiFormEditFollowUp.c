@@ -543,7 +543,7 @@ document = fopen(XML_FILE_PATH, "r");
 	printf ("	\n");
 	printf ("	<tr class=\"impar\">\n");
 	printf ("	<td><script>document.write(tabFields[10][1]);</script></td> \n");
-	printf ("	<td colspan=\"4\"><input name=\"pesoAtual90dias\" type=\"text\" maxlength=\"3\" size=\"3\" onBlur=\"validarCampoNumerico(this)\"></td>\n");
+	printf ("	<td colspan=\"4\"><input name=\"pesoAtual90dias\" type=\"text\" maxlength=\"5\" size=\"5\" onBlur=\"validarCampoPeso(this); this.value = arredondarNcasasDecimais(this.value,1);\"></td>\n");
 	printf ("	</tr>\n");
 	printf ("	<!-- Alteracoes Evolutivas no Exame Fisico -->\n");
 	printf ("\n");
