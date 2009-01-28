@@ -1198,3 +1198,12 @@ function validar_hora_escarro (horaA,minA,horaB,minB)
 	
 	return true;
 }
+
+function validar_numero_de_digitos (campo, num)
+{
+	if(campo.value.length != num)
+	{
+		alert("Este campo deve conter " + num + " dígitos.");
+		campo.select();
+	}
+}
