@@ -134,7 +134,7 @@ printf("<tr>\n");
 			printf("<td height=\"15\"></td>\n");
 		printf("</tr>\n");
 		printf("<tr>\n");
-			printf("<td><iframe src=\"searchPatient.cgi?modo=listagem&uid=%s\" frameborder=\"0\" name=\"resultado\" marginwidth=\"0\" marginheight=\"0\" style=\"width:100%%\"></iframe></td>\n", username);
+			printf("<td><iframe src=\"searchPatient.cgi?modo=listagem&uid=%s\" frameborder=\"0\" scrolling=\"yes\" name=\"resultado\" marginwidth=\"0\" marginheight=\"0\" style=\"width:100%%\"></iframe></td>\n", username);
 printf("		</tr>\n");
 printf("		\n");
 		printf("</table>\n");

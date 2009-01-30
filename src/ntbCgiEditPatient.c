@@ -53,7 +53,7 @@ void printSuccess (char *username)
 	printf ("\t</head>\n");
 	printf ("\t</body>\n");
 	printf ("<span style=\"background-color:green; color: white; font-family: Verdana, Arial; font-size:15pt; padding: 5px\">");
-	printf ("Usu&aacute;rio editado com sucesso. Aguarde...</span>");
+	printf ("Formul&aacute;rio editado com sucesso. Aguarde...</span>");
 	printf ("\t</body>\n");
 	printf ("</html>");
 }
