@@ -326,6 +326,8 @@ function validarCampoNumerico(campo)
 //Valida se o campo e um numero positivo valido.
 function validarCampoNumericoPositivo(campo)
 {
+  if (campo.readOnly) return; // We don't check if it is read only.
+
 	if ( (!isNumberString(campo.value)) || (campo.value <= 0) )
 	{
 		alert("Valor inválido, digite somente números maiores que zero.");
