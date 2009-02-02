@@ -1164,8 +1164,9 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 			/** CALCULO DO TEMPO QUE LEVOU PARA SAIR DE CASA ATEH SER ATENDIDO PELO MEDICO **/
 			
 			tempoTotalMin.value = (tempoC - tempoA) % 60;
-			
+			if (tempoTotalMin.value.length == 1) tempoTotalMin.value = "0" + tempoTotalMin.value;
 			tempoTotalHora.value = ((tempoC - tempoA) - tempoTotalMin.value) / 60;
+		  if (tempoTotalHora.value.length == 1) tempoTotalHora.value = "0" + tempoTotalHora.value;
 		}
 	
 	}
