@@ -340,7 +340,7 @@ function validarNumEPonto (campo)
 {
 	if(campo.length == 0)
 		return(true);
-	var stringRef = ".1234567890";
+	var stringRef = ".,1234567890";
 	for (indice = 0; indice < campo.length; indice ++)
 	{
 		if(stringRef.indexOf(campo.charAt(indice),0) == -1 )
@@ -352,39 +352,39 @@ function validarNumEPonto (campo)
 
 function mudarVirgulaParaPonto (campo)
 {
-	var temp = "";
-	
-	for(indice = 0; indice < campo.length; indice++)
-	{
-		if(campo[indice] == ",")
-			temp = temp + ".";
-		else
-			temp = temp + campo[indice];
-	}
-	
-	return temp;
+	campo.value = campo.value.replace(/,/g,".");
 }
 
 function validarCampoPeso (campo)
 {	
-	campo.value = mudarVirgulaParaPonto(campo.value);
+	mudarVirgulaParaPonto(campo);
 	
 	if(validarNumEPonto(campo.value) == false)
 	{
 		alert("Valor inválido, digite somente números, \".\" e \",\".");
-		campo.focus();
-		campo.select();
+		campo.value = "";
+		return false;
 	}
+	return true;
 }
 
+function trabalharComCampoPeso (campo)
+{
+	if(validarCampoPeso(campo))
+	{
+		campo.value = arredondarNcasasDecimais(campo.value,1);
+		return true;
+	}
+
+	return false;
+}
 
 function validarPorcentagem(campo)
 {
 	if (campo.value > 100)
 	{
 		alert("Digite um valor entre 0 e 100.");
-		campo.focus();
-		campo.select();
+		campo.value = "";
 	}
 }
 
@@ -1201,9 +1201,12 @@ function validar_hora_escarro (horaA,minA,horaB,minB)
 
 function validar_numero_de_digitos (campo, num)
 {
-	if(campo.value.length != num)
+	if(campo.value.length != 0)
 	{
-		alert("Este campo deve conter " + num + " dígitos.");
-		campo.select();
+		if(campo.value.length != num)
+		{
+			alert("Este campo deve conter " + num + " dígitos.");
+			campo.value = "";
+		}
 	}
 }
