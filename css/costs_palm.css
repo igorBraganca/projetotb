@@ -59,6 +59,6 @@ input[id="id_patientName"]
 
 fieldset
 {
-  border-style: groove;
-  border-color: #C0C0C0;
+  border-style: solid;
+  border-color: #CDCDCD;
 }

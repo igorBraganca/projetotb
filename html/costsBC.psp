@@ -130,7 +130,7 @@ var fieldsCostBC = new CostsBC();
     <!-- Numero Geral e Nome-->
     <p>      
       <label title="label_pid" for="id_pid"><b>Número Geral:</b></label><input type="text" name="pid" id="id_pid" size="6" maxlength="100" readonly="true" value="<%= functions.encode(patientId) %>" /><br />
-      <label title="label_patientName" for="id_patientName"><b>Paciente:</b></label><input type="text" name="patientName" id="id_patientName" maxlength="100" readonly="true" disabled="true" value="<%= functions.encode(patientName) %>" />
+      <label title="label_patientName" for="id_patientName"><b>Paciente:</b></label><input type="text" name="patientName" id="id_patientName" maxlength="100" size="50" readonly="true" disabled="true" value="<%= functions.encode(patientName) %>" />
     </p>
     <br />
 
