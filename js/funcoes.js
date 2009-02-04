@@ -392,27 +392,28 @@ function validarPorcentagem(campo)
 
 function validarDia(campoDia)
 {
+	globalvar = campoDia;
 	if(campoDia.value != '')
 	{
 		if(campoDia.value.length != 2)
 		{
 			alert("O campo dia deve conter dois dígitos.");
 			campoDia.value = '';
-			campoDia.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if(!isNumberString(campoDia.value))
 		{
 			alert("Valor inválido para dia, digite somente números.");
 			campoDia.value = '';
-			campoDia.focus();
+			setTimeout("globalvar.focus()",250);			
 			return false;
 		}
 		if(campoDia.value < 1 || campoDia.value > 31)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
 			campoDia.value = '';
-			campoDia.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
@@ -421,27 +422,28 @@ function validarDia(campoDia)
 
 function validarMes(campoMes)
 {
+globalvar = campoMes;
 	if(campoMes.value != '')
 	{
 		if(campoMes.value.length != 2)
 		{
 			alert("O campo mês deve conter dois dígitos.");
 			campoMes.value = '';
-			campoMes.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if (!isNumberString(campoMes.value))
 		{
 			alert("Valor inválido para mês, digite somente números.");
 			campoMes.value = '';
-			campoMes.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if (campoMes.value < 1 || campoMes.value > 12)
 		{
 			alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
 			campoMes.value = '';
-			campoMes.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
@@ -450,6 +452,7 @@ function validarMes(campoMes)
 
 function validarAno(campoAno)
 {
+globalvar = campoAno;
 	if(campoAno.value != '')
 	{
 		if(campoAno.value.length != 4)
@@ -457,14 +460,14 @@ function validarAno(campoAno)
 			alert("O campo ano deve conter quatro dígitos.");
 
 			campoAno.value = '';
-			campoAno.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if(!isNumberString(campoAno.value))
 		{
 			alert("Valor inválido para ano, digite somente números.");
 			campoAno.value = '';
-			campoAno.focus();
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
@@ -506,8 +509,8 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
+				//form.dia_nascimento.select();
 				return false;
 			}
 		break;
@@ -518,8 +521,8 @@ function validarData(form)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mes de Fevereiro");
 				
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
+				//form.dia_nascimento.select();
 				return false;
 			}
 		}
@@ -528,8 +531,7 @@ function validarData(form)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mes de Fevereiro");
 				
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -537,8 +539,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -546,8 +547,7 @@ function validarData(form)
 		if(dia<1 || dia>30)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-			form.dia_nascimento.focus();
-			form.dia_nascimento.select();
+			setTimeout("form.dia_nascimento.focus()",250);
 			return false;
 		}
 		break;
@@ -555,8 +555,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -564,8 +563,7 @@ function validarData(form)
 		if(dia<1 || dia>30)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-			form.dia_nascimento.focus();
-			form.dia_nascimento.select();
+			setTimeout("form.dia_nascimento.focus()",250);
 			return false;
 		}
 		break;
@@ -573,8 +571,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -582,8 +579,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -591,8 +587,7 @@ function validarData(form)
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -600,8 +595,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -609,8 +603,7 @@ function validarData(form)
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
@@ -618,34 +611,31 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
 		default://mes inválido
 		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
-		form.mes_nascimento.focus();
-		form.mes_nascimento.select();
-		return false;
-	}
-	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
-	{
-		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
-
-		form.ano_nascimento.focus();
-		form.ano_nascimento.select();
+		setTimeout("form.mes_nascimento.focus()",250);
 		return false;
 	}
 	BirthDay = new Date(ano, mes-1 ,dia);
 	if(BirthDay.getTime()>today.getTime())
 	{
 		alert("A data de nascimento não pode ser posterior a data de hoje");
-		form.ano_nascimento.focus();
-		form.ano_nascimento.select();
+		setTimeout("form.ano_nascimento.focus()",250);
 		return false;
 	}
-	return true;
+
+	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
+	{
+		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
+
+		setTimeout("form.ano_nascimento.focus()",250);
+		return false;
+	}
+		return true;
 }
 
 function habilitaIdade(form)
