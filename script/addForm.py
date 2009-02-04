@@ -19,9 +19,11 @@ doc = xml.dom.minidom.Document();
 data = doc.createElement(form['form'].value);
 for k in form.keys():
   if k in ['form', 'pid']: continue;
-  val = doc.createElement(k);
-  val.appendChild(doc.createTextNode(unicode(form[k].value, xmlEncoding)));
-  data.appendChild(val);
+  valueList = form.getlist(k)
+  for value in valueList:
+      val = doc.createElement(k);
+      val.appendChild(doc.createTextNode(unicode(value, xmlEncoding)));
+      data.appendChild(val);
 
 #Opening the xml file and locking it to prevent access from other processes.
 xmlData = open(functions.PATIENTS_FILE_NAME, 'r+');
