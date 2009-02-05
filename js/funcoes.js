@@ -509,6 +509,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				//form.dia_nascimento.select();
 				return false;
@@ -520,7 +521,7 @@ function validarData(form)
 			if(dia<1 || dia>29)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mes de Fevereiro");
-				
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				//form.dia_nascimento.select();
 				return false;
@@ -530,7 +531,7 @@ function validarData(form)
 			if(dia<1 || dia>28)//O ano nao e bissexto
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mes de Fevereiro");
-				
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -539,6 +540,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -547,6 +549,7 @@ function validarData(form)
 		if(dia<1 || dia>30)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+			form.dia_nascimento.value='';
 			setTimeout("form.dia_nascimento.focus()",250);
 			return false;
 		}
@@ -555,6 +558,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -563,6 +567,7 @@ function validarData(form)
 		if(dia<1 || dia>30)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+			form.dia_nascimento.value='';
 			setTimeout("form.dia_nascimento.focus()",250);
 			return false;
 		}
@@ -571,6 +576,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -579,6 +585,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -587,6 +594,7 @@ function validarData(form)
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -595,6 +603,7 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -603,6 +612,7 @@ function validarData(form)
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
@@ -611,12 +621,14 @@ function validarData(form)
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				form.dia_nascimento.value='';
 				setTimeout("form.dia_nascimento.focus()",250);
 				return false;
 			}
 		break;
 		default://mes inválido
 		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
+		form.mes_nascimento.value='';
 		setTimeout("form.mes_nascimento.focus()",250);
 		return false;
 	}
@@ -624,14 +636,15 @@ function validarData(form)
 	if(BirthDay.getTime()>today.getTime())
 	{
 		alert("A data de nascimento não pode ser posterior a data de hoje");
+		form.ano_nascimento.value='';
 		setTimeout("form.ano_nascimento.focus()",250);
 		return false;
 	}
 
-	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
+	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < -1) || (ano_atual - ano == 1 && mes_atual == (mes - 1) && dia_atual - dia < 0))
 	{
 		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
-
+		form.ano_nascimento.value='';
 		setTimeout("form.ano_nascimento.focus()",250);
 		return false;
 	}
