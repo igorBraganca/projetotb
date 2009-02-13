@@ -15,7 +15,7 @@ def fmt2GetMethod(s):
   return s;
 
 
-escape_table = {"\n" : "\\n", '"' : '\\"', "\r" : "\\r", "'" : "\'"}
+escape_table = {"\n" : "\\n", '"' : '\\"', "\r" : "\\r", "'" : "\\'", '\\' : '\\\\'}
  
 def escapeJavaScript(original):
     result = ""

@@ -207,56 +207,6 @@ function diagnostico()
 	document.check.pontuacao.value = totalPontos
 }
 
-/*
-function enviar()
-{
-	var i,j,len;
-	var str = "Linhas escondidas: ";
-	var nroLinhas = document.getElementById('tabelaSintomas').rows.length - 8;
-	if (confirm('Tem certeza que deseja enviar este formulário?'))
-	{
-		for (i = 0; i < nroLinhas; i++)
-			if (document.getElementById('tabelaSintomas').rows[i].style.display != "none")
-			{
-				len = document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input").length;
-				for (j = 0; j < len; j++)
-				{
-					nomeCampo = document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[j].name;
-					switch (document.getElementsByName(nomeCampo).length)
-					{
-						case 1:
-							if(document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[j].value == "")
-							{
-								alert("Falha no envio: ha campos nao preenchidos.");
-								return false;
-							}
-						break;
-						case 2:
-						if(document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[j].checked == false && document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[++j].checked == false)
-						{
-							alert("Falha no envio: ha campos nao preenchidos.");
-							return false;
-						}
-						break;
-						case 3:
-						if(document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[j].checked == false && document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[++j].checked == false && document.getElementById('tabelaSintomas').rows[i].getElementsByTagName("input")[++j].checked == false)
-						{
-							alert("Falha no envio: ha campos nao preenchidos.");
-							return false;
-						}
-						break;
-					}
-				}
-			}
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-*/
-
 function enviar()
 {
 	var i,j,len,c1,c2;
@@ -296,7 +246,6 @@ function enviar()
 		return false;
 }
 
-
 function isNumberString(InString)
 {
 	if(InString.length==0)
@@ -314,26 +263,39 @@ function isNumberString(InString)
 //Valida se o campo e um numero nao-negativo valido.
 function validarCampoNumerico(campo)
 {
-	if (!isNumberString(campo.value))
+	globalvar = campo;
+	
+	if(campo.value != "")
 	{
-		alert("Valor inválido, digite somente números.");
-		
-		campo.value = '';
-		campo.focus();
+		if (!isNumberString(campo.value))
+		{
+			alert("Valor inválido, digite somente números.");
+			
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+			return (false);
+		}
 	}
+	
+	return (true);
 }
 
 //Valida se o campo e um numero positivo valido.
 function validarCampoNumericoPositivo(campo)
 {
-  if (campo.readOnly) return; // We don't check if it is read only.
+	globalvar = campo;
+	
+	if (campo.readOnly) return; // We don't check if it is read only.
 
-	if ( (!isNumberString(campo.value)) || (campo.value <= 0) )
+	if(campo.value != "")
 	{
-		alert("Valor inválido, digite somente números maiores que zero.");
-		
-		campo.value = '';
-		campo.focus();
+		if ((!isNumberString(campo.value)) || (campo.value <= 0))
+		{
+			alert("Valor inválido, digite somente números maiores que zero.");
+			
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+		}
 	}
 }
 
@@ -342,7 +304,7 @@ function validarNumEPonto (campo)
 {
 	if(campo.length == 0)
 		return(true);
-	var stringRef = ".,1234567890";
+	var stringRef = ".1234567890";
 	for (indice = 0; indice < campo.length; indice ++)
 	{
 		if(stringRef.indexOf(campo.charAt(indice),0) == -1 )
@@ -359,15 +321,22 @@ function mudarVirgulaParaPonto (campo)
 
 function validarCampoPeso (campo)
 {	
-	mudarVirgulaParaPonto(campo);
-	
-	if(validarNumEPonto(campo.value) == false)
+	globalvar = campo;
+
+	if(campo.value != "")
 	{
-		alert("Valor inválido, digite somente números, \".\" e \",\".");
-		campo.value = "";
-		return false;
+		mudarVirgulaParaPonto(campo);
+		
+		if(validarNumEPonto(campo.value) == false)
+		{
+			alert("Valor inválido, digite somente números, \".\" e \",\".");
+			
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+			return (false);
+		}
 	}
-	return true;
+	return (true);
 }
 
 function trabalharComCampoPeso (campo)
@@ -375,44 +344,57 @@ function trabalharComCampoPeso (campo)
 	if(validarCampoPeso(campo))
 	{
 		campo.value = arredondarNcasasDecimais(campo.value,1);
-		return true;
+		return (true);
 	}
 
-	return false;
+	return (false);
 }
 
 function validarPorcentagem(campo)
 {
-	if (campo.value > 100)
+	globalvar = campo;
+
+	if(campo.value != "")
 	{
-		alert("Digite um valor entre 0 e 100.");
-		campo.value = "";
+		if (campo.value > 100)
+		{
+			alert("Digite um valor entre 0 e 100.");
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+		}
 	}
 }
 
 function validarDia(campoDia)
 {
-	if(campoDia.value != '')
+	if(campoDia.readOnly == true)
+		return true;
+		
+	if(campoDia.disabled == true)
+		return true;
+
+	globalvar = campoDia;
+	if(campoDia.value != "")
 	{
 		if(campoDia.value.length != 2)
 		{
 			alert("O campo dia deve conter dois dígitos.");
-			campoDia.value = '';
-			campoDia.focus();
+			campoDia.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if(!isNumberString(campoDia.value))
 		{
 			alert("Valor inválido para dia, digite somente números.");
-			campoDia.value = '';
-			campoDia.focus();
+			campoDia.value = "";
+			setTimeout("globalvar.focus()",250);			
 			return false;
 		}
 		if(campoDia.value < 1 || campoDia.value > 31)
 		{
 			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-			campoDia.value = '';
-			campoDia.focus();
+			campoDia.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
@@ -421,27 +403,35 @@ function validarDia(campoDia)
 
 function validarMes(campoMes)
 {
-	if(campoMes.value != '')
+	globalvar = campoMes;
+	
+	if(campoMes.readOnly == true)
+		return true;
+		
+	if(campoMes.disabled == true)
+		return true;
+	
+	if(campoMes.value != "")
 	{
 		if(campoMes.value.length != 2)
 		{
 			alert("O campo mês deve conter dois dígitos.");
-			campoMes.value = '';
-			campoMes.focus();
+			campoMes.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if (!isNumberString(campoMes.value))
 		{
 			alert("Valor inválido para mês, digite somente números.");
-			campoMes.value = '';
-			campoMes.focus();
+			campoMes.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if (campoMes.value < 1 || campoMes.value > 12)
 		{
 			alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
-			campoMes.value = '';
-			campoMes.focus();
+			campoMes.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
@@ -450,201 +440,307 @@ function validarMes(campoMes)
 
 function validarAno(campoAno)
 {
-	if(campoAno.value != '')
+	if(campoAno.readOnly == true)
+		return true;
+	
+	if(campoAno.disabled == true)
+		return true;
+		
+	globalvar = campoAno;
+	if(campoAno.value != "")
 	{
 		if(campoAno.value.length != 4)
 		{
 			alert("O campo ano deve conter quatro dígitos.");
-
-			campoAno.value = '';
-			campoAno.focus();
+			campoAno.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		if(!isNumberString(campoAno.value))
 		{
 			alert("Valor inválido para ano, digite somente números.");
-			campoAno.value = '';
-			campoAno.focus();
+			campoAno.value = "";
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	}
 	return true;
 }
 
-function validarIdade(campoIdade)
-{
-	if(!isNumberString(campoIdade.value))
-	{
-		alert("Valor inválido para idade, digite somente números.");
-		campoIdade.focus();
-		campoIdade.select();
-		return false;
-	}			
-	if ((campoIdade.value < 1 || campoIdade.value > 120) && campoIdade.value != "")
-	{
-		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
-		campoIdade.focus();
-		campoIdade.select();
-		return false;
-	}
-	return true;
-}
-
-function validarData(form)
+function validarQualquerData(campoDia,campoMes,campoAno)
 {
 	today = new Date();
-	dia = form.dia_nascimento.value;
-	mes = form.mes_nascimento.value;
-	ano = form.ano_nascimento.value;
-	dia_atual =today.getDate();
-	mes_atual =today.getMonth();
-	ano_atual =today.getFullYear();
+	dia = Number(campoDia.value);
+	mes = Number(campoMes.value);
+	ano = Number(campoAno.value);
+	dia_atual = today.getDate();
+	mes_atual = today.getMonth() + 1;
+	ano_atual = today.getFullYear();
 
+	if((dia == "") && (mes == "") && (ano == ""))
+		return (true);
+	
 	switch(mes)
 	{
-		case '01'://janeiro
+		case 1://janeiro
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
-		case '02'://fevereiro
-		if((retcode=(ano-1900)%4 )== 0) // Se o ano e bissexto
-		{
-			if(dia<1 || dia>29)
+		case 2://fevereiro
+			if((retcode=(ano-1900)%4 )== 0) // Se o ano e bissexto
 			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mes de Fevereiro");
-				
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
-				return false;
+				if(dia<1 || dia>29)
+				{
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mês de Fevereiro");
+					campoDia.value = "";
+					globalvar = campoDia;
+					setTimeout("globalvar.focus()",250);
+					return false;
+				}
 			}
-		}
-		else 
-			if(dia<1 || dia>28)//O ano nao e bissexto
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mes de Fevereiro");
-				
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
-				return false;
-			}
+			else 
+				if(dia<1 || dia>28)//O ano nao e bissexto
+				{
+					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mês de Fevereiro");
+					campoDia.value = "";
+					globalvar = campoDia;
+					setTimeout("globalvar.focus()",250);
+					return false;
+				}
 		break;
-		case '03'://marco
+		case 3://marco
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
-		case '04'://abril
-		if(dia<1 || dia>30)
-		{
-			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-			form.dia_nascimento.focus();
-			form.dia_nascimento.select();
-			return false;
-		}
-		break;
-		case '05'://maio
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
-				return false;
-			}
-		break;
-		case '06'://junho
-		if(dia<1 || dia>30)
-		{
-			alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-			form.dia_nascimento.focus();
-			form.dia_nascimento.select();
-			return false;
-		}
-		break;
-		case '07'://julho
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
-				return false;
-			}
-		break;
-		case '08'://agosto
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
-				return false;
-			}
-		break;
-		case '09'://setembro
+		case 4://abril
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
-		case '10'://outubro
+		case 5://maio
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
-		case '11'://novembro
+		case 6://junho
 			if(dia<1 || dia>30)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
-		case '12'://dezembro
+		case 7://julho
 			if(dia<1 || dia>31)
 			{
 				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				form.dia_nascimento.focus();
-				form.dia_nascimento.select();
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
+				return false;
+			}
+		break;
+		case 8://agosto
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
+				return false;
+			}
+		break;
+		case 9://setembro
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
+				return false;
+			}
+		break;
+		case 10://outubro
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
+				return false;
+			}
+		break;
+		case 11://novembro
+			if(dia<1 || dia>30)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
+				return false;
+			}
+		break;
+		case 12://dezembro
+			if(dia<1 || dia>31)
+			{
+				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
+				campoDia.value = "";
+				globalvar = campoDia;
+				setTimeout("globalvar.focus()",250);
 				return false;
 			}
 		break;
 		default://mes inválido
+		
 		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
-		form.mes_nascimento.focus();
-		form.mes_nascimento.select();
+		campoMes.value = "";
+		globalvar = campoMes;
+		setTimeout("globalvar.focus()",250);
 		return false;
 	}
-	if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
-	{
-		alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
+	
+	if(((dia > dia_atual) && (mes == mes_atual) && (ano == ano_atual)) || ((mes > mes_atual) && (ano == ano_atual)) || (ano > ano_atual))
+	{ 	
+			alert("Data inválida, a data preenchida não pode ser posterior a data de hoje.");
+			campoDia.value = "";
+			campoMes.value = "";
+			campoAno.value = "";
+			globalvar = campoDia;
+			setTimeout("globalvar.focus()",250);
+			return false;
+	}
+	
+	return true;
+}
 
-		form.ano_nascimento.focus();
-		form.ano_nascimento.select();
-		return false;
+/*
+  Funcao que valida qualquer data....
+  Verifica se eh uma data valida...
+  Se eh posterio a data atual...
+  Se eh anterior a data de nascimento.....
+*/
+function validarData(dia,mes,ano)
+{			
+	if((dia.readOnly == true) || (mes.readOnly == true) || (ano.readOnly == true))
+		return true;
+
+	if(validarQualquerData(dia,mes,ano))
+	{	
+		if((document.check.ano_nascimento.value != "") && (document.check.mes_nascimento.value != "") && (document.check.dia_nascimento.value != ""))
+		{
+			if((document.check.ano_nascimento.value != "") && (document.check.mes_nascimento.value == "XX") && (document.check.dia_nascimento.value == "XX"))
+			{
+				if(parseInt(ano.value) < parseInt(document.check.ano_nascimento.value))
+				{
+					alert("Data inválida. A data não pode ser anterior à data de nascimento do paciente.");
+					ano.value = "";
+					globalvar = ano;
+					setTimeout("globalvar.focus()",250);
+				}
+			}
+			else
+			{
+				if ((parseInt(ano.value) < parseInt(document.check.ano_nascimento.value)) || ((mes.value < document.check.mes_nascimento.value) && (ano.value == document.check.ano_nascimento.value)) || ((parseInt(dia.value) < parseInt(document.check.dia_nascimento.value)) && (parseInt(mes.value) == parseInt(document.check.mes_nascimento.value)) && (parseInt(ano.value) == parseInt(document.check.ano_nascimento.value))))
+				{
+					alert("Data inválida. A data não pode ser anterior à data de nascimento do paciente.");
+					dia.value="";
+					mes.value="";
+					ano.value="";
+					globalvar = dia;
+					setTimeout("globalvar.focus()",250);
+					
+					return false;
+				}
+			}
+		}
+		return true;
 	}
-	BirthDay = new Date(ano, mes-1 ,dia);
-	if(BirthDay.getTime()>today.getTime())
+	return false;
+}
+
+/*
+  Funcao que valida data de nascimento....
+  Verifica se eh uma data valida...
+  Se eh posterior a data atual...
+  Se com essa data o paciente vai ter mais de 120 anos.....
+*/
+function validarDataDeNascimento(form)
+{
+	today = new Date();
+	dia = form.dia_nascimento;
+	mes = form.mes_nascimento;
+	ano = form.ano_nascimento;
+	dia_atual =today.getDate();
+	mes_atual =today.getMonth();
+	ano_atual =today.getFullYear();
+	
+	if((dia.readOnly == true) || (mes.readOnly == true) || (ano.readOnly == true))
+		return true;
+		
+	if((dia.value == "") || (mes.value == "") || (ano.value == ""))
+		return (true);
+		
+	if(validarQualquerData(dia,mes,ano))
 	{
-		alert("A data de nascimento não pode ser posterior a data de hoje");
-		form.ano_nascimento.focus();
-		form.ano_nascimento.select();
-		return false;
+		if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
+		{
+			alert("Ano inválido:\n A idade não deve ser maior que 120 anos, nem menor do que 1 ano.");
+			form.dia_nascimento.value = "";
+			form.mes_nascimento.value = "";
+			form.ano_nascimento.value = "";
+			setTimeout("form.ano_nascimento.focus()",250);
+			return false;
+		}
+		return true;
+	}	
+	return false;
+}
+
+function validarIdade(campoIdade)
+{
+	globalvar = campoIdade;
+	if(campoIdade.value != "")
+	{
+		if(!isNumberString(campoIdade.value))
+		{
+			alert("Valor inválido para idade, digite somente números.");
+			campoIdade.value = "";
+			setTimeout("globalvar.focus()",250);
+			return false;
+		}			
+		if ((campoIdade.value < 1 || campoIdade.value > 120) && campoIdade.value != "")
+		{
+			alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
+			campoIdade.value = "";
+			setTimeout("globalvar.focus()",250);
+			return false;
+		}
 	}
+	
 	return true;
 }
 
@@ -652,6 +748,7 @@ function habilitaIdade(form)
 {
 	if (form.habilita_idade.checked)
  	{
+		setTimeout("form.idade.focus()",250);
 		form.dia_nascimento.value = "XX";
 		form.mes_nascimento.value = "XX";
 		form.ano_nascimento.value = "XXXX";
@@ -660,21 +757,20 @@ function habilitaIdade(form)
 		form.dia_nascimento.readOnly = true;
 		form.mes_nascimento.readOnly = true;
 		form.ano_nascimento.readOnly = true;
-		form.idade.focus();
 		document.getElementById("aproximadamente").innerHTML = tabFields[14][1] + " aproximada:";
 	}
 	else
 	{
-		form.dia_nascimento.value = '';
-		form.mes_nascimento.value = '';
-		form.ano_nascimento.value = '';
-		form.idade.value= '';
+		form.dia_nascimento.value = "";
+		form.mes_nascimento.value = "";
+		form.ano_nascimento.value = "";
+		form.idade.value= "";
 		form.idade.readOnly = true;
 		form.dia_nascimento.readOnly = false;
 		form.mes_nascimento.readOnly = false;
 		form.ano_nascimento.readOnly = false;
 		document.getElementById("aproximadamente").innerHTML = tabFields[14][1] + ":";
-		form.dia_nascimento.focus();
+		setTimeout("form.dia_nascimento.focus()",250);
 	}
 }
 
@@ -688,10 +784,10 @@ function calcularAnoNascimento(idade)
 function calcularIdade(diaNascimento, mesNascimento, anoNascimento)
 {
 	today = new Date();
-	diaAtual =today.getDate();
-	mesAtual =today.getMonth();
+	diaAtual = today.getDate();
+	mesAtual = today.getMonth();
 	anoAtual = today.getFullYear();
-	idade= (anoAtual - anoNascimento);
+	idade = (anoAtual - anoNascimento);
 	if(mesNascimento-1 > mesAtual)
 		idade--;
 	if(mesNascimento-1 == mesAtual)
@@ -706,235 +802,71 @@ function getElement(aID){
 
 function validarHora(campo)
 {
-  if (campo.value.length == 1)
-  {
-		alert("A hora precisa ter exatamente 2 dígitos.");
-		campo.focus();
-		campo.select();
-		campo.value = ''; 
-		return false;    
-  }
-  
-	if (campo.value > 23)
+	globalvar = campo;
+	if(campo.value != "")
 	{
-		alert("Digite um valor entre 0 e 23.");
-		campo.focus();
-		campo.select();
-		campo.value = '';
-		return false;
+		if (campo.value.length == 1)
+		{
+			alert("A hora precisa ter exatamente 2 dígitos.");
+			campo.value = "";
+			setTimeout("globalvar.focus()",250); 
+			return false;    
+		}
+	  
+		if (campo.value > 23)
+		{
+			alert("Digite um valor entre 0 e 23.");
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+			return false;
+		}
 	}
 	return true;
 }
 
 function validarMinuto(campo)
 {
-  if (campo.value.length == 1)
-  {
-		alert("Os minutos precisam ter exatamente 2 dígitos.");
-		campo.focus();
-		campo.select();
-		campo.value = ''; 
-		return false;    
-  }
-
-	if (campo.value > 59)
+	globalvar = campo;
+	if(campo.value != "")
 	{
-		alert("Digite um valor entre 0 e 59.");
-		campo.focus();
-		campo.select();
-		campo.value = ''; 
-		return false;
+		if (campo.value.length == 1)
+		{
+			alert("Os minutos precisam ter exatamente 2 dígitos.");
+			campo.value = ""; 
+			setTimeout("globalvar.focus()",250);
+			return false;    
+		}
+
+		if (campo.value > 59)
+		{
+			alert("Digite um valor entre 0 e 59.");
+			campo.value = ""; 
+			setTimeout("globalvar.focus()",250);
+			return false;
+		}
 	}
 	return true;
 }
 
 function validarTempo(campo)
 {
-	if(parseInt(document.check.idade.value) < parseInt(campo.value))
+	globalvar = campo;
+	if(campo.value != "")
 	{
-		alert("O valor deve ser menor do que a idade do paciente.");
-		campo.focus();
-		campo.select();
+		if(parseInt(document.check.idade.value) < parseInt(campo.value))
+		{
+			alert("Valor inválido, este valor deve ser menor do que a idade do paciente.");
+			campo.value = "";
+			setTimeout("globalvar.focus()",250);
+		}
 	}
-}
-
-function validarQualquerData(campoDia,campoMes,campoAno)
-{
-	today = new Date();
-	dia = Number(campoDia.value);
-	mes = Number(campoMes.value);
-	ano = Number(campoAno.value);
-	dia_atual = today.getDate();
-	mes_atual = today.getMonth() + 1;
-	ano_atual = today.getFullYear();
-
-	if((dia == 0) && (mes == 0) && (ano == 0))
-		return true;
-	
-	switch(mes)
-	{
-		case 1://janeiro
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 2://fevereiro
-			if((retcode=(ano-1900)%4 )== 0) // Se o ano e bissexto
-			{
-				if(dia<1 || dia>29)
-				{
-					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 29, pois este é o mês de Fevereiro");
-
-					campoDia.value = '';
-					campoDia.focus();
-					return false;
-				}
-			}
-			else 
-				if(dia<1 || dia>28)//O ano nao e bissexto
-				{
-					alert("Dia inválido:" +"\n" +"Use valores entre 01 e 28, pois este é o mês de Fevereiro");
-					
-					campoDia.value = '';
-					campoDia.focus();
-					return false;
-				}
-		break;
-		case 3://marco
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 4://abril
-			if(dia<1 || dia>30)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				campoDia.value = '';
-					campoDia.focus();
-				return false;
-			}
-		break;
-		case 5://maio
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 6://junho
-			if(dia<1 || dia>30)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				campoDia.value = '';
-					campoDia.focus();
-				return false;
-			}
-		break;
-		case 7://julho
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 8://agosto
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 9://setembro
-			if(dia<1 || dia>30)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 10://outubro
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 11://novembro
-			if(dia<1 || dia>30)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 30");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		case 12://dezembro
-			if(dia<1 || dia>31)
-			{
-				alert("Dia inválido:" +"\n" +"Use valores entre 01 e 31");
-				campoDia.value = '';
-				campoDia.focus();
-				return false;
-			}
-		break;
-		default://mes inválido
-		
-		alert("Mês inválido:" +"\n" +"Use valores entre 01 e 12");
-
-		campoMes.value = '';
-		campoMes.focus();
-		return false;
-	}
-	/*if ((ano_atual - ano < 1) || (ano_atual - ano > 120) || (ano_atual - ano == 1 && mes_atual - mes < 1) || (ano_atual - ano == 1 && mes_atual == mes && dia_atual - dia < 1))
-	{
-		alert("Ano inválido:\n A idade nao deve ser maior que 120 anos, nem menor do que 1 ano.");
-		campoAno.focus();
-		campoAno.select();
-		return false;
-	}
-	BirthDay = new Date(ano, mes-1 ,dia);
-	if(BirthDay.getTime()>today.getTime())
-	{
-		alert("A data de nascimento nao pode ser posterior a data de hoje");
-		campoAno.focus();
-		campoAno.select();
-		return false;
-	} */
-	
-	if(((dia > dia_atual) && (mes == mes_atual) && (ano == ano_atual)) || ((mes > mes_atual) && (ano == ano_atual)) || (ano > ano_atual))
-	{ 	
-			alert("A data preenchida não pode ser posterior a data de hoje.");
-			campoDia.value = '';
-			campoMes.value = '';
-			campoAno.value = '';
-			campoDia.focus();
-			return false;
-	}
-	
-	return true;
 }
 
 function showmenu(elmnt)
 {
 	document.getElementById(elmnt).style.visibility = "visible";
 }
+
 function hidemenu(elmnt)
 {
 	document.getElementById(elmnt).style.visibility = "hidden";
@@ -1021,8 +953,6 @@ function confirmar(form)
 function arredondarNcasasDecimais (valor, casas)
 {
    var numeroArredondado = Math.round(valor * Math.pow(10,casas)) / Math.pow(10,casas);
-
-   //valor = numeroArredondado;
    
    return numeroArredondado;
 }
@@ -1037,76 +967,19 @@ function perdaPeso(habitual,atual)
 	if (perda > habitualDez)
 	{
 		document.check.perdaDePeso.value = "SIM";
-		document.check.perdaDePeso_semanas.disabled = false;
-		document.check.perdaDePeso_semanas.select();
+		setTimeout("document.check.perdaDePeso_semanas.focus()",250);
+		return false;
 	}
 	else
 	{
 		document.check.perdaDePeso.value = "nao";
-		document.check.perdaDePeso_semanas.disabled = true;
+		return true;
 	}
 }
-
-function validarDataExame(dia,mes,ano)
-{	
-	var d = new Date();
-	var Dia = d.getDate();
-	var Mes = d.getMonth() + 1;
-	var Ano = d.getFullYear();
-		
-	if (ano.value > Ano)
-	{
-		alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
-
-		dia.value="";
-		mes.value="";
-		ano.value="";
-		dia.focus();
-	}	
-	else if (parseInt(ano.value) < parseInt(document.check.ano_nascimento.value))
-	{
-		alert("Data inválida. A data não pode ser anterior ao nascimento do paciente.");
-		dia.value="";
-		mes.value="";
-		ano.value="";
-		dia.focus();
-	}
-	else
-	{
-		if (ano.value == Ano)
-		{
-			if (mes.value > Mes)
-			{
-				alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
-
-				dia.value="";
-				mes.value="";
-				ano.value="";
-				dia.focus();
-			}
-			else
-			{
-				if (mes.value == Mes)
-				{
-					if (dia.value > Dia)
-					{
-						alert("Data inválida. Por favor, digite uma data anterior à data de hoje.");
-
-						dia.value="";
-						mes.value="";
-						ano.value="";
-						dia.focus();
-					}	
-				}
-			}
-		}
-	}
-}
-
 
 function naturalidade ( campo1, campo2) /* naturalidadeEstado,,, naturalidadeCidade */
 {
-	if(campo1.value != 'RJ' && campo1.value != '')
+	if(campo1.value != 'RJ' && campo1.value != "")
 		return false;
 
 	if(campo1.value == 'RJ')
@@ -1116,7 +989,7 @@ function naturalidade ( campo1, campo2) /* naturalidadeEstado,,, naturalidadeCid
 	return true;
 }
 
-function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,tempoTotalHora,tempoTotalMin)
+function validarTempoViagem (horaA,minA,horaB,minB,horaC,minC,tempoTotalHora,tempoTotalMin)
 /**
 	A - Que horas você saiu de casa?
 	B - Que horas você chegou no posto?
@@ -1130,49 +1003,51 @@ function validar_tempo_de_viagem_custos_A (horaA,minA,horaB,minB,horaC,minC,temp
 	tempoB = (Number(horaB.value)*60) + Number(minB.value);
 	tempoC = (Number(horaC.value)*60) + Number(minC.value);
 
-	if((horaA.value != '') && (minA.value != '') && (horaB.value != '') && (minB.value != ''))
+	if((horaA.value != "") && (minA.value != "") && (horaB.value != "") && (minB.value != ""))
 	{
 		if(tempoB < tempoA)
 		{
 			alert("A hora que você chegou no posto de saúde não pode ser anterior a hora que você saiu de casa.");
-			horaB.value = '';
-			minB.value = '';
-			horaB.focus();
+			horaB.value = "";
+			minB.value = "";
+			globalvar = horaB;
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 		
 		if((tempoB < tempoA) && (tempoC < tempoB))
 		{
 			alert("A hora que você chegou no posto de saúde e a hora em que você viu o médico não podem ser anteriores a hora que você saiu de casa.");
-			horaB.value = '';
-			minB.value = '';
-			horaC.value = '';
-			minC.value = '';
-			horaB.focus();
+			horaB.value = "";
+			minB.value = "";
+			horaC.value = "";
+			minC.value = "";
+			globalvar = horaB;
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
-		
-		if((horaC.value != '') && (minC.value != ''))
+		if((horaC.value != "") && (minC.value != ""))
 		{	
 			if(tempoC < tempoB)
 			{
 				alert("A hora em que você viu o médico não pode ser anterior a hora que você chegou no posto.");
-				horaC.value = '';
-				minC.value = '';
-				horaC.focus();
+				horaC.value = "";
+				minC.value = "";
+				globalvar = horaC;
+				setTimeout("globalvar.focus()",250);
 				return false
 			}
-	
 			/** CALCULO DO TEMPO QUE LEVOU PARA SAIR DE CASA ATEH SER ATENDIDO PELO MEDICO **/
 			
 			tempoTotalMin.value = (tempoC - tempoA) % 60;
-			if (tempoTotalMin.value.length == 1) tempoTotalMin.value = "0" + tempoTotalMin.value;
+			if (tempoTotalMin.value.length == 1) 
+				tempoTotalMin.value = "0" + tempoTotalMin.value;
+				
 			tempoTotalHora.value = ((tempoC - tempoA) - tempoTotalMin.value) / 60;
-		  if (tempoTotalHora.value.length == 1) tempoTotalHora.value = "0" + tempoTotalHora.value;
+			if (tempoTotalHora.value.length == 1) 
+				tempoTotalHora.value = "0" + tempoTotalHora.value;
 		}
-	
 	}
-	
 	return true;
 }
 
@@ -1187,29 +1062,50 @@ function validar_hora_escarro (horaA,minA,horaB,minB)
 	tempoA = (Number(horaA.value)*60) + Number(minA.value);
 	tempoB = (Number(horaB.value)*60) + Number(minB.value);
 	
-	if((horaA.value != '') && (minA.value != '') && (horaB.value != '') && (minB.value != ''))
+	if((horaA.value != "") && (minA.value != "") && (horaB.value != "") && (minB.value != ""))
 		if(tempoA < tempoB)
 		{
 			alert("A hora em que você coletou o escarro no potinho não pode ser anterior a hora em que você acordou para coletar o escarro.");
-			horaB.value = '';
-			minB.value = '';
-			horaA.value = '';
-			minA.value = '';
-			horaA.focus();
+			horaB.value = "";
+			minB.value = "";
+			horaA.value = "";
+			minA.value = "";
+			globalvar = horaA;
+			setTimeout("globalvar.focus()",250);
 			return false;
 		}
 	
 	return true;
 }
 
-function validar_numero_de_digitos (campo, num)
+function validarNumeroDeDigitos (campo, num)
 {
-	if(campo.value.length != 0)
+	if(campo.value != "")
 	{
 		if(campo.value.length != num)
 		{
 			alert("Este campo deve conter " + num + " dígitos.");
 			campo.value = "";
+			globalvar = campo;
+			setTimeout("globalvar.focus()",250);
 		}
 	}
 }
+
+function desabilitarRadio (name, num)
+{
+	for(indice=0; indice< num; indice++)
+		name[indice].disabled = true;
+}
+
+function habilitarRadio (name, num)
+{
+	for(indice=0; indice< num; indice++)
+		name[indice].disabled = false;
+}
+
+/*
+**	para as funcoes desabilitarRadio e habilitarRadio
+**	name -> nome do campo
+**	num -> numero de opcoes do campo
+*/

@@ -176,19 +176,19 @@ var fieldsCostBC = new CostsBC();
     <!-- HORARIO SAIU DE CASA -->    
     <p>
       <script>document.write(fieldsCostBC.horaSaidaCasa.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasa.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasa.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
 
     <!-- HORARIO CHEGOU NO POSTO -->
     <p>
       <script>document.write(fieldsCostBC.horaChegadaPosto.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedico.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedico.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- HORARIO MEDICO -->
     <p>
       <script>document.write(fieldsCostBC.horaMedico.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedico.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedico.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- TEMPO TOTAL -->

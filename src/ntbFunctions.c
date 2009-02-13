@@ -220,7 +220,16 @@ char* translate_escape_character (char* palavra)
 						indice2 ++;
 					}
 					else
-						temp[indice2] = palavra[indice1];
+					{
+						if(palavra[indice1] == '\\')
+						{
+							temp[indice2] = '\\';
+							temp[indice2 + 1] = '\\';
+							indice2 ++;
+						}
+						else
+							temp[indice2] = palavra[indice1];
+					}
 				}
 			}
 		}	
