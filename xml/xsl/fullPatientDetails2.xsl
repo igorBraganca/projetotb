@@ -265,7 +265,7 @@
 					<td class="title1">Qual?</td>
 					<td class="answer1">
 						<xsl:for-each select="contatoTBPqual">
-							<xsl:value-of select="." />&#32;
+							<xsl:value-of select="." />. 
 						</xsl:for-each>
 					</td>
 				</tr>
@@ -396,27 +396,27 @@
 			</tr>
 			<tr>
 				<td class="title2">Quanto custou o transporte?</td>
-				<td class="answer2"><xsl:value-of select="custoTransporteA" /></td>
+				<td class="answer2"><xsl:value-of select="custoTransporte" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Está acompanhado? Por quantas pessoas?</td>
-				<td class="answer1"><xsl:value-of select="acompanhadoA" />. <xsl:value-of select="numeroAcompanhantesA" /></td>
+				<td class="answer1"><xsl:value-of select="acompanhado" />. <xsl:value-of select="numeroAcompanhantes" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Que horas saiu de casa?</td>
-				<td class="answer1"><xsl:value-of select="horaSaidaCasaA" /></td>
+				<td class="answer1"><xsl:value-of select="horaSaidaCasa" />:<xsl:value-of select="minutoSaidaCasa" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Que horas chegou no posto?</td>
-				<td class="answer1"><xsl:value-of select="horaChegadaPostoA" /></td>
+				<td class="answer1"><xsl:value-of select="horaChegadaPosto" />:<xsl:value-of select="minutoChegadaPosto" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Que horas viu o médico?</td>
-				<td class="answer2"><xsl:value-of select="horaMedicoA" /></td>
+				<td class="answer2"><xsl:value-of select="horaMedico" />:<xsl:value-of select="minutoMedico" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quanto tempo levou desde que saiu de casa?</td>
-				<td class="answer1"><xsl:value-of select="tempoTotalA" /></td>
+				<td class="answer1"><xsl:value-of select="horaTotal" />:<xsl:value-of select="minutoTotal" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Se o paciente mora fora da cidade do Rio de Janeiro: Amanhã terá que voltar para trazer outra amostra de escarro. Onde vai passar a noite? </td>
@@ -440,19 +440,19 @@
 			</tr>
 			<tr>
 				<td class="title1">Desde que saiu de casa, comeu ou bebeu alguma coisa?</td>
-				<td class="answer1"><xsl:value-of select="comeuBebeuA" /></td>
+				<td class="answer1"><xsl:value-of select="comeuBebeu" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quanto custou?</td>
-				<td class="answer1"><xsl:value-of select="custoComidaBebidaA" /></td>
+				<td class="answer1"><xsl:value-of select="custoComidaBebida" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Teve que pagar algo aqui no posto?</td>
-				<td class="answer2"><xsl:value-of select="pagarPostoA" /></td>
+				<td class="answer2"><xsl:value-of select="pagarPosto" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Quanto custou?</td>
-				<td class="answer2"><xsl:value-of select="custoPostoA" /></td>
+				<td class="answer2"><xsl:value-of select="custoPosto" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Profissão:</td>
@@ -464,11 +464,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Deixou de ganhar dinheiro hoje para poder vir ao posto?</td>
-				<td class="answer1"><xsl:value-of select="deixouGanharDinheiroA" /></td>
+				<td class="answer1"><xsl:value-of select="deixouGanharDinheiro" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quanto deixou de ganhar?</td>
-				<td class="answer1"><xsl:value-of select="quantoDeixouGanharA" /></td>
+				<td class="answer1"><xsl:value-of select="quantoDeixouGanhar" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Se o paciente estiver acompanhado: Quem pagou pela bebida, comida, transporte, hotel, etc? O paciente ou seus acompanhantes?</td>
@@ -479,8 +479,8 @@
 				<td class="answer2"><xsl:value-of select="gastoAcompanhante" /></td>
 			</tr>
 			<tr>
-				<td class="evaluated">Avaliado pelo(a) enfermeiro(a): <xsl:value-of select="avaliadorEnfermeiroA" /></td>
-				<td class="evaluated">Data da avaliação: <xsl:value-of select="diaCustoA" />/<xsl:value-of select="mesCustoA" />/<xsl:value-of select="anoCustoA" /></td>
+				<td class="evaluated">Avaliado pelo(a) enfermeiro(a): <xsl:value-of select="avaliador" /></td>
+				<td class="evaluated">Data da avaliação: <xsl:value-of select="diaCadastro" />/<xsl:value-of select="mesCadastro" />/<xsl:value-of select="anoCadastro" /></td>
 			</tr>
 </xsl:template>
 
@@ -520,7 +520,7 @@
 			</tr>
 			<tr>
 				<td class="title1">Data da quimioprofilaxia:</td>
-				<td class="answer1"><xsl:value-of select="dataQuimio" /></td>
+				<td class="answer1"><xsl:value-of select="mes_quimio" />/<xsl:value-of select="ano_quimio" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Desfecho:</td>
@@ -539,18 +539,29 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do Anti-HIV:</td>
-				<td class="answer2"><xsl:value-of select="dataAntiHIV" /></td>
+				<td class="answer2"><xsl:value-of select="dia_antihiv" />/<xsl:value-of select="mes_antihiv" />/<xsl:value-of select="ano_antihiv" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Comorbidades:</td>
-				<td class="answer1"><xsl:value-of select="comorbidades" /></td>
+				<td class="answer1">
+				<xsl:for-each select="comorbidades"><xsl:value-of select="." />. </xsl:for-each>
+				<xsl:value-of select="outrascomorbidades" /></td>
 			</tr>
 			
 			
 			<tr>
 				<td class="title4" colspan="2">Avaliação clínica</td>
+			</tr> 
+			
+			<tr>
+				<td class="title1">Exame Físico Normal:</td>
+				<td class="answer1"><xsl:value-of select="exameFisico" /></td>
 			</tr>
 			
+			<tr>
+				<td class="title1">Alterações no exame físico:</td>
+				<td class="answer1"><xsl:value-of select="alteracoesNoExameFisico" /></td>
+			</tr>
 			
 			<tr>
 				<td class="title1">Probabilidade de TB ativa: </td>
@@ -587,7 +598,7 @@
 			</tr>
 			<tr>
 				<td class="title2">NSA</td>
-				<td class="answer2"><xsl:value-of select="NSA" /></td>
+				<td class="answer2"><xsl:value-of select="nsa" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Em caso de baixa probabilidade de TB ativa:</td>
@@ -595,7 +606,7 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do RX:</td>
-				<td class="answer2"><xsl:value-of select="dataRX" /></td>
+				<td class="answer2"><xsl:value-of select="dia_rx" />/<xsl:value-of select="mes_rx" />/<xsl:value-of select="ano_rx" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Diagnóstico de probabilidade tendo informação sobre o RX de tórax mas sem conhecimento dos resultados bacteriológicos:</td>
@@ -607,11 +618,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Resultado da Baciloscopia 1:</td>
-				<td class="answer1"><xsl:value-of select="resultadoBaciloscopia1" /></td>
+				<td class="answer1"><xsl:value-of select="resultadoBaciloscopia1" />. <xsl:value-of select="casoPositivo1" />.</td>
 			</tr>
 			<tr>
 				<td class="title1">Resultado da Baciloscopia 2:</td>
-				<td class="answer1"><xsl:value-of select="resultadoBaciloscopia2" /></td>
+				<td class="answer1"><xsl:value-of select="resultadoBaciloscopia2" />. <xsl:value-of select="casoPositivo2" />.</td>
 			</tr>
 			<tr>
 				<td class="title2">Caso as duas baciloscopias iniciais sejam negativas qual seria o diagnóstico de probabilidade de TB?</td>
@@ -634,8 +645,12 @@
 				<td class="answer2"><xsl:value-of select="fatoresRisco" /></td>
 			</tr>
 			<tr>
-				<td class="evaluated">Avaliado pelo(a) médico(a): <xsl:value-of select="avaliadorMedico1" /></td>
-				<td class="evaluated">Data da avaliação: <xsl:value-of select="dataMedico1" /></td>
+				<td class="title2">Observações:</td>
+				<td class="answer2"><xsl:value-of select="observacoes" /></td>
+			</tr>
+			<tr>
+				<td class="evaluated">Avaliado pelo(a) médico(a): <xsl:value-of select="avaliador" /></td>
+				<td class="evaluated">Data da avaliação: <xsl:value-of select="dia_inclusao" />/<xsl:value-of select="mes_inclusao" /><xsl:value-of select="ano_inclusao" /></td>
 			</tr>
 </xsl:template>
 
@@ -660,35 +675,35 @@
 			</tr>
 			<tr>
 				<td class="title1">Se não veio a pé quanto custou o transporte?</td>
-				<td class="answer1"><xsl:value-of select="custoTransporteB" /></td>
+				<td class="answer1"><xsl:value-of select="custoTransporte" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Você está acompanhado? Por quantas pessoas?</td>
-				<td class="answer2"><xsl:value-of select="acompanhadoB" />. <xsl:value-of select="numeroAcompanhantesB" /></td>
+				<td class="answer2"><xsl:value-of select="acompanhado" />. <xsl:value-of select="numeroAcompanhantes" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Que horas saiu de casa?</td>
-				<td class="answer1"><xsl:value-of select="horaSaidaCasaB" /></td>
+				<td class="answer1"><xsl:value-of select="horaSaidaCasa" />:<xsl:value-of select="minutoSaidaCasa" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Que horas chegou no posto?</td>
-				<td class="answer2"><xsl:value-of select="horaChegadaPostoB" /></td>
+				<td class="answer2"><xsl:value-of select="horaChegadaPosto" />:<xsl:value-of select="minutoChegadaPosto" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Que horas viu o médico?</td>
-				<td class="answer1"><xsl:value-of select="horaMedicoB" /></td>
+				<td class="answer1"><xsl:value-of select="horaMedico" />:<xsl:value-of select="minutoMedico" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Quanto tempo levou desde que saiu de casa?</td>
-				<td class="answer2"><xsl:value-of select="tempoTotalB" /></td>
+				<td class="answer2"><xsl:value-of select="horaTotal" />:<xsl:value-of select="minutoTotal" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quando teve que trazer a segunda amostra de escarro há alguns dias, em que horário escarrou no potinho?</td>
-				<td class="answer1"><xsl:value-of select="horarioEscarro" /></td>
+				<td class="answer1"><xsl:value-of select="horaEscarro" />:<xsl:value-of select="minutoEscarro" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Que horas acordou no dia de escarrar pela segunda vez no potinho?</td>
-				<td class="answer2"><xsl:value-of select="horarioEscarro" /></td><!-- ............... -->
+				<td class="answer2"><xsl:value-of select="horaAcordouEscarro" />:<xsl:value-of select="minutoAcordouEscarro" /></td><!-- ............... -->
 			</tr>
 			<tr>
 				<td class="title1">Recebeu uma receita com antibióticos?</td>
@@ -700,11 +715,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Desde que saiu de casa, comeu ou bebeu alguma coisa?</td>
-				<td class="answer1"><xsl:value-of select="comeuBebeuB" /></td>
+				<td class="answer1"><xsl:value-of select="comeuBebeu" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quanto custou?</td>
-				<td class="answer1"><xsl:value-of select="custoComidaBebidaB" /></td>
+				<td class="answer1"><xsl:value-of select="custoComidaBebida" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Teve que pagar algo aqui no posto?</td>
@@ -716,19 +731,19 @@
 			</tr>
 			<tr>
 				<td class="title1">Deixou de ganhar dinheiro hoje para poder vir ao posto?</td>
-				<td class="answer1"><xsl:value-of select="deixouGanharDinheiroB" /></td>
+				<td class="answer1"><xsl:value-of select="deixouGanharDinheiro" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Quanto deixou de ganhar?</td>
-				<td class="answer1"><xsl:value-of select="quantoDeixouGanharB" /></td>
+				<td class="answer1"><xsl:value-of select="quantoDeixouGanhar" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Já sabe o resultado dos exames de escarro?</td>
-				<td class="answer2"><xsl:value-of select="resultadoExamesEscarro" /></td>
+				<td class="answer2"><xsl:value-of select="resultadoExameEscarro" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Se o paciente tiver TB: Foi registrado no programa de tratamento de TB?</td>
-				<td class="answer1"><xsl:value-of select="registroProgramaTratamentoTB" /></td>
+				<td class="answer1"><xsl:value-of select="programaTB" /></td>
 			</tr>
 			
 			<!-- Parte C -->
@@ -751,11 +766,11 @@
 			</tr>
 			<tr>
 				<td class="title2">Este local era:</td>
-				<td class="answer2"><xsl:value-of select="naturezaLocal" /></td>
+				<td class="answer2"><xsl:value-of select="naturezaLocal" />. <xsl:value-of select="qual_outro" /></td>
 			</tr>
 			<tr>
-				<td class="evaluated">Avaliado pelo(a) enfermeiro(a): <xsl:value-of select="avaliadorEnfermeiroBeC" /></td>
-				<td class="evaluated">Data da avaliação: <xsl:value-of select="dataEnfermeiroBeC" /></td>
+				<td class="evaluated">Avaliado pelo(a) enfermeiro(a): <xsl:value-of select="avaliador" /></td>
+				<td class="evaluated">Data da avaliação: <xsl:value-of select="diaCadastro" />/<xsl:value-of select="mesCadastro" />/<xsl:value-of select="anoCadastro" /></td>
 			</tr>
 </xsl:template>
 
@@ -773,11 +788,11 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do início:</td>
-				<td class="answer2"><xsl:value-of select="tratamentoPrescritoTBData" /></td>
+				<td class="answer2"><xsl:value-of select="inicio_dia" />/<xsl:value-of select="inicio_mes" />/<xsl:value-of select="inicio_ano" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Fármacos utilizados:</td>
-				<td class="answer2"><xsl:value-of select="tratamentoPrescritoTBFarmacos" /></td>
+				<td class="answer2"><xsl:for-each select="tratamentoPrescritoTBFarmacos"><xsl:value-of select="." />. </xsl:for-each><xsl:if test="farmacos7"><xsl:value-of select="farmacos7" />.</xsl:if></td>
 			</tr>
 			<tr>
 				<td class="title1">Reação adversa dos tuberculostáticos?</td>
@@ -785,11 +800,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Maiores:</td>
-				<td class="answer1"><xsl:value-of select="reacoesAdversasTuberculostaticosMaiores" /></td>
+				<td class="answer1"><xsl:for-each select="reacoesAdversasTuberculostaticosMaiores"><xsl:value-of select="." />. </xsl:for-each></td>
 			</tr>
 			<tr>
 				<td class="title1">Menores:</td>
-				<td class="answer1"><xsl:value-of select="reacoesAdversasTuberculostaticosMenores" /></td>
+				<td class="answer1"><xsl:for-each select="reacoesAdversasTuberculostaticosMenores"><xsl:value-of select="." />. </xsl:for-each></td>
 			</tr>
 			<tr>
 				<td class="title2">Houve óbito?</td>
@@ -805,11 +820,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Data da mudança:</td>
-				<td class="answer1"><xsl:value-of select="mudancaData" /></td>
+				<td class="answer1"><xsl:value-of select="mudanca_mes" />/<xsl:value-of select="mudanca_ano" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Fármacos utilizados:</td>
-				<td class="answer1"><xsl:value-of select="mudancaFarmacos" /></td>
+				<td class="answer1"><xsl:for-each select ="mudancaFarmacos"><xsl:value-of select="." />. </xsl:for-each><xsl:if test="farmacos14"><xsl:value-of select="farmacos14" /></xsl:if></td>
 			</tr>
 			<tr>
 				<td class="title1">Motivo:</td>
@@ -824,9 +839,13 @@
 				<td class="answer1"><xsl:value-of select="concat(pesoAtual90dias, ' ', pesoAtual90dias/@unidade)" /></td>
 			</tr>
 			<tr>
-				<td class="title2">Probabilidade de TB ativa ao avaliar o RXT:</td>
-				<td class="answer2"><xsl:value-of select="probabilidadeTBAtivaAposEstudoRX" /></td>
+				<td class="title2">Alterações evolutivas no exame físico:</td>
+				<td class="answer2"><xsl:value-of select="alteracoesEvolutivasNoExameFisico" /></td>
 			</tr>
+                        <tr>
+                                <td class="title2">Probabilidade de TB ativa ao avaliar o RXT:</td>
+                                <td class="answer2"><xsl:value-of select="probabilidadeTBAtivaAposEstudoRX" /></td>
+                        </tr>
 			<tr>
 				<td class="title1">Cavitação:</td>
 				<td class="answer1"><xsl:value-of select="cavitacao90dias" /></td>
@@ -853,7 +872,7 @@
 			</tr>
 			<tr>
 				<td class="title1">Data do RX:</td>
-				<td class="answer1"><xsl:value-of select="dataRX90dias" /></td>
+				<td class="answer1"><xsl:value-of select="rx_dia" />/<xsl:value-of select="rx_mes" />/<xsl:value-of select="rx_ano" /><</td>
 			</tr>
 			<tr>
 				<td class="title2">Follow up do RX de Tórax (compare com o RXT inicial como o atual):</td>
@@ -865,7 +884,7 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do Anti-HIV:</td>
-				<td class="answer2"><xsl:value-of select="dataAntiHIV90dias" /></td>
+				<td class="answer2"><xsl:value-of select="antihiv_dia" />/<xsl:value-of select="antihiv_mes" />/<xsl:value-of select="antihiv_ano" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Diagnóstico 90 dias:</td>

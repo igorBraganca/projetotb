@@ -113,7 +113,7 @@ if (tmpnam(tempname) != NULL)
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"triagem\" />\r\n");
 
-/*
+
 	fprintf(xsl,"			<tr>\r\n");
 	fprintf(xsl,"				<td colspan=\"2\" height=\"10\"></td>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
@@ -146,7 +146,8 @@ if (tmpnam(tempname) != NULL)
 	fprintf(xsl,"				<th colspan=\"2\">Follow Up - 90 dias</th>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			<xsl:apply-templates select=\"followUp\" />\r\n");
-	fprintf(xsl,"			<tr>\r\n");
+
+/*	fprintf(xsl,"			<tr>\r\n");
 	fprintf(xsl,"				<td colspan=\"2\" height=\"10\"></td>\r\n");
 	fprintf(xsl,"			</tr>\r\n");
 	fprintf(xsl,"			\r\n");
