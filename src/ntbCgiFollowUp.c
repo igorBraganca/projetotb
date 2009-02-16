@@ -91,7 +91,7 @@ int main (int argc, char **argv)
 	printf ("	tabFields[10] = [\"pesoAtual90dias\", \"07 - Peso atual(kg):\"];\n");
 	printf ("	tabFields[11] = [\"probabilidadeTBAtivaAposEstudoRX\", \"09 - Probabilidade de TB ativa ao avaliar o RXT:\"];\n");
 	printf ("	tabFields[12] = [\"cavitacao90dias\", \"09.1 - Cavita&ccedil;&atilde;o\"];\n");
-	printf ("	tabFields[13] = [\"padraoTipico90dias\", \"09.2 - Padr&atilde;o t&oacute;pico (infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior):\"];\n");
+	printf ("	tabFields[13] = [\"padraoTipico90dias\", \"09.2 - Padr&atilde;o t&iacute;pico (infiltrado em lobo(s) superior(es) e/ou segmento apical de lobo inferior):\"];\n");
 	printf ("	tabFields[14] = [\"compativel90dias\", \"09.3 - Compat&iacute;vel (alargamento mediastinal ou linf.  hilar , padr&atilde;o miliar,ou derrame pleural):\"];\n");
 	printf ("	tabFields[15] = [\"atipico90dias\", \"09.4 - At&iacute;pico (qualquer outro padr&atilde;o):\"];\n");
 	printf ("	tabFields[16] = [\"NSA90dias\", \"09.4 - At&iacute;pico (qualquer outro padr&atilde;o):\"];\n");
