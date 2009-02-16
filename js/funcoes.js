@@ -477,7 +477,7 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 	mes_atual = today.getMonth() + 1;
 	ano_atual = today.getFullYear();
 
-	if((dia == "") && (mes == "") && (ano == ""))
+	if((dia == "") ||  (mes == "") || (ano == ""))
 		return (true);
 	
         if(campoMes.disabled != true)
