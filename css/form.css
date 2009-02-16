@@ -1,4 +1,4 @@
-/* Neural TB Project - Form style */
+* Neural TB Project - Form style */
 
 form td
 {
@@ -15,9 +15,9 @@ input
 	font-size: 10pt;
 }
 
-.tabela	{ width: 800px}
-.impar	{ background-color: #66CCFF} /* #66CCFF */
-.par	{ background-color: #C0D9D9} /* #C0D9D9 */
+.tabela	{ max-width: 800px}
+.impar	{ background-color: #66CCFF; max-width: 800px} /* #66CCFF */
+.par	{ background-color: #C0D9D9; max-width: 800px} /* #C0D9D9 */
 
 .custo	{ /*background-color: #336699;*/ border:1px solid #336699; color: black;} /*color:#3366CC; background-color:#66CCFF  */
 .label	{ background-color: #FFFF99; text-indent: 10px}
