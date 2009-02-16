@@ -343,7 +343,7 @@ document = fopen(XML_FILE_PATH, "r");
 	printf ("<span style=\"font-size: 13pt\" class=\"bold\">Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 	printf ("<h4>(<i>Follow up</i> 90 dias)</h4>\n");
 	printf ("\n");
-	printf ("	<form name=\"check\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_follow_up (this)\">\n");
+	printf ("	<form name=\"check\" id=\"form\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_follow_up (this)\">\n");
 	printf ("	<!-- action=\"addPatientInfo.cgi\" -->\n");
 	printf ("	<!-- --><input type=\"hidden\" name=\"form\" value=\"followUp\" />\n");
 	printf ("		<input type=\"hidden\" name=\"uid\" value=\"%s\" />\n",username);
@@ -754,6 +754,18 @@ document = fopen(XML_FILE_PATH, "r");
 	printf ("\n");
 	printf ("	<p>\n");
 	printf ("</body>\n");
+	
+	printf ("<script language=\"JavaScript\">\n");
+	printf ("emSubmissao = false; // ao tentar sair da pagina, eh preciso saber se estamos submetendo o formulario ou nao\n"); 
+	printf ("window.onbeforeunload = checkGoToNewPage;\n");
+	printf ("function checkGoToNewPage() {\n");
+	printf ("	if ((!emSubmissao) && temAlgumCampoPreenchido(form)) {\n");
+	printf ("		return \"Voce perdera todos os dados nao salvos se sair desta pagina.\";\n"); 
+	printf ("	}\n");
+	printf ("	else { emSubmissao=false; }\n");
+	printf ("}\n");
+	printf ("</script>\n");
+
 	printf ("</html>");
 	
 	cgi_end();

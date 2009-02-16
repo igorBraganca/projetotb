@@ -347,7 +347,7 @@ int main (void)/*(int argc,char**argv)*/
 	showMenu("consulta",username);
 
 	printf ("<div align=\"center\">\n");
-	printf ("<form name=\"check\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_consulta_medica(this)\">\n");
+	printf ("<form name=\"check\" id=\"form\" method=\"post\" action=\"addForm.py\" onSubmit=\"return validar_consulta_medica(this)\">\n");
 	printf ("\n");
 	printf ("	<span style=\"font-size: 13pt\" class=\"bold\"><br />Projeto - Novos M&eacute;todos Diagn&oacute;sicos em TB pulmonar - Policlinica Augusto Amaral Peixoto - SMS - RJ</span>\n");
 	printf ("	<div align=\"center\">\n");
@@ -770,6 +770,18 @@ int main (void)/*(int argc,char**argv)*/
 	printf ("</div>\n");
 	printf ("\n");
 	printf ("</body>\n");
+	
+	printf ("<script language=\"JavaScript\">\n");
+	printf ("emSubmissao = false; // ao tentar sair da pagina, eh preciso saber se estamos submetendo o formulario ou nao\n"); 
+	printf ("window.onbeforeunload = checkGoToNewPage;\n");
+	printf ("function checkGoToNewPage() {\n");
+	printf ("	if ((!emSubmissao) && temAlgumCampoPreenchido(form)) {\n");
+	printf ("		return \"Voce perdera todos os dados nao salvos se sair desta pagina.\";\n"); 
+	printf ("	}\n");
+	printf ("	else { emSubmissao=false; }\n");
+	printf ("}\n");
+	printf ("</script>\n");
+
 	printf ("</html>\n");
 	
 	cgi_end();

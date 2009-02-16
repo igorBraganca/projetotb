@@ -101,7 +101,7 @@ int main (void)/*(int argc,char**argv)*/
 			printf ("	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/form.css\">\n");
 			printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/funcoes.js\"></script>\n");
 			printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/const_digitador.js\"></script>\n");
-			printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar_.js\"></script>\n");
+			printf ("	<script charset=\"ISO-8859-1\" language=javascript src=\"js/validar.js\"></script>\n");
 			printf ("	<script>\n");
 			printf ("\n");
 			printf ("	function inicializaOcultos(tabela)\n");
@@ -311,7 +311,7 @@ int main (void)/*(int argc,char**argv)*/
 			printf ("	<!--onSubmit=\"return enviar()\"-->\n");
 			printf ("\n");
 			printf ("	<!--------------------------------------------------------- INICIO DO FORMULARIO ------------------------------------------------------------------->\n");
-			printf ("	<form name=\"check\" id=\"form\" action=\"editPatient.cgi\" method=\"post\" onSubmit=\"return validar_triagem(this)\">\n");
+			printf ("	<form name=\"check\" id=\"form\" action=\"editPatient.cgi\" method=\"post\" onSubmit=\"emSubmissao = true;\">\n");
 			printf ("\n");
 			printf ("		<input type=\"hidden\" name=\"form\" value=\"triagem\" />\n");
 			printf ("		<div align=\"center\">\n");

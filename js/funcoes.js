@@ -480,7 +480,9 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 	if((dia == "") && (mes == "") && (ano == ""))
 		return (true);
 	
-	switch(mes)
+        if(campoMes.disabled != true)
+        {
+        switch(mes)
 	{
 		case 1://janeiro
 			if(dia<1 || dia>31)
@@ -622,14 +624,18 @@ function validarQualquerData(campoDia,campoMes,campoAno)
 		setTimeout("globalvar.focus()",250);
 		return false;
 	}
-	
+        }
+        
 	if(((dia > dia_atual) && (mes == mes_atual) && (ano == ano_atual)) || ((mes > mes_atual) && (ano == ano_atual)) || (ano > ano_atual))
 	{ 	
 			alert("Data inválida, a data preenchida não pode ser posterior a data de hoje.");
-			campoDia.value = "";
+                        campoDia.value = "";
 			campoMes.value = "";
 			campoAno.value = "";
-			globalvar = campoDia;
+			if(campoDia.value == undefined)
+                            globalvar = campoMes;
+                        else
+                            globalvar = campoDia;
 			setTimeout("globalvar.focus()",250);
 			return false;
 	}
@@ -670,7 +676,10 @@ function validarData(dia,mes,ano)
 					dia.value="";
 					mes.value="";
 					ano.value="";
-					globalvar = dia;
+			                if(dia.value == undefined)
+                                            globalvar = mes;
+                                        else
+                                            globalvar = dia;
 					setTimeout("globalvar.focus()",250);
 					
 					return false;
