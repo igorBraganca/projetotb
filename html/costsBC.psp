@@ -29,6 +29,7 @@ jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
 <title>Questionário Custos - Partes B e C</title>
 
 <link rel="stylesheet" type="text/css" href="css/costs_pc.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/menu.css" />
 <link rel="stylesheet" type="text/css" href="css/costs_palm.css" media="handheld" />
 
 <script>
@@ -110,6 +111,33 @@ var fieldsCostBC = new CostsBC();
 
 <body onLoad="inicializa();">
 
+<table border="0" id="menu">
+	<tr>
+		<td>
+			<table border="0">
+				<tr>
+					<td class="fl" onmouseover="showmenu('forms')" onmouseout="hidemenu('forms')">
+						<a href="#">Formul&aacute;rios</a><br />
+						<ul class="option" id="forms">
+						<li><a href="triagem.cgi?uid=<%= userName %>" target="_parent">Triagem</a></li>
+						<li><a href="busca.cgi?uid=<%= userName %>" target="_parent">Outros Formul&aacute;rios</a></li>
+						</ul>
+					</td>
+					<td class="fl"><a href="busca.cgi?uid=<%= userName %>" target="_parent">Buscar/Editar/Remover</a></td>
+					<td class="fl"><a href="listar.cgi?uid=<%= userName %>" target="_parent">Listar Pacientes</a></td>
+					<td class="fl"><a href="backup.cgi">Backup</a></td>
+					<td class="fl"><a style="cursor:help" href="ajuda.html" target="_blank">Ajuda</a></td>
+				</tr>
+			</table>
+		</td>	
+		<td>
+			<table border="0">
+				<tr><td class="fr"><i><%= userName %></i> conectado | <a href="logout.cgi">Sair</a></td></tr>
+			</table>	
+		</td>
+	</tr>
+</table>
+
 <div align="center">
 
   <h3>Projeto - Novos Métodos Diagnósicos em TB pulmonar - Policlínica Augusto Amaral Peixoto-SMS-RJ</br></h3>
@@ -176,19 +204,19 @@ var fieldsCostBC = new CostsBC();
     <!-- HORARIO SAIU DE CASA -->    
     <p>
       <script>document.write(fieldsCostBC.horaSaidaCasa.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasa.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoSaidaCasa.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoSaidaCasa" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
 
     <!-- HORARIO CHEGOU NO POSTO -->
     <p>
       <script>document.write(fieldsCostBC.horaChegadaPosto.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedico.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoChegadaPosto.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoChegadaPosto" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaMedico.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- HORARIO MEDICO -->
     <p>
       <script>document.write(fieldsCostBC.horaMedico.text)</script><br />
-      <text_label>Hora:</text_label><input name="horaMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedico.select();" onBlur="validarCampoNumerico(this);validarHora(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validarTempoViagem(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
+      <text_label>Hora:</text_label><input name="horaMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) minutoMedico.select();" onBlur="validarCampoNumerico(this);validarHora(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">:<input name="minutoMedico" type="text" maxlength="2" size="2" onKeyUp="if(this.value.length == 2) horaEscarro.select();" onBlur="validarCampoNumerico(this);validarMinuto(this);validar_tempo_de_viagem_custos_A(horaSaidaCasa,minutoSaidaCasa,horaChegadaPosto,minutoChegadaPosto,horaMedico,minutoMedico,horaTotal,minutoTotal);">
     </p>
     
     <!-- TEMPO TOTAL -->
