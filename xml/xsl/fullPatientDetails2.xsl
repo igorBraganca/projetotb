@@ -544,8 +544,8 @@
 			<tr>
 				<td class="title1">Comorbidades:</td>
 				<td class="answer1">
-				<xsl:for-each select="comorbidades"><xsl:value-of select="." />. </xsl:for-each>
-				<xsl:value-of select="outrascomorbidades" /></td>
+				<xsl:for-each select="comorbidades"><xsl:value-of select="." />. </xsl:for-each></td>
+				<xsl:value-of select="outrascomorbidades" />
 			</tr>
 			
 			
@@ -788,11 +788,11 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do início:</td>
-				<td class="answer2"><xsl:value-of select="inicio_dia" />/<xsl:value-of select="inicio_mes" />/<xsl:value-of select="inicio_ano" /></td>
+				<td class="answer2"><xsl:value-of select="tratamentoPrescritoTBData" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Fármacos utilizados:</td>
-				<td class="answer2"><xsl:for-each select="tratamentoPrescritoTBFarmacos"><xsl:value-of select="." />. </xsl:for-each><xsl:if test="farmacos7"><xsl:value-of select="farmacos7" />.</xsl:if></td>
+				<td class="answer2"><xsl:value-of select="tratamentoPrescritoTBFarmacos" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Reação adversa dos tuberculostáticos?</td>
@@ -800,11 +800,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Maiores:</td>
-				<td class="answer1"><xsl:for-each select="reacoesAdversasTuberculostaticosMaiores"><xsl:value-of select="." />. </xsl:for-each></td>
+				<td class="answer1"><xsl:value-of select="reacoesAdversasTuberculostaticosMaiores" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Menores:</td>
-				<td class="answer1"><xsl:for-each select="reacoesAdversasTuberculostaticosMenores"><xsl:value-of select="." />. </xsl:for-each></td>
+				<td class="answer1"><xsl:value-of select="reacoesAdversasTuberculostaticosMenores" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Houve óbito?</td>
@@ -820,11 +820,11 @@
 			</tr>
 			<tr>
 				<td class="title1">Data da mudança:</td>
-				<td class="answer1"><xsl:value-of select="mudanca_mes" />/<xsl:value-of select="mudanca_ano" /></td>
+				<td class="answer1"><xsl:value-of select="mudancaData" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Fármacos utilizados:</td>
-				<td class="answer1"><xsl:for-each select ="mudancaFarmacos"><xsl:value-of select="." />. </xsl:for-each><xsl:if test="farmacos14"><xsl:value-of select="farmacos14" /></xsl:if></td>
+				<td class="answer1"><xsl:value-of select="mudancaFarmacos" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Motivo:</td>
@@ -839,13 +839,9 @@
 				<td class="answer1"><xsl:value-of select="concat(pesoAtual90dias, ' ', pesoAtual90dias/@unidade)" /></td>
 			</tr>
 			<tr>
-				<td class="title2">Alterações evolutivas no exame físico:</td>
-				<td class="answer2"><xsl:value-of select="alteracoesEvolutivasNoExameFisico" /></td>
+				<td class="title2">Probabilidade de TB ativa ao avaliar o RXT:</td>
+				<td class="answer2"><xsl:value-of select="probabilidadeTBAtivaAposEstudoRX" /></td>
 			</tr>
-                        <tr>
-                                <td class="title2">Probabilidade de TB ativa ao avaliar o RXT:</td>
-                                <td class="answer2"><xsl:value-of select="probabilidadeTBAtivaAposEstudoRX" /></td>
-                        </tr>
 			<tr>
 				<td class="title1">Cavitação:</td>
 				<td class="answer1"><xsl:value-of select="cavitacao90dias" /></td>
@@ -872,7 +868,7 @@
 			</tr>
 			<tr>
 				<td class="title1">Data do RX:</td>
-				<td class="answer1"><xsl:value-of select="rx_dia" />/<xsl:value-of select="rx_mes" />/<xsl:value-of select="rx_ano" /><</td>
+				<td class="answer1"><xsl:value-of select="dataRX90dias" /></td>
 			</tr>
 			<tr>
 				<td class="title2">Follow up do RX de Tórax (compare com o RXT inicial como o atual):</td>
@@ -884,7 +880,7 @@
 			</tr>
 			<tr>
 				<td class="title2">Data do Anti-HIV:</td>
-				<td class="answer2"><xsl:value-of select="antihiv_dia" />/<xsl:value-of select="antihiv_mes" />/<xsl:value-of select="antihiv_ano" /></td>
+				<td class="answer2"><xsl:value-of select="dataAntiHIV90dias" /></td>
 			</tr>
 			<tr>
 				<td class="title1">Diagnóstico 90 dias:</td>
