@@ -16,7 +16,7 @@ costs = functions.formAsMap(patientId, "custosA");
 isNewForm = "true";
 if len(costs) > 0: isNewForm = "false";
 
-#Como o mobile IE nao entende quando colocamos JS e CSS em arquivos separados,
+#Como o mobile IE nao entende quando colocamos JS em arquivos separados,
 #este bacalhau resolve o problema (obrigado Microsoft...).
 jsText = open(functions.PROJECT_PATH + "js/funcoes.js", "r").read();
 jsText += open(functions.PROJECT_PATH + "js/validar.js", "r").read();
@@ -112,6 +112,10 @@ var fieldsCostA = new CostsA();
 
 <body onLoad="inicializa()">
 
+<%
+if not functions.isMobile(envVars):
+%>
+
 <table border="0" id="menu">
 	<tr>
 		<td>
@@ -138,6 +142,10 @@ var fieldsCostA = new CostsA();
 		</td>
 	</tr>
 </table>
+
+<%
+#end if para a apresentacao do menu
+%>
 
 <div align="center" >
   <h3>Projeto - Novos Métodos Diagnósticos em TB pulmonar - Policlínica Augusto Amaral Peixoto-SMS-RJ</br></h4>
